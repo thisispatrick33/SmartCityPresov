@@ -8,11 +8,9 @@ use DB;
 class MainController extends Controller
 {
     public function subpages(){
-        $subpages = DB::table('subpages')->select('title_link')->get();
+        $subpages = DB::table('subpages')->select(array('title', 'title_link'))->get();
 
-        return response()->json([
-            'subpages' => $subpages
-        ]);
+        return $subpages;
                 
     }
 }
