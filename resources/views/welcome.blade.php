@@ -14,8 +14,8 @@
         <noscript>
             Turn on JS
         </noscript>
+        <div>{{dd($data)}}</div>
         <div id="root">
-
         </div>
         <script src="{{ asset('js/app.js')}}"></script>
     </body>
