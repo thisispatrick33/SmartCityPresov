@@ -6,3 +6,18 @@
 
 // Bootstrap
 @import '~bootstrap/scss/bootstrap';
+
+@font-face {
+  font-family: NexaBold;
+  src: url('../fonts/NexaBold.otf');
+}
+
+
+.row{
+
+  margin-right: 0 !important;
+  margin-left: 0 !important;
+}
+nav{
+  font-family: NexaBold, serif;
+}
