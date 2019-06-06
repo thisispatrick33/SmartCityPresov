@@ -13,4 +13,13 @@ class MainController extends Controller
         return $subpages;
                 
     }
+
+    public function data($option){
+        $data = DB::table('subpages')->select('*')->where('title_link','=',$option)->first();
+        
+        return response()->json([
+            'data' => $data
+        ]);
+                
+    }
 }

@@ -13,6 +13,6 @@ use Illuminate\Http\Request;
 |
 */
 
-Route::get('/Energia', 'EnergiaController@data');
+Route::get('/{option}', 'MainController@data');
 Route::get('/', 'MainController@subpages');
 
