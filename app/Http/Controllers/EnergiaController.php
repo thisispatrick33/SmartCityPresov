@@ -8,11 +8,11 @@ use DB;
 class EnergiaController extends Controller
 {
     public function data(){
-        $user = DB::table('users')->first();
+        $subpage = DB::table('subpages')->select('*')->where('title','=','Energia')->get()[0];
     
 
         return response()->json([
-            'name' => $meno
+            'subpage' => $subpage
         ]);
                 
     }
