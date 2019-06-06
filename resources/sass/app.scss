@@ -18,6 +18,46 @@
   margin-right: 0 !important;
   margin-left: 0 !important;
 }
+body{
+  background : $colorOfPage;
+}
 nav{
-  font-family: NexaBold, serif;
+  .nav_item{
+    color : $secondaryColor;
+    text-transform : uppercase;
+    font-size : 1.450em;
+    font-family: NexaBold, serif;
+    hr{
+      border-top : 1px solid $colorOfPage;
+      width : 80%;
+    }
+    a {
+      color: $secondaryColor !important;
+      border-bottom: 1px solid $colorOfPage;
+    }
+    &:hover{
+      hr{
+        border-top : 1px solid $primaryColor;
+        transition: 1s;
+      }
+      a{
+        color: $primaryColor !important;
+        text-decoration: none;
+        border-bottom: 1px solid $primaryColor;
+        transition: 1s;
+      }
+    }
+    &:not(:hover){
+      hr{
+        border-top : 1px solid $colorOfPage;
+        transition: 1s;
+      }
+      a {
+        color: $secondaryColor !important;
+        border-bottom: 1px solid $colorOfPage;
+        transition: 1s;
+      }
+    }
+  }
+
 }

@@ -10672,7 +10672,47 @@ a.text-dark:focus {
   margin-left: 0 !important;
 }
 
-nav {
+body {
+  background: #fff;
+}
+
+nav .nav_item {
+  color: #191919;
+  text-transform: uppercase;
+  font-size: 1.45em;
   font-family: NexaBold, serif;
+}
+
+nav .nav_item hr {
+  border-top: 1px solid #fff;
+  width: 80%;
+}
+
+nav .nav_item a {
+  color: #191919 !important;
+  border-bottom: 1px solid #fff;
+}
+
+nav .nav_item:hover hr {
+  border-top: 1px solid #D71920;
+  transition: 1s;
+}
+
+nav .nav_item:hover a {
+  color: #D71920 !important;
+  text-decoration: none;
+  border-bottom: 1px solid #D71920;
+  transition: 1s;
+}
+
+nav .nav_item:not(:hover) hr {
+  border-top: 1px solid #fff;
+  transition: 1s;
+}
+
+nav .nav_item:not(:hover) a {
+  color: #191919 !important;
+  border-bottom: 1px solid #fff;
+  transition: 1s;
 }
 

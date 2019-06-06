@@ -11,7 +11,9 @@
 |
 */
 
-Route::get('/', 'StartController@data');
+Route::get('/', function(){
+    return view('welcome');
+});
 
 
 
