@@ -15,7 +15,7 @@ Route::get('/', function(){
     return view('welcome');
 });
 
-Route::get('/mobilita', function(){
+Route::get('/{id}', function(){
     return view('welcome');
 });
 
