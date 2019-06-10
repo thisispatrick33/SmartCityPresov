@@ -7,31 +7,32 @@ use App\Post;
 
 class PostsController extends Controller
 {
-    public function add($title, $description, $image, $user_id, $subpage_id){
-        return $post = Post::create([
-            'title' => $title,
-            'description' => $description,
-            'image' => $image,
-            'user_id' => (int)$user_id,
-            'subpage_id' => (int)$subpage_id,
+    public function add(Request $request){
+        return 
+        /*return $post = Post::create([
+            'title' => $request->title,
+            'description' => $request->description,
+            'image' => $request->image,
+            'user_id' => $request->user_id,
+            'subpage_id' => $request->subpage_id,
             'timestamps' => true
-        ]);   
+        ]);   */
     }
 
-    public function update($id, $title, $description, $image, $user_id, $subpage_id){
-        $post = Post::find($id);
-        $post->title = $title;
-        $post->description = $description;
-        $post->image = $image;
-        $post->user_id = $user_id;
-        $post->subpage_id = $subpage_id;
+    public function update(Request $request){
+        $post = Post::find($request->id);
+        $post->title = $request->title;
+        $post->description = $request->description;
+        $post->image = $request->image;
+        $post->user_id = $request->user_id;
+        $post->subpage_id = $request->subpage_id;
         $post->timestamps = true;
         $post->save();
         return $post;
     }
 
-    public function delete($id){
-        Post::find($id)->delete();
+    public function delete(Request $request){
+        Post::find($request->id)->delete();
         return response(200);        
     }
 }
