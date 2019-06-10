@@ -9,7 +9,16 @@ use App\Post;
 use App\User;
 
 class MainController extends Controller
-{
+{   
+    public function news(){
+        $news = DB::table('posts')->where('subpage_id','=', null)->get();
+
+        return response()->json([
+            'data' => $news
+        ]);
+                
+    }
+
     public function subpages(){
         $subpages = DB::table('subpages')->select(array('title', 'title_link'))->get();
 
@@ -26,7 +35,7 @@ class MainController extends Controller
     }
 
     public function post($id){
-        $data = Post::with('subpage')->select('*')->where('id','=',$id)->first();
+        $data = Post::with('subpage')->where('id','=',$id)->first();
                 
         return response()->json([
             'data' => $data
@@ -34,10 +43,15 @@ class MainController extends Controller
     }
 
     public function data($option){
-        $data = Subpage::with('posts')->select('*')->where('title_link','=',$option)->first();
-        
+        $subpage = Subpage::with('posts')->select('*')->where('title_link','=',$option)->first();
+        $data = array();
+        foreach ($subpage->posts as $x) {
+             $author = DB::table('users')->where('id', '=', $x->user_id)->first();
+             array_push($data,array($x, $author));
+        }
         return response()->json([
-            'data' => $data
+            'subpage' => $subpage,
+            'posts' => $data
         ]);
                 
     }
