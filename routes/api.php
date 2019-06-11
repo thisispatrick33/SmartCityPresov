@@ -14,7 +14,7 @@ use Illuminate\Http\Request;
 */
 
 Route::get('/news', 'MainController@news');
-Route::get('/{option}', 'MainController@data');
+Route::get('/{option}', 'MainController@data')->middleware('auth');
 Route::get('/', 'MainController@subpages');
 Route::get('/author/{id}', 'MainController@author');
 Route::get('/post/{id}', 'MainController@post');
@@ -23,3 +23,5 @@ Route::get('/post/{id}', 'MainController@post');
 Route::post('/post', 'PostsController@add');
 Route::put('/post/edit', 'PostsController@update');
 Route::delete('/post/delete', 'PostsController@delete');
+
+Route::post('/auth/login', 'AuthController@login');

@@ -8,14 +8,15 @@ use App\Post;
 class PostsController extends Controller
 {
     public function add(Request $request){
-        return $post = Post::create([
+       /* return $post = Post::create([
             'title' => $request->title,
             'description' => $request->description,
             'image' => $request->image,
             'user_id' => $request->user_id,
             'subpage_id' => $request->subpage_id,
             'timestamps' => true
-        ]);
+        ]);*/
+        return $request;
     }
 
     public function update(Request $request){
