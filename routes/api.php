@@ -24,4 +24,19 @@ Route::post('/post', 'PostsController@add');
 Route::put('/post/edit', 'PostsController@update');
 Route::delete('/post/delete', 'PostsController@delete');
 
-Route::post('/auth/login', 'AuthController@login');
+
+Route::group(['middleware' => ['jwt.auth','api-header']], function () {
+  
+    // all routes to protected resources are registered here  
+    
+    
+});
+
+Route::group(['middleware' => 'api-header'], function () {
+  
+    // The registration and login requests doesn't come with tokens 
+    // as users at that point have not been authenticated yet
+    // Therefore the jwtMiddleware will be exclusive of them
+    Route::post('auth/login', 'AuthController@login');
+    Route::post('auth/register', 'AuthController@register');
+});

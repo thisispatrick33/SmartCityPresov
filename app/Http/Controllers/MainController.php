@@ -46,8 +46,8 @@ class MainController extends Controller
         $subpage = Subpage::with('posts')->select('*')->where('title_link','=',$option)->first();
         $data = array();
         foreach ($subpage->posts as $x) {
-             $author = DB::table('users')->where('id', '=', $x->user_id)->first();
-             array_push($data,array($x, $author));
+             $author = DB::table('users')->select('name')->where('id', '=', $x->user_id)->first();
+             array_push($data,array($x, $author->name));
         }
         return response()->json([
             'subpage' => $subpage,
