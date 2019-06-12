@@ -12,9 +12,9 @@ use Illuminate\Http\Request;
 | is assigned the "api" middleware group. Enjoy building your API!
 |
 */
-
+/*->middleware('auth.basic')*/
 Route::get('/news', 'MainController@news');
-Route::get('/{option}', 'MainController@data')->middleware('auth');
+Route::get('/{option}', 'MainController@data');
 Route::get('/', 'MainController@subpages');
 Route::get('/author/{id}', 'MainController@author');
 Route::get('/post/{id}', 'MainController@post');
