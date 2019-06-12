@@ -13,10 +13,15 @@ class MainController extends Controller
     public function news(){
         $news = DB::table('posts')->where('subpage_id','=', null)->get();
 
-        return response()->json([
+        /*return response()->json([
             'data' => $news
-        ]);
-                
+        ]);*/
+        $data =  [];
+        foreach( $news as $x){
+            $user = DB::table('users')->select('name')->where('id','=', $x->user_id)->first();
+            array_push($data, array($x, $user->name));
+        }
+        return $data;
     }
 
     public function subpages(){
