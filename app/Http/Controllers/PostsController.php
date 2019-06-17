@@ -4,9 +4,21 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Post;
+use App\User;
 
 class PostsController extends Controller
 {
+    public function get(){
+        $posts = Post::where('subpage_id', '!=', null)->get();
+
+        foreach( $posts as $post){
+            $user = User::select(array('id','name','email','admin'))->where('id','=', $post->user_id)->first();
+            $post->user = $user;
+        }
+
+        return $posts;
+    }
+
     public function add(Request $request){
         return $post = Post::create([
             'title' => $request->title,
