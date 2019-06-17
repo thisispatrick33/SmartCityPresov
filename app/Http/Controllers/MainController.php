@@ -12,14 +12,11 @@ class MainController extends Controller
 {   
     public function news(){
         $news = DB::table('posts')->where('subpage_id','=', null)->get();
-
-        /*return response()->json([
-            'data' => $news
-        ]);*/
         $data =  [];
         foreach( $news as $x){
-            $user = DB::table('users')->select('name')->where('id','=', $x->user_id)->first();
-            array_push($data, array($x, $user->name));
+            $user = User::select(array('id','name','email','admin'))->where('id','=',$x->user_id)->first();
+            $x->user = $user;
+            array_push($data, array($x));
         }
         return $data;
     }
@@ -42,21 +39,20 @@ class MainController extends Controller
     public function post($id){
         $data = Post::with('subpage')->where('id','=',$id)->first();
                 
-        return response()->json([
-            'data' => $data
-        ]);
+        return $data;
     }
 
+    
     public function data($option){
         $subpage = Subpage::with('posts')->select('*')->where('title_link','=',$option)->first();
         $data = array();
         foreach ($subpage->posts as $x) {
-             $author = DB::table('users')->select('name')->where('id', '=', $x->user_id)->first();
-             array_push($data,array($x, $author->name));
+             $author = User::select(array('id','name','email','admin'))->where('id','=',$x->user_id)->first();
+             $x->user = $author;
+             array_push($data,array($x));
         }
         return response()->json([
-            'subpage' => $subpage,
-            'posts' => $data
+            'subpage' => $subpage
         ]);
                 
     }
