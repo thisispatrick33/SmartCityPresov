@@ -16,7 +16,7 @@ class MainController extends Controller
         foreach( $news as $x){
             $user = User::select(array('id','name','email','admin'))->where('id','=',$x->user_id)->first();
             $x->user = $user;
-            array_push($data, array($x));
+            array_push($data, $x);
         }
         return $data;
     }
