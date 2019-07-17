@@ -49,7 +49,8 @@ class AuthController extends Controller
         return $token;
     }
     public function login(Request $request)
-    {
+    {   
+
         $user = \App\User::where('email', $request->email)->get()->first();
         if ($user && \Hash::check($request->password, $user->password)) // The passwords match...
         {
@@ -58,9 +59,9 @@ class AuthController extends Controller
             $user->save();
             $response = ['success'=>true, 'data'=>['id'=>$user->id,'auth_token'=>$user->auth_token,'name'=>$user->name, 'email'=>$user->email]];           
         }
-        else 
+        else{
           $response = ['success'=>false, 'data'=>'Record doesnt exists'];
-      
+        }
         return response()->json($response, 201);
     }
     public function register(Request $request)

@@ -26,6 +26,7 @@ class CreatePostsTable extends Migration
             $table->foreign('user_id')->references('id')->on('users');
             $table->integer('subpage_id')->unsigned();
             $table->foreign('subpage_id')->references('id')->on('subpages');
+            $table->boolean('active')->default(true);
             $table->timestamps();
 
             

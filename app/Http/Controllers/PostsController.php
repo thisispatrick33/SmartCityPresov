@@ -10,12 +10,18 @@ class PostsController extends Controller
 {
     public function get(){
         $posts = Post::where('subpage_id', '!=', null)->get();
-
+        $i=0;
         foreach( $posts as $post){
-            $user = User::select(array('id','name','email','admin'))->where('id','=', $post->user_id)->first();
-            $post->user = $user;
+            if($post->active){
+                $user = User::select(array('id','name','email','admin'))->where('id','=', $post->user_id)->first();
+                $post->user = $user;
+            }
+            else{
+                unset($posts[$i]);
+            }
+            $i++;
         }
-
+        
         return $posts;
     }
 
@@ -43,7 +49,9 @@ class PostsController extends Controller
     }
 
     public function delete(Request $request){
-        Post::find($request->id)->delete();
+        $post = Post::find($request->id);
+        $post->active = false;
+        $post->save();
         return response(200);        
     }
 }
