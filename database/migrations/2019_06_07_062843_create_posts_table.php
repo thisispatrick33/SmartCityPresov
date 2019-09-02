@@ -28,15 +28,9 @@ class CreatePostsTable extends Migration
             $table->foreign('subpage_id')->references('id')->on('subpages');
             $table->timestamps();
 
-            
-            
+
+
         });
-
-        
-
-     
-
-        
     }
 
     /**

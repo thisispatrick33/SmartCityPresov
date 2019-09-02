@@ -18,4 +18,9 @@ Route::get('/', function(){
 Route::get('/{id}', function(){
     return view('welcome');
 });
-
+Route::get('/login', function(){
+    return view('welcome');
+});
+Route::get('/posts/{id}', function(){
+    return view('welcome');
+});

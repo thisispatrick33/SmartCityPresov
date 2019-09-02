@@ -1,0 +1,110 @@
+import React, {useEffect, useState} from "react";
+import { Loader } from "../Utillities";
+import { Project } from './Project';
+import { Link } from "@reach/router";
+import axios from "axios";
+
+export const Subpage = ({ id, user, del = f => f, get = f => f, }) => {
+    const [subpage, setSubpage] = useState([]);
+    const [reload, setReload] = useState(false);
+    const [project, setProject] = useState(null);
+    const [author, setAuthor] = useState([]);
+    const fetchData = async () => {
+        const response = await axios.get(`api/${id}`);
+        setSubpage(response.data.subpage);
+        reload ? setReload(false) :``;
+    };
+    const handleDelete = (_id,_title_link) => {
+        setReload(!reload);
+        del(_id, _title_link);
+    }
+    const handleGet = (_id) => {
+        fetch(`/api/post/${_id}`)
+            .then(response => response.json())
+            .then(postData => {
+                setProject(postData);
+                fetch(`/api/author/${postData.user_id}`)
+                    .then(response => response.json())
+                    .then(({data}) => {
+                        setAuthor( data );
+                    })
+            })
+    }
+    useEffect( () => {  fetchData(subpage) }, [ id,reload ] );
+    if(user){
+        if(!subpage.title){
+            return <Loader/>;
+        }
+
+        return (
+            <div className={"subpage-content col-12 row align-items-start "}>
+                <h1 className={"col-12 text-center mt-4"}>{subpage.title}</h1>
+                <p className={"col-12 text-center description mt-5"}  dangerouslySetInnerHTML={{__html: subpage.description}} />
+                <div className="col-12 justify-content-center  projects-frame row">
+                    <h3 className={"col-12 p-0 projects-title my-5"}>projekty smartcity prešov - <span className={"projects-category"}>{subpage.title}</span></h3>
+                    <div className="col-12 row projects p-0">
+                        {subpage.posts.map(({id, title, description, user, image, updated_at}) => {
+                            return ( <div className={"project-frame row col-xl-4 col-lg-4 col-md-6 col-sm-12 col-12 p-0 justify-content-xl-start justify-content-lg-start justify-content-md-center justify-content-sm-center justify-content-center mb-4"} key={title}>
+                                <div className="project col-10 row shadow p-0 align-items-start">
+                                    <div className="col-12 p-0 row">
+                                        <div className="col-12 p-0"><img src="../img/eu4.jpg" alt="" className={"col-12 p-0"} style={{borderRadius : "10px 10px 0 0"}}/></div>
+                                    </div>
+                                    <h3 className={"col-12 py-0 px-3 mt-3"}>{title}</h3>
+                                    <p className={"col-12 py-0 px-3 mb-3"}>{description.substring(0, description.includes(".") ? description.indexOf(".")+1 : 50)} <a href={`/api/post/${id}`} className={"read_more"}>Objav viac</a></p>
+                                    <p className={"col-12 py-0 mb-0 px-3"}><span>Dátum : </span>{new Date(updated_at).toDateString()}</p>
+                                    <p className={"col-12 py-0 px-3"}><span>Autor : </span>{user.name}</p>
+                                    <div className="col-12 row mb-2">
+                                        <Link to={`/posts/${id}`} state={{ subpage : subpage.id }} className={"edit | d-flex mx-2 justify-content-center align-items-center p-2 shadow"}><div style={{width : 28, height : 28}}><img style={{width : 28, height : 28}} src="../img/edit.svg" alt=""/></div></Link>
+                                        <div onClick={() => handleDelete(id,subpage.title_link)} className={"delete | d-flex mx-2 justify-content-center align-items-center p-2 shadow"}><div style={{width : 28, height : 28}}><img style={{width : 28, height : 28}} src="../img/delete.svg" alt=""/></div></div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            );
+                        })}
+                        <div className={"project-frame row col-xl-4 col-lg-4 col-md-6 col-sm-12 col-12 p-0 justify-content-xl-start justify-content-lg-start justify-content-md-center justify-content-sm-center justify-content-center mb-4"}>
+                            <div className="project col-10 row shadow p-0 justify-content-center align-items-center">
+                                <Link className="justify-content-center row my-3" to={"/post-create"} state={{subpage : subpage.id}}>
+                                    <div className="col-xl-5 col-lg-6 col-md-7 col-sm-6 col-6">
+                                        <img src="../img/file.png" alt="" className={"col-12"}/>
+                                    </div>
+                                    <h3 className={"col-12 py-0 px-3 mt-3 text-center"}>pridajte projekt</h3>
+                                </Link>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        );
+    }else{
+        if(!subpage.title){
+            return <Loader/>;
+        }
+        return (
+            <div className={"subpage-content col-12 row align-items-start "}>
+                <h1 className={"col-12 text-center mt-4"}>{subpage.title}</h1>
+                <p className={"col-12 text-center description mt-5"}  dangerouslySetInnerHTML={{__html: subpage.description}} />
+                <div className="col-12 justify-content-center  projects-frame row">
+                    <h3 className={"col-12 projects-title my-5"}>projekty smartcity prešov - <span className={"projects-category"}>{subpage.title}</span></h3>
+                    <div className="col-12 row projects p-0 align-items-start">
+                        {subpage.posts.map(({id, title, description, user, image, updated_at}) => {
+                            return ( <div onClick={() => handleGet(id)} className={"project-frame row col-xl-4 col-lg-4 col-md-6 col-sm-12 col-12 p-0 justify-content-xl-start justify-content-lg-start justify-content-md-center justify-content-sm-center justify-content-center mb-4"}>
+                                <div className="project col-10 row shadow p-0">
+                                    <div className="col-12 p-0 row">
+                                        <div className="col-12 p-0"><img src="../img/eu4.jpg" alt="" className={"col-12 p-0"} style={{borderRadius : "10px 10px 0 0"}}/></div>
+                                    </div>
+                                    <h3 className={"col-12 py-0 px-3 mt-3"}>{title}</h3>
+                                    <p className={"col-12 py-0 px-3 mb-3"}>{description.substring(0, description.includes(".") ? description.indexOf(".")+1 : 50)} <a href={`/api/post/${id}`} className={"read_more"}>Objav viac</a></p>
+                                </div>
+                            </div>);
+                        })}
+                    </div>
+                </div>
+                {
+                    project !== null ? <Project data={project} user={author}/> : null
+                }
+            </div>
+        );
+    }
+};
+

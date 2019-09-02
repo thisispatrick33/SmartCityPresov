@@ -11,7 +11,7 @@ class PostsController extends Controller
         return $post = Post::create([
             'title' => $request->title,
             'description' => $request->description,
-            'image' => $request->image,
+            'image' => "text",
             'user_id' => $request->user_id,
             'subpage_id' => $request->subpage_id,
             'timestamps' => true
@@ -32,6 +32,6 @@ class PostsController extends Controller
 
     public function delete(Request $request){
         Post::find($request->id)->delete();
-        return response(200);        
+        return response(200);
     }
 }
