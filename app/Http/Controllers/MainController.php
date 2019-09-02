@@ -45,11 +45,17 @@ class MainController extends Controller
 
     public function data($option){
         $subpage = Subpage::with('posts')->select('*')->where('title_link','=',$option)->first();
-        $data = array();
-        foreach ($subpage->posts as $x) {
-             $author = User::select(array('id','name','email','admin'))->where('id','=',$x->user_id)->first();
-             $x->user = $author;
-             array_push($data,array($x));
+        $i = 0;
+        foreach ($subpage->posts as $post) {
+            if ($post->active) {
+                $author = User::select(array('id','name','email','admin'))->where('id','=',$post->user_id)->first();
+                $post->user = $author;
+            }
+            else {
+                unset($subpage->posts[$i]);      
+            } 
+            $i++;
+            
         }
         return response()->json([
             'subpage' => $subpage

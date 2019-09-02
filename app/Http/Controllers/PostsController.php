@@ -4,9 +4,27 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Post;
+use App\User;
 
 class PostsController extends Controller
 {
+    public function get(){
+        $posts = Post::where('subpage_id', '!=', null)->get();
+        $i=0;
+        foreach( $posts as $post){
+            if($post->active){
+                $user = User::select(array('id','name','email','admin'))->where('id','=', $post->user_id)->first();
+                $post->user = $user;
+            }
+            else{
+                unset($posts[$i]);
+            }
+            $i++;
+        }
+        
+        return $posts;
+    }
+
     public function add(Request $request){
         return $post = Post::create([
             'title' => $request->title,
@@ -31,7 +49,14 @@ class PostsController extends Controller
     }
 
     public function delete(Request $request){
+<<<<<<< HEAD
         Post::find($request->id)->delete();
         return response(200);
+=======
+        $post = Post::find($request->id);
+        $post->active = false;
+        $post->save();
+        return response(200);        
+>>>>>>> 0d188d6140ec3879e573e02836613c40efc8ada1
     }
 }
