@@ -26,7 +26,7 @@ const App = () => {
             isLoggedIn: false,
             user: {}
         };
-        // save app state with user date in local storage
+
         localStorage["authState"] = JSON.stringify(authState);
         setAuthState(authState);
     };
@@ -35,19 +35,25 @@ const App = () => {
         formData.append("email", email);
         formData.append("password", password);
         axios
-            .post("/api/auth/login/", formData)
+            .post("/api/auth/login/", formData,{
+                headers : {
+                    'Content-Type' : 'application/json',
+                }
+            })
             .then(response => {
                 return response;
             })
             .then(json => {
                 if (json.data.success) {
                     alert("Login Successful!");
+                    console.log(json.data);
                     let authState = {
                         isLoggedIn: true,
                         user: {
                             id: json.data.data.id,
                             name: json.data.data.name,
                             email: json.data.data.email,
+                            auth_token : json.data.data.auth_token,
                             timestamp: new Date().toString()
                         }
                     };
@@ -70,7 +76,13 @@ const App = () => {
 
     const _updatePost = (postData) => {
         axios
-            .put("/api/post/edit", postData)
+            .put("/api/post/edit", postData,{
+                headers : {
+                    'Content-Type' : 'application/json',
+                    'Accept' : 'application/json',
+                    'Authorization' : `Bearer ${authState.user.auth_token}`
+                }
+            })
             .then(response => {
                 console.log(response)
             })
@@ -84,7 +96,13 @@ const App = () => {
     };
     const _createPost = (postData) => {
         axios
-            .post("/api/post", postData)
+            .post("/api/post", postData,{
+                headers : {
+                    'Content-Type' : 'application/json',
+                    'Accept' : 'application/json',
+                    'Authorization' : `Bearer ${authState.user.auth_token}`
+                }
+            })
             .then(response => {
                 console.log(response)
             })
@@ -100,7 +118,13 @@ const App = () => {
             id : postData
         };
         axios
-            .delete("/api/post/delete", { data : postData})
+            .delete("/api/post/delete", { data : postData},{
+                headers : {
+                    'Content-Type' : 'application/json',
+                    'Accept' : 'application/json',
+                    'Authorization' : `Bearer ${authState.user.auth_token}`
+                }
+            })
             .then(response => {
                 console.log(response)
             })
@@ -108,7 +132,7 @@ const App = () => {
                 if (!json) {
                     alert("Úspešne si vymazal článok.");
                 } else  alert("Vymazanie neprebehlo, nastala chyba.");
-            })
+            });
         navigate(`/${subpage}`);
     };
     return (

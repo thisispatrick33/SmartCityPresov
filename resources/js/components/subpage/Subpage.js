@@ -3,6 +3,7 @@ import { Loader } from "../Utillities";
 import { Project } from './Project';
 import { Link } from "@reach/router";
 import axios from "axios";
+import $ from "jquery";
 
 export const Subpage = ({ id, user, del = f => f, get = f => f, }) => {
     const [subpage, setSubpage] = useState([]);
@@ -17,6 +18,13 @@ export const Subpage = ({ id, user, del = f => f, get = f => f, }) => {
     const handleDelete = (_id,_title_link) => {
         setReload(!reload);
         del(_id, _title_link);
+    }
+    const close = () => {
+        $('.project-details-frame .project-content').animate({
+            marginTop: '100vh',
+            easing: 'easeInOutCirc'
+        },1000);
+        $('.project-details-frame').fadeToggle("slow", () => setProject(null));
     }
     const handleGet = (_id) => {
         fetch(`/api/post/${_id}`)
@@ -101,7 +109,7 @@ export const Subpage = ({ id, user, del = f => f, get = f => f, }) => {
                     </div>
                 </div>
                 {
-                    project !== null ? <Project data={project} user={author}/> : null
+                    project !== null ? <Project data={project} user={author} close={close}/> : null
                 }
             </div>
         );

@@ -65538,8 +65538,7 @@ var App = function App() {
     var authState = {
       isLoggedIn: false,
       user: {}
-    }; // save app state with user date in local storage
-
+    };
     localStorage["authState"] = JSON.stringify(authState);
     setAuthState(authState);
   };
@@ -65548,17 +65547,23 @@ var App = function App() {
     var formData = new FormData();
     formData.append("email", email);
     formData.append("password", password);
-    axios__WEBPACK_IMPORTED_MODULE_8___default.a.post("/api/auth/login/", formData).then(function (response) {
+    axios__WEBPACK_IMPORTED_MODULE_8___default.a.post("/api/auth/login/", formData, {
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    }).then(function (response) {
       return response;
     }).then(function (json) {
       if (json.data.success) {
         alert("Login Successful!");
+        console.log(json.data);
         var _authState = {
           isLoggedIn: true,
           user: {
             id: json.data.data.id,
             name: json.data.data.name,
             email: json.data.data.email,
+            auth_token: json.data.data.auth_token,
             timestamp: new Date().toString()
           }
         };
@@ -65575,7 +65580,13 @@ var App = function App() {
   };
 
   var _updatePost = function _updatePost(postData) {
-    axios__WEBPACK_IMPORTED_MODULE_8___default.a.put("/api/post/edit", postData).then(function (response) {
+    axios__WEBPACK_IMPORTED_MODULE_8___default.a.put("/api/post/edit", postData, {
+      headers: {
+        'Content-Type': 'application/json',
+        'Accept': 'application/json',
+        'Authorization': "Bearer ".concat(authState.user.auth_token)
+      }
+    }).then(function (response) {
       console.log(response);
     }).then(function (json) {
       if (!json) {
@@ -65585,7 +65596,13 @@ var App = function App() {
   };
 
   var _createPost = function _createPost(postData) {
-    axios__WEBPACK_IMPORTED_MODULE_8___default.a.post("/api/post", postData).then(function (response) {
+    axios__WEBPACK_IMPORTED_MODULE_8___default.a.post("/api/post", postData, {
+      headers: {
+        'Content-Type': 'application/json',
+        'Accept': 'application/json',
+        'Authorization': "Bearer ".concat(authState.user.auth_token)
+      }
+    }).then(function (response) {
       console.log(response);
     }).then(function (json) {
       if (!json) {
@@ -65600,6 +65617,12 @@ var App = function App() {
     };
     axios__WEBPACK_IMPORTED_MODULE_8___default.a["delete"]("/api/post/delete", {
       data: postData
+    }, {
+      headers: {
+        'Content-Type': 'application/json',
+        'Accept': 'application/json',
+        'Authorization': "Bearer ".concat(authState.user.auth_token)
+      }
     }).then(function (response) {
       console.log(response);
     }).then(function (json) {
@@ -66251,6 +66274,7 @@ var Post = function Post(_ref) {
 
   var handleSubmit = function handleSubmit(e) {
     e.preventDefault();
+    console.log(postData);
     make(_objectSpread({}, postData, {
       user_id: _idControl ? user.data.id : logged.id,
       subpage_id: location.state.subpage
@@ -66383,11 +66407,8 @@ var Post = function Post(_ref) {
       className: "col-8 px-0 py-2 ml-4",
       value: _idControl ? postData.updated_at : "".concat(date.getFullYear(), "-").concat(date.getMonth() + 1, "-").concat(date.getDate() + 1, " ").concat(date.getHours(), ":").concat(date.getMinutes(), ":").concat(date.getSeconds())
     })))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
-      htmlFor: "post-gallery",
-      className: "col-2 p-0"
-    }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
       className: "col-12 mb-5 row title justify-content-start",
-      htmlFor: "title"
+      htmlFor: "image"
     }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h2", {
       className: "mb-0 col-12 p-0 ml-1 mb-0"
     }, "gal\xE9ria"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
@@ -66402,12 +66423,18 @@ var Post = function Post(_ref) {
     }))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
       className: "col-4 p-0 ml-4"
     }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("hr", null)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
-      name: "title",
+      name: "image",
       type: "file",
       placeholder: "Zadajte názov",
+      onChange: function onChange(e) {
+        setPostData(_objectSpread({}, postData, {
+          image: e.target.files
+        }));
+      },
       disabled: !control,
-      className: "col-12 mt-3 px-0 py-2 ml-1"
-    })))), !control ? "" : react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
+      className: "col-12 mt-3 px-0 py-2 ml-1",
+      multiple: true
+    }))), !control ? "" : react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
       className: "col-12 mb-5 row title p-2 justify-content-start",
       htmlFor: "button"
     }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
@@ -66533,26 +66560,26 @@ __webpack_require__.r(__webpack_exports__);
 
 var Project = function Project(_ref) {
   var data = _ref.data,
-      user = _ref.user;
+      user = _ref.user,
+      _ref$close = _ref.close,
+      close = _ref$close === void 0 ? function (f) {
+    return f;
+  } : _ref$close;
   Object(react__WEBPACK_IMPORTED_MODULE_0__["useEffect"])(function () {
+    jquery__WEBPACK_IMPORTED_MODULE_1___default()('.project-details-frame').fadeIn();
     jquery__WEBPACK_IMPORTED_MODULE_1___default()('.project-details-frame .project-content').animate({
       marginTop: '10vh',
       easing: 'easeInOutCirc'
     }, 1000);
   }, []);
-
-  var del = function del() {
-    console.log("close");
-    jquery__WEBPACK_IMPORTED_MODULE_1___default()('.project-details-frame .project-content').animate({
-      marginTop: '100vh',
-      easing: 'easeInOutCirc'
-    }, 1000);
-    jquery__WEBPACK_IMPORTED_MODULE_1___default()('.project-details-frame').fadeToggle();
-  };
-
   return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    onClick: del,
-    className: "project-details-frame row p-0 justify-content-center"
+    onClick: function onClick() {
+      return close();
+    },
+    className: "project-details-frame row p-0 justify-content-center",
+    style: {
+      display: "none"
+    }
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "project-content col-9 row shadow p-0 justify-content-start align-items-start",
     style: {
@@ -66634,6 +66661,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _reach_router__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @reach/router */ "./node_modules/@reach/router/es/index.js");
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_5__);
+/* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! jquery */ "./node_modules/jquery/dist/jquery.js");
+/* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(jquery__WEBPACK_IMPORTED_MODULE_6__);
 
 
 function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
@@ -66647,6 +66676,7 @@ function _nonIterableRest() { throw new TypeError("Invalid attempt to destructur
 function _iterableToArrayLimit(arr, i) { var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
 
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
+
 
 
 
@@ -66720,6 +66750,16 @@ var Subpage = function Subpage(_ref) {
   var handleDelete = function handleDelete(_id, _title_link) {
     setReload(!reload);
     del(_id, _title_link);
+  };
+
+  var close = function close() {
+    jquery__WEBPACK_IMPORTED_MODULE_6___default()('.project-details-frame .project-content').animate({
+      marginTop: '100vh',
+      easing: 'easeInOutCirc'
+    }, 1000);
+    jquery__WEBPACK_IMPORTED_MODULE_6___default()('.project-details-frame').fadeToggle("slow", function () {
+      return setProject(null);
+    });
   };
 
   var handleGet = function handleGet(_id) {
@@ -66910,7 +66950,8 @@ var Subpage = function Subpage(_ref) {
       }, "Objav viac"))));
     }))), project !== null ? react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_Project__WEBPACK_IMPORTED_MODULE_3__["Project"], {
       data: project,
-      user: author
+      user: author,
+      close: close
     }) : null);
   }
 };

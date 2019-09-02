@@ -1,22 +1,15 @@
-import React, {useEffect,useRef} from "react";
+import React, {useEffect} from "react";
 import $ from 'jquery';
-export const Project = ({data,user}) => {
+export const Project = ({data,user, close = f => f}) => {
     useEffect(() => {
+        $('.project-details-frame').fadeIn();
         $('.project-details-frame .project-content').animate({
             marginTop: '10vh',
             easing: 'easeInOutCirc'
         },1000);
     }, []);
-    const del = () => {
-        console.log("close")
-        $('.project-details-frame .project-content').animate({
-            marginTop: '100vh',
-            easing: 'easeInOutCirc'
-        },1000);
-        $('.project-details-frame').fadeToggle();
-    }
     return (
-        <div onClick={del} className={"project-details-frame row p-0 justify-content-center"}>
+        <div onClick={() => close()} className={"project-details-frame row p-0 justify-content-center"} style={{display : `none`}}>
             <div className="project-content col-9 row shadow p-0 justify-content-start align-items-start" style={{marginTop : '100vh', minHeight : '80%'}}>
                 <div className="gallery col-2 row p-0">
                     <div className="col-12 p-0 my-5 title">
