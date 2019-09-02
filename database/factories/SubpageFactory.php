@@ -9,7 +9,7 @@ $factory->define(Subpage::class, function (Faker $faker) {
     return [
         'title' => $faker->jobTitle,
         'description' => $faker->text(250),
-        'image' => $faker->image('/tmp'),
+        'CoverImage' => $faker->imageUrl(1920, 1080, 'city'),
         'title_link' => $faker->slug
     ];
 });

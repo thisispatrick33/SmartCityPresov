@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateSubpagesTable extends Migration
+class CreateImagesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -12,12 +12,11 @@ class CreateSubpagesTable extends Migration
      */
     public function up()
     {
-        Schema::create('subpages', function (Blueprint $table) {
+        Schema::create('images', function (Blueprint $table) {
             $table->increments('id');
             $table->string('title');
-            $table->text('description');
-            $table->string('CoverImage');
-            $table->string('title_link');
+            $table->string('alt');
+            $table->string('path');
             $table->timestamps();
         });
     }
@@ -29,6 +28,6 @@ class CreateSubpagesTable extends Migration
      */
     public function down()
     {
-        Schema::drop('subpages');
+        Schema::drop('images');
     }
 }

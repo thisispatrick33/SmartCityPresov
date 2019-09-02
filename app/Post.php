@@ -23,4 +23,8 @@ class Post extends Model
     public function subpage(){
         return $this->belongsTo(Subpage::class);
     }
+
+    public function images(){
+        return $this->belongsToMany('App\Image', 'image_post');
+    }
 }
