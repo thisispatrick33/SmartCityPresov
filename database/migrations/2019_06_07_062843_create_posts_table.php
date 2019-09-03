@@ -16,7 +16,7 @@ class CreatePostsTable extends Migration
             $table->increments('id');
             $table->string('title');
             $table->text('description');
-            $table->string('CoverImage');
+            $table->string('image');
             $table->double('price',20,2);
             //$table->unsignedBigInteger('user_id');
             //$table->unsignedBigInteger('subpage_id');
