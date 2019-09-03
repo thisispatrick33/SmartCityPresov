@@ -26,6 +26,7 @@ class PostsController extends Controller
     }
 
     public function add(Request $request){
+
         return $post = Post::create([
             'title' => $request->title,
             'description' => $request->description,
@@ -49,9 +50,18 @@ class PostsController extends Controller
     }
 
     public function delete(Request $request){
+<<<<<<< HEAD
         $post = Post::find($request->id);
         $post->active = false;
         $post->save();
         return response(200);
+=======
+
+        $post = Post::find($request->id);
+        $post->active = false;
+        $post->save();
+        return response(200);        
+
+>>>>>>> b5b35b118fbad173b82f24643635c1e6f24a4907
     }
 }

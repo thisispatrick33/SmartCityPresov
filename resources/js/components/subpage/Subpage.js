@@ -38,7 +38,7 @@ export const Subpage = ({ id, user, del = f => f, get = f => f, }) => {
                     })
             })
     }
-    useEffect( () => {  fetchData(subpage) }, [ id,reload ] );
+    useEffect( () => {  fetchData(subpage) }, [ id ] );
     if(user){
         if(!subpage.title){
             return <Loader/>;
@@ -96,6 +96,7 @@ export const Subpage = ({ id, user, del = f => f, get = f => f, }) => {
                     <h3 className={"col-12 projects-title my-5"}>projekty smartcity prešov - <span className={"projects-category"}>{subpage.title}</span></h3>
                     <div className="col-12 row projects p-0 align-items-start">
                         {subpage.posts.map(({id, title, description, user, image, updated_at}) => {
+                            console.log(subpage.posts)
                             return ( <div onClick={() => handleGet(id)} className={"project-frame row col-xl-4 col-lg-4 col-md-6 col-sm-12 col-12 p-0 justify-content-xl-start justify-content-lg-start justify-content-md-center justify-content-sm-center justify-content-center mb-4"}>
                                 <div className="project col-10 row shadow p-0">
                                     <div className="col-12 p-0 row">

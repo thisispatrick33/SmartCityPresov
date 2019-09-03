@@ -66778,7 +66778,7 @@ var Subpage = function Subpage(_ref) {
 
   Object(react__WEBPACK_IMPORTED_MODULE_1__["useEffect"])(function () {
     fetchData(subpage);
-  }, [id, reload]);
+  }, [id]);
 
   if (user) {
     if (!subpage.title) {
@@ -66922,6 +66922,7 @@ var Subpage = function Subpage(_ref) {
           user = _ref5.user,
           image = _ref5.image,
           updated_at = _ref5.updated_at;
+      console.log(subpage.posts);
       return react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
         onClick: function onClick() {
           return handleGet(id);

@@ -25,7 +25,7 @@ Route::get('/post/{id}', 'MainController@post');
 
 
 Route::group(['middleware' => ['jwt.auth','api-header']], function () {
-  
+    
     // all routes to protected resources are registered here  
     Route::post('/post', 'PostsController@add');
     Route::put('/post/edit', 'PostsController@update');
