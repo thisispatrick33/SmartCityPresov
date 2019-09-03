@@ -16,7 +16,7 @@ class CreateSubpagesTable extends Migration
             $table->increments('id');
             $table->string('title');
             $table->text('description');
-            $table->string('CoverImage');
+            $table->string('image');
             $table->string('title_link');
             $table->timestamps();
         });

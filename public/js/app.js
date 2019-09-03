@@ -66572,6 +66572,7 @@ var Project = function Project(_ref) {
       easing: 'easeInOutCirc'
     }, 1000);
   }, []);
+  console.log(data);
   return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     onClick: function onClick() {
       return close();
@@ -66922,7 +66923,6 @@ var Subpage = function Subpage(_ref) {
           user = _ref5.user,
           image = _ref5.image,
           updated_at = _ref5.updated_at;
-      console.log(subpage.posts);
       return react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
         onClick: function onClick() {
           return handleGet(id);

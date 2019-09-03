@@ -8,6 +8,7 @@ export const Project = ({data,user, close = f => f}) => {
             easing: 'easeInOutCirc'
         },1000);
     }, []);
+    console.log(data);
     return (
         <div onClick={() => close()} className={"project-details-frame row p-0 justify-content-center"} style={{display : `none`}}>
             <div className="project-content col-9 row shadow p-0 justify-content-start align-items-start" style={{marginTop : '100vh', minHeight : '80%'}}>

@@ -11,7 +11,7 @@ $factory->define(Post::class, function (Faker $faker) {
     return [
         'title' => $faker->jobTitle,
         'description' => $faker->text(250),
-        'CoverImage' => $faker->imageUrl(1920, 1080, 'city'),
+        'image' => $faker->imageUrl(1920, 1080, 'city'),
         'price' => $faker->randomFloat(2, 0, NULL)
     ];
 });
