@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Post;
 use App\User;
+use App\Image;
 
 class PostsController extends Controller
 {
@@ -27,7 +28,7 @@ class PostsController extends Controller
 
     public function add(Request $request){
 
-        return $post = Post::create([
+        $post = Post::create([
             'title' => $request->title,
             'description' => $request->description,
             'image' => "text",
@@ -35,6 +36,32 @@ class PostsController extends Controller
             'subpage_id' => $request->subpage_id,
             'timestamps' => true
         ]);
+        
+        $images_id= [];
+        $images = [ 'images' => $request->images->all() ];
+
+        $validator = Validator::make($images, [
+            'data.*.name' => 'required|image|mimes:jpeg,png,jpg,gif,svg'
+        ]);
+
+        if ($validator->fails()) {
+            return response(422);
+        }
+        else{
+            foreach($request->images as $image){
+                $imageName = time().'.'.$image->getClientOriginalExtension();
+                request()->image->move(public_path('images'), $imageName);
+                $img= new Image;
+                $img->title = $image->getClientOriginalExtension();
+                $img->alt = $image->getClientOriginalExtension();
+                $img->path = public_path('images/'.$imageName);
+                $img->save();
+                array_push($images_id,$img->id);
+            }
+            $post->images()->attach($images_id);
+        }
+
+        return response(200);
     }
 
     public function update(Request $request){
@@ -46,7 +73,7 @@ class PostsController extends Controller
         $post->subpage_id = $request->subpage_id;
         $post->timestamps = true;
         $post->save();
-        return $post;
+        return response(200);
     }
 
     public function delete(Request $request){

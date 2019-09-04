@@ -15,7 +15,7 @@ class DatabaseSeeder extends Seeder
         factory(App\User::class, 5)->create();
         factory(App\Image::class,15)->create();
         factory(App\Subpage::class,4)->create();
-        factory(App\Post::class,10)->create();
+        factory(App\Post::class,17)->create();
 
         $users=App\User::select('id')->get()->all();
         $subpages=App\Subpage::select('id')->get()->all();
