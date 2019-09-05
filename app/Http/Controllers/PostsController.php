@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use App\Post;
 use App\User;
 use App\Image;
+use Illuminate\Support\Facades\Validator;
+use App\Http\Requests;
 
 class PostsController extends Controller
 {
@@ -28,40 +30,53 @@ class PostsController extends Controller
 
     public function add(Request $request){
 
-        $post = Post::create([
-            'title' => $request->title,
-            'description' => $request->description,
-            'image' => "text",
-            'user_id' => $request->user_id,
-            'subpage_id' => $request->subpage_id,
-            'timestamps' => true
-        ]);
+        $post = new Post;
+        $post->title = $request->title;
+        $post->description = $request->description;
+        $post->image = "dd";
+        $post->price = $request->price;
+        $post->user_id = $request->user_id;
+        $post->subpage_id = $request->subpage_id;
         
+        return $request->images;
         $images_id= [];
-        $images = [ 'images' => $request->images->all() ];
+        $images = ['data' => $request->images];
 
         $validator = Validator::make($images, [
             'data.*.name' => 'required|image|mimes:jpeg,png,jpg,gif,svg'
         ]);
 
         if ($validator->fails()) {
+
             return response(422);
         }
         else{
             foreach($request->images as $image){
                 $imageName = time().'.'.$image->getClientOriginalExtension();
-                request()->image->move(public_path('images'), $imageName);
+                $image->move(public_path('images'), $imageName);
                 $img= new Image;
                 $img->title = $image->getClientOriginalExtension();
                 $img->alt = $image->getClientOriginalExtension();
                 $img->path = public_path('images/'.$imageName);
                 $img->save();
                 array_push($images_id,$img->id);
-            }
-            $post->images()->attach($images_id);
+            }            
         }
 
-        return response(200);
+        if ($post->save()) {
+            if(sizeof($request->images)>0){
+                if($post->images()->attach($images_id)){
+                    return response(200);
+                }
+            }
+            else {
+                return response(200);
+            }
+        }
+        else {
+            return response(422);
+        }
+
     }
 
     public function update(Request $request){

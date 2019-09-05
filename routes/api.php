@@ -20,14 +20,14 @@ Route::get('/', 'MainController@subpages');
 Route::get('/author/{id}', 'MainController@author');
 Route::get('/post/{id}', 'MainController@post');
 
-
+Route::post('/post', 'PostsController@add');
 
 
 
 Route::group(['middleware' => ['jwt.auth','api-header']], function () {
     
     // all routes to protected resources are registered here  
-    Route::post('/post', 'PostsController@add');
+    
     Route::put('/post/edit', 'PostsController@update');
     Route::delete('/post/delete', 'PostsController@delete');
     
