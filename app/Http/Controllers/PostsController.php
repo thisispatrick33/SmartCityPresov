@@ -6,8 +6,12 @@ use Illuminate\Http\Request;
 use App\Post;
 use App\User;
 use App\Image;
+use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Validator;
-use App\Http\Requests;
+use Storage;
+
+
+
 
 class PostsController extends Controller
 {
@@ -24,12 +28,12 @@ class PostsController extends Controller
             }
             $i++;
         }
-
+        
         return $posts;
     }
-
+    
     public function add(Request $request){
-
+        return $request;
         $post = new Post;
         $post->title = $request->title;
         $post->description = $request->description;
@@ -38,7 +42,6 @@ class PostsController extends Controller
         $post->user_id = $request->user_id;
         $post->subpage_id = $request->subpage_id;
         
-        return $request->images;
         $images_id= [];
         $images = ['data' => $request->images];
 
@@ -51,16 +54,18 @@ class PostsController extends Controller
             return response(422);
         }
         else{
-            foreach($request->images as $image){
-                $imageName = time().'.'.$image->getClientOriginalExtension();
-                $image->move(public_path('images'), $imageName);
+           
+            foreach($request->images as $image ){
+                $name= time().Str::random(5);
+                $alt = $image->getClientOriginalName();
+                $image->move(public_path('img/'),$name);
                 $img= new Image;
-                $img->title = $image->getClientOriginalExtension();
-                $img->alt = $image->getClientOriginalExtension();
-                $img->path = public_path('images/'.$imageName);
+                $img->title = $name;
+                $img->alt = $alt;
+                $img->path = public_path('img/'.$name);
                 $img->save();
                 array_push($images_id,$img->id);
-            }            
+            }       
         }
 
         if ($post->save()) {
@@ -80,15 +85,75 @@ class PostsController extends Controller
     }
 
     public function update(Request $request){
-        $post = Post::find($request->id);
-        $post->title = $request->title;
+        $post = Post::with('images')->find($request->id);
+        
+        $images=[];
+
+        foreach($post->images as $image){
+            $images[]=$image->title;
+        }
+
+
+        Storage::delete($images);
+
+        if ($post->images()->detach()) {
+            $post->title = $request->title;
+            $post->description = $request->description;
+            $post->user_id = $request->user_id;
+            $post->subpage_id = $request->subpage_id;
+
+            $images_id= [];
+            $images = ['data' => $request->images];
+    
+            $validator = Validator::make($images, [
+                'data.*.name' => 'required|image|mimes:jpeg,png,jpg,gif,svg'
+            ]);
+    
+            if ($validator->fails()) {
+    
+                return response(422);
+            }
+            else{
+                $prvy=true;
+                foreach($request->images as $image ){
+                    $name= time().Str::random(5);
+                    $alt = $image->getClientOriginalName();
+                    $image->move(public_path('img/'),$name);
+                    $img= new Image;
+                    $img->title = $name;
+                    $img->alt = $alt;
+                    $img->path = public_path('img/'.$name);
+                    $img->save();
+                    array_push($images_id,$img->id);
+                    if ($prvy) {
+                        $post->image = public_path('img/'.$name);
+                        $prvy = false;
+                    }
+                }       
+            }
+            if ($post->save()) {
+                if(sizeof($request->images)>0){
+                    if($post->images()->attach($images_id)){
+                        return response(200);
+                    }
+                }
+                else {
+                    return response(200);
+                }
+            }
+        }
+        else {
+            # code...
+            return response(422);
+        }
+       /* $post->title = $request->title;
         $post->description = $request->description;
         $post->image = $request->image;
         $post->user_id = $request->user_id;
         $post->subpage_id = $request->subpage_id;
         $post->timestamps = true;
-        $post->save();
-        return response(200);
+        $post->save();*/
+        
     }
 
     public function delete(Request $request){
@@ -96,11 +161,5 @@ class PostsController extends Controller
         $post->active = false;
         $post->save();
         return response(200);
-
-        $post = Post::find($request->id);
-        $post->active = false;
-        $post->save();
-        return response(200);
-
     }
 }
