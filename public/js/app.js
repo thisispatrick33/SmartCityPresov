@@ -65938,6 +65938,8 @@ var Navigation = react__WEBPACK_IMPORTED_MODULE_0___default.a.forwardRef(functio
     var title = _ref2.title,
         title_link = _ref2.title_link;
     return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      onClick: window.innerWidth <= 991 ? open : null,
+      key: title_link,
       className: "nav-item | row col-xl-auto col-lg-2 col-12 | justify-content-xl-start justify-content-lg-start justify-content-center | text-center | p-0 ".concat(path.includes("".concat(title_link)) ? "on" : "")
     }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_reach_router__WEBPACK_IMPORTED_MODULE_1__["Link"], {
       className: "col-xl-12 col-lg-10 col-auto | px-xl-0 px-lg-0 px-2| mb-xl-0 mb-lg-0 my-2 | text-center ",
@@ -66196,7 +66198,7 @@ var News = function News(_ref) {
         user = _ref2.user,
         updated_at = _ref2.updated_at;
     return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_PostLookup__WEBPACK_IMPORTED_MODULE_2__["PostLookup"], {
-      key: title,
+      key: index,
       id: id,
       index: index,
       title: title,
@@ -66511,6 +66513,7 @@ var PostLookup = function PostLookup(_ref) {
       date = _ref.date,
       author = _ref.author,
       index = _ref.index;
+  var written = new Date(date.replace(' ', 'T'));
   return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "row post col-xl-11 col-lg-11 col-12 px-0"
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
@@ -66531,7 +66534,7 @@ var PostLookup = function PostLookup(_ref) {
     className: "col-6 text-left p-0"
   }, author.name.split(" ")[0].substring(0, 1) + " . " + author.name.split(" ")[1].substring(0, 1) + " . "), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
     className: "col-6 text-right"
-  }, new Date(date).toLocaleDateString("en-US")))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+  }, String(written.getDay()) + "/" + (written.getMonth() + 1) + "/" + written.getFullYear()))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "".concat(index % 2 === 1 ? "offset-1" : "", " col-11 px-0")
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "".concat(index % 2 === 1 ? "offset-6" : "", " col-6 px-0 mt-2")
@@ -66572,7 +66575,6 @@ var Project = function Project(_ref) {
       easing: 'easeInOutCirc'
     }, 1000);
   }, []);
-  console.log(data);
   return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     onClick: function onClick() {
       return close();
@@ -66582,42 +66584,39 @@ var Project = function Project(_ref) {
       display: "none"
     }
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "project-content col-9 row shadow p-0 justify-content-start align-items-start",
+    className: "project-content col-xl-9 col-lg-9 col-md-10 col-sm-11 col-11 row shadow p-0 justify-content-start align-items-start",
     style: {
       marginTop: '100vh',
       minHeight: '80%'
     }
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "gallery col-2 row p-0"
+    className: "gallery col-xl-2 col-lg-2 col-12 order-xl-1 order-lg-1 order-2 row p-0"
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "col-12 p-0 my-5 title"
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", {
     className: "text-center"
   }, "gal\xE9ria")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "col-12 row p-0"
+    className: "col-12 row p-3"
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "col-12 mb-4"
+    className: "col-xl-12 col-lg-12 col-4 mb-4 cover-image p-1"
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
-    src: "img/eu4.jpg",
-    alt: "",
-    className: "col-12 shadow"
-  })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "col-12 mb-4"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
-    src: "img/eu4.jpg",
-    alt: "",
-    className: "col-12 shadow"
-  })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "col-12 mb-4"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
-    src: "img/eu4.jpg",
-    alt: "",
-    className: "col-12 shadow"
-  })))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "content shadow col-10 row justify-content-end p-0 align-items-start",
-    style: {
-      height: "100%"
-    }
+    src: data.image,
+    alt: "cover image",
+    className: "col-12 shadow p-0"
+  })), data.images.map(function (_ref2) {
+    var id = _ref2.id,
+        title = _ref2.title,
+        alt = _ref2.alt,
+        path = _ref2.path;
+    return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      className: "col-xl-12 col-lg-12 col-4 mb-4 p-1"
+    }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
+      src: path,
+      alt: alt,
+      className: "col-12 shadow p-2"
+    }));
+  }))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "content shadow col-xl-10 col-lg-10 col-12 order-xl-2 order-lg-2 order-1 row justify-content-end p-0 align-items-start"
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "col-12 row p-0"
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
@@ -66628,11 +66627,11 @@ var Project = function Project(_ref) {
     className: "col-12 row description mt-4 py-2 px-5"
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
     className: "col-11 mb-3"
-  }, data.description), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
-    className: "col-11 mb-3"
-  }, data.description), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
-    className: "col-11 mb-3"
   }, data.description)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "col-12 row price mt-4 py-2 px-5"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
+    className: "col-11 mb-3"
+  }, data.price)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "col-11 row post-data my-4 py-2 px-5"
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
     className: "col-12 mb-0 text-right"
@@ -66701,7 +66700,7 @@ var Subpage = function Subpage(_ref) {
       subpage = _useState2[0],
       setSubpage = _useState2[1];
 
-  var _useState3 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(false),
+  var _useState3 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(null),
       _useState4 = _slicedToArray(_useState3, 2),
       reload = _useState4[0],
       setReload = _useState4[1];
@@ -66727,13 +66726,13 @@ var Subpage = function Subpage(_ref) {
         while (1) {
           switch (_context.prev = _context.next) {
             case 0:
-              _context.next = 2;
+              setReload(true);
+              _context.next = 3;
               return axios__WEBPACK_IMPORTED_MODULE_5___default.a.get("api/".concat(id));
 
-            case 2:
+            case 3:
               response = _context.sent;
               setSubpage(response.data.subpage);
-              reload ? setReload(false) : "";
 
             case 5:
             case "end":
@@ -66749,7 +66748,6 @@ var Subpage = function Subpage(_ref) {
   }();
 
   var handleDelete = function handleDelete(_id, _title_link) {
-    setReload(!reload);
     del(_id, _title_link);
   };
 
@@ -66778,7 +66776,9 @@ var Subpage = function Subpage(_ref) {
   };
 
   Object(react__WEBPACK_IMPORTED_MODULE_1__["useEffect"])(function () {
-    fetchData(subpage);
+    fetchData(subpage).then(function () {
+      return setReload(false);
+    }, console.log(reload));
   }, [id]);
 
   if (user) {
@@ -66812,7 +66812,7 @@ var Subpage = function Subpage(_ref) {
           updated_at = _ref4.updated_at;
       return react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
         className: "project-frame row col-xl-4 col-lg-4 col-md-6 col-sm-12 col-12 p-0 justify-content-xl-start justify-content-lg-start justify-content-md-center justify-content-sm-center justify-content-center mb-4",
-        key: title
+        key: id
       }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
         className: "project col-10 row shadow p-0 align-items-start"
       }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
@@ -66895,7 +66895,7 @@ var Subpage = function Subpage(_ref) {
       className: "col-12 py-0 px-3 mt-3 text-center"
     }, "pridajte projekt")))))));
   } else {
-    if (!subpage.title) {
+    if (!subpage.title || reload) {
       return react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_Utillities__WEBPACK_IMPORTED_MODULE_2__["Loader"], null);
     }
 
@@ -66927,7 +66927,8 @@ var Subpage = function Subpage(_ref) {
         onClick: function onClick() {
           return handleGet(id);
         },
-        className: "project-frame row col-xl-4 col-lg-4 col-md-6 col-sm-12 col-12 p-0 justify-content-xl-start justify-content-lg-start justify-content-md-center justify-content-sm-center justify-content-center mb-4"
+        className: "project-frame row col-xl-4 col-lg-4 col-md-6 col-sm-12 col-12 p-0 justify-content-xl-start justify-content-lg-start justify-content-md-center justify-content-sm-center justify-content-center mb-4",
+        key: id
       }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
         className: "project col-10 row shadow p-0"
       }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
@@ -66935,8 +66936,8 @@ var Subpage = function Subpage(_ref) {
       }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
         className: "col-12 p-0"
       }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("img", {
-        src: "../img/eu4.jpg",
-        alt: "",
+        src: image,
+        alt: "cover image",
         className: "col-12 p-0",
         style: {
           borderRadius: "10px 10px 0 0"
@@ -66946,7 +66947,9 @@ var Subpage = function Subpage(_ref) {
       }, title), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("p", {
         className: "col-12 py-0 px-3 mb-3"
       }, description.substring(0, description.includes(".") ? description.indexOf(".") + 1 : 50), " ", react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("a", {
-        href: "/api/post/".concat(id),
+        onClick: function onClick() {
+          return handleGet(id);
+        },
         className: "read_more"
       }, "Objav viac"))));
     }))), project !== null ? react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_Project__WEBPACK_IMPORTED_MODULE_3__["Project"], {

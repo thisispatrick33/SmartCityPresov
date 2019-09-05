@@ -14426,7 +14426,7 @@ body .main-container .news-frame .news .post {
 }
 
 body .main-container .news-frame .news .post div:nth-child(2) {
-  border-top: 1px solid #707070;
+  border-top: 1px solid #191919;
 }
 
 body .main-container .news-frame .news .post .content h3 {
@@ -14458,6 +14458,10 @@ body .main-container .news-frame .news .post .content a.read_more:hover {
 
 body .main-container .news-frame .news .post .content .detail_info {
   font-family: NexaLight, serif;
+}
+
+body .main-container .news-frame .news .post hr {
+  background: #191919;
 }
 
 body .main-container .news-button {
@@ -14537,10 +14541,7 @@ body .main-container .subpage .project-details-frame .project-content {
 }
 
 body .main-container .subpage .project-details-frame .project-content .content {
-  border-left: 10px #D71920 solid;
   background: white;
-  min-height: 100%;
-  border-radius: 0 10px 10px 0;
 }
 
 body .main-container .subpage .project-details-frame .project-content .content .title span {
@@ -14555,6 +14556,10 @@ body .main-container .subpage .project-details-frame .project-content .content .
 body .main-container .subpage .project-details-frame .project-content .content .post-data {
   font-family: Gilroy-SemiBold;
   font-size: 1em;
+}
+
+body .main-container .subpage .project-details-frame .project-content .gallery .cover-image {
+  border: 4px solid #D71920;
 }
 
 body .main-container .subpage .project-details-frame .project-content .gallery .title {
@@ -14794,5 +14799,25 @@ hr {
 .logged .body {
   border-top: 1px solid #e3e3e3;
   border-bottom: 1px solid #e3e3e3;
+}
+
+@media (max-width: 991.98px) {
+  .project-details-frame .content {
+    border-width: 0 0 10px 0;
+    border-style: solid;
+    border-color: #D71920;
+    border-radius: 10px 10px 0 0;
+    height: auto;
+  }
+}
+
+@media (min-width: 992px) {
+  .project-details-frame .content {
+    border-width: 0 0 0 10px;
+    border-style: solid;
+    border-color: #D71920;
+    border-radius: 0 10px 10px 0;
+    height: 100%;
+  }
 }
 
