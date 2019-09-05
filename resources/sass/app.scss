@@ -127,7 +127,7 @@ body{
           background-color : $colorOfPage;
           border-right : 1px solid $secondaryColor;
           div:nth-child(2){
-            border-top: 1px solid #707070;
+            border-top: 1px solid $secondaryColor;
           }
           .content{
             h3{
@@ -153,6 +153,9 @@ body{
             .detail_info{
               font-family: NexaLight, serif;
             }
+          }
+          hr{
+            background: $secondaryColor;
           }
         }
       }
@@ -230,10 +233,7 @@ body{
           background: $secondaryColor;
           margin-bottom: 10vh;
           .content{
-            border-left: 10px $primaryColor solid;
             background: white;
-            min-height: 100%;
-            border-radius: 0 10px 10px 0;
             .title{
               span{
                 color: $primaryColor;
@@ -249,6 +249,9 @@ body{
             }
           }
           .gallery{
+            .cover-image{
+                border: 4px solid $primaryColor;
+            }
             .title{
               color: $colorOfPage;
             }
@@ -419,4 +422,22 @@ hr{
 .logged .body{
   border-top: 1px solid #e3e3e3 ;
   border-bottom: 1px solid #e3e3e3 ;
+}
+@include media-breakpoint-down(md) {
+  .project-details-frame .content{
+    border-width : 0 0 10px 0;
+    border-style : solid;
+    border-color: $primaryColor;
+    border-radius: 10px 10px 0 0;
+    height : auto;
+  }
+}
+@include media-breakpoint-up(lg) {
+  .project-details-frame .content{
+    border-width : 0 0 0 10px;
+    border-style : solid;
+    border-color: $primaryColor;
+    border-radius: 0 10px 10px 0;
+    height : 100%;
+  }
 }

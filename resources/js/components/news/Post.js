@@ -21,6 +21,7 @@ export const Post = ({ id, logged, make = f => f , location}) => {
     }
     const handleSubmit = e => {
         e.preventDefault();
+        console.log(postData);
         make({
             ...postData,
             user_id : _idControl ? user.data.id : logged.id,
@@ -103,23 +104,23 @@ export const Post = ({ id, logged, make = f => f , location}) => {
                             </label>
                         </label>
                     </label>
-                    <label htmlFor={`post-gallery`} className={`col-2 p-0`}>
-                        <label className={"col-12 mb-5 row title justify-content-start"} htmlFor={"title"}>
+                        <label className={"col-12 mb-5 row title justify-content-start"} htmlFor={"image"}>
                             <h2 className="mb-0 col-12 p-0 ml-1 mb-0">galéria</h2>
                             <p className={"col-12 ml-4 p-0 mb-0"}>fotky ? sem s nimi<span><img style={{width : 24, height : 24}} src="../img/wink.svg" alt=""/></span></p>
                             <div className="col-4 p-0 ml-4">
                                 <hr/>
                             </div>
                             <input
-                                name={"title"}
+                                name={`image`}
                                 type={`file`}
                                 placeholder={"Zadajte názov"}
-
+                                onChange={e => {setPostData({...postData,image : e.target.files})}}
                                 disabled={!control}
                                 className={"col-12 mt-3 px-0 py-2 ml-1"}
+                                multiple
+
                             />
                         </label>
-                    </label>
                 </label>
 
 

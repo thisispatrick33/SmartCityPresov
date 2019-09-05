@@ -14,7 +14,7 @@ class PostsController extends Controller
     public function get(){
         $posts = Post::where('subpage_id', '!=', null)->get();
         $i=0;
-        foreach( $posts as $post){
+        foreach($posts as $post){
             if($post->active){
                 $user = User::select(array('id','name','email','admin'))->where('id','=', $post->user_id)->first();
                 $post->user = $user;
@@ -24,7 +24,7 @@ class PostsController extends Controller
             }
             $i++;
         }
-        
+
         return $posts;
     }
 
@@ -92,11 +92,15 @@ class PostsController extends Controller
     }
 
     public function delete(Request $request){
+        $post = Post::find($request->id);
+        $post->active = false;
+        $post->save();
+        return response(200);
 
         $post = Post::find($request->id);
         $post->active = false;
         $post->save();
-        return response(200);        
+        return response(200);
 
     }
 }
