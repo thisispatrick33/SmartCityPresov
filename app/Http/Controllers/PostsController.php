@@ -28,12 +28,11 @@ class PostsController extends Controller
             }
             $i++;
         }
-        
+
         return $posts;
     }
-    
+
     public function add(Request $request){
-        return $request;
         $post = new Post;
         $post->title = $request->title;
         $post->description = $request->description;
@@ -41,7 +40,7 @@ class PostsController extends Controller
         $post->price = $request->price;
         $post->user_id = $request->user_id;
         $post->subpage_id = $request->subpage_id;
-        
+
         $images_id= [];
         $images = ['data' => $request->images];
 
@@ -54,7 +53,7 @@ class PostsController extends Controller
             return response(422);
         }
         else{
-           
+
             foreach($request->images as $image ){
                 $name= time().Str::random(5);
                 $alt = $image->getClientOriginalName();
@@ -65,7 +64,7 @@ class PostsController extends Controller
                 $img->path = public_path('img/'.$name);
                 $img->save();
                 array_push($images_id,$img->id);
-            }       
+            }
         }
 
         if ($post->save()) {
@@ -86,7 +85,7 @@ class PostsController extends Controller
 
     public function update(Request $request){
         $post = Post::with('images')->find($request->id);
-        
+
         $images=[];
 
         foreach($post->images as $image){
@@ -104,13 +103,13 @@ class PostsController extends Controller
 
             $images_id= [];
             $images = ['data' => $request->images];
-    
+
             $validator = Validator::make($images, [
                 'data.*.name' => 'required|image|mimes:jpeg,png,jpg,gif,svg'
             ]);
-    
+
             if ($validator->fails()) {
-    
+
                 return response(422);
             }
             else{
@@ -129,7 +128,7 @@ class PostsController extends Controller
                         $post->image = public_path('img/'.$name);
                         $prvy = false;
                     }
-                }       
+                }
             }
             if ($post->save()) {
                 if(sizeof($request->images)>0){
@@ -153,7 +152,7 @@ class PostsController extends Controller
         $post->subpage_id = $request->subpage_id;
         $post->timestamps = true;
         $post->save();*/
-        
+
     }
 
     public function delete(Request $request){
