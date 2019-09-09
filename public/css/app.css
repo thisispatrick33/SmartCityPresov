@@ -14585,7 +14585,11 @@ body form.admin-form .warning {
   background: #D71920;
 }
 
-body form.admin-form label {
+body form.admin-form label .title,
+body form.admin-form label .description,
+body form.admin-form label .autor,
+body form.admin-form label .date,
+body form.admin-form label .gallery {
   border-left: 1px solid #D71920;
 }
 

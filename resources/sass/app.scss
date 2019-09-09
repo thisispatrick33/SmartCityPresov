@@ -278,7 +278,9 @@ body{
       background: $primaryColor;
     }
     label{
-      border-left: 1px solid $primaryColor;
+      .title,.description,.autor,.date,.gallery{
+        border-left: 1px solid $primaryColor;
+      }
       input[type="submit"]{
         color: $colorOfPage;
 

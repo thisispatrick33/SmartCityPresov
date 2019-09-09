@@ -44,7 +44,7 @@ export const Subpage = ({ id, user, del = f => f, get = f => f, }) => {
         }
 
         return (
-            <div className={"subpage-content col-12 row align-items-start "}>
+            <div className={"subpage-content col-12 row align-items-start justify-content-center"}>
                 <h1 className={"col-12 text-center mt-4"}>{subpage.title}</h1>
                 <p className={"col-12 text-center description mt-5"}  dangerouslySetInnerHTML={{__html: subpage.description}} />
                 <div className="col-12 justify-content-center  projects-frame row">
@@ -88,10 +88,10 @@ export const Subpage = ({ id, user, del = f => f, get = f => f, }) => {
             return <Loader/>;
         }
         return (
-            <div className={"subpage-content col-12 row align-items-start "}>
-                <h1 className={"col-12 text-center mt-4"}>{subpage.title}</h1>
-                <p className={"col-12 text-center description mt-5"}  dangerouslySetInnerHTML={{__html: subpage.description}} />
-                <div className="col-12 justify-content-center  projects-frame row">
+            <div className={"subpage-content col-12 row align-items-start justify-content-center"}>
+                <h1 className={"col-xl-12 col-lg-12 col-11 text-center mt-4"}>{subpage.title}</h1>
+                <p className={"col-xl-12 col-lg-12 col-11 text-center description mt-5"}  dangerouslySetInnerHTML={{__html: subpage.description}} />
+                <div className="col-xl-12 col-lg-12 col-11 justify-content-center  projects-frame row">
                     <h3 className={"col-12 projects-title my-5"}>projekty smartcity prešov - <span className={"projects-category"}>{subpage.title}</span></h3>
                     <div className="col-12 row projects p-0 align-items-start">
                         {subpage.posts.map(({id, title, description, user, image, updated_at}) => {

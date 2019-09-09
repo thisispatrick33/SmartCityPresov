@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Loader } from "../Utillities";
 
-export const Post = ({ id, logged, make = f => f , location}) => {
+export const Post = ({ id, logged, make = f => f , location }) => {
     let _idControl = (id !== undefined);
     const [postData, setPostData] = useState([]);
     const [user, setUser] = useState([]);
@@ -35,9 +35,9 @@ export const Post = ({ id, logged, make = f => f , location}) => {
     let control = _idControl ? (user.data.name  === logged.name)  : true;
     if(logged.name){
         return (
-            <form onSubmit={handleSubmit} method={_idControl ? "PUT" : "POST"} className={"admin-form mt-4 row col-12"}>
+            <form onSubmit={handleSubmit} method={_idControl ? `PUT` : `POST`} className={`admin-form mt-4 row col-12`}>
                 {
-                    control ? "" : (
+                    control ? `` : (
                         <label className={"col-12 row warning p-2 mb-5  justify-content-start align-items-center"} htmlFor="info">
                             <p className={"col-12 mb-0"}><span className={"pr-3"}><img style={{width : 24, height : 24}} src="../img/danger.svg" alt=""/></span> Hmm...toto nie je tvoj článok, ale tak, prečítaj si ho.</p>
                         </label>
@@ -45,16 +45,15 @@ export const Post = ({ id, logged, make = f => f , location}) => {
                 }
                 <label htmlFor={`post`} className={`col-12 p-0 row`}>
                     <label htmlFor={`post-data`} className={`col-10 p-0`}>
-                        <label className={"col-12 mb-5 row title p-2 justify-content-start"} htmlFor={"title"}>
+                        <label className={`col-12 mb-5 row title p-2 justify-content-start`} htmlFor={"title"}>
                             <h2 className="mb-0 col-11 p-0 ml-4 mb-0">názov</h2>
                             <p className={"col-11 ml-4 p-0 mb-0"}>krátky, pútavý, no proste zaujmi <span><img style={{width : 24, height : 24}} src="../img/wink.svg" alt=""/></span></p>
-
                             <div className="col-4 p-0 ml-4">
                                 <hr/>
                             </div>
                             <input
                                 name={"title"}
-                                value={postData.title}
+                                value={ postData.title }
                                 placeholder={"Zadajte názov"}
 
                                 onChange={e => {setPostData({...postData,title : e.target.value})}}
@@ -93,7 +92,7 @@ export const Post = ({ id, logged, make = f => f , location}) => {
                                 <input disabled={true} name={"user"} className={"col-8 px-0 py-2 ml-4"} value={_idControl ? user.data.name : logged.name} />
 
                             </label>
-                            <label className={"col-xl-6 col-lg-6 col-md-12 col-sm-12 col-12 mb-5 row title p-2 justify-content-start"} htmlFor="title">
+                            <label className={"col-xl-6 col-lg-6 col-md-12 col-sm-12 col-12 mb-5 row date p-2 justify-content-start"} htmlFor="title">
                                 <h4 className="mb-0 col-11 p-0 ml-4 mb-0">dátum - posledná zmena</h4>
                                 <p className={"col-11 ml-4 p-0 mb-0"}>{control ?  "po uložení zmien sa automaticky upraví" :"upravoval to presne vtedy"}</p>
                                 <div className="col-8 p-0 ml-4">
@@ -104,19 +103,19 @@ export const Post = ({ id, logged, make = f => f , location}) => {
                             </label>
                         </label>
                     </label>
-                        <label className={"col-12 mb-5 row title justify-content-start"} htmlFor={"image"}>
-                            <h2 className="mb-0 col-12 p-0 ml-1 mb-0">galéria</h2>
-                            <p className={"col-12 ml-4 p-0 mb-0"}>fotky ? sem s nimi<span><img style={{width : 24, height : 24}} src="../img/wink.svg" alt=""/></span></p>
+                        <label className={"col-12 mb-5 row gallery justify-content-start"} htmlFor={"images"}>
+                            <h2 className="mb-0 col-11 p-0 ml-4 mb-0">galéria</h2>
+                            <p className={"col-11 ml-4 p-0 mb-0"}>fotky ? sem s nimi <span><img style={{width : 24, height : 24}} src="../img/wink.svg" alt=""/></span></p>
                             <div className="col-4 p-0 ml-4">
                                 <hr/>
                             </div>
                             <input
-                                name={`image`}
+                                name={`images[]`}
                                 type={`file`}
                                 placeholder={"Zadajte názov"}
                                 onChange={e => {setPostData({...postData,image : e.target.files})}}
                                 disabled={!control}
-                                className={"col-12 mt-3 px-0 py-2 ml-1"}
+                                className={"col-11 mt-3 px-0 py-2 ml-4"}
                                 multiple
 
                             />
