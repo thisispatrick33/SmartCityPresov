@@ -33,11 +33,10 @@ class PostsController extends Controller
     }
     
     public function add(Request $request){
-        return $request;
         $post = new Post;
         $post->title = $request->title;
         $post->description = $request->description;
-        $post->image = "dd";
+    
         $post->price = $request->price;
         $post->user_id = $request->user_id;
         $post->subpage_id = $request->subpage_id;
@@ -54,18 +53,24 @@ class PostsController extends Controller
             return response(422);
         }
         else{
+            $prvy=true;
+                foreach($request->images as $image ){
+                    $name= time().Str::random(5).'.'.$image->getClientOriginalExtension();
+                    $alt = $image->getClientOriginalName();
+                    $image->move(public_path('img/'),$name);
+                    $img= new Image;
+                    $img->title = $name;
+                    $img->alt = $alt;
+                    $img->path = public_path('img/'.$name);
+                    $img->save();
+                    array_push($images_id,$img->id);
+                    if ($prvy) {
+                        $post->image = public_path('img/'.$name);
+                        $prvy = false;
+                    }
+                }  
            
-            foreach($request->images as $image ){
-                $name= time().Str::random(5);
-                $alt = $image->getClientOriginalName();
-                $image->move(public_path('img/'),$name);
-                $img= new Image;
-                $img->title = $name;
-                $img->alt = $alt;
-                $img->path = public_path('img/'.$name);
-                $img->save();
-                array_push($images_id,$img->id);
-            }       
+               
         }
 
         if ($post->save()) {
