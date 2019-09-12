@@ -14426,7 +14426,7 @@ body .main-container .news-frame .news .post {
 }
 
 body .main-container .news-frame .news .post div:nth-child(2) {
-  border-top: 1px solid #707070;
+  border-top: 1px solid #191919;
 }
 
 body .main-container .news-frame .news .post .content h3 {
@@ -14458,6 +14458,10 @@ body .main-container .news-frame .news .post .content a.read_more:hover {
 
 body .main-container .news-frame .news .post .content .detail_info {
   font-family: NexaLight, serif;
+}
+
+body .main-container .news-frame .news .post hr {
+  background: #191919;
 }
 
 body .main-container .news-button {
@@ -14537,10 +14541,7 @@ body .main-container .subpage .project-details-frame .project-content {
 }
 
 body .main-container .subpage .project-details-frame .project-content .content {
-  border-left: 10px #D71920 solid;
   background: white;
-  min-height: 100%;
-  border-radius: 0 10px 10px 0;
 }
 
 body .main-container .subpage .project-details-frame .project-content .content .title span {
@@ -14555,6 +14556,10 @@ body .main-container .subpage .project-details-frame .project-content .content .
 body .main-container .subpage .project-details-frame .project-content .content .post-data {
   font-family: Gilroy-SemiBold;
   font-size: 1em;
+}
+
+body .main-container .subpage .project-details-frame .project-content .gallery .cover-image {
+  border: 4px solid #D71920;
 }
 
 body .main-container .subpage .project-details-frame .project-content .gallery .title {
@@ -14575,48 +14580,52 @@ body .main-container .subpage-cover-image div img {
   width: auto;
 }
 
-body form.admin-form .warning {
+body form.post-form .warning {
   color: #fff;
   background: #D71920;
 }
 
-body form.admin-form label {
+body form.post-form label .title,
+body form.post-form label .description,
+body form.post-form label .author,
+body form.post-form label .date,
+body form.post-form label .gallery {
   border-left: 1px solid #D71920;
 }
 
-body form.admin-form label input[type=submit] {
+body form.post-form label input[type=submit] {
   color: #fff;
   text-transform: uppercase;
   border-radius: 10px;
 }
 
-body form.admin-form label input[type=submit]:hover {
+body form.post-form label input[type=submit]:hover {
   background: #D71920;
   transition: 0.5s;
   border: none !important;
 }
 
-body form.admin-form label input[type=submit]:not(:hover) {
+body form.post-form label input[type=submit]:not(:hover) {
   color: #D71920;
   background: #fff;
   border: 1px solid #D71920;
   transition: 0.5s;
 }
 
-body form.admin-form label p {
+body form.post-form label p {
   font-family: Gilroy-Regular, serif;
 }
 
-body form.admin-form label input,
-body form.admin-form label textarea {
+body form.post-form label input,
+body form.post-form label textarea {
   resize: none;
   font-family: Gilroy-Regular, serif;
   border: 0;
   border-bottom: 1px solid #191919;
 }
 
-body form.admin-form label input:focus,
-body form.admin-form label textarea:focus {
+body form.post-form label input:focus,
+body form.post-form label textarea:focus {
   outline: 0;
   border-color: #D71920;
   transition: 2s;
@@ -14796,11 +14805,32 @@ hr {
   border-bottom: 1px solid #e3e3e3;
 }
 
+<<<<<<< HEAD
 .post-details h2 {
   border-bottom: 1px solid #D71920;
 }
 
 .post-details hr {
   border-top: 1px solid #D71920;
+=======
+@media (max-width: 991.98px) {
+  .project-details-frame .content {
+    border-width: 0 0 10px 0;
+    border-style: solid;
+    border-color: #D71920;
+    border-radius: 10px 10px 0 0;
+    height: auto;
+  }
+}
+
+@media (min-width: 992px) {
+  .project-details-frame .content {
+    border-width: 0 0 0 10px;
+    border-style: solid;
+    border-color: #D71920;
+    border-radius: 0 10px 10px 0;
+    height: 100%;
+  }
+>>>>>>> 8ae1e10ee11b0b419b56a4765fbd91fcaec4313e
 }
 

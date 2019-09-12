@@ -25,22 +25,23 @@ Route::get('/post/{id}', 'MainController@post');
 
 
 Route::group(['middleware' => ['jwt.auth','api-header']], function () {
-  
-    // all routes to protected resources are registered here  
+
+    // all routes to protected resources are registered here
+
+    Route::delete('/post/delete', 'PostsController@delete');
     Route::post('/post', 'PostsController@add');
     Route::put('/post/edit', 'PostsController@update');
-    Route::delete('/post/delete', 'PostsController@delete');
-    
+
     Route::group(['middleware' => 'admin'], function () {
-        
+
         Route::post('auth/register', 'AuthController@register');
-        
+
     });
 });
 
 Route::group(['middleware' => 'api-header'], function () {
-  
-    // The registration and login requests doesn't come with tokens 
+
+    // The registration and login requests doesn't come with tokens
     // as users at that point have not been authenticated yet
     // Therefore the jwtMiddleware will be exclusive of them
     Route::post('auth/login', 'AuthController@login');

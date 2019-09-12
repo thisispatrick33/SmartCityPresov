@@ -37,9 +37,9 @@ class MainController extends Controller
     }
 
     public function post($id){
-        $data = Post::with('subpage')->where('id','=',$id)->first();
+        $post = Post::with(['subpage','images'])->where('id','=',$id)->first();
 
-        return $data;
+        return $post;
     }
 
 

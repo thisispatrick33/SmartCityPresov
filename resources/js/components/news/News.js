@@ -45,7 +45,7 @@ export const News = ({loggedIn}) => {
                     {
                         posts.map( ({ id, title, description, user, updated_at }, index)  => {
                             return <PostLookup
-                                key={title}
+                                key={index}
                                 id={id}
                                 index={index}
                                 title={title}
