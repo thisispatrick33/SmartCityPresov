@@ -9,6 +9,7 @@ use App\Image;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Validator;
 use Storage;
+use App\Services\PayUService\Exception;
 
 
 
@@ -33,52 +34,88 @@ class PostsController extends Controller
     }
 
     public function add(Request $request){
-        $post = new Post;
-        $post->title = $request->title;
-        $post->description = $request->description;
-        $post->image = "dd";
-        $post->price = $request->price;
-        $post->user_id = $request->user_id;
-        $post->subpage_id = $request->subpage_id;
+        try{
+            /*
+             * Auxiliary variables
+             */
 
-        $images_id= [];
-        $images = ['data' => $request->images];
+            $post_images_ids = [];
+            $first = true;
 
-        $validator = Validator::make($images, [
-            'data.*.name' => 'required|image|mimes:jpeg,png,jpg,gif,svg'
-        ]);
+            /*
+             *  Creating new database entry for Post
+             */
 
-        if ($validator->fails()) {
+            $post = new Post;
+            $post->title = $request->title;
+            $post->description = $request->description;
+            $post->price = $request->price;
+            $post->user_id = $request->user_id;
+            $post->subpage_id = $request->subpage_id;
 
-            return response(422);
-        }
-        else{
+            /*
+             *  Images validator
+             *  if post contains images, append data to post
+            */
 
-            foreach($request->images as $image ){
-                $name= time().Str::random(5);
-                $alt = $image->getClientOriginalName();
-                $image->move(public_path('img/'),$name);
-                $img= new Image;
-                $img->title = $name;
-                $img->alt = $alt;
-                $img->path = public_path('img/'.$name);
-                $img->save();
-                array_push($images_id,$img->id);
+            $validator = Validator::make(['data' => $request->images], [
+                'data.*.name' => 'required|image|mimes:jpeg,png,jpg,gif,svg'
+            ]);
+
+            /*
+             *  Images storage process
+             *  foreach pass over every image, change name and save it
+            */
+            foreach($request->images as $image_file){
+
+                /*
+                 *  Crafting new image name
+                 */
+
+                $image_name = time().Str::random(5).".".$image_file->getClientOriginalExtension();
+
+                /*
+                *  Move image to public folder
+                */
+
+                $image_file->move(public_path('img/'),$image_name);
+
+                /*
+                 *  Creating new database entry for Image and save
+                 */
+
+                $image = new Image;
+                $image->title = $image_name;
+                $image->alt = $image_file->getClientOriginalName();
+                $image->path = public_path('img/'.$image_name);
+                $image->save();
+
+                array_push($post_images_ids,$image->id);
+
+                /*
+                 *  Select cover image | first image = cover image
+                 */
+
+                if ($first) {
+                    $post->image = public_path('img/'.$image_name);
+                    $first = false;
+                }
             }
-        }
-
-        if ($post->save()) {
-            if(sizeof($request->images)>0){
-                if($post->images()->attach($images_id)){
+            if ($post->save()) {
+                if(sizeof($request->images)>0){
+                    if($post->images()->attach($post_images_ids)){
+                        return response(200);
+                    }
+                }
+                else {
                     return response(200);
                 }
             }
             else {
-                return response(200);
+                return response(422);
             }
-        }
-        else {
-            return response(422);
+        }catch (\Exception $e){
+            return $e->getMessage() ;
         }
 
     }

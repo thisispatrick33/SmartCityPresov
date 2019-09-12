@@ -75,6 +75,7 @@ const App = () => {
     };
 
     const _updatePost = (postData) => {
+
         axios
             .put("/api/post/edit", postData,{
                 headers : {
@@ -94,12 +95,19 @@ const App = () => {
             })
 
     };
-    const _createPost = (postData) => {
+
+    const _createPost = ({title,description,price,user_id,subpage_id,images}) => {
+        let formData = new FormData();
+        formData.append("title",title);
+        formData.append("description",description);
+        formData.append("price",price);
+        formData.append("user_id",user_id);
+        formData.append("subpage_id",subpage_id);
+        Array.from(images).forEach(image => formData.append('images[]', image));
         axios
-            .post("/api/post", postData,{
+            .post("/api/post", formData,{
                 headers : {
-                    'Content-Type' : 'application/json',
-                    'Accept' : 'application/json',
+                    'Content-Type' : 'multipart/form-data;boundary=----WebKitFormBoundaryyrV7KO0BoCBuDbTL',
                     'Authorization' : `Bearer ${authState.user.auth_token}`
                 }
             })
@@ -113,7 +121,7 @@ const App = () => {
             })
 
     };
-    const _deletePost = (postData,subpage) => {
+    const _deletePost = (postData) => {
         postData = {
             id : postData
         };

@@ -14580,52 +14580,52 @@ body .main-container .subpage-cover-image div img {
   width: auto;
 }
 
-body form.admin-form .warning {
+body form.post-form .warning {
   color: #fff;
   background: #D71920;
 }
 
-body form.admin-form label .title,
-body form.admin-form label .description,
-body form.admin-form label .autor,
-body form.admin-form label .date,
-body form.admin-form label .gallery {
+body form.post-form label .title,
+body form.post-form label .description,
+body form.post-form label .author,
+body form.post-form label .date,
+body form.post-form label .gallery {
   border-left: 1px solid #D71920;
 }
 
-body form.admin-form label input[type=submit] {
+body form.post-form label input[type=submit] {
   color: #fff;
   text-transform: uppercase;
   border-radius: 10px;
 }
 
-body form.admin-form label input[type=submit]:hover {
+body form.post-form label input[type=submit]:hover {
   background: #D71920;
   transition: 0.5s;
   border: none !important;
 }
 
-body form.admin-form label input[type=submit]:not(:hover) {
+body form.post-form label input[type=submit]:not(:hover) {
   color: #D71920;
   background: #fff;
   border: 1px solid #D71920;
   transition: 0.5s;
 }
 
-body form.admin-form label p {
+body form.post-form label p {
   font-family: Gilroy-Regular, serif;
 }
 
-body form.admin-form label input,
-body form.admin-form label textarea {
+body form.post-form label input,
+body form.post-form label textarea {
   resize: none;
   font-family: Gilroy-Regular, serif;
   border: 0;
   border-bottom: 1px solid #191919;
 }
 
-body form.admin-form label input:focus,
-body form.admin-form label textarea:focus {
+body form.post-form label input:focus,
+body form.post-form label textarea:focus {
   outline: 0;
   border-color: #D71920;
   transition: 2s;

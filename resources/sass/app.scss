@@ -272,13 +272,13 @@ body{
     }
   }
 
-  form.admin-form{
+  form.post-form{
     .warning{
       color: $colorOfPage;
       background: $primaryColor;
     }
     label{
-      .title,.description,.autor,.date,.gallery{
+      .title,.description,.author,.date,.gallery{
         border-left: 1px solid $primaryColor;
       }
       input[type="submit"]{

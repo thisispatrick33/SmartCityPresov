@@ -49,7 +49,7 @@ export const Navigation = React.forwardRef(({path, auth, logout, scroll}, ref) =
                         return (
                             <div onClick={window.innerWidth <= 991 ? open : null} key={title_link} className={`nav-item | row col-xl-auto col-lg-2 col-12 | justify-content-xl-start justify-content-lg-start justify-content-center | text-center | p-0 ${path.includes(`${title_link}`) ? `on` : ``}`}>
                                 <Link className={`col-xl-12 col-lg-10 col-auto | px-xl-0 px-lg-0 px-2| mb-xl-0 mb-lg-0 my-2 | text-center `} to={`/${title_link}`}>{title}</Link>
-                                <hr className={"underline | col-5 | d-xl-flex d-lg-flex d-none | m-0 my-2"}/>
+                                <hr className={`underline | col-5 | d-xl-flex d-lg-flex d-none | m-0 my-2`}/>
                             </div>
                         );
                     })}

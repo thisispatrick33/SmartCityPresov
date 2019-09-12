@@ -65606,11 +65606,25 @@ var App = function App() {
     });
   };
 
-  var _createPost = function _createPost(postData) {
-    axios__WEBPACK_IMPORTED_MODULE_8___default.a.post("/api/post", postData, {
+  var _createPost = function _createPost(_ref) {
+    var title = _ref.title,
+        description = _ref.description,
+        price = _ref.price,
+        user_id = _ref.user_id,
+        subpage_id = _ref.subpage_id,
+        images = _ref.images;
+    var formData = new FormData();
+    formData.append("title", title);
+    formData.append("description", description);
+    formData.append("price", price);
+    formData.append("user_id", user_id);
+    formData.append("subpage_id", subpage_id);
+    Array.from(images).forEach(function (image) {
+      return formData.append('images[]', image);
+    });
+    axios__WEBPACK_IMPORTED_MODULE_8___default.a.post("/api/post", formData, {
       headers: {
-        'Content-Type': 'application/json',
-        'Accept': 'application/json',
+        'Content-Type': 'multipart/form-data;boundary=----WebKitFormBoundaryyrV7KO0BoCBuDbTL',
         'Authorization': "Bearer ".concat(authState.user.auth_token)
       }
     }).then(function (response) {
@@ -65622,7 +65636,7 @@ var App = function App() {
     });
   };
 
-  var _deletePost = function _deletePost(postData, subpage) {
+  var _deletePost = function _deletePost(postData) {
     postData = {
       id: postData
     };
@@ -66287,10 +66301,9 @@ var Post = function Post(_ref) {
 
   var handleSubmit = function handleSubmit(e) {
     e.preventDefault();
-    console.log(postData);
     make(_objectSpread({}, postData, {
       user_id: _idControl ? user.data.id : logged.id,
-      subpage_id: location.state.subpage
+      subpage_id: location.state.subpage ? location.state.subpage : null
     }));
   };
 
@@ -66304,14 +66317,14 @@ var Post = function Post(_ref) {
 
   if (logged.name) {
     return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("form", {
+      encType: "multipart/form-data",
       onSubmit: handleSubmit,
       method: _idControl ? "PUT" : "POST",
-      className: "admin-form mt-4 row col-12"
-    }, control ? "" : react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
-      className: "col-12 row warning p-2 mb-5  justify-content-start align-items-center",
-      htmlFor: "info"
+      className: "post-form | row col-12 | mt-4"
+    }, control ? "" : react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      className: "warning | row col-12 | justify-content-start | align-items-center | mb-5 p-2"
     }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
-      className: "col-12 mb-0"
+      className: "col-12 | mb-0"
     }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
       className: "pr-3"
     }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
@@ -66320,76 +66333,104 @@ var Post = function Post(_ref) {
         height: 24
       },
       src: "../img/danger.svg",
-      alt: ""
+      alt: "warning"
     })), " Hmm...toto nie je tvoj \u010Dl\xE1nok, ale tak, pre\u010D\xEDtaj si ho.")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
-      htmlFor: "post",
-      className: "col-12 p-0 row"
+      htmlFor: "post-frame",
+      className: "post-frame | row col-12 | p-0"
     }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
       htmlFor: "post-data",
-      className: "col-10 p-0"
+      className: "post-data | row col-10 | p-0"
     }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
-      className: "col-12 mb-5 row title p-2 justify-content-start",
+      className: "title | row col-12 | justify-content-start | mb-5 p-2",
       htmlFor: "title"
     }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h2", {
-      className: "mb-0 col-11 p-0 ml-4 mb-0"
+      className: "col-11 | p-0 ml-4 mb-0"
     }, "n\xE1zov"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
-      className: "col-11 ml-4 p-0 mb-0"
+      className: "col-11 | p-0 ml-4 mb-0"
     }, "kr\xE1tky, p\xFAtav\xFD, no proste zaujmi ", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
       style: {
         width: 24,
         height: 24
       },
       src: "../img/wink.svg",
-      alt: ""
+      alt: "smile"
     }))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-      className: "col-4 p-0 ml-4"
+      className: "col-4 | p-0 ml-4"
     }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("hr", null)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
       name: "title",
       value: postData.title,
-      placeholder: "Zadajte názov",
+      placeholder: "Zadajte n\xE1zov",
       onChange: function onChange(e) {
         setPostData(_objectSpread({}, postData, {
           title: e.target.value
         }));
       },
       disabled: !control,
-      className: "col-11 mt-3 px-0 py-2 ml-4"
+      className: "col-11 | px-0 py-2 mt-3 ml-4"
     })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
-      className: "description col-12 mb-5 row p-2 justify-content-start",
+      className: "description | row col-12 | justify-content-start | mb-5 p-2",
       htmlFor: "description"
     }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h2", {
-      className: "mb-0 col-11 p-0 ml-4 mb-0"
+      className: "col-11 | p-0 ml-4 mb-0"
     }, "popisok"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
-      className: "col-11 ml-4 p-0 mb-0"
-    }, control ? "teraz sa ukáž a predveď svoj skill v písaní" : "ten frajer nižšie napísal celkom fajn sloh, že", " ", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
+      className: "col-11 | p-0 ml-4 mb-0"
+    }, control ? "teraz sa uk\xE1\u017E a predve\u010F svoj skill v p\xEDsan\xED" : "ten frajer ni\u017E\u0161ie nap\xEDsal celkom fajn sloh, \u017Ee", " ", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
       style: {
         width: 24,
         height: 24
       },
       src: "../img/happy.svg",
-      alt: ""
+      alt: "smile"
     }))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-      className: "col-4 p-0 ml-4"
+      className: "col-4 | p-0 ml-4"
     }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("hr", null)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("textarea", {
       name: "description",
-      placeholder: "Zadajte popis",
+      placeholder: "Zadajte text \u010Dl\xE1nku",
       value: postData.description,
       onChange: function onChange(e) {
         setPostData(_objectSpread({}, postData, {
           description: e.target.value
         }));
       },
-      className: "col-11 mt-3 px-0 py-2 ml-4",
+      className: "col-11 | ml-4 mt-3 px-0 py-2",
       disabled: !control,
       rows: 5
     })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
-      className: "col-12 mb-5 row autor p-2 justify-content-start",
+      className: "price | row col-12 | justify-content-start | mb-5 p-2",
+      htmlFor: "price"
+    }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h2", {
+      className: "col-11 | p-0 ml-4 mb-0"
+    }, "price"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
+      className: "col-11 | p-0 ml-4 mb-0"
+    }, "kr\xE1tky, p\xFAtav\xFD, no proste zaujmi ", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
+      style: {
+        width: 24,
+        height: 24
+      },
+      src: "../img/wink.svg",
+      alt: "smile"
+    }))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      className: "col-4 | p-0 ml-4"
+    }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("hr", null)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+      name: "price",
+      value: postData.price,
+      placeholder: "Zadajte n\xE1zov",
+      type: "number",
+      onChange: function onChange(e) {
+        setPostData(_objectSpread({}, postData, {
+          price: e.target.value
+        }));
+      },
+      disabled: !control,
+      className: "col-11 | px-0 py-2 mt-3 ml-4"
+    })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
+      className: "author | row col-12 | justify-content-start | mb-5 p-2",
       htmlFor: "autor"
     }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
-      className: "col-xl-6 col-lg-6 col-md-12 col-sm-12 col-12 mb-5 row autor p-2 justify-content-start",
+      className: "author col-xl-6 col-lg-6 col-md-12 col-sm-12 col-12 mb-5 row p-2 justify-content-start",
       htmlFor: "autor"
     }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h4", {
-      className: "mb-0 col-11 p-0 ml-4 mb-0"
+      className: "col-11 | ml-4 mb-0 p-0"
     }, "autor"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
       className: "col-11 ml-4 p-0 mb-0"
     }, control ? "len aby si vedel ako sa voláš" : "toto asi nie je tvoje meno", " ", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
@@ -66403,29 +66444,29 @@ var Post = function Post(_ref) {
       className: "col-8 p-0 ml-4"
     }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("hr", null)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
       disabled: true,
-      name: "user",
+      name: "user_id",
       className: "col-8 px-0 py-2 ml-4",
       value: _idControl ? user.data.name : logged.name
     })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
-      className: "col-xl-6 col-lg-6 col-md-12 col-sm-12 col-12 mb-5 row date p-2 justify-content-start",
+      className: "date | row col-xl-6 col-lg-6 col-12 | justify-content-start | mb-5 p-2 ",
       htmlFor: "title"
     }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h4", {
-      className: "mb-0 col-11 p-0 ml-4 mb-0"
+      className: "col-11 | mb-0 ml-4 mb-0 p-0"
     }, "d\xE1tum - posledn\xE1 zmena"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
-      className: "col-11 ml-4 p-0 mb-0"
+      className: "col-11 | ml-4 mb-0 p-0"
     }, control ? "po uložení zmien sa automaticky upraví" : "upravoval to presne vtedy"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-      className: "col-8 p-0 ml-4"
+      className: "col-8 | ml-4 p-0"
     }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("hr", null)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
       disabled: true,
-      className: "col-8 px-0 py-2 ml-4",
+      className: "col-8 | ml-4 px-0 py-2",
       value: _idControl ? postData.updated_at : "".concat(date.getFullYear(), "-").concat(date.getMonth() + 1, "-").concat(date.getDate() + 1, " ").concat(date.getHours(), ":").concat(date.getMinutes(), ":").concat(date.getSeconds())
     })))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
-      className: "col-12 mb-5 row gallery justify-content-start",
+      className: "gallery | row col-12 | justify-content-start | mb-5 ",
       htmlFor: "images"
     }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h2", {
-      className: "mb-0 col-11 p-0 ml-4 mb-0"
+      className: "col-11 | mb-0  ml-4 mb-0 p-0"
     }, "gal\xE9ria"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
-      className: "col-11 ml-4 p-0 mb-0"
+      className: "col-11 | ml-4 mb-0 p-0"
     }, "fotky ? sem s nimi ", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
       style: {
         width: 24,
@@ -66434,24 +66475,24 @@ var Post = function Post(_ref) {
       src: "../img/wink.svg",
       alt: ""
     }))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-      className: "col-4 p-0 ml-4"
+      className: "col-4 | ml-4 p-0"
     }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("hr", null)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
       name: "images[]",
       type: "file",
       placeholder: "Zadajte názov",
       onChange: function onChange(e) {
         setPostData(_objectSpread({}, postData, {
-          image: e.target.files
+          images: e.target.files
         }));
       },
       disabled: !control,
-      className: "col-11 mt-3 px-0 py-2 ml-4",
+      className: "col-11 | mt-3 ml-4 px-0 py-2",
       multiple: true
     }))), !control ? "" : react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
-      className: "col-12 mb-5 row title p-2 justify-content-start",
+      className: "title | row col-12 | mb-5 p-2",
       htmlFor: "button"
     }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
-      className: "col-11 ml-4 p-0 mb-0"
+      className: "col-11 | ml-4 mb-0 p-0"
     }, "Hej hej, je to fajn, skontroluj to a pacni ten button dole ", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
       style: {
         width: 24,
@@ -66460,31 +66501,31 @@ var Post = function Post(_ref) {
       src: "../img/cool.svg",
       alt: ""
     }))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
-      className: "col-4 p-2 mt-3 ml-4  mb-0",
+      className: "col-4 | mt-3 ml-4 mb-0 p-2",
       type: "submit",
       value: "potvrdiť"
     })));
   } else {
     return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-      className: "project-form mt-4 row col-12"
+      className: "project-form | row col-12 | mt-4"
     }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-      className: "col-12 mb-5 row title p-2 justify-content-start"
+      className: " title | row col-12 | justify-content-start | mb-5 p-2 "
     }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h2", {
-      className: "mb-0 col-11 p-0 ml-4 mb-0"
+      className: "col-11 | mb-0 ml-4 mb-0 p-0"
     }, postData.title)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-      className: "description col-12 mb-5 row p-2 justify-content-start"
+      className: "description | row col-12 | justify-content-start | mb-5 p-2"
     }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, postData.description)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-      className: "col-12 mb-5 row autor p-2 justify-content-start",
+      className: "author | row col-12 | justify-content-start| mb-5 p-2 ",
       htmlFor: "autor"
     }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
-      className: "col-8 px-0 py-2 ml-4"
+      className: "col-8 | ml-4 px-0 py-2 "
     }, user.data.name), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
-      className: "col-8 px-0 py-2 ml-4"
+      className: "col-8 | ml-4 px-0 py-2 "
     }, postData.updated_at, " ")), !control ? "" : react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
-      className: "col-12 mb-5 row title p-2 justify-content-start",
+      className: "title | row col-12 | justify-content-start | mb-5  p-2 ",
       htmlFor: "button"
     }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
-      className: "col-11 ml-4 p-0 mb-0"
+      className: "col-11 | ml-4 mb-0 p-0"
     }, "Hej hej, je to fajn, skontroluj to a pacni ten button dole ", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
       style: {
         width: 24,
@@ -66493,7 +66534,7 @@ var Post = function Post(_ref) {
       src: "../img/cool.svg",
       alt: ""
     }))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
-      className: "col-4 p-2 mt-3 ml-4  mb-0",
+      className: "col-4 | mt-3 ml-4 mb-0 p-2",
       type: "submit",
       value: "potvrdiť"
     })));
@@ -66821,22 +66862,22 @@ var Subpage = function Subpage(_ref) {
     }
 
     return react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
-      className: "subpage-content col-12 row align-items-start justify-content-center"
+      className: " subpage-content | row col-12 | justify-content-center | align-items-start"
     }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("h1", {
-      className: "col-12 text-center mt-4"
+      className: " col-12 | mt-4 | text-center"
     }, subpage.title), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("p", {
-      className: "col-12 text-center description mt-5",
+      className: " description | col-12 | mt-5 | text-center",
       dangerouslySetInnerHTML: {
         __html: subpage.description
       }
     }), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
-      className: "col-12 justify-content-center  projects-frame row"
+      className: " projects-frame | row col-12 | justify-content-center"
     }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("h3", {
-      className: "col-12 p-0 projects-title my-5"
+      className: "projects-title | col-12 | my-5 p-0"
     }, "projekty smartcity pre\u0161ov - ", react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("span", {
       className: "projects-category"
     }, subpage.title)), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
-      className: "col-12 row projects p-0"
+      className: "projects | row col-12 | p-0"
     }, subpage.posts.map(function (_ref4) {
       var id = _ref4.id,
           title = _ref4.title,
@@ -66845,32 +66886,32 @@ var Subpage = function Subpage(_ref) {
           image = _ref4.image,
           updated_at = _ref4.updated_at;
       return react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
-        className: "project-frame row col-xl-4 col-lg-4 col-md-6 col-sm-12 col-12 p-0 justify-content-xl-start justify-content-lg-start justify-content-md-center justify-content-sm-center justify-content-center mb-4",
+        className: "project-frame | row col-xl-4 col-lg-4 col-md-6 col-sm-12 col-12 | justify-content-xl-start justify-content-lg-start justify-content-md-center justify-content-sm-center justify-content-center | mb-4 p-0",
         key: id
       }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
-        className: "project col-10 row shadow p-0 align-items-start"
+        className: "shadow project | row col-10 | align-items-start | p-0 "
       }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
-        className: "col-12 p-0 row"
+        className: "row col-12 | p-0 "
       }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
-        className: "col-12 p-0"
+        className: "col-12 | p-0"
       }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("img", {
         src: "../img/eu4.jpg",
         alt: "",
-        className: "col-12 p-0",
+        className: "col-12 | p-0",
         style: {
           borderRadius: "10px 10px 0 0"
         }
       }))), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("h3", {
-        className: "col-12 py-0 px-3 mt-3"
+        className: "col-12 | mt-3 py-0 px-3"
       }, title), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("p", {
-        className: "col-12 py-0 px-3 mb-3"
+        className: "col-12 | mb-3 py-0 px-3"
       }, description.substring(0, description.includes(".") ? description.indexOf(".") + 1 : 50), " ", react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("a", {
         href: "/api/post/".concat(id),
         className: "read_more"
       }, "Objav viac")), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("p", {
-        className: "col-12 py-0 mb-0 px-3"
+        className: "col-12 | mb-0 py-0  px-3"
       }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("span", null, "D\xE1tum : "), new Date(updated_at).toDateString()), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("p", {
-        className: "col-12 py-0 px-3"
+        className: "col-12 | py-0 px-3"
       }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("span", null, "Autor : "), user.name), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
         className: "col-12 row mb-2"
       }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_reach_router__WEBPACK_IMPORTED_MODULE_4__["Link"], {
