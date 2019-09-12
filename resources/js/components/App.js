@@ -107,7 +107,8 @@ const App = () => {
         axios
             .post("/api/post", formData,{
                 headers : {
-                    'Content-Type' : 'multipart/form-data;boundary=----WebKitFormBoundaryyrV7KO0BoCBuDbTL',
+                    'Content-Type' : 'multipart/form-data',
+                    'Accept' : 'multipart/form-data',
                     'Authorization' : `Bearer ${authState.user.auth_token}`
                 }
             })
@@ -120,13 +121,11 @@ const App = () => {
                 } else  alert("Úprava neprebehla, nastala chyba.");
             })
 
+
     };
-    const _deletePost = (postData) => {
-        postData = {
-            id : postData
-        };
+    const _deletePost = ({ id }) => {
         axios
-            .delete("/api/post/delete", { data : postData},{
+            .delete("/api/post/delete", {id : id},{
                 headers : {
                     'Content-Type' : 'application/json',
                     'Accept' : 'application/json',

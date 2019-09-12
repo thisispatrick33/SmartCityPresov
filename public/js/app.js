@@ -65624,7 +65624,8 @@ var App = function App() {
     });
     axios__WEBPACK_IMPORTED_MODULE_8___default.a.post("/api/post", formData, {
       headers: {
-        'Content-Type': 'multipart/form-data;boundary=----WebKitFormBoundaryyrV7KO0BoCBuDbTL',
+        'Content-Type': 'multipart/form-data',
+        'Accept': 'multipart/form-data',
         'Authorization': "Bearer ".concat(authState.user.auth_token)
       }
     }).then(function (response) {
@@ -65636,12 +65637,10 @@ var App = function App() {
     });
   };
 
-  var _deletePost = function _deletePost(postData) {
-    postData = {
-      id: postData
-    };
+  var _deletePost = function _deletePost(_ref2) {
+    var id = _ref2.id;
     axios__WEBPACK_IMPORTED_MODULE_8___default.a["delete"]("/api/post/delete", {
-      data: postData
+      id: id
     }, {
       headers: {
         'Content-Type': 'application/json',
@@ -66895,8 +66894,8 @@ var Subpage = function Subpage(_ref) {
       }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
         className: "col-12 | p-0"
       }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("img", {
-        src: "../img/eu4.jpg",
-        alt: "",
+        src: image,
+        alt: "cover image",
         className: "col-12 | p-0",
         style: {
           borderRadius: "10px 10px 0 0"

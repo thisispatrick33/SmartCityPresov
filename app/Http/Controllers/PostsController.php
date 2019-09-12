@@ -34,6 +34,7 @@ class PostsController extends Controller
     }
 
     public function add(Request $request){
+
         try{
             /*
              * Auxiliary variables

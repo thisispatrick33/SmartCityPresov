@@ -4,40 +4,88 @@
     <list default="true" id="b40c9df6-0b96-4ac4-9038-e75470bb9bdd" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/Http/Controllers/PostsController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/PostsController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/css/app.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/css/app.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/img/1567676842Screenshot from 2019-05-27 20-25-28.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/img/1567676842Screenshot from 2019-05-30 11-11-50.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/img/1567676842Screenshot from 2019-05-30 11-11-54.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/img/1567676842Screenshot from 2019-06-02 09-34-27.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/img/1567677351Screenshot from 2019-06-02 09-34-27.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/img/1567677352Screenshot from 2019-05-27 20-25-28.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/img/1567677352Screenshot from 2019-05-30 11-11-50.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/img/1567677352Screenshot from 2019-05-30 11-11-54.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/img/1567691052881Bm" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/img/15676910556LzSU" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/img/1567691055IybCd" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/img/1567691055PIkMZ" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/img/1567691056CbNm6" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/img/1567691056DkE9p" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/img/1567691056MdnOy" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/img/1567691056SahFk" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/img/1567691056d7q9w" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/img/1567691056l8Jer" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/img/1567691056ykypo" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/img/156769676000MUg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/img/15676967604KgB7" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/img/1567696760U7Vwg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/img/1567696760iFKQX" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/img/1567696760kwS1Z" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/img/15676967611hl9B" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/img/1567696761hZQVh" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/img/1567696857LftQk" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/img/1568188288DxB04.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/img/1568188459HES73.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/img/1568188459QiEaN.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/img/1568188459VYf4i.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/img/1568188459YdY0U.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/img/1568188459ZWJbO.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/img/1568188459apZ3h.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/img/1568188459qXEXc.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/img/1568188459xMyMS.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/img/15681884601KtPS.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/img/1568188460LUYVb.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/img/1568188460OPw7p.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/img/1568188460aBP8e.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/img/1568188460eoGbu.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/img/1568188460isXLy.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/img/15681885111ETO7.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/img/15681885115ooTC.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/img/15681885118j3t6.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/img/1568188511PFuAu.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/img/1568188511PLsWp.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/img/1568188511j1m68.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/img/1568188511jRCIO.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/img/1568188511sBxHK.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/img/15681885120LjRl.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/img/15681885126O14q.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/img/15681885126Qw2b.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/img/1568188512SbFRr.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/img/1568188512bzwdr.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/img/1568188512erPz3.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/img/1568188512p3kZx.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/img/1568188512yAKJb.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/img/1568188631a1Yf4.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/img/1568188632X0tjt.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/img/1568188632lI1F1.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/img/1568188632ndCVD.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/img/1568188854UIYLn.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/img/1568188854ZDpX7.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/img/1568188854cLAue.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/img/1568188854q7nR7.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/img/1568188854sSZnR.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/img/1568188854yTy2G.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/img/15681888553Uyn8.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/img/156818885580jnh.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/img/1568188855FlgSb.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/img/1568188855Ktjzr.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/img/1568188855RsLXo.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/img/1568188855clN9w.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/img/1568188987f62ZI.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/img/1568188987hHqJL.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/img/1568199247sjJrm.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/img/1568199251G4eNA.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/img/1568199251H4Lnf.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/img/1568199251lIOyc.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/img/1568199251pVhlf.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/img/1568199252DQhh3.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/img/1568199252LCVT8.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/img/1568199252bP0EI.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/img/156819925317oF9.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/img/15681992534vzsp.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/img/1568200282gKGhM.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/img/1568205542Hdg7Q.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/img/15682056286GlYg.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/img/15682057076svcl.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/img/1568205743oAw09.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/img/1568205838XjjyF.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/img/1568205905tIZHW.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/img/1568205986Wa5g6.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/img/1568205987JEYoL.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/img/15682060668CIuL.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/img/1568206066F3v9H.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/img/1568206066Q5MtB.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/img/1568206066dl9Rv.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/img/1568206067654Z6.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/img/1568206067TR1kw.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/img/1568206068AjvfD.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/img/1568206068COrsu.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/img/1568206068MNmuf.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/img/1568206068rGOoY.jpg" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/public/js/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/js/app.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/js/components/App.js" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/App.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/js/components/Navigation.js" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/Navigation.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/js/components/news/Post.js" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/news/Post.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/js/components/subpage/Subpage.js" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/subpage/Subpage.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/sass/app.scss" beforeDir="false" afterPath="$PROJECT_DIR$/resources/sass/app.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/routes/api.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/api.php" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -62,7 +110,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/resources/js/components/news/Post.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="575">
+            <state relative-caret-position="-2340">
               <caret line="26" column="79" selection-start-line="26" selection-start-column="79" selection-end-line="26" selection-end-column="79" />
               <folding>
                 <element signature="e#0#51#0" expanded="true" />
@@ -71,11 +119,11 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/Http/Controllers/PostsController.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="239">
-              <caret line="105" column="63" selection-start-line="105" selection-start-column="63" selection-end-line="105" selection-end-column="63" />
+            <state relative-caret-position="-2452">
+              <caret line="78" column="29" selection-start-line="78" selection-start-column="29" selection-end-line="78" selection-end-column="29" />
               <folding>
                 <element signature="e#40#68#0#PHP" expanded="true" />
               </folding>
@@ -84,10 +132,19 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/routes/api.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-336">
+              <caret line="16" column="21" selection-start-line="16" selection-start-column="21" selection-end-line="16" selection-end-column="21" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/resources/js/components/subpage/Subpage.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1449">
-              <caret line="68" selection-start-line="68" selection-end-line="68" />
+            <state relative-caret-position="52">
+              <caret line="52" column="99" selection-start-line="52" selection-start-column="99" selection-end-line="52" selection-end-column="99" />
               <folding>
                 <element signature="e#0#49#0" expanded="true" />
               </folding>
@@ -100,11 +157,11 @@
           <provider selected="true" editor-type-id="images" />
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/resources/js/components/App.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="2185">
-              <caret line="104" column="8" selection-start-line="104" selection-start-column="8" selection-end-line="104" selection-end-column="8" />
+            <state relative-caret-position="249">
+              <caret line="129" column="32" selection-start-line="129" selection-start-column="32" selection-end-line="129" selection-end-column="32" />
               <folding>
                 <element signature="e#0#49#0" expanded="true" />
               </folding>
@@ -123,8 +180,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>props.location.pathname</find>
-      <find>border-bottom</find>
       <find>$white</find>
       <find>style={{ border : &quot;1px solid red&quot;}}</find>
       <find>width</find>
@@ -153,6 +208,8 @@
       <find>img</find>
       <find>$img</find>
       <find>images_id</find>
+      <find>&lt;&lt;&lt;&lt;&lt;&lt;&lt; HEAD</find>
+      <find>=======</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -196,10 +253,11 @@
         <option value="$PROJECT_DIR$/resources/js/components/subpage/Project.js" />
         <option value="$PROJECT_DIR$/resources/js/components/Navigation.js" />
         <option value="$PROJECT_DIR$/resources/sass/app.scss" />
-        <option value="$PROJECT_DIR$/resources/js/components/subpage/Subpage.js" />
         <option value="$PROJECT_DIR$/resources/js/components/news/Post.js" />
-        <option value="$PROJECT_DIR$/resources/js/components/App.js" />
+        <option value="$PROJECT_DIR$/resources/js/components/subpage/Subpage.js" />
         <option value="$PROJECT_DIR$/app/Http/Controllers/PostsController.php" />
+        <option value="$PROJECT_DIR$/routes/api.php" />
+        <option value="$PROJECT_DIR$/resources/js/components/App.js" />
       </list>
     </option>
   </component>
@@ -304,7 +362,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -367,10 +424,16 @@
               <item name="components" type="462c0819:PsiDirectoryNode" />
               <item name="subpage" type="462c0819:PsiDirectoryNode" />
             </path>
+            <path>
+              <item name="SmartCityPresov" type="b2602c69:ProjectViewProjectNode" />
+              <item name="SmartCityPresov" type="462c0819:PsiDirectoryNode" />
+              <item name="routes" type="462c0819:PsiDirectoryNode" />
+            </path>
           </expand>
           <select />
         </subPane>
       </pane>
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -537,12 +600,13 @@
       <workItem from="1568173661590" duration="5661000" />
       <workItem from="1568184622984" duration="7608000" />
       <workItem from="1568213996464" duration="101000" />
-      <workItem from="1568227980962" duration="117000" />
+      <workItem from="1568227980962" duration="922000" />
+      <workItem from="1568286086575" duration="2131000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="340791000" />
+    <option name="totallyTimeSpent" value="343727000" />
   </component>
   <component name="TodoView" selected-index="1">
     <todo-panel id="selected-file">
@@ -557,7 +621,7 @@
     <frame x="0" y="0" width="1440" height="900" extended-state="0" />
     <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.44635195" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.4527897" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="npm" order="2" side_tool="true" />
       <window_info id="Favorites" order="3" side_tool="true" />
@@ -572,7 +636,7 @@
       <window_info anchor="bottom" id="Version Control" order="8" weight="0.32923833" />
       <window_info anchor="bottom" id="Database Changes" order="9" />
       <window_info anchor="bottom" id="Event Log" order="10" side_tool="true" weight="0.32923833" />
-      <window_info active="true" anchor="bottom" id="Terminal" order="11" visible="true" weight="0.26535627" />
+      <window_info anchor="bottom" id="Terminal" order="11" visible="true" weight="0.26535627" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
@@ -716,13 +780,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/routes/api.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="598">
-          <caret line="26" column="36" selection-start-line="26" selection-start-column="36" selection-end-line="26" selection-end-column="36" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/Http/Middleware/jwtMiddleware.php">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
@@ -830,9 +887,12 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/public/img/logo.png">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
     <entry file="file://$PROJECT_DIR$/resources/js/components/news/Post.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="575">
+        <state relative-caret-position="-2340">
           <caret line="26" column="79" selection-start-line="26" selection-start-column="79" selection-end-line="26" selection-end-column="79" />
           <folding>
             <element signature="e#0#51#0" expanded="true" />
@@ -842,33 +902,37 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/resources/js/components/subpage/Subpage.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1449">
-          <caret line="68" selection-start-line="68" selection-end-line="68" />
+        <state relative-caret-position="52">
+          <caret line="52" column="99" selection-start-line="52" selection-start-column="99" selection-end-line="52" selection-end-column="99" />
           <folding>
             <element signature="e#0#49#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/public/img/logo.png">
-      <provider selected="true" editor-type-id="images" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/resources/js/components/App.js">
+    <entry file="file://$PROJECT_DIR$/routes/api.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2185">
-          <caret line="104" column="8" selection-start-line="104" selection-start-column="8" selection-end-line="104" selection-end-column="8" />
-          <folding>
-            <element signature="e#0#49#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="-336">
+          <caret line="16" column="21" selection-start-line="16" selection-start-column="21" selection-end-line="16" selection-end-column="21" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/Http/Controllers/PostsController.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="239">
-          <caret line="105" column="63" selection-start-line="105" selection-start-column="63" selection-end-line="105" selection-end-column="63" />
+        <state relative-caret-position="-2452">
+          <caret line="78" column="29" selection-start-line="78" selection-start-column="29" selection-end-line="78" selection-end-column="29" />
           <folding>
             <element signature="e#40#68#0#PHP" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/js/components/App.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="249">
+          <caret line="129" column="32" selection-start-line="129" selection-start-column="32" selection-end-line="129" selection-end-column="32" />
+          <folding>
+            <element signature="e#0#49#0" expanded="true" />
           </folding>
         </state>
       </provider>
