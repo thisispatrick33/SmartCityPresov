@@ -420,3 +420,15 @@ hr{
   border-top: 1px solid #e3e3e3 ;
   border-bottom: 1px solid #e3e3e3 ;
 }
+
+
+//Post Details - Mamuss
+.post-details{
+
+  h2{
+    border-bottom: 1px solid $primaryColor;
+  }
+  hr{
+    border-top: 1px solid $primaryColor ;
+  }
+}

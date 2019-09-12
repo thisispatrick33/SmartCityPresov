@@ -14796,3 +14796,11 @@ hr {
   border-bottom: 1px solid #e3e3e3;
 }
 
+.post-details h2 {
+  border-bottom: 1px solid #D71920;
+}
+
+.post-details hr {
+  border-top: 1px solid #D71920;
+}
+

@@ -136,26 +136,21 @@ export const Post = ({ id, logged, make = f => f , location}) => {
         );
     }else{
         return (
-            <div className={"project-form mt-4 row col-12"}>
-                <div className={"col-12 mb-5 row title p-2 justify-content-start"}>
-                    <h2 className="mb-0 col-11 p-0 ml-4 mb-0">{postData.title}</h2>
+            <div className={"post-details mt-4 ml-5 row col-auto justify-content-center"}>
+                <div className={"col-lg-12 col-sm-10 mb-5 row title p-2 justify-content-start"}>
+                    <div className={"col-12 row p-0"}>
+                        <h2 className="mb-0 p-0 pb-3 mb-0 col-auto">{postData.title}</h2>
+                    </div>
+                        <hr className={"m-0 mt-2 col-2"}/>
                 </div>
 
-                <div className={"description col-12 mb-5 row p-2 justify-content-start"}>
+                <div className={"description col-lg-12 col-sm-10 mb-5 row p-2 justify-content-start"}>
                     <p>{postData.description}</p>
                 </div>
-                <div className={"col-12 mb-5 row autor p-2 justify-content-start"} htmlFor="autor">
-                    <p className={"col-8 px-0 py-2 ml-4"} >{user.data.name}</p>
-                    <p className={"col-8 px-0 py-2 ml-4"}>{postData.updated_at} </p>
+                <div className={"col-lg-12 col-sm-10 mb-5 row autor p-2 justify-content-start"} htmlFor="autor">
+                    <p className={"col-lg-6 col-sm-12 px-0 py-2 "} >{user.data.name}</p>
+                    <p className={"col-lg-6 col-sm-12 px-0 py-2 "}>{new Date(postData.updated_at).toLocaleDateString("en-US")} </p>
                 </div>
-                {
-                    !control ? "" : (
-                        <label className={"col-12 mb-5 row title p-2 justify-content-start"} htmlFor="button">
-                            <p className={"col-11 ml-4 p-0 mb-0"}>Hej hej, je to fajn, skontroluj to a pacni ten button dole <span><img style={{width : 24, height : 24}} src="../img/cool.svg" alt=""/></span></p>
-                            <input className={"col-4 p-2 mt-3 ml-4  mb-0"} type="submit" value={"potvrdiť"}/>
-                        </label>
-                    )
-                }
             </div>
         );
     }

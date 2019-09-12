@@ -66426,37 +66426,25 @@ var Post = function Post(_ref) {
     })));
   } else {
     return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-      className: "project-form mt-4 row col-12"
+      className: "post-details mt-4 ml-5 row col-auto justify-content-center"
     }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-      className: "col-12 mb-5 row title p-2 justify-content-start"
+      className: "col-lg-12 col-sm-10 mb-5 row title p-2 justify-content-start"
+    }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      className: "col-12 row p-0"
     }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h2", {
-      className: "mb-0 col-11 p-0 ml-4 mb-0"
-    }, postData.title)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-      className: "description col-12 mb-5 row p-2 justify-content-start"
+      className: "mb-0 p-0 pb-3 mb-0 col-auto"
+    }, postData.title)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("hr", {
+      className: "m-0 mt-2 col-2"
+    })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      className: "description col-lg-12 col-sm-10 mb-5 row p-2 justify-content-start"
     }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, postData.description)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-      className: "col-12 mb-5 row autor p-2 justify-content-start",
+      className: "col-lg-12 col-sm-10 mb-5 row autor p-2 justify-content-start",
       htmlFor: "autor"
     }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
-      className: "col-8 px-0 py-2 ml-4"
+      className: "col-lg-6 col-sm-12 px-0 py-2 "
     }, user.data.name), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
-      className: "col-8 px-0 py-2 ml-4"
-    }, postData.updated_at, " ")), !control ? "" : react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
-      className: "col-12 mb-5 row title p-2 justify-content-start",
-      htmlFor: "button"
-    }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
-      className: "col-11 ml-4 p-0 mb-0"
-    }, "Hej hej, je to fajn, skontroluj to a pacni ten button dole ", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
-      style: {
-        width: 24,
-        height: 24
-      },
-      src: "../img/cool.svg",
-      alt: ""
-    }))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
-      className: "col-4 p-2 mt-3 ml-4  mb-0",
-      type: "submit",
-      value: "potvrdiť"
-    })));
+      className: "col-lg-6 col-sm-12 px-0 py-2 "
+    }, new Date(postData.updated_at).toLocaleDateString("en-US"), " ")));
   }
 };
 
@@ -66935,8 +66923,8 @@ var Subpage = function Subpage(_ref) {
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! /Users/patrik/Projects/Webs/SmartCityPresov/resources/js/app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! /Users/patrik/Projects/Webs/SmartCityPresov/resources/sass/app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! C:\MAMP\htdocs\SmartCityPresov\SmartCityPresov\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! C:\MAMP\htdocs\SmartCityPresov\SmartCityPresov\resources\sass\app.scss */"./resources/sass/app.scss");
 
 
 /***/ })
