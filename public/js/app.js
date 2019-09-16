@@ -65637,10 +65637,9 @@ var App = function App() {
     });
   };
 
-  var _deletePost = function _deletePost(_ref2) {
-    var id = _ref2.id;
-    axios__WEBPACK_IMPORTED_MODULE_8___default.a["delete"]("/api/post/delete", {
-      id: id
+  var _deletePost = function _deletePost(postData) {
+    axios__WEBPACK_IMPORTED_MODULE_8___default.a.put("/api/post/delete", {
+      id: postData
     }, {
       headers: {
         'Content-Type': 'application/json',
@@ -65651,10 +65650,9 @@ var App = function App() {
       console.log(response);
     }).then(function (json) {
       if (!json) {
-        alert("Úspešne si vymazal článok.");
-      } else alert("Vymazanie neprebehlo, nastala chyba.");
-    });
-    Object(_reach_router__WEBPACK_IMPORTED_MODULE_2__["navigate"])("/".concat(subpage));
+        alert("Úspešne si upravil článok.");
+      } else alert("Úprava neprebehla, nastala chyba.");
+    }); //navigate(`/${subpage}`);
   };
 
   return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
@@ -66283,12 +66281,18 @@ var Post = function Post(_ref) {
       user = _useState4[0],
       setUser = _useState4[1];
 
+  var _useState5 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])([]),
+      _useState6 = _slicedToArray(_useState5, 2),
+      images = _useState6[0],
+      setImages = _useState6[1];
+
   if (_idControl) {
     Object(react__WEBPACK_IMPORTED_MODULE_0__["useEffect"])(function () {
       fetch("/api/post/".concat(id)).then(function (response) {
         return response.json();
       }).then(function (postData) {
         setPostData(postData);
+        setImages(postData.images);
         fetch("/api/author/".concat(postData.user_id)).then(function (response) {
           return response.json();
         }).then(function (user) {
@@ -66301,8 +66305,18 @@ var Post = function Post(_ref) {
   var handleSubmit = function handleSubmit(e) {
     e.preventDefault();
     make(_objectSpread({}, postData, {
+      updated_images: images.map(function (_ref2) {
+        var id = _ref2.id;
+        return id;
+      }),
       user_id: _idControl ? user.data.id : logged.id,
       subpage_id: location.state.subpage ? location.state.subpage : null
+    }));
+  };
+
+  var handleImages = function handleImages(index) {
+    return setImages(images.filter(function (image) {
+      return image.id !== index;
     }));
   };
 
@@ -66401,7 +66415,7 @@ var Post = function Post(_ref) {
       className: "col-11 | p-0 ml-4 mb-0"
     }, "price"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
       className: "col-11 | p-0 ml-4 mb-0"
-    }, "kr\xE1tky, p\xFAtav\xFD, no proste zaujmi ", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
+    }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
       style: {
         width: 24,
         height: 24
@@ -66413,7 +66427,7 @@ var Post = function Post(_ref) {
     }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("hr", null)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
       name: "price",
       value: postData.price,
-      placeholder: "Zadajte n\xE1zov",
+      placeholder: "Zadajte cenu projektu",
       type: "number",
       onChange: function onChange(e) {
         setPostData(_objectSpread({}, postData, {
@@ -66475,7 +66489,25 @@ var Post = function Post(_ref) {
       alt: ""
     }))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
       className: "col-4 | ml-4 p-0"
-    }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("hr", null)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+    }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("hr", null)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      className: "col-12 row"
+    }, images.map(function (_ref3) {
+      var path = _ref3.path,
+          id = _ref3.id;
+      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+        onClick: function onClick() {
+          handleImages(id);
+        }
+      }, "x"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
+        style: {
+          height: "100px",
+          width: "auto"
+        },
+        src: "../".concat(path.substr(path.indexOf('img'))),
+        className: "m-2",
+        alt: ""
+      }));
+    })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
       name: "images[]",
       type: "file",
       placeholder: "Zadajte názov",
@@ -66506,7 +66538,6 @@ var Post = function Post(_ref) {
     })));
   } else {
     return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-<<<<<<< HEAD
       className: "post-details mt-4 ml-5 row col-auto justify-content-center"
     }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
       className: "col-lg-12 col-sm-10 mb-5 row title p-2 justify-content-start"
@@ -66526,39 +66557,6 @@ var Post = function Post(_ref) {
     }, user.data.name), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
       className: "col-lg-6 col-sm-12 px-0 py-2 "
     }, new Date(postData.updated_at).toLocaleDateString("en-US"), " ")));
-=======
-      className: "project-form | row col-12 | mt-4"
-    }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-      className: " title | row col-12 | justify-content-start | mb-5 p-2 "
-    }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h2", {
-      className: "col-11 | mb-0 ml-4 mb-0 p-0"
-    }, postData.title)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-      className: "description | row col-12 | justify-content-start | mb-5 p-2"
-    }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, postData.description)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-      className: "author | row col-12 | justify-content-start| mb-5 p-2 ",
-      htmlFor: "autor"
-    }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
-      className: "col-8 | ml-4 px-0 py-2 "
-    }, user.data.name), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
-      className: "col-8 | ml-4 px-0 py-2 "
-    }, postData.updated_at, " ")), !control ? "" : react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
-      className: "title | row col-12 | justify-content-start | mb-5  p-2 ",
-      htmlFor: "button"
-    }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
-      className: "col-11 | ml-4 mb-0 p-0"
-    }, "Hej hej, je to fajn, skontroluj to a pacni ten button dole ", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
-      style: {
-        width: 24,
-        height: 24
-      },
-      src: "../img/cool.svg",
-      alt: ""
-    }))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
-      className: "col-4 | mt-3 ml-4 mb-0 p-2",
-      type: "submit",
-      value: "potvrdiť"
-    })));
->>>>>>> 8ae1e10ee11b0b419b56a4765fbd91fcaec4313e
   }
 };
 
@@ -66595,7 +66593,7 @@ var PostLookup = function PostLookup(_ref) {
     className: "col-12"
   }, title), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
     className: "col-12 mb-0 description"
-  }, description.substring(0, 100), " ", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_reach_router__WEBPACK_IMPORTED_MODULE_1__["Link"], {
+  }, description.substring(0, window.innerWidth > 991 ? 100 : 50), " ", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_reach_router__WEBPACK_IMPORTED_MODULE_1__["Link"], {
     className: "read_more",
     to: "/posts/".concat(id),
     state: {
@@ -66664,6 +66662,7 @@ var Project = function Project(_ref) {
       marginTop: '10vh',
       easing: 'easeInOutCirc'
     }, 1000);
+    console.log(data);
   }, []);
   return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "project-details-frame row p-0 justify-content-center",
@@ -66684,19 +66683,12 @@ var Project = function Project(_ref) {
     className: "text-center"
   }, "gal\xE9ria")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(fslightbox_react__WEBPACK_IMPORTED_MODULE_2___default.a, {
     toggler: toggler,
-    sources: ['https://picsum.photos/id/237/200/300', 'https://picsum.photos/id/237/200/300', 'https://picsum.photos/id/237/200/300']
+    sources: data.images.map(function (image) {
+      return image.path.substr(image.path.indexOf('img'));
+    })
   })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "col-12 row p-3"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    onClick: function onClick() {
-      return setToggler(!toggler);
-    },
-    className: "col-xl-12 col-lg-12 col-4 | mb-4 cover-image p-1"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
-    src: data.image,
-    alt: "cover image",
-    className: "col-12 shadow p-0"
-  })), data.images.map(function (_ref2) {
+  }, data.images.map(function (_ref2) {
     var id = _ref2.id,
         title = _ref2.title,
         alt = _ref2.alt,
@@ -66707,7 +66699,7 @@ var Project = function Project(_ref) {
       },
       className: "col-xl-12 col-lg-12 col-4 mb-4 p-1"
     }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
-      src: path,
+      src: path.substr(path.indexOf('img')),
       alt: alt,
       className: "col-12 shadow p-2"
     }));
@@ -66716,6 +66708,13 @@ var Project = function Project(_ref) {
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "col-12 row p-0"
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    onClick: function onClick() {
+      return close();
+    },
+    className: "col-12 row mt-5 px-5 title p-0"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", {
+    className: "col-12 mb-2"
+  }, "close", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null, "."))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "col-12 row mt-5 px-5 title p-0"
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", {
     className: "col-12 mb-2"
@@ -66885,14 +66884,14 @@ var Subpage = function Subpage(_ref) {
     return react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
       className: " subpage-content | row col-12 | justify-content-center | align-items-start"
     }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("h1", {
-      className: " col-12 | mt-4 | text-center"
+      className: " title | col-xl-12 col-lg-12 col-11 | mt-4 | text-center"
     }, subpage.title), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("p", {
-      className: " description | col-12 | mt-5 | text-center",
+      className: " description | col-xl-12 col-lg-12 col-11 | mt-5 | text-center",
       dangerouslySetInnerHTML: {
         __html: subpage.description
       }
     }), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
-      className: " projects-frame | row col-12 | justify-content-center"
+      className: " projects-frame | row col-xl-12 col-lg-12 col-11 | justify-content-center "
     }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("h3", {
       className: "projects-title | col-12 | my-5 p-0"
     }, "projekty smartcity pre\u0161ov - ", react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("span", {
@@ -66916,8 +66915,8 @@ var Subpage = function Subpage(_ref) {
       }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
         className: "col-12 | p-0"
       }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("img", {
-        src: image,
-        alt: "cover image",
+        src: "../".concat(image.substr(image.indexOf('img'))),
+        alt: "",
         className: "col-12 | p-0",
         style: {
           borderRadius: "10px 10px 0 0"
@@ -67032,7 +67031,7 @@ var Subpage = function Subpage(_ref) {
       }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
         className: "col-12 p-0"
       }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("img", {
-        src: image,
+        src: "../".concat(image.substr(image.indexOf('img'))),
         alt: "cover image",
         className: "col-12 p-0",
         style: {
@@ -67076,8 +67075,8 @@ var Subpage = function Subpage(_ref) {
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! C:\MAMP\htdocs\SmartCityPresov\SmartCityPresov\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! C:\MAMP\htdocs\SmartCityPresov\SmartCityPresov\resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! /Users/patrik/Projects/Webs/SmartCityPresov/resources/js/app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! /Users/patrik/Projects/Webs/SmartCityPresov/resources/sass/app.scss */"./resources/sass/app.scss");
 
 
 /***/ })

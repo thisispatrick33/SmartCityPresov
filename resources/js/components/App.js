@@ -75,9 +75,7 @@ const App = () => {
     };
 
     const _updatePost = (postData) => {
-
-        axios
-            .put("/api/post/edit", postData,{
+        axios.put("/api/post/edit", postData,{
                 headers : {
                     'Content-Type' : 'application/json',
                     'Accept' : 'application/json',
@@ -123,24 +121,24 @@ const App = () => {
 
 
     };
-    const _deletePost = ({ id }) => {
-        axios
-            .delete("/api/post/delete", {id : id},{
-                headers : {
-                    'Content-Type' : 'application/json',
-                    'Accept' : 'application/json',
-                    'Authorization' : `Bearer ${authState.user.auth_token}`
-                }
-            })
+    const _deletePost = (postData) => {
+        axios.put("/api/post/delete", {id : postData},{
+            headers : {
+                'Content-Type' : 'application/json',
+                'Accept' : 'application/json',
+                'Authorization' : `Bearer ${authState.user.auth_token}`
+            }
+        })
             .then(response => {
                 console.log(response)
             })
             .then(json => {
                 if (!json) {
-                    alert("Úspešne si vymazal článok.");
-                } else  alert("Vymazanie neprebehlo, nastala chyba.");
-            });
-        navigate(`/${subpage}`);
+                    alert("Úspešne si upravil článok.");
+                } else  alert("Úprava neprebehla, nastala chyba.");
+
+            })
+        //navigate(`/${subpage}`);
     };
     return (
         <div className={"col-12 p-0 row"}>

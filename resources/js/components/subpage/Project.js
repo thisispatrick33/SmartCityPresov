@@ -9,6 +9,7 @@ export const Project = ({data,user, close = f => f}) => {
             marginTop: '10vh',
             easing: 'easeInOutCirc'
         },1000);
+        console.log(data)
     }, []);
     return (
         <div  className={"project-details-frame row p-0 justify-content-center"} style={{display : `none`}}>
@@ -21,17 +22,14 @@ export const Project = ({data,user, close = f => f}) => {
                         <FsLightbox
                             toggler={ toggler }
                             sources={
-                                ['https://picsum.photos/id/237/200/300','https://picsum.photos/id/237/200/300','https://picsum.photos/id/237/200/300']
+                                data.images.map(image => image.path.substr(image.path.indexOf('img')))
                              }
                         />
                     </>
                     <div className={"col-12 row p-3"}>
-                        <div onClick={ () => setToggler(!toggler) } className={"col-xl-12 col-lg-12 col-4 | mb-4 cover-image p-1"}>
-                            <img src={data.image} alt="cover image" className={"col-12 shadow p-0"}/>
-                        </div>
                         { data.images.map(({id,title,alt,path}) => {
                             return <div onClick={ () => setToggler(!toggler) } className={"col-xl-12 col-lg-12 col-4 mb-4 p-1"}>
-                                <img src={path} alt={alt} className={"col-12 shadow p-2"}/>
+                                <img src={path.substr(path.indexOf('img'))} alt={alt} className={"col-12 shadow p-2"}/>
                             </div>
                           })
                         }
@@ -39,6 +37,9 @@ export const Project = ({data,user, close = f => f}) => {
                 </div>
                 <div className="content shadow col-xl-10 col-lg-10 col-12 order-xl-2 order-lg-2 order-1 row justify-content-end p-0 align-items-start">
                     <div className="col-12 row p-0">
+                        <div onClick={() => close()} className="col-12 row mt-5 px-5 title p-0">
+                            <h1 className={"col-12 mb-2"}>close<span>.</span></h1>
+                        </div>
                         <div className="col-12 row mt-5 px-5 title p-0">
                             <h1 className={"col-12 mb-2"}>{data.title}<span>.</span></h1>
                         </div>

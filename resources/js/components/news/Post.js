@@ -5,12 +5,14 @@ export const Post = ({ id, logged, make = f => f , location }) => {
     let _idControl = (id !== undefined);
     const [postData, setPostData] = useState([]);
     const [user, setUser] = useState([]);
+    const [images, setImages] = useState([]);
     if(_idControl){
         useEffect(() => {
             fetch(`/api/post/${id}`)
                 .then(response => response.json())
                 .then(postData => {
                     setPostData(postData);
+                    setImages(postData.images)
                     fetch(`/api/author/${postData.user_id}`)
                         .then(response => response.json())
                         .then(user => {
@@ -23,10 +25,14 @@ export const Post = ({ id, logged, make = f => f , location }) => {
         e.preventDefault();
         make({
             ...postData,
+            updated_images : images.map(({id}) => id),
             user_id : _idControl ? user.data.id : logged.id,
             subpage_id : location.state.subpage ? location.state.subpage : null
         });
     };
+
+    const handleImages = index => setImages(images.filter((image) => image.id !== index));
+
     const date = new Date();
     if((!postData || !user.data) && _idControl){
         return <Loader />;
@@ -94,14 +100,14 @@ export const Post = ({ id, logged, make = f => f , location }) => {
                         </label>
                         <label className={`price | row col-12 | justify-content-start | mb-5 p-2`} htmlFor={`price`}>
                             <h2 className={`col-11 | p-0 ml-4 mb-0`}>price</h2>
-                            <p className={`col-11 | p-0 ml-4 mb-0`}>krátky, pútavý, no proste zaujmi <span><img style={{width : 24, height : 24}} src={`../img/wink.svg`} alt={`smile`}/></span></p>
+                            <p className={`col-11 | p-0 ml-4 mb-0`}><span><img style={{width : 24, height : 24}} src={`../img/wink.svg`} alt={`smile`}/></span></p>
                             <div className={`col-4 | p-0 ml-4`}>
                                 <hr/>
                             </div>
                             <input
                                 name={`price`}
                                 value={postData.price}
-                                placeholder={`Zadajte názov`}
+                                placeholder={`Zadajte cenu projektu`}
                                 type={`number`}
 
                                 onChange={e => {setPostData({...postData,price : e.target.value})}}
@@ -137,6 +143,16 @@ export const Post = ({ id, logged, make = f => f , location }) => {
                             <div className={`col-4 | ml-4 p-0`}>
                                 <hr/>
                             </div>
+                            <div className={"col-12 row"}>
+                                        {images.map(({path,id}) => {
+                                            return (
+                                                <div>
+                                                    <span onClick={() => {handleImages(id)}}>x</span>
+                                                    <img style={{height : "100px", width : "auto"}} src={`../${path.substr(path.indexOf('img'))}`}  className={"m-2"} alt=""/>
+                                                </div>
+                                            )
+                                        })}
+                                </div>
                             <input
                                 name={`images[]`}
                                 type={`file`}
@@ -164,7 +180,6 @@ export const Post = ({ id, logged, make = f => f , location }) => {
         );
     }else{
         return (
-<<<<<<< HEAD
             <div className={"post-details mt-4 ml-5 row col-auto justify-content-center"}>
                 <div className={"col-lg-12 col-sm-10 mb-5 row title p-2 justify-content-start"}>
                     <div className={"col-12 row p-0"}>
@@ -180,28 +195,7 @@ export const Post = ({ id, logged, make = f => f , location }) => {
                     <p className={"col-lg-6 col-sm-12 px-0 py-2 "} >{user.data.name}</p>
                     <p className={"col-lg-6 col-sm-12 px-0 py-2 "}>{new Date(postData.updated_at).toLocaleDateString("en-US")} </p>
                 </div>
-=======
-            <div className={`project-form | row col-12 | mt-4`}>
-                <div className={` title | row col-12 | justify-content-start | mb-5 p-2 `}>
-                    <h2 className={`col-11 | mb-0 ml-4 mb-0 p-0`}>{postData.title}</h2>
-                </div>
 
-                <div className={`description | row col-12 | justify-content-start | mb-5 p-2`}>
-                    <p>{postData.description}</p>
-                </div>
-                <div className={`author | row col-12 | justify-content-start| mb-5 p-2 `} htmlFor="autor">
-                    <p className={`col-8 | ml-4 px-0 py-2 `} >{user.data.name}</p>
-                    <p className={`col-8 | ml-4 px-0 py-2 `}>{postData.updated_at} </p>
-                </div>
-                {
-                    !control ? `` : (
-                        <label className={`title | row col-12 | justify-content-start | mb-5  p-2 `} htmlFor="button">
-                            <p className={`col-11 | ml-4 mb-0 p-0`}>Hej hej, je to fajn, skontroluj to a pacni ten button dole <span><img style={{width : 24, height : 24}} src="../img/cool.svg" alt=""/></span></p>
-                            <input className={"col-4 | mt-3 ml-4 mb-0 p-2"} type="submit" value={"potvrdiť"}/>
-                        </label>
-                    )
-                }
->>>>>>> 8ae1e10ee11b0b419b56a4765fbd91fcaec4313e
             </div>
         );
     }

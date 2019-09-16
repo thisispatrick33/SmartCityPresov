@@ -14805,14 +14805,14 @@ hr {
   border-bottom: 1px solid #e3e3e3;
 }
 
-<<<<<<< HEAD
 .post-details h2 {
   border-bottom: 1px solid #D71920;
 }
 
 .post-details hr {
   border-top: 1px solid #D71920;
-=======
+}
+
 @media (max-width: 991.98px) {
   .project-details-frame .content {
     border-width: 0 0 10px 0;
@@ -14831,6 +14831,5 @@ hr {
     border-radius: 0 10px 10px 0;
     height: 100%;
   }
->>>>>>> 8ae1e10ee11b0b419b56a4765fbd91fcaec4313e
 }
 

@@ -425,7 +425,7 @@ hr{
   border-top: 1px solid #e3e3e3 ;
   border-bottom: 1px solid #e3e3e3 ;
 }
-<<<<<<< HEAD
+
 
 
 //Post Details - Mamuss
@@ -438,7 +438,7 @@ hr{
     border-top: 1px solid $primaryColor ;
   }
 }
-=======
+
 @include media-breakpoint-down(md) {
   .project-details-frame .content{
     border-width : 0 0 10px 0;
@@ -457,4 +457,4 @@ hr{
     height : 100%;
   }
 }
->>>>>>> 8ae1e10ee11b0b419b56a4765fbd91fcaec4313e
+

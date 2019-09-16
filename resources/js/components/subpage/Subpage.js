@@ -45,16 +45,16 @@ export const Subpage = ({ id, user, del = f => f, get = f => f, }) => {
 
         return (
             <div className={` subpage-content | row col-12 | justify-content-center | align-items-start`}>
-                <h1 className={` col-12 | mt-4 | text-center`}>{subpage.title}</h1>
-                <p className={` description | col-12 | mt-5 | text-center`}  dangerouslySetInnerHTML={{__html: subpage.description}} />
-                <div className={` projects-frame | row col-12 | justify-content-center`}>
+                <h1 className={` title | col-xl-12 col-lg-12 col-11 | mt-4 | text-center`}>{subpage.title}</h1>
+                <p className={` description | col-xl-12 col-lg-12 col-11 | mt-5 | text-center`}  dangerouslySetInnerHTML={{__html: subpage.description}} />
+                <div className={` projects-frame | row col-xl-12 col-lg-12 col-11 | justify-content-center `}>
                     <h3 className={`projects-title | col-12 | my-5 p-0`}>projekty smartcity prešov - <span className={"projects-category"}>{subpage.title}</span></h3>
                     <div className={`projects | row col-12 | p-0`}>
                         {subpage.posts.map(({id, title, description, user, image, updated_at}) => {
                             return ( <div className={`project-frame | row col-xl-4 col-lg-4 col-md-6 col-sm-12 col-12 | justify-content-xl-start justify-content-lg-start justify-content-md-center justify-content-sm-center justify-content-center | mb-4 p-0`} key={id}>
                                 <div className={`shadow project | row col-10 | align-items-start | p-0 `}>
                                     <div className={`row col-12 | p-0 `}>
-                                        <div className={`col-12 | p-0`}><img src={image} alt="cover image" className={`col-12 | p-0`} style={{borderRadius : "10px 10px 0 0"}}/></div>
+                                        <div className={`col-12 | p-0`}><img src={`../${image.substr(image.indexOf('img'))}`} alt="" className={`col-12 | p-0`} style={{borderRadius : "10px 10px 0 0"}}/></div>
                                     </div>
                                     <h3 className={`col-12 | mt-3 py-0 px-3`}>{title}</h3>
                                     <p className={`col-12 | mb-3 py-0 px-3`}>{description.substring(0, description.includes(".") ? description.indexOf(".")+1 : 50)} <a href={`/api/post/${id}`} className={"read_more"}>Objav viac</a></p>
@@ -98,7 +98,7 @@ export const Subpage = ({ id, user, del = f => f, get = f => f, }) => {
                             return ( <div onClick={() => handleGet(id)} className={"project-frame row col-xl-4 col-lg-4 col-md-6 col-sm-12 col-12 p-0 justify-content-xl-start justify-content-lg-start justify-content-md-center justify-content-sm-center justify-content-center mb-4"} key={id}>
                                 <div className="project col-10 row shadow p-0">
                                     <div className="col-12 p-0 row">
-                                        <div className="col-12 p-0"><img src={image} alt={`cover image`} className={"col-12 p-0"} style={{borderRadius : "10px 10px 0 0"}}/></div>
+                                        <div className="col-12 p-0"><img src={`../${image.substr(image.indexOf('img'))}`} alt={`cover image`} className={"col-12 p-0"} style={{borderRadius : "10px 10px 0 0"}}/></div>
                                     </div>
                                     <h3 className={"col-12 py-0 px-3 mt-3"}>{title}</h3>
                                     <p className={"col-12 py-0 px-3 mb-3"}>{description.substring(0, description.includes(".") ? description.indexOf(".")+1 : 50)} <a onClick={() => handleGet(id)} className={"read_more"}>Objav viac</a></p>

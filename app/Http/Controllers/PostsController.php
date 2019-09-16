@@ -34,7 +34,6 @@ class PostsController extends Controller
     }
 
     public function add(Request $request){
-
         try{
             /*
              * Auxiliary variables
@@ -122,6 +121,7 @@ class PostsController extends Controller
     }
 
     public function update(Request $request){
+        return $request;
         $post = Post::with('images')->find($request->id);
 
         $images=[];
@@ -194,6 +194,7 @@ class PostsController extends Controller
     }
 
     public function delete(Request $request){
+        return $request;
         $post = Post::find($request->id);
         $post->active = false;
         $post->save();
