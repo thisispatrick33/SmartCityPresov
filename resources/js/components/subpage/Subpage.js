@@ -39,7 +39,6 @@ export const Subpage = ({ id, user, del = f => f, get = f => f, }) => {
     }
     useEffect( () => {  fetchData(subpage) }, [ id ] );
     if(user){
-        console.log(subpage)
         if(!subpage.title){
             return <Loader/>;
         }
@@ -85,7 +84,7 @@ export const Subpage = ({ id, user, del = f => f, get = f => f, }) => {
             </div>
         );
     }else{
-        if(!subpage.title || !subpage.posts ){
+        if(!subpage.title ){
             return <Loader/>;
         }
         return (
@@ -95,7 +94,22 @@ export const Subpage = ({ id, user, del = f => f, get = f => f, }) => {
                 <div className="col-xl-12 col-lg-12 col-11 justify-content-center  projects-frame row">
                     <h3 className={"col-12 projects-title my-5"}>projekty smartcity prešov - <span className={"projects-category"}>{subpage.title}</span></h3>
                     <div className="col-12 row projects p-0 align-items-start">
-                        {console.log(subpa)}
+                        {subpage.posts.map(({id, title, description, user, image, updated_at}) => {
+                            return ( <div className={`project-frame | row col-xl-4 col-lg-4 col-md-6 col-sm-12 col-12 | justify-content-xl-start justify-content-lg-start justify-content-md-center justify-content-sm-center justify-content-center | mb-4 p-0`} key={id}>
+                                    <div className={`shadow project | row col-10 | align-items-start | p-0 `}>
+                                        <div className={`row col-12 | p-0 `}>
+                                            <div className={`col-12 | p-0`}><img src={`../${image.substr(image.indexOf('img'))}`} alt="" className={`col-12 | p-0`} style={{borderRadius : "10px 10px 0 0"}}/></div>
+                                        </div>
+                                        <h3 className={`col-12 | mt-3 py-0 px-3`}>{title}</h3>
+                                        <p className={`col-12 | mb-3 py-0 px-3`}>{description.substring(0, description.includes(".") ? description.indexOf(".")+1 : 50)} <a href={`/api/post/${id}`} className={"read_more"}>Objav viac</a></p>
+                                        <p className={`col-12 | mb-0 py-0  px-3`}><span>Dátum : </span>{new Date(updated_at).toDateString()}</p>
+                                        <p className={`col-12 | py-0 px-3`}><span>Autor : </span>{user.name}</p>
+
+                                    </div>
+                                </div>
+
+                            );
+                        })}
                     </div>
                 </div>
                 {
