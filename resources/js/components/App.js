@@ -74,11 +74,21 @@ const App = () => {
             });
     };
 
-    const _updatePost = (postData) => {
-        axios.put("/api/post/edit", postData,{
+    const _updatePost = ({title,description,price,user_id,subpage_id,images,updated_images}) => {
+        let formData = new FormData();
+        formData.append("title",title);
+        formData.append("description",description);
+        formData.append("price",price);
+        formData.append("user_id",user_id);
+        formData.append("subpage_id",subpage_id);
+        formData.append("updated_images[]",updated_images);
+        console.log(images.typeof)
+        Array.from(images).forEach(image => formData.append('images[]', image));
+        axios
+            .post("/api/post", formData,{
                 headers : {
-                    'Content-Type' : 'application/json',
-                    'Accept' : 'application/json',
+                    'Content-Type' : 'multipart/form-data',
+                    'Accept' : 'multipart/form-data',
                     'Authorization' : `Bearer ${authState.user.auth_token}`
                 }
             })
@@ -87,9 +97,8 @@ const App = () => {
             })
             .then(json => {
                 if (!json) {
-                    alert("Úspešne si upravil článok.");
+                    alert("Úspešne si vytvoril článok.");
                 } else  alert("Úprava neprebehla, nastala chyba.");
-
             })
 
     };

@@ -194,7 +194,6 @@ class PostsController extends Controller
     }
 
     public function delete(Request $request){
-        return $request;
         $post = Post::find($request->id);
         $post->active = false;
         $post->save();

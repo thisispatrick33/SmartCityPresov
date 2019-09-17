@@ -37,8 +37,9 @@ export const Subpage = ({ id, user, del = f => f, get = f => f, }) => {
                     })
             })
     }
-    useEffect( () => {  fetchData(subpage).then(() => setReload(false),console.log(reload)) }, [ id ] );
+    useEffect( () => {  fetchData(subpage) }, [ id ] );
     if(user){
+        console.log(subpage)
         if(!subpage.title){
             return <Loader/>;
         }
@@ -84,7 +85,7 @@ export const Subpage = ({ id, user, del = f => f, get = f => f, }) => {
             </div>
         );
     }else{
-        if(!subpage.title || reload){
+        if(!subpage.title || !subpage.posts ){
             return <Loader/>;
         }
         return (
@@ -94,17 +95,7 @@ export const Subpage = ({ id, user, del = f => f, get = f => f, }) => {
                 <div className="col-xl-12 col-lg-12 col-11 justify-content-center  projects-frame row">
                     <h3 className={"col-12 projects-title my-5"}>projekty smartcity prešov - <span className={"projects-category"}>{subpage.title}</span></h3>
                     <div className="col-12 row projects p-0 align-items-start">
-                        {subpage.posts.map(({id, title, description, user, image, updated_at}) => {
-                            return ( <div onClick={() => handleGet(id)} className={"project-frame row col-xl-4 col-lg-4 col-md-6 col-sm-12 col-12 p-0 justify-content-xl-start justify-content-lg-start justify-content-md-center justify-content-sm-center justify-content-center mb-4"} key={id}>
-                                <div className="project col-10 row shadow p-0">
-                                    <div className="col-12 p-0 row">
-                                        <div className="col-12 p-0"><img src={`../${image.substr(image.indexOf('img'))}`} alt={`cover image`} className={"col-12 p-0"} style={{borderRadius : "10px 10px 0 0"}}/></div>
-                                    </div>
-                                    <h3 className={"col-12 py-0 px-3 mt-3"}>{title}</h3>
-                                    <p className={"col-12 py-0 px-3 mb-3"}>{description.substring(0, description.includes(".") ? description.indexOf(".")+1 : 50)} <a onClick={() => handleGet(id)} className={"read_more"}>Objav viac</a></p>
-                                </div>
-                            </div>);
-                        })}
+                        {console.log(subpa)}
                     </div>
                 </div>
                 {

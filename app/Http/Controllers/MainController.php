@@ -52,10 +52,10 @@ class MainController extends Controller
                 $post->user = $author;
             }
             else {
-                unset($subpage->posts[$i]);      
-            } 
+                unset($subpage->posts[$i]);
+            }
             $i++;
-            
+
         }
         return response()->json([
             'subpage' => $subpage

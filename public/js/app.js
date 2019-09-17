@@ -65590,29 +65590,47 @@ var App = function App() {
     });
   };
 
-  var _updatePost = function _updatePost(postData) {
-    axios__WEBPACK_IMPORTED_MODULE_8___default.a.put("/api/post/edit", postData, {
+  var _updatePost = function _updatePost(_ref) {
+    var title = _ref.title,
+        description = _ref.description,
+        price = _ref.price,
+        user_id = _ref.user_id,
+        subpage_id = _ref.subpage_id,
+        images = _ref.images,
+        updated_images = _ref.updated_images;
+    var formData = new FormData();
+    formData.append("title", title);
+    formData.append("description", description);
+    formData.append("price", price);
+    formData.append("user_id", user_id);
+    formData.append("subpage_id", subpage_id);
+    formData.append("updated_images[]", updated_images);
+    console.log(images["typeof"]);
+    Array.from(images).forEach(function (image) {
+      return formData.append('images[]', image);
+    });
+    axios__WEBPACK_IMPORTED_MODULE_8___default.a.post("/api/post", formData, {
       headers: {
-        'Content-Type': 'application/json',
-        'Accept': 'application/json',
+        'Content-Type': 'multipart/form-data',
+        'Accept': 'multipart/form-data',
         'Authorization': "Bearer ".concat(authState.user.auth_token)
       }
     }).then(function (response) {
       console.log(response);
     }).then(function (json) {
       if (!json) {
-        alert("Úspešne si upravil článok.");
+        alert("Úspešne si vytvoril článok.");
       } else alert("Úprava neprebehla, nastala chyba.");
     });
   };
 
-  var _createPost = function _createPost(_ref) {
-    var title = _ref.title,
-        description = _ref.description,
-        price = _ref.price,
-        user_id = _ref.user_id,
-        subpage_id = _ref.subpage_id,
-        images = _ref.images;
+  var _createPost = function _createPost(_ref2) {
+    var title = _ref2.title,
+        description = _ref2.description,
+        price = _ref2.price,
+        user_id = _ref2.user_id,
+        subpage_id = _ref2.subpage_id,
+        images = _ref2.images;
     var formData = new FormData();
     formData.append("title", title);
     formData.append("description", description);
@@ -66871,12 +66889,12 @@ var Subpage = function Subpage(_ref) {
   };
 
   Object(react__WEBPACK_IMPORTED_MODULE_1__["useEffect"])(function () {
-    fetchData(subpage).then(function () {
-      return setReload(false);
-    }, console.log(reload));
+    fetchData(subpage);
   }, [id]);
 
   if (user) {
+    console.log(subpage);
+
     if (!subpage.title) {
       return react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_Utillities__WEBPACK_IMPORTED_MODULE_2__["Loader"], null);
     }
@@ -66990,7 +67008,7 @@ var Subpage = function Subpage(_ref) {
       className: "col-12 py-0 px-3 mt-3 text-center"
     }, "pridajte projekt")))))));
   } else {
-    if (!subpage.title || reload) {
+    if (!subpage.title || !subpage.posts) {
       return react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_Utillities__WEBPACK_IMPORTED_MODULE_2__["Loader"], null);
     }
 
@@ -67011,43 +67029,7 @@ var Subpage = function Subpage(_ref) {
       className: "projects-category"
     }, subpage.title)), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
       className: "col-12 row projects p-0 align-items-start"
-    }, subpage.posts.map(function (_ref5) {
-      var id = _ref5.id,
-          title = _ref5.title,
-          description = _ref5.description,
-          user = _ref5.user,
-          image = _ref5.image,
-          updated_at = _ref5.updated_at;
-      return react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
-        onClick: function onClick() {
-          return handleGet(id);
-        },
-        className: "project-frame row col-xl-4 col-lg-4 col-md-6 col-sm-12 col-12 p-0 justify-content-xl-start justify-content-lg-start justify-content-md-center justify-content-sm-center justify-content-center mb-4",
-        key: id
-      }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
-        className: "project col-10 row shadow p-0"
-      }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
-        className: "col-12 p-0 row"
-      }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
-        className: "col-12 p-0"
-      }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("img", {
-        src: "../".concat(image.substr(image.indexOf('img'))),
-        alt: "cover image",
-        className: "col-12 p-0",
-        style: {
-          borderRadius: "10px 10px 0 0"
-        }
-      }))), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("h3", {
-        className: "col-12 py-0 px-3 mt-3"
-      }, title), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("p", {
-        className: "col-12 py-0 px-3 mb-3"
-      }, description.substring(0, description.includes(".") ? description.indexOf(".") + 1 : 50), " ", react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("a", {
-        onClick: function onClick() {
-          return handleGet(id);
-        },
-        className: "read_more"
-      }, "Objav viac"))));
-    }))), project !== null ? react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_Project__WEBPACK_IMPORTED_MODULE_3__["Project"], {
+    }, console.log(subpa))), project !== null ? react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_Project__WEBPACK_IMPORTED_MODULE_3__["Project"], {
       data: project,
       user: author,
       close: close
