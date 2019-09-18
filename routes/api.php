@@ -30,7 +30,7 @@ Route::group(['middleware' => ['jwt.auth','api-header']], function () {
 
     Route::put('/post/delete', 'PostsController@delete');
     Route::post('/post', 'PostsController@add');
-    Route::put('/post/edit', 'PostsController@update');
+    Route::post('/post/edit', 'PostsController@update');
 
     Route::group(['middleware' => 'admin'], function () {
 

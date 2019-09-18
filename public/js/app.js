@@ -65590,29 +65590,44 @@ var App = function App() {
     });
   };
 
-  var _updatePost = function _updatePost(postData) {
-    axios__WEBPACK_IMPORTED_MODULE_8___default.a.put("/api/post/edit", postData, {
+  var _updatePost = function _updatePost(_ref) {
+    var id = _ref.id,
+        title = _ref.title,
+        description = _ref.description,
+        price = _ref.price,
+        subpage_id = _ref.subpage_id,
+        images = _ref.images,
+        updated_images = _ref.updated_images;
+    var formData = new FormData();
+    formData.append("id", id);
+    formData.append("title", title);
+    formData.append("description", description);
+    formData.append("price", price);
+    formData.append("subpage_id", subpage_id);
+    Array.from(images).forEach(function (image) {
+      return formData.append('images[]', image);
+    });
+    Array.from(updated_images).forEach(function (image) {
+      return formData.append('updated_images[]', image);
+    });
+    axios__WEBPACK_IMPORTED_MODULE_8___default.a.post("/api/post/edit", formData, {
       headers: {
-        'Content-Type': 'application/json',
-        'Accept': 'application/json',
+        'Content-Type': 'multipart/form-data',
+        'Accept': 'multipart/form-data',
         'Authorization': "Bearer ".concat(authState.user.auth_token)
       }
     }).then(function (response) {
-      console.log(response);
-    }).then(function (json) {
-      if (!json) {
-        alert("Úspešne si upravil článok.");
-      } else alert("Úprava neprebehla, nastala chyba.");
+      console.log(response.data);
     });
   };
 
-  var _createPost = function _createPost(_ref) {
-    var title = _ref.title,
-        description = _ref.description,
-        price = _ref.price,
-        user_id = _ref.user_id,
-        subpage_id = _ref.subpage_id,
-        images = _ref.images;
+  var _createPost = function _createPost(_ref2) {
+    var title = _ref2.title,
+        description = _ref2.description,
+        price = _ref2.price,
+        user_id = _ref2.user_id,
+        subpage_id = _ref2.subpage_id,
+        images = _ref2.images;
     var formData = new FormData();
     formData.append("title", title);
     formData.append("description", description);
@@ -67075,8 +67090,8 @@ var Subpage = function Subpage(_ref) {
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! /var/www/html/SmartCityPresov/resources/js/app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! /var/www/html/SmartCityPresov/resources/sass/app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! C:\Users\Mamuss\PhpstormProjects\SmartCityPresov\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! C:\Users\Mamuss\PhpstormProjects\SmartCityPresov\resources\sass\app.scss */"./resources/sass/app.scss");
 
 
 /***/ })

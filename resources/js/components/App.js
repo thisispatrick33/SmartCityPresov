@@ -74,23 +74,26 @@ const App = () => {
             });
     };
 
-    const _updatePost = (postData) => {
-        axios.put("/api/post/edit", postData,{
-                headers : {
-                    'Content-Type' : 'application/json',
-                    'Accept' : 'application/json',
-                    'Authorization' : `Bearer ${authState.user.auth_token}`
-                }
-            })
-            .then(response => {
-                console.log(response)
-            })
-            .then(json => {
-                if (!json) {
-                    alert("Úspešne si upravil článok.");
-                } else  alert("Úprava neprebehla, nastala chyba.");
+    const _updatePost = ({id,title,description,price,subpage_id,images,updated_images}) => {
 
-            })
+        const formData = new FormData();
+        formData.append("id", id);
+        formData.append("title",title);
+        formData.append("description",description);
+        formData.append("price",price);
+        formData.append("subpage_id",subpage_id);
+        Array.from(images).forEach(image => formData.append('images[]', image));
+        Array.from(updated_images).forEach(image => formData.append('updated_images[]', image));
+
+        axios.post("/api/post/edit", formData,{
+            headers : {
+                'Content-Type' : 'multipart/form-data',
+                'Accept' : 'multipart/form-data',
+                'Authorization' : `Bearer ${authState.user.auth_token}`
+            }
+        })
+            .then(response=>{console.log(response.data)})
+
 
     };
 
