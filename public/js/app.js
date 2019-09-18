@@ -65554,6 +65554,37 @@ var App = function App() {
     setAuthState(authState);
   };
 
+  var _createPost = function _createPost(_ref) {
+    var title = _ref.title,
+        description = _ref.description,
+        price = _ref.price,
+        user_id = _ref.user_id,
+        subpage_id = _ref.subpage_id,
+        images = _ref.images;
+    var formData = new FormData();
+    formData.append("title", title);
+    formData.append("description", description);
+    formData.append("price", price);
+    formData.append("user_id", user_id);
+    formData.append("subpage_id", subpage_id);
+    Array.from(images).forEach(function (image) {
+      return formData.append('images[]', image);
+    });
+    axios__WEBPACK_IMPORTED_MODULE_8___default.a.post("/api/post", formData, {
+      headers: {
+        'Content-Type': 'multipart/form-data',
+        'Accept': 'multipart/form-data',
+        'Authorization': "Bearer ".concat(authState.user.auth_token)
+      }
+    }).then(function (response) {
+      console.log(response);
+    }).then(function (json) {
+      if (!json) {
+        alert("Úspešne si vytvoril článok.");
+      } else alert("Úprava neprebehla, nastala chyba.");
+    });
+  };
+
   var _loginUser = function _loginUser(email, password) {
     var formData = new FormData();
     formData.append("email", email);
@@ -65590,23 +65621,14 @@ var App = function App() {
     });
   };
 
-<<<<<<< HEAD
-  var _createPost = function _createPost(_ref) {
-    var title = _ref.title,
-        description = _ref.description,
-        price = _ref.price,
-        user_id = _ref.user_id,
-        subpage_id = _ref.subpage_id,
-        images = _ref.images;
-=======
-  var _updatePost = function _updatePost(_ref) {
-    var id = _ref.id,
-        title = _ref.title,
-        description = _ref.description,
-        price = _ref.price,
-        subpage_id = _ref.subpage_id,
-        images = _ref.images,
-        updated_images = _ref.updated_images;
+  var _updatePost = function _updatePost(_ref2) {
+    var id = _ref2.id,
+        title = _ref2.title,
+        description = _ref2.description,
+        price = _ref2.price,
+        subpage_id = _ref2.subpage_id,
+        images = _ref2.images,
+        updated_images = _ref2.updated_images;
     var formData = new FormData();
     formData.append("id", id);
     formData.append("title", title);
@@ -65627,38 +65649,6 @@ var App = function App() {
       }
     }).then(function (response) {
       console.log(response.data);
-    });
-  };
-
-  var _createPost = function _createPost(_ref2) {
-    var title = _ref2.title,
-        description = _ref2.description,
-        price = _ref2.price,
-        user_id = _ref2.user_id,
-        subpage_id = _ref2.subpage_id,
-        images = _ref2.images;
->>>>>>> fbf78b61f4ac3aaf818f3fb7d238f86fa2062f47
-    var formData = new FormData();
-    formData.append("title", title);
-    formData.append("description", description);
-    formData.append("price", price);
-    formData.append("user_id", user_id);
-    formData.append("subpage_id", subpage_id);
-    Array.from(images).forEach(function (image) {
-      return formData.append('images[]', image);
-    });
-    axios__WEBPACK_IMPORTED_MODULE_8___default.a.post("/api/post", formData, {
-      headers: {
-        'Content-Type': 'multipart/form-data',
-        'Accept': 'multipart/form-data',
-        'Authorization': "Bearer ".concat(authState.user.auth_token)
-      }
-    }).then(function (response) {
-      console.log(response);
-    }).then(function (json) {
-      if (!json) {
-        alert("Úspešne si vytvoril článok.");
-      } else alert("Úprava neprebehla, nastala chyba.");
     });
   };
 
@@ -67102,13 +67092,8 @@ var Subpage = function Subpage(_ref) {
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-<<<<<<< HEAD
-__webpack_require__(/*! /Users/patrik/Projects/Webs/SmartCityPresov/resources/js/app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! /Users/patrik/Projects/Webs/SmartCityPresov/resources/sass/app.scss */"./resources/sass/app.scss");
-=======
-__webpack_require__(/*! C:\Users\Mamuss\PhpstormProjects\SmartCityPresov\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! C:\Users\Mamuss\PhpstormProjects\SmartCityPresov\resources\sass\app.scss */"./resources/sass/app.scss");
->>>>>>> fbf78b61f4ac3aaf818f3fb7d238f86fa2062f47
+__webpack_require__(/*! /var/www/html/SmartCityPresov/resources/js/app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! /var/www/html/SmartCityPresov/resources/sass/app.scss */"./resources/sass/app.scss");
 
 
 /***/ })

@@ -16,7 +16,7 @@ class MainController extends Controller
         *  get news
          */
 
-        $news = DB::table('posts')->where('subpage_id','=', null)->get();
+        $news = Post::orderBy('created_at', 'DESC')->where('subpage_id','=', null)->where('active','=',true)->get();
         
         /*
         *  assign user to news
@@ -48,7 +48,7 @@ class MainController extends Controller
          */
 
         $user = User::with('posts')->select(['id','name','email'])->where('id','=',$id)->first();
-        $posts = Post::where('user_id','=',$user->id)->where('active','=',true)->get();
+        $posts = Post::orderBy('created_at', 'DESC')->where('user_id','=',$user->id)->where('active','=',true)->get();
                 
         /*
         *   assign post to user
@@ -81,7 +81,7 @@ class MainController extends Controller
          */
 
         $subpage = Subpage::select('*')->where('title_link','=',$option)->first();
-        $posts = Post::where('subpage_id','=',$subpage->id)->where('active','=',true)->get();
+        $posts = Post::orderBy('created_at', 'DESC')->where('subpage_id','=',$subpage->id)->where('active','=',true)->get();
                         
         /*
         *   assign users to posts 
