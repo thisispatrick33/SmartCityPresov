@@ -73,6 +73,7 @@ class MainController extends Controller
     }
 
 
+
     public function subpage($option){
                         
         /*
@@ -96,6 +97,7 @@ class MainController extends Controller
          */
 
         $subpage->posts = $posts;
+
 
         return response()->json([
             'subpage' => $subpage

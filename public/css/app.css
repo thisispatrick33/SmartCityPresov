@@ -14448,11 +14448,12 @@ body .main-container .news-frame .news .post .content a.read_more:visited,
 body .main-container .news-frame .news .post .content a.read_more:not(:hover) {
   color: #191919;
   text-decoration: none;
-  transition: 0.5s;
+  transition: 0.2s;
 }
 
 body .main-container .news-frame .news .post .content a.read_more:hover {
-  transition: 0.5s;
+  cursor: pointer;
+  transition: 0.2s;
   color: #D71920;
 }
 
@@ -14515,11 +14516,12 @@ body .main-container .subpage .subpage-content .projects-frame .projects .projec
 body .main-container .subpage .subpage-content .projects-frame .projects .project-frame .project a.read_more:not(:hover) {
   color: #191919;
   text-decoration: none;
-  transition: 0.5s;
+  transition: 0.2s;
 }
 
 body .main-container .subpage .subpage-content .projects-frame .projects .project-frame .project a.read_more:hover {
-  transition: 0.5s;
+  cursor: pointer;
+  transition: 0.2s;
   color: #D71920;
 }
 
@@ -14542,6 +14544,22 @@ body .main-container .subpage .project-details-frame .project-content {
 
 body .main-container .subpage .project-details-frame .project-content .content {
   background: white;
+}
+
+body .main-container .subpage .project-details-frame .project-content .content .close-button {
+  width: 30px;
+  height: 30px;
+}
+
+body .main-container .subpage .project-details-frame .project-content .content .close-button:not(:hover) {
+  fill: #191919;
+  transition: 0.2s;
+}
+
+body .main-container .subpage .project-details-frame .project-content .content .close-button:hover {
+  fill: #D71920;
+  cursor: pointer;
+  transition: 0.2s;
 }
 
 body .main-container .subpage .project-details-frame .project-content .content .title span {

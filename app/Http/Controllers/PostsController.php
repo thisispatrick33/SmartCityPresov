@@ -131,7 +131,7 @@ class PostsController extends Controller
     }
 
     public function update(Request $request){
-        //return $request;
+        return $request;
         //return $request->file('images[]');
         try{
         
