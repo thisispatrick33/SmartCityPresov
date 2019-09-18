@@ -65590,47 +65590,13 @@ var App = function App() {
     });
   };
 
-  var _updatePost = function _updatePost(_ref) {
+  var _createPost = function _createPost(_ref) {
     var title = _ref.title,
         description = _ref.description,
         price = _ref.price,
         user_id = _ref.user_id,
         subpage_id = _ref.subpage_id,
-        images = _ref.images,
-        updated_images = _ref.updated_images;
-    var formData = new FormData();
-    formData.append("title", title);
-    formData.append("description", description);
-    formData.append("price", price);
-    formData.append("user_id", user_id);
-    formData.append("subpage_id", subpage_id);
-    formData.append("updated_images[]", updated_images);
-    console.log(images["typeof"]);
-    Array.from(images).forEach(function (image) {
-      return formData.append('images[]', image);
-    });
-    axios__WEBPACK_IMPORTED_MODULE_8___default.a.post("/api/post", formData, {
-      headers: {
-        'Content-Type': 'multipart/form-data',
-        'Accept': 'multipart/form-data',
-        'Authorization': "Bearer ".concat(authState.user.auth_token)
-      }
-    }).then(function (response) {
-      console.log(response);
-    }).then(function (json) {
-      if (!json) {
-        alert("Úspešne si vytvoril článok.");
-      } else alert("Úprava neprebehla, nastala chyba.");
-    });
-  };
-
-  var _createPost = function _createPost(_ref2) {
-    var title = _ref2.title,
-        description = _ref2.description,
-        price = _ref2.price,
-        user_id = _ref2.user_id,
-        subpage_id = _ref2.subpage_id,
-        images = _ref2.images;
+        images = _ref.images;
     var formData = new FormData();
     formData.append("title", title);
     formData.append("description", description);
@@ -65684,7 +65650,7 @@ var App = function App() {
   }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_subpage_Subpage__WEBPACK_IMPORTED_MODULE_5__["Subpage"], {
     path: ":id",
     del: _deletePost,
-    user: authState.isLoggedIn ? authState.user : false
+    logged: authState.isLoggedIn ? authState.user : false
   }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_news_Post__WEBPACK_IMPORTED_MODULE_6__["Post"], {
     path: "/posts/:id",
     logged: authState.user,
@@ -66726,17 +66692,24 @@ var Project = function Project(_ref) {
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "col-12 row p-0"
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "col-12 row mt-5 px-5 title p-0"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", {
+    className: "col-11 mb-2"
+  }, data.title, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null, ".")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
     onClick: function onClick() {
       return close();
     },
-    className: "col-12 row mt-5 px-5 title p-0"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", {
-    className: "col-12 mb-2"
-  }, "close", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null, "."))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "col-12 row mt-5 px-5 title p-0"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", {
-    className: "col-12 mb-2"
-  }, data.title, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null, "."))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "col-1 p-0"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("svg", {
+    className: "col-12 p-0 close-button",
+    enableBackground: "new 0 0 357 357",
+    version: "1.1",
+    viewBox: "0 0 357 357",
+    space: "preserve",
+    xmlns: "http://www.w3.org/2000/svg"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("polygon", {
+    points: "357 35.7 321.3 0 178.5 142.8 35.7 0 0 35.7 142.8 178.5 0 321.3 35.7 357 178.5 214.2 321.3 357 357 321.3 214.2 178.5"
+  })))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "col-12 row description mt-4 py-2 px-5"
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
     className: "col-11 mb-3"
@@ -66798,7 +66771,7 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 var Subpage = function Subpage(_ref) {
   var id = _ref.id,
-      user = _ref.user,
+      logged = _ref.logged,
       _ref$del = _ref.del,
       del = _ref$del === void 0 ? function (f) {
     return f;
@@ -66815,18 +66788,13 @@ var Subpage = function Subpage(_ref) {
 
   var _useState3 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(null),
       _useState4 = _slicedToArray(_useState3, 2),
-      reload = _useState4[0],
-      setReload = _useState4[1];
+      project = _useState4[0],
+      setProject = _useState4[1];
 
-  var _useState5 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(null),
+  var _useState5 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])([]),
       _useState6 = _slicedToArray(_useState5, 2),
-      project = _useState6[0],
-      setProject = _useState6[1];
-
-  var _useState7 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])([]),
-      _useState8 = _slicedToArray(_useState7, 2),
-      author = _useState8[0],
-      setAuthor = _useState8[1];
+      author = _useState6[0],
+      setAuthor = _useState6[1];
 
   var fetchData =
   /*#__PURE__*/
@@ -66839,15 +66807,14 @@ var Subpage = function Subpage(_ref) {
         while (1) {
           switch (_context.prev = _context.next) {
             case 0:
-              setReload(true);
-              _context.next = 3;
+              _context.next = 2;
               return axios__WEBPACK_IMPORTED_MODULE_5___default.a.get("api/".concat(id));
 
-            case 3:
+            case 2:
               response = _context.sent;
               setSubpage(response.data.subpage);
 
-            case 5:
+            case 4:
             case "end":
               return _context.stop();
           }
@@ -66892,7 +66859,7 @@ var Subpage = function Subpage(_ref) {
     fetchData(subpage);
   }, [id]);
 
-  if (user) {
+  if (logged) {
     if (!subpage.title) {
       return react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_Utillities__WEBPACK_IMPORTED_MODULE_2__["Loader"], null);
     }
@@ -66948,7 +66915,7 @@ var Subpage = function Subpage(_ref) {
         className: "col-12 | mb-0 py-0  px-3"
       }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("span", null, "D\xE1tum : "), new Date(updated_at).toDateString()), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("p", {
         className: "col-12 | py-0 px-3"
-      }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("span", null, "Autor : "), user.name), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+      }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("span", null, "Autor : "), user.name), logged.name !== user.name ? "" : react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
         className: "col-12 row mb-2"
       }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_reach_router__WEBPACK_IMPORTED_MODULE_4__["Link"], {
         to: "/posts/".concat(id),
@@ -67035,6 +67002,9 @@ var Subpage = function Subpage(_ref) {
           image = _ref5.image,
           updated_at = _ref5.updated_at;
       return react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+        onClick: function onClick() {
+          return handleGet(id);
+        },
         className: "project-frame | row col-xl-4 col-lg-4 col-md-6 col-sm-12 col-12 | justify-content-xl-start justify-content-lg-start justify-content-md-center justify-content-sm-center justify-content-center | mb-4 p-0",
         key: id
       }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
@@ -67053,9 +67023,10 @@ var Subpage = function Subpage(_ref) {
       }))), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("h3", {
         className: "col-12 | mt-3 py-0 px-3"
       }, title), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("p", {
+        className: "col-12 | mb-0 py-0 px-3"
+      }, description.substring(0, 50)), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("p", {
         className: "col-12 | mb-3 py-0 px-3"
-      }, description.substring(0, description.includes(".") ? description.indexOf(".") + 1 : 50), " ", react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("a", {
-        href: "/api/post/".concat(id),
+      }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("a", {
         className: "read_more"
       }, "Objav viac")), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("p", {
         className: "col-12 | mb-0 py-0  px-3"

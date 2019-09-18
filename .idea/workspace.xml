@@ -2,206 +2,14 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="b40c9df6-0b96-4ac4-9038-e75470bb9bdd" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/public/img/1568704456QYHmk.jpeg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.editorconfig" beforeDir="false" afterPath="$PROJECT_DIR$/.editorconfig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.env" beforeDir="false" afterPath="$PROJECT_DIR$/.env" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gitattributes" beforeDir="false" afterPath="$PROJECT_DIR$/.gitattributes" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/SmartCityPresov.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/SmartCityPresov.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/encodings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/laravel-plugin.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/laravel-plugin.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/php.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/php.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.styleci.yml" beforeDir="false" afterPath="$PROJECT_DIR$/.styleci.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Console/Kernel.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Console/Kernel.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Exceptions/Handler.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Exceptions/Handler.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Auth/ForgotPasswordController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Auth/ForgotPasswordController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Auth/LoginController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Auth/LoginController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Auth/RegisterController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Auth/RegisterController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Auth/ResetPasswordController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Auth/ResetPasswordController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Auth/VerificationController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Auth/VerificationController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/AuthController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/AuthController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Controller.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Controller.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/Http/Controllers/MainController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/MainController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/PostsController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/PostsController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Kernel.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Kernel.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Middleware/APIMiddleware.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Middleware/APIMiddleware.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Middleware/Authenticate.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Middleware/Authenticate.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Middleware/CheckAdmin.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Middleware/CheckAdmin.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Middleware/CheckForMaintenanceMode.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Middleware/CheckForMaintenanceMode.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Middleware/EncryptCookies.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Middleware/EncryptCookies.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Middleware/RedirectIfAuthenticated.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Middleware/RedirectIfAuthenticated.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Middleware/TrimStrings.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Middleware/TrimStrings.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Middleware/TrustProxies.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Middleware/TrustProxies.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Middleware/VerifyCsrfToken.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Middleware/VerifyCsrfToken.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Middleware/jwtMiddleware.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Middleware/jwtMiddleware.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Image.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Image.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Post.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Post.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Providers/AppServiceProvider.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Providers/AppServiceProvider.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Providers/AuthServiceProvider.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Providers/AuthServiceProvider.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Providers/BroadcastServiceProvider.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Providers/BroadcastServiceProvider.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Providers/EventServiceProvider.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Providers/EventServiceProvider.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Providers/RouteServiceProvider.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Providers/RouteServiceProvider.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Subpage.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Subpage.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/User.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/User.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/artisan" beforeDir="false" afterPath="$PROJECT_DIR$/artisan" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bootstrap/app.php" beforeDir="false" afterPath="$PROJECT_DIR$/bootstrap/app.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/composer.json" beforeDir="false" afterPath="$PROJECT_DIR$/composer.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/composer.lock" beforeDir="false" afterPath="$PROJECT_DIR$/composer.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/config/app.php" beforeDir="false" afterPath="$PROJECT_DIR$/config/app.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/config/auth.php" beforeDir="false" afterPath="$PROJECT_DIR$/config/auth.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/config/broadcasting.php" beforeDir="false" afterPath="$PROJECT_DIR$/config/broadcasting.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/config/cache.php" beforeDir="false" afterPath="$PROJECT_DIR$/config/cache.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/config/database.php" beforeDir="false" afterPath="$PROJECT_DIR$/config/database.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/config/filesystems.php" beforeDir="false" afterPath="$PROJECT_DIR$/config/filesystems.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/config/hashing.php" beforeDir="false" afterPath="$PROJECT_DIR$/config/hashing.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/config/jwt.php" beforeDir="false" afterPath="$PROJECT_DIR$/config/jwt.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/config/logging.php" beforeDir="false" afterPath="$PROJECT_DIR$/config/logging.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/config/mail.php" beforeDir="false" afterPath="$PROJECT_DIR$/config/mail.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/config/queue.php" beforeDir="false" afterPath="$PROJECT_DIR$/config/queue.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/config/services.php" beforeDir="false" afterPath="$PROJECT_DIR$/config/services.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/config/session.php" beforeDir="false" afterPath="$PROJECT_DIR$/config/session.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/config/view.php" beforeDir="false" afterPath="$PROJECT_DIR$/config/view.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/database/.gitignore" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/factories/ImageFactory.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/factories/ImageFactory.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/factories/PostFactory.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/factories/PostFactory.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/factories/PostImageFactory.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/factories/PostImageFactory.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/factories/SubpageFactory.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/factories/SubpageFactory.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/factories/UserFactory.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/factories/UserFactory.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/migrations/2014_10_12_000000_create_users_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2014_10_12_000000_create_users_table.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/migrations/2014_10_12_100000_create_password_resets_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2014_10_12_100000_create_password_resets_table.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/migrations/2019_06_07_062315_create_subpages_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2019_06_07_062315_create_subpages_table.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/migrations/2019_06_07_062843_create_posts_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2019_06_07_062843_create_posts_table.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/migrations/2019_09_02_040644_create_images_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2019_09_02_040644_create_images_table.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/migrations/2019_09_02_040743_create_image_post_pivot_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2019_09_02_040743_create_image_post_pivot_table.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/seeds/DatabaseSeeder.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/seeds/DatabaseSeeder.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/phpunit.xml" beforeDir="false" afterPath="$PROJECT_DIR$/phpunit.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/.htaccess" beforeDir="false" afterPath="$PROJECT_DIR$/public/.htaccess" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/public/css/app.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/css/app.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/favicon.ico" beforeDir="false" afterPath="$PROJECT_DIR$/public/favicon.ico" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/fonts/Gilroy-Regular.ttf" beforeDir="false" afterPath="$PROJECT_DIR$/public/fonts/Gilroy-Regular.ttf" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/fonts/Gilroy-SemiBold.ttf" beforeDir="false" afterPath="$PROJECT_DIR$/public/fonts/Gilroy-SemiBold.ttf" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/fonts/NexaBold.otf" beforeDir="false" afterPath="$PROJECT_DIR$/public/fonts/NexaBold.otf" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/fonts/NexaLight.otf" beforeDir="false" afterPath="$PROJECT_DIR$/public/fonts/NexaLight.otf" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/fonts/vendor/slick-carousel/slick/slick.eot" beforeDir="false" afterPath="$PROJECT_DIR$/public/fonts/vendor/slick-carousel/slick/slick.eot" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/fonts/vendor/slick-carousel/slick/slick.svg" beforeDir="false" afterPath="$PROJECT_DIR$/public/fonts/vendor/slick-carousel/slick/slick.svg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/fonts/vendor/slick-carousel/slick/slick.ttf" beforeDir="false" afterPath="$PROJECT_DIR$/public/fonts/vendor/slick-carousel/slick/slick.ttf" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/fonts/vendor/slick-carousel/slick/slick.woff" beforeDir="false" afterPath="$PROJECT_DIR$/public/fonts/vendor/slick-carousel/slick/slick.woff" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/images/Screenshot from 2019-05-27 20-25-28.png" beforeDir="false" afterPath="$PROJECT_DIR$/public/images/Screenshot from 2019-05-27 20-25-28.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/images/Screenshot from 2019-05-30 11-11-50.png" beforeDir="false" afterPath="$PROJECT_DIR$/public/images/Screenshot from 2019-05-30 11-11-50.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/images/Screenshot from 2019-05-30 11-11-54.png" beforeDir="false" afterPath="$PROJECT_DIR$/public/images/Screenshot from 2019-05-30 11-11-54.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/images/Screenshot from 2019-06-02 09-34-27.png" beforeDir="false" afterPath="$PROJECT_DIR$/public/images/Screenshot from 2019-06-02 09-34-27.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/images/eu4.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/public/images/eu4.jpg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/images/php7qNMGn" beforeDir="false" afterPath="$PROJECT_DIR$/public/images/php7qNMGn" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/images/phpCG5msK" beforeDir="false" afterPath="$PROJECT_DIR$/public/images/phpCG5msK" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/images/phpaL2cV0" beforeDir="false" afterPath="$PROJECT_DIR$/public/images/phpaL2cV0" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/images/phpnCBD9D" beforeDir="false" afterPath="$PROJECT_DIR$/public/images/phpnCBD9D" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/images/vendor/@ckeditor/ckeditor5-basic-styles/theme/icons/bold.svg" beforeDir="false" afterPath="$PROJECT_DIR$/public/images/vendor/@ckeditor/ckeditor5-basic-styles/theme/icons/bold.svg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/images/vendor/@ckeditor/ckeditor5-basic-styles/theme/icons/italic.svg" beforeDir="false" afterPath="$PROJECT_DIR$/public/images/vendor/@ckeditor/ckeditor5-basic-styles/theme/icons/italic.svg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/images/vendor/@ckeditor/ckeditor5-core/theme/icons/eraser.svg" beforeDir="false" afterPath="$PROJECT_DIR$/public/images/vendor/@ckeditor/ckeditor5-core/theme/icons/eraser.svg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/images/vendor/@ckeditor/ckeditor5-highlight/theme/icons/marker.svg" beforeDir="false" afterPath="$PROJECT_DIR$/public/images/vendor/@ckeditor/ckeditor5-highlight/theme/icons/marker.svg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/images/vendor/@ckeditor/ckeditor5-highlight/theme/icons/pen.svg" beforeDir="false" afterPath="$PROJECT_DIR$/public/images/vendor/@ckeditor/ckeditor5-highlight/theme/icons/pen.svg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/images/vendor/@ckeditor/ckeditor5-ui/theme/icons/dropdown-arrow.svg" beforeDir="false" afterPath="$PROJECT_DIR$/public/images/vendor/@ckeditor/ckeditor5-ui/theme/icons/dropdown-arrow.svg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/images/vendor/@ckeditor/ckeditor5-undo/theme/icons/redo.svg" beforeDir="false" afterPath="$PROJECT_DIR$/public/images/vendor/@ckeditor/ckeditor5-undo/theme/icons/redo.svg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/images/vendor/@ckeditor/ckeditor5-undo/theme/icons/undo.svg" beforeDir="false" afterPath="$PROJECT_DIR$/public/images/vendor/@ckeditor/ckeditor5-undo/theme/icons/undo.svg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/images/vendor/slick-carousel/slick/ajax-loader.gif" beforeDir="false" afterPath="$PROJECT_DIR$/public/images/vendor/slick-carousel/slick/ajax-loader.gif" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/img/1568288355GMOtN.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/public/img/1568288355GMOtN.jpg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/img/1568288355Hmz2X.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/public/img/1568288355Hmz2X.jpg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/img/1568288355Jxrgt.png" beforeDir="false" afterPath="$PROJECT_DIR$/public/img/1568288355Jxrgt.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/img/1568288355LIBT2.png" beforeDir="false" afterPath="$PROJECT_DIR$/public/img/1568288355LIBT2.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/img/1568288355gKaBX.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/public/img/1568288355gKaBX.jpg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/img/1568288355zJcrd.png" beforeDir="false" afterPath="$PROJECT_DIR$/public/img/1568288355zJcrd.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/img/15682883565QMhK.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/public/img/15682883565QMhK.jpg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/img/15682883565tqCz.png" beforeDir="false" afterPath="$PROJECT_DIR$/public/img/15682883565tqCz.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/img/15682883568DGRU.png" beforeDir="false" afterPath="$PROJECT_DIR$/public/img/15682883568DGRU.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/img/1568288356JxtdO.png" beforeDir="false" afterPath="$PROJECT_DIR$/public/img/1568288356JxtdO.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/img/1568288356u6H7V.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/public/img/1568288356u6H7V.jpg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/img/1568288356x8id0.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/public/img/1568288356x8id0.jpg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/img/1568292674OEoDg.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/public/img/1568292674OEoDg.jpg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/img/1568294325Gfrvx.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/public/img/1568294325Gfrvx.jpg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/img/1568294325kis97.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/public/img/1568294325kis97.jpg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/img/1568309703ekJ6I.png" beforeDir="false" afterPath="$PROJECT_DIR$/public/img/1568309703ekJ6I.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/img/1568645477tqnpE.png" beforeDir="false" afterPath="$PROJECT_DIR$/public/img/1568645477tqnpE.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/img/1568645806PusBd.png" beforeDir="false" afterPath="$PROJECT_DIR$/public/img/1568645806PusBd.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/img/cancel.svg" beforeDir="false" afterPath="$PROJECT_DIR$/public/img/cancel.svg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/img/cool.svg" beforeDir="false" afterPath="$PROJECT_DIR$/public/img/cool.svg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/img/danger.svg" beforeDir="false" afterPath="$PROJECT_DIR$/public/img/danger.svg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/img/delete.svg" beforeDir="false" afterPath="$PROJECT_DIR$/public/img/delete.svg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/img/dest.png" beforeDir="false" afterPath="$PROJECT_DIR$/public/img/dest.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/img/edit.svg" beforeDir="false" afterPath="$PROJECT_DIR$/public/img/edit.svg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/img/eu4.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/public/img/eu4.jpg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/img/file.png" beforeDir="false" afterPath="$PROJECT_DIR$/public/img/file.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/img/happy.svg" beforeDir="false" afterPath="$PROJECT_DIR$/public/img/happy.svg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/img/laughing.svg" beforeDir="false" afterPath="$PROJECT_DIR$/public/img/laughing.svg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/img/loader-logo.png" beforeDir="false" afterPath="$PROJECT_DIR$/public/img/loader-logo.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/img/logo.png" beforeDir="false" afterPath="$PROJECT_DIR$/public/img/logo.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/img/newspaper.svg" beforeDir="false" afterPath="$PROJECT_DIR$/public/img/newspaper.svg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/img/subpages/digitalne_mesto.png" beforeDir="false" afterPath="$PROJECT_DIR$/public/img/subpages/digitalne_mesto.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/img/subpages/energia.png" beforeDir="false" afterPath="$PROJECT_DIR$/public/img/subpages/energia.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/img/subpages/login.png" beforeDir="false" afterPath="$PROJECT_DIR$/public/img/subpages/login.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/img/subpages/mobilita.png" beforeDir="false" afterPath="$PROJECT_DIR$/public/img/subpages/mobilita.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/img/subpages/zivotne_prostredie.png" beforeDir="false" afterPath="$PROJECT_DIR$/public/img/subpages/zivotne_prostredie.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/img/wink.svg" beforeDir="false" afterPath="$PROJECT_DIR$/public/img/wink.svg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/index.php" beforeDir="false" afterPath="$PROJECT_DIR$/public/index.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/public/js/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/js/app.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/mix-manifest.json" beforeDir="false" afterPath="$PROJECT_DIR$/public/mix-manifest.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/robots.txt" beforeDir="false" afterPath="$PROJECT_DIR$/public/robots.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/fonts/Gilroy-Regular.ttf" beforeDir="false" afterPath="$PROJECT_DIR$/resources/fonts/Gilroy-Regular.ttf" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/fonts/Gilroy-SemiBold.ttf" beforeDir="false" afterPath="$PROJECT_DIR$/resources/fonts/Gilroy-SemiBold.ttf" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/img/cancel.svg" beforeDir="false" afterPath="$PROJECT_DIR$/resources/img/cancel.svg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/img/cool.svg" beforeDir="false" afterPath="$PROJECT_DIR$/resources/img/cool.svg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/img/danger.svg" beforeDir="false" afterPath="$PROJECT_DIR$/resources/img/danger.svg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/img/delete.svg" beforeDir="false" afterPath="$PROJECT_DIR$/resources/img/delete.svg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/img/edit.svg" beforeDir="false" afterPath="$PROJECT_DIR$/resources/img/edit.svg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/img/eu4.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/resources/img/eu4.jpg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/img/file.png" beforeDir="false" afterPath="$PROJECT_DIR$/resources/img/file.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/img/happy.svg" beforeDir="false" afterPath="$PROJECT_DIR$/resources/img/happy.svg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/img/laughing.svg" beforeDir="false" afterPath="$PROJECT_DIR$/resources/img/laughing.svg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/img/loader-logo.png" beforeDir="false" afterPath="$PROJECT_DIR$/resources/img/loader-logo.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/img/logo.png" beforeDir="false" afterPath="$PROJECT_DIR$/resources/img/logo.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/img/newspaper.svg" beforeDir="false" afterPath="$PROJECT_DIR$/resources/img/newspaper.svg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/img/subpages/digitalne_mesto.png" beforeDir="false" afterPath="$PROJECT_DIR$/resources/img/subpages/digitalne_mesto.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/img/subpages/energia.png" beforeDir="false" afterPath="$PROJECT_DIR$/resources/img/subpages/energia.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/img/subpages/login.png" beforeDir="false" afterPath="$PROJECT_DIR$/resources/img/subpages/login.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/img/subpages/mobilita.png" beforeDir="false" afterPath="$PROJECT_DIR$/resources/img/subpages/mobilita.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/img/subpages/zivotne_prostredie.png" beforeDir="false" afterPath="$PROJECT_DIR$/resources/img/subpages/zivotne_prostredie.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/img/wink.svg" beforeDir="false" afterPath="$PROJECT_DIR$/resources/img/wink.svg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/js/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/app.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/js/bootstrap.js" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/bootstrap.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/js/components/App.js" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/App.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/js/components/Home.js" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/Home.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/js/components/Main.js" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/Main.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/js/components/Navigation.js" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/Navigation.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/js/components/Utillities.js" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/Utillities.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/js/components/admin/Login.js" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/admin/Login.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/js/components/news/News.js" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/news/News.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/js/components/news/Post.js" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/news/Post.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/js/components/news/PostLookup.js" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/news/PostLookup.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/js/components/subpage/Project.js" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/subpage/Project.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/js/components/subpage/Subpage.js" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/subpage/Subpage.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/lang/en/auth.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/lang/en/auth.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/lang/en/pagination.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/lang/en/pagination.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/lang/en/passwords.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/lang/en/passwords.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/lang/en/validation.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/lang/en/validation.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/sass/_variables.scss" beforeDir="false" afterPath="$PROJECT_DIR$/resources/sass/_variables.scss" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/sass/app.scss" beforeDir="false" afterPath="$PROJECT_DIR$/resources/sass/app.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/welcome.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/welcome.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/routes/api.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/api.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/routes/channels.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/channels.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/routes/console.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/console.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/routes/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/web.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server.php" beforeDir="false" afterPath="$PROJECT_DIR$/server.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tests/CreatesApplication.php" beforeDir="false" afterPath="$PROJECT_DIR$/tests/CreatesApplication.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tests/Feature/ExampleTest.php" beforeDir="false" afterPath="$PROJECT_DIR$/tests/Feature/ExampleTest.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tests/TestCase.php" beforeDir="false" afterPath="$PROJECT_DIR$/tests/TestCase.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tests/Unit/ExampleTest.php" beforeDir="false" afterPath="$PROJECT_DIR$/tests/Unit/ExampleTest.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/webpack.mix.js" beforeDir="false" afterPath="$PROJECT_DIR$/webpack.mix.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/yarn.lock" beforeDir="false" afterPath="$PROJECT_DIR$/yarn.lock" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -217,8 +25,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/resources/js/components/news/Post.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="598">
-              <caret line="26" column="12" selection-start-line="26" selection-start-column="12" selection-end-line="26" selection-end-column="24" />
+            <state relative-caret-position="713">
+              <caret line="32" selection-start-line="32" selection-end-line="32" />
               <folding>
                 <element signature="e#0#51#0" expanded="true" />
               </folding>
@@ -229,7 +37,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/Http/Controllers/PostsController.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="4508">
+            <state relative-caret-position="5221">
               <caret line="234" column="40" selection-start-line="234" selection-start-column="40" selection-end-line="234" selection-end-column="40" />
               <folding>
                 <element signature="e#40#68#0#PHP" expanded="true" />
@@ -238,11 +46,11 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/resources/js/components/subpage/Subpage.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="492">
-              <caret line="105" column="40" selection-start-line="105" selection-start-column="40" selection-end-line="105" selection-end-column="40" />
+            <state relative-caret-position="2116">
+              <caret line="97" column="52" selection-start-line="97" selection-start-column="52" selection-end-line="97" selection-end-column="52" />
               <folding>
                 <element signature="e#0#49#0" expanded="true" />
               </folding>
@@ -250,25 +58,39 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/Http/Controllers/MainController.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="239">
-              <caret line="52" selection-start-line="52" selection-end-line="52" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/resources/js/components/App.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1932">
-              <caret line="84" column="8" selection-start-line="84" selection-start-column="8" selection-end-line="84" selection-end-column="34" />
+            <state relative-caret-position="22">
+              <caret line="74" column="6" selection-start-line="74" selection-start-column="6" selection-end-line="74" selection-end-column="6" />
               <folding>
                 <element signature="e#0#49#0" expanded="true" />
               </folding>
             </state>
           </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/resources/js/components/subpage/Project.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="92">
+              <caret line="6" column="43" selection-start-line="6" selection-start-column="43" selection-end-line="6" selection-end-column="43" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/resources/sass/app.scss">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="4899">
+              <caret line="213" column="36" selection-start-line="213" selection-start-column="36" selection-end-line="213" selection-end-column="36" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/resources/img/close-button.svg">
+          <provider selected="true" editor-type-id="images" />
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
@@ -296,7 +118,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>$white</find>
       <find>style={{ border : &quot;1px solid red&quot;}}</find>
       <find>width</find>
       <find>window.innerWidth</find>
@@ -314,7 +135,6 @@
       <find>hr</find>
       <find>pro</find>
       <find>&quot;</find>
-      <find>project</find>
       <find>primaryColor</find>
       <find>import { Loader }</find>
       <find>import { Loader } from './Loader';</find>
@@ -326,6 +146,8 @@
       <find>images_id</find>
       <find>&lt;&lt;&lt;&lt;&lt;&lt;&lt; HEAD</find>
       <find>=======</find>
+      <find>project</find>
+      <find>a</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -365,15 +187,15 @@
         <option value="$PROJECT_DIR$/resources/js/components/Utillities.js" />
         <option value="$PROJECT_DIR$/resources/js/components/Main.js" />
         <option value="$PROJECT_DIR$/resources/js/components/Navigation.js" />
-        <option value="$PROJECT_DIR$/resources/sass/app.scss" />
         <option value="$PROJECT_DIR$/resources/js/components/news/PostLookup.js" />
-        <option value="$PROJECT_DIR$/resources/js/components/subpage/Project.js" />
         <option value="$PROJECT_DIR$/routes/api.php" />
         <option value="$PROJECT_DIR$/resources/js/components/news/Post.js" />
-        <option value="$PROJECT_DIR$/resources/js/components/App.js" />
         <option value="$PROJECT_DIR$/app/Http/Controllers/PostsController.php" />
         <option value="$PROJECT_DIR$/app/Http/Controllers/MainController.php" />
         <option value="$PROJECT_DIR$/resources/js/components/subpage/Subpage.js" />
+        <option value="$PROJECT_DIR$/resources/sass/app.scss" />
+        <option value="$PROJECT_DIR$/resources/js/components/subpage/Project.js" />
+        <option value="$PROJECT_DIR$/resources/js/components/App.js" />
       </list>
     </option>
   </component>
@@ -506,18 +328,13 @@
             <path>
               <item name="SmartCityPresov" type="b2602c69:ProjectViewProjectNode" />
               <item name="SmartCityPresov" type="462c0819:PsiDirectoryNode" />
-              <item name="public" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="SmartCityPresov" type="b2602c69:ProjectViewProjectNode" />
-              <item name="SmartCityPresov" type="462c0819:PsiDirectoryNode" />
-              <item name="public" type="462c0819:PsiDirectoryNode" />
-              <item name="img" type="462c0819:PsiDirectoryNode" />
+              <item name="resources" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="SmartCityPresov" type="b2602c69:ProjectViewProjectNode" />
               <item name="SmartCityPresov" type="462c0819:PsiDirectoryNode" />
               <item name="resources" type="462c0819:PsiDirectoryNode" />
+              <item name="img" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="SmartCityPresov" type="b2602c69:ProjectViewProjectNode" />
@@ -551,6 +368,12 @@
             <path>
               <item name="SmartCityPresov" type="b2602c69:ProjectViewProjectNode" />
               <item name="SmartCityPresov" type="462c0819:PsiDirectoryNode" />
+              <item name="resources" type="462c0819:PsiDirectoryNode" />
+              <item name="sass" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="SmartCityPresov" type="b2602c69:ProjectViewProjectNode" />
+              <item name="SmartCityPresov" type="462c0819:PsiDirectoryNode" />
               <item name="routes" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
@@ -568,17 +391,17 @@
     <property name="settings.editor.selected.configurable" value="watcher.settings" />
   </component>
   <component name="RecentsManager">
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$/public/img" />
-      <recent name="$PROJECT_DIR$/resources/js/components/Subpage" />
-      <recent name="$PROJECT_DIR$/resources/js/components" />
-      <recent name="$PROJECT_DIR$/resources/js/components/projects" />
-      <recent name="$PROJECT_DIR$/resources/js/components/news" />
-    </key>
     <key name="CopyFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/resources" />
       <recent name="$PROJECT_DIR$/resources/fonts" />
       <recent name="$PROJECT_DIR$/public" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/resources/img" />
+      <recent name="$PROJECT_DIR$/public/img" />
+      <recent name="$PROJECT_DIR$/resources/js/components/Subpage" />
+      <recent name="$PROJECT_DIR$/resources/js/components" />
+      <recent name="$PROJECT_DIR$/resources/js/components/projects" />
     </key>
   </component>
   <component name="RunDashboard">
@@ -733,12 +556,14 @@
       <workItem from="1568573786886" duration="92000" />
       <workItem from="1568645386526" duration="2935000" />
       <workItem from="1568697694274" duration="2518000" />
-      <workItem from="1568727434774" duration="855000" />
+      <workItem from="1568727434774" duration="3282000" />
+      <workItem from="1568778498098" duration="1479000" />
+      <workItem from="1568782944252" duration="175000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="361288000" />
+    <option name="totallyTimeSpent" value="365369000" />
   </component>
   <component name="TodoView" selected-index="1">
     <todo-panel id="selected-file">
@@ -751,9 +576,8 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1440" height="900" extended-state="0" />
-    <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.23676682" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.24320458" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="npm" order="2" side_tool="true" />
       <window_info id="Favorites" order="3" side_tool="true" />
@@ -768,7 +592,7 @@
       <window_info anchor="bottom" id="Version Control" order="8" weight="0.32923833" />
       <window_info anchor="bottom" id="Database Changes" order="9" />
       <window_info anchor="bottom" id="Event Log" order="10" side_tool="true" weight="0.32923833" />
-      <window_info active="true" anchor="bottom" id="Terminal" order="11" visible="true" weight="0.26535627" />
+      <window_info active="true" anchor="bottom" id="Terminal" order="11" visible="true" weight="0.23710074" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
@@ -819,13 +643,6 @@
     </option>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/public/css/app.css">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-3070">
-          <caret line="10538" column="13" lean-forward="true" selection-start-line="10538" selection-start-column="13" selection-end-line="10538" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/resources/sass/_variables.scss">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="483">
@@ -958,13 +775,6 @@
     <entry file="file://$PROJECT_DIR$/public/img/1568288356x8id0.jpg">
       <provider selected="true" editor-type-id="images" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/resources/sass/app.scss">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="10557">
-          <caret line="459" selection-start-line="459" selection-end-line="459" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/public/img/logo.png">
       <provider selected="true" editor-type-id="images" />
     </entry>
@@ -988,13 +798,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/resources/js/components/subpage/Project.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="318">
-          <caret line="39" column="44" selection-start-line="39" selection-start-column="44" selection-end-line="39" selection-end-column="44" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/resources/js/components/news/PostLookup.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="184">
@@ -1012,10 +815,17 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/app/Http/Controllers/MainController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="297">
+          <caret line="54" column="8" selection-start-line="54" selection-start-column="8" selection-end-line="54" selection-end-column="8" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/resources/js/components/news/Post.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="598">
-          <caret line="26" column="12" selection-start-line="26" selection-start-column="12" selection-end-line="26" selection-end-column="24" />
+        <state relative-caret-position="713">
+          <caret line="32" selection-start-line="32" selection-end-line="32" />
           <folding>
             <element signature="e#0#51#0" expanded="true" />
           </folding>
@@ -1024,7 +834,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app/Http/Controllers/PostsController.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="4508">
+        <state relative-caret-position="5221">
           <caret line="234" column="40" selection-start-line="234" selection-start-column="40" selection-end-line="234" selection-end-column="40" />
           <folding>
             <element signature="e#40#68#0#PHP" expanded="true" />
@@ -1032,15 +842,32 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/resources/js/components/App.js">
+    <entry file="file://$PROJECT_DIR$/resources/js/components/subpage/Subpage.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1932">
-          <caret line="84" column="8" selection-start-line="84" selection-start-column="8" selection-end-line="84" selection-end-column="34" />
+        <state relative-caret-position="2116">
+          <caret line="97" column="52" selection-start-line="97" selection-start-column="52" selection-end-line="97" selection-end-column="52" />
           <folding>
             <element signature="e#0#49#0" expanded="true" />
           </folding>
         </state>
       </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/js/components/subpage/Project.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="92">
+          <caret line="6" column="43" selection-start-line="6" selection-start-column="43" selection-end-line="6" selection-end-column="43" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/sass/app.scss">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="4899">
+          <caret line="213" column="36" selection-start-line="213" selection-start-column="36" selection-end-line="213" selection-end-column="36" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/img/close-button.svg">
+      <provider selected="true" editor-type-id="images" />
     </entry>
     <entry file="file://$PROJECT_DIR$/routes/api.php">
       <provider selected="true" editor-type-id="text-editor">
@@ -1052,17 +879,10 @@
     <entry file="file://$PROJECT_DIR$/routes/channels.php">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/Http/Controllers/MainController.php">
+    <entry file="file://$PROJECT_DIR$/resources/js/components/App.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="239">
-          <caret line="52" selection-start-line="52" selection-end-line="52" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/resources/js/components/subpage/Subpage.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="492">
-          <caret line="105" column="40" selection-start-line="105" selection-start-column="40" selection-end-line="105" selection-end-column="40" />
+        <state relative-caret-position="22">
+          <caret line="74" column="6" selection-start-line="74" selection-start-column="6" selection-end-line="74" selection-end-column="6" />
           <folding>
             <element signature="e#0#49#0" expanded="true" />
           </folding>

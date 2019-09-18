@@ -48,6 +48,11 @@ class MainController extends Controller
         $subpage = Subpage::select('*')->where('title_link','=',$option)->first();
         $posts = Post::where('subpage_id','=',$subpage->id)->where('active','=',true)->get();
 
+        foreach ($posts as $post) {
+            $user = User::select(['id','name','email'])->where('id','=',$post->user_id)->first();
+            $post->user = $user;
+        }
+        
         $subpage->posts = $posts;
 
 

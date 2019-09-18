@@ -73,36 +73,6 @@ const App = () => {
                     .html("Login");
             });
     };
-
-    const _updatePost = ({title,description,price,user_id,subpage_id,images,updated_images}) => {
-        let formData = new FormData();
-        formData.append("title",title);
-        formData.append("description",description);
-        formData.append("price",price);
-        formData.append("user_id",user_id);
-        formData.append("subpage_id",subpage_id);
-        formData.append("updated_images[]",updated_images);
-        console.log(images.typeof)
-        Array.from(images).forEach(image => formData.append('images[]', image));
-        axios
-            .post("/api/post", formData,{
-                headers : {
-                    'Content-Type' : 'multipart/form-data',
-                    'Accept' : 'multipart/form-data',
-                    'Authorization' : `Bearer ${authState.user.auth_token}`
-                }
-            })
-            .then(response => {
-                console.log(response)
-            })
-            .then(json => {
-                if (!json) {
-                    alert("Úspešne si vytvoril článok.");
-                } else  alert("Úprava neprebehla, nastala chyba.");
-            })
-
-    };
-
     const _createPost = ({title,description,price,user_id,subpage_id,images}) => {
         let formData = new FormData();
         formData.append("title",title);
@@ -154,7 +124,7 @@ const App = () => {
                 <Router>
                     <Main path="/" auth={authState} logout={_logoutUser}>
                         <Home path="/" />
-                        <Subpage path={":id"} del={_deletePost} user={authState.isLoggedIn ? authState.user : false}/>
+                        <Subpage path={":id"} del={_deletePost} logged={authState.isLoggedIn ? authState.user : false}/>
                         <Post path={"/posts/:id"} logged={authState.user} make={_updatePost}/>
                         <Post path={"/post-create"} logged={authState.user} make={_createPost}/>
                         <Login path={"/login"} login={_loginUser} logout={_logoutUser}/>

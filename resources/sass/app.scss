@@ -143,10 +143,11 @@ body{
               &:link, &:visited,&:not(:hover){
                 color: $secondaryColor;
                 text-decoration: none;
-                transition: 0.5s;
+                transition: 0.2s;
               }
               &:hover{
-                transition: 0.5s;
+                cursor: pointer;
+                transition: 0.2s;
                 color : $primaryColor;
               }
             }
@@ -207,10 +208,11 @@ body{
                   &:link, &:visited,&:not(:hover){
                     color: $secondaryColor;
                     text-decoration: none;
-                    transition: 0.5s;
+                    transition: 0.2s;
                   }
                   &:hover{
-                    transition: 0.5s;
+                    cursor: pointer;
+                    transition: 0.2s;
                     color : $primaryColor;
                   }
                 }
@@ -234,6 +236,20 @@ body{
           margin-bottom: 10vh;
           .content{
             background: white;
+            .close-button{
+              width: 30px;
+              height: 30px;
+              &:not(:hover){
+                fill : $secondaryColor;
+                transition: 0.2s;
+              }
+              &:hover{
+                fill : $primaryColor;
+                cursor: pointer;
+                transition: 0.2s;
+              }
+
+            }
             .title{
               span{
                 color: $primaryColor;

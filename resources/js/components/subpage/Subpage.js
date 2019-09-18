@@ -5,13 +5,11 @@ import { Link } from "@reach/router";
 import axios from "axios";
 import $ from "jquery";
 
-export const Subpage = ({ id, user, del = f => f, get = f => f, }) => {
+export const Subpage = ({ id, logged, del = f => f, get = f => f, }) => {
     const [subpage, setSubpage] = useState([]);
-    const [reload, setReload] = useState(null);
     const [project, setProject] = useState(null);
     const [author, setAuthor] = useState([]);
     const fetchData = async () => {
-        setReload(true);
         const response = await axios.get(`api/${id}`);
         setSubpage(response.data.subpage)
     };
@@ -38,7 +36,7 @@ export const Subpage = ({ id, user, del = f => f, get = f => f, }) => {
             })
     }
     useEffect( () => {  fetchData(subpage) }, [ id ] );
-    if(user){
+    if(logged){
         if(!subpage.title){
             return <Loader/>;
         }
@@ -60,10 +58,12 @@ export const Subpage = ({ id, user, del = f => f, get = f => f, }) => {
                                     <p className={`col-12 | mb-3 py-0 px-3`}>{description.substring(0, description.includes(".") ? description.indexOf(".")+1 : 50)} <a href={`/api/post/${id}`} className={"read_more"}>Objav viac</a></p>
                                     <p className={`col-12 | mb-0 py-0  px-3`}><span>Dátum : </span>{new Date(updated_at).toDateString()}</p>
                                     <p className={`col-12 | py-0 px-3`}><span>Autor : </span>{user.name}</p>
-                                    <div className="col-12 row mb-2">
-                                        <Link to={`/posts/${id}`} state={{ subpage : subpage.id }} className={"edit | d-flex mx-2 justify-content-center align-items-center p-2 shadow"}><div style={{width : 28, height : 28}}><img style={{width : 28, height : 28}} src="../img/edit.svg" alt=""/></div></Link>
-                                        <div onClick={() => handleDelete(id,subpage.title_link)} className={"delete | d-flex mx-2 justify-content-center align-items-center p-2 shadow"}><div style={{width : 28, height : 28}}><img style={{width : 28, height : 28}} src="../img/delete.svg" alt=""/></div></div>
-                                    </div>
+                                    {
+                                        logged.name !== user.name ? `` : <div className="col-12 row mb-2">
+                                            <Link to={`/posts/${id}`} state={{ subpage : subpage.id }} className={"edit | d-flex mx-2 justify-content-center align-items-center p-2 shadow"}><div style={{width : 28, height : 28}}><img style={{width : 28, height : 28}} src="../img/edit.svg" alt=""/></div></Link>
+                                            <div onClick={() => handleDelete(id,subpage.title_link)} className={"delete | d-flex mx-2 justify-content-center align-items-center p-2 shadow"}><div style={{width : 28, height : 28}}><img style={{width : 28, height : 28}} src="../img/delete.svg" alt=""/></div></div>
+                                        </div>
+                                    }
                                 </div>
                             </div>
 
@@ -95,13 +95,14 @@ export const Subpage = ({ id, user, del = f => f, get = f => f, }) => {
                     <h3 className={"col-12 projects-title my-5"}>projekty smartcity prešov - <span className={"projects-category"}>{subpage.title}</span></h3>
                     <div className="col-12 row projects p-0 align-items-start">
                         {subpage.posts.map(({id, title, description, user, image, updated_at}) => {
-                            return ( <div className={`project-frame | row col-xl-4 col-lg-4 col-md-6 col-sm-12 col-12 | justify-content-xl-start justify-content-lg-start justify-content-md-center justify-content-sm-center justify-content-center | mb-4 p-0`} key={id}>
+                            return ( <div onClick={() => handleGet(id)} className={`project-frame | row col-xl-4 col-lg-4 col-md-6 col-sm-12 col-12 | justify-content-xl-start justify-content-lg-start justify-content-md-center justify-content-sm-center justify-content-center | mb-4 p-0`} key={id}>
                                     <div className={`shadow project | row col-10 | align-items-start | p-0 `}>
                                         <div className={`row col-12 | p-0 `}>
                                             <div className={`col-12 | p-0`}><img src={`../${image.substr(image.indexOf('img'))}`} alt="" className={`col-12 | p-0`} style={{borderRadius : "10px 10px 0 0"}}/></div>
                                         </div>
                                         <h3 className={`col-12 | mt-3 py-0 px-3`}>{title}</h3>
-                                        <p className={`col-12 | mb-3 py-0 px-3`}>{description.substring(0, description.includes(".") ? description.indexOf(".")+1 : 50)} <a href={`/api/post/${id}`} className={"read_more"}>Objav viac</a></p>
+                                        <p className={`col-12 | mb-0 py-0 px-3`}>{description.substring(0, 50)}</p>
+                                        <p className={`col-12 | mb-3 py-0 px-3`}><a className={"read_more"}>Objav viac</a></p>
                                         <p className={`col-12 | mb-0 py-0  px-3`}><span>Dátum : </span>{new Date(updated_at).toDateString()}</p>
                                         <p className={`col-12 | py-0 px-3`}><span>Autor : </span>{user.name}</p>
 
