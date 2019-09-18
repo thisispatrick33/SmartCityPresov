@@ -17,8 +17,18 @@ use App\Services\PayUService\Exception;
 class PostsController extends Controller
 {
     public function get(){
+                
+        /*
+        *   get all posts
+         */
+
         $posts = Post::where('subpage_id', '!=', null)->get();
         $i=0;
+                
+        /*
+        * check if post is active and attach user to it
+         */
+
         foreach($posts as $post){
             if($post->active){
                 $user = User::select(array('id','name','email','admin'))->where('id','=', $post->user_id)->first();
@@ -184,43 +194,51 @@ class PostsController extends Controller
              *  Images storage process
              *  foreach pass over every image, change name and save it
             */
-            
-            foreach($request->images as $image_file){
+            if(sizeOf($request->images) > 0){
+                foreach($request->images as $image_file){
 
-                /*
-                 *  Crafting new image name
-                 */
+                    /*
+                    *  Crafting new image name
+                    */
 
-                $image_name = time().Str::random(5).".".$image_file->getClientOriginalExtension();
+                    $image_name = time().Str::random(5).".".$image_file->getClientOriginalExtension();
 
-                /*
-                *  Move image to public folder
-                */
+                    /*
+                    *  Move image to public folder
+                    */
 
-                $image_file->move(public_path('img/'),$image_name);
+                    $image_file->move(public_path('img/'),$image_name);
 
-                /*
-                 *  Creating new database entry for Image and save
-                 */
+                    /*
+                    *  Creating new database entry for Image and save
+                    */
 
-                $image = new Image;
-                $image->title = $image_name;
-                $image->alt = $image_file->getClientOriginalName();
-                $image->path = public_path('img/'.$image_name);
-                $image->save();
+                    $image = new Image;
+                    $image->title = $image_name;
+                    $image->alt = $image_file->getClientOriginalName();
+                    $image->path = public_path('img/'.$image_name);
+                    $image->save();
 
-                array_push($post_images_ids,$image->id);
+                    array_push($post_images_ids,$image->id);
 
+                }
             }
             if ($post->save()) {
                 if(sizeof($request->images)>0){
                     if($post->images()->attach($post_images_ids)){
-                        return $post->images();
-                        return response(200);
+                        $cover = $post->images()[0];
+                        $post->image = $cover->path;
+                        if($post->save){
+                            return response(200);
+                        }
                     }
                 }
                 else {
-                    return response(200);
+                    $cover = $post->images()[0];
+                    $post->image = $cover->path;
+                    if($post->save){
+                        return response(200);
+                    }
                 }
             }
             else {
@@ -232,7 +250,17 @@ class PostsController extends Controller
     }
 
     public function delete(Request $request){
+                
+        /*
+        *   get post
+         */
+
         $post = Post::find($request->id);
+                
+        /*
+        *  set active to false and save post
+         */
+
         $post->active = false;
         $post->save();
         return response(200);
