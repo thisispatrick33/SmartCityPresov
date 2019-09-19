@@ -15,7 +15,7 @@ export const Project = ({data,user, close = f => f}) => {
         <div  className={"project-details-frame row p-0 justify-content-center"} style={{display : `none`}}>
             <div className="project-content col-xl-9 col-lg-9 col-md-10 col-sm-11 col-11 row shadow p-0 justify-content-start align-items-start" style={{marginTop : '100vh', minHeight : '80%'}}>
                 <div className="gallery col-xl-2 col-lg-2 col-12 order-xl-1 order-lg-1 order-2 row p-0">
-                    <div className="col-12 p-0 my-5 title">
+                    <div className="col-12 p-0 mt-5 title">
                         <h3 className={"text-center"}>galéria</h3>
                     </div>
                     <>
@@ -49,7 +49,7 @@ export const Project = ({data,user, close = f => f}) => {
                             <p className={"col-11 mb-3"}>{data.description}</p>
                         </div>
                         <div className="col-12 row price mt-4 py-2 px-5">
-                            <p className={"col-11 mb-3"}>{data.price}</p>
+                            <p className={"col-11 mb-3"}><b>Cena projektu : </b>{data.price}</p>
                         </div>
                         <div className="col-11 row post-data my-4 py-2 px-5">
                             <p className={"col-12 mb-0 text-right"}>{new Date(data.updated_at).toLocaleDateString("en-US")}</p>

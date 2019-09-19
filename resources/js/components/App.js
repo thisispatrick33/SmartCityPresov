@@ -76,7 +76,6 @@ const App = () => {
 
 
     const _updatePost = ({id,title,description,price,subpage_id,images,updated_images}) => {
-
         const formData = new FormData();
         formData.append("id", id);
         formData.append("title",title);
@@ -99,6 +98,33 @@ const App = () => {
     };
 
 
+    const _createPost = ({title,description,price,user_id,subpage_id,images}) => {
+        let formData = new FormData();
+        formData.append("title",title);
+        formData.append("description",description);
+        formData.append("price",price);
+        formData.append("user_id",user_id);
+        formData.append("subpage_id",subpage_id);
+        Array.from(images).forEach(image => formData.append('images[]', image));
+        axios
+            .post("/api/post", formData,{
+                headers : {
+                    'Content-Type' : 'multipart/form-data',
+                    'Accept' : 'multipart/form-data',
+                    'Authorization' : `Bearer ${authState.user.auth_token}`
+                }
+            })
+            .then(response => {
+                console.log(response)
+            })
+            .then(json => {
+                if (!json) {
+                    alert("Úspešne si vytvoril článok.");
+                } else  alert("Úprava neprebehla, nastala chyba.");
+            })
+
+
+    };
     const _deletePost = (postData) => {
         axios.put("/api/post/delete", {id : postData},{
             headers : {

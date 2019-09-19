@@ -83,12 +83,17 @@ export const Subpage = ({ id, logged, del = f => f, get = f => f, }) => {
                 </div>
             </div>
         );
-    }else{
-        if(!subpage.title ){
+    }
+    else{
+
+        {/*
+           Subpage content, for public
+        */}
+        if(!subpage.title){
             return <Loader/>;
         }
         return (
-            <div className={"subpage-content col-12 row align-items-start justify-content-center"}>
+            <div className={"subpage-content  col-12 row align-items-start justify-content-center"}>
                 <h1 className={"col-xl-12 col-lg-12 col-11 text-center mt-4"}>{subpage.title}</h1>
                 <p className={"col-xl-12 col-lg-12 col-11 text-center description mt-5"}  dangerouslySetInnerHTML={{__html: subpage.description}} />
                 <div className="col-xl-12 col-lg-12 col-11 justify-content-center  projects-frame row">

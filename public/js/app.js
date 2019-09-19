@@ -65590,15 +65590,6 @@ var App = function App() {
     });
   };
 
-<<<<<<< HEAD
-  var _createPost = function _createPost(_ref) {
-    var title = _ref.title,
-        description = _ref.description,
-        price = _ref.price,
-        user_id = _ref.user_id,
-        subpage_id = _ref.subpage_id,
-        images = _ref.images;
-=======
   var _updatePost = function _updatePost(_ref) {
     var id = _ref.id,
         title = _ref.title,
@@ -65637,7 +65628,6 @@ var App = function App() {
         user_id = _ref2.user_id,
         subpage_id = _ref2.subpage_id,
         images = _ref2.images;
->>>>>>> fbf78b61f4ac3aaf818f3fb7d238f86fa2062f47
     var formData = new FormData();
     formData.append("title", title);
     formData.append("description", description);
@@ -66703,7 +66693,7 @@ var Project = function Project(_ref) {
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "gallery col-xl-2 col-lg-2 col-12 order-xl-1 order-lg-1 order-2 row p-0"
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "col-12 p-0 my-5 title"
+    className: "col-12 p-0 mt-5 title"
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", {
     className: "text-center"
   }, "gal\xE9ria")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(fslightbox_react__WEBPACK_IMPORTED_MODULE_2___default.a, {
@@ -66758,7 +66748,7 @@ var Project = function Project(_ref) {
     className: "col-12 row price mt-4 py-2 px-5"
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
     className: "col-11 mb-3"
-  }, data.price)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, "Cena projektu : "), data.price)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "col-11 row post-data my-4 py-2 px-5"
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
     className: "col-12 mb-0 text-right"
@@ -67014,12 +67004,18 @@ var Subpage = function Subpage(_ref) {
       className: "col-12 py-0 px-3 mt-3 text-center"
     }, "pridajte projekt")))))));
   } else {
+    {
+      /*
+        Subpage content, for public
+      */
+    }
+
     if (!subpage.title) {
       return react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_Utillities__WEBPACK_IMPORTED_MODULE_2__["Loader"], null);
     }
 
     return react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
-      className: "subpage-content col-12 row align-items-start justify-content-center"
+      className: "subpage-content  col-12 row align-items-start justify-content-center"
     }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("h1", {
       className: "col-xl-12 col-lg-12 col-11 text-center mt-4"
     }, subpage.title), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("p", {
@@ -67102,13 +67098,8 @@ var Subpage = function Subpage(_ref) {
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-<<<<<<< HEAD
 __webpack_require__(/*! /Users/patrik/Projects/Webs/SmartCityPresov/resources/js/app.js */"./resources/js/app.js");
 module.exports = __webpack_require__(/*! /Users/patrik/Projects/Webs/SmartCityPresov/resources/sass/app.scss */"./resources/sass/app.scss");
-=======
-__webpack_require__(/*! C:\Users\Mamuss\PhpstormProjects\SmartCityPresov\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! C:\Users\Mamuss\PhpstormProjects\SmartCityPresov\resources\sass\app.scss */"./resources/sass/app.scss");
->>>>>>> fbf78b61f4ac3aaf818f3fb7d238f86fa2062f47
 
 
 /***/ })
