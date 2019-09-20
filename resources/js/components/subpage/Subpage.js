@@ -5,17 +5,25 @@ import { Link } from "@reach/router";
 import axios from "axios";
 import $ from "jquery";
 
-export const Subpage = ({ id, logged, del = f => f, get = f => f, }) => {
+export const Subpage = ({ id, logged, hide = f => f }) => {
+    {/*
+        Auxiliary variable for store subpage, project and author data
+    */}
     const [subpage, setSubpage] = useState([]);
     const [project, setProject] = useState(null);
     const [author, setAuthor] = useState([]);
+
+    {/*
+        Handlers
+    */}
+    const handleDelete = (_id,_title_link) => {
+        hide(_id, _title_link);
+    }
     const fetchData = async () => {
         const response = await axios.get(`api/${id}`);
         setSubpage(response.data.subpage)
     };
-    const handleDelete = (_id,_title_link) => {
-        del(_id, _title_link);
-    }
+
     const close = () => {
         $('.project-details-frame .project-content').animate({
             marginTop: '100vh',
@@ -61,7 +69,7 @@ export const Subpage = ({ id, logged, del = f => f, get = f => f, }) => {
                                     {
                                         logged.name !== user.name ? `` : <div className="col-12 row mb-2">
                                             <Link to={`/posts/${id}`} state={{ subpage : subpage.id }} className={"edit | d-flex mx-2 justify-content-center align-items-center p-2 shadow"}><div style={{width : 28, height : 28}}><img style={{width : 28, height : 28}} src="../img/edit.svg" alt=""/></div></Link>
-                                            <div onClick={() => handleDelete(id,subpage.title_link)} className={"delete | d-flex mx-2 justify-content-center align-items-center p-2 shadow"}><div style={{width : 28, height : 28}}><img style={{width : 28, height : 28}} src="../img/delete.svg" alt=""/></div></div>
+                                            <div onClick={() => handleDelete(id, subpage.title_link)} className={"delete | d-flex mx-2 justify-content-center align-items-center p-2 shadow"}><div style={{width : 28, height : 28}}><img style={{width : 28, height : 28}} src="../img/delete.svg" alt=""/></div></div>
                                         </div>
                                     }
                                 </div>

@@ -17,17 +17,23 @@ use App\Services\PayUService\Exception;
 class PostsController extends Controller
 {
     public function get(){
-        $posts = Post::where('subpage_id', '!=', null)->get();
-        $i=0;
+
+        /*
+        *   get all posts
+         */
+
+        $posts = Post::orderBy('created_at', 'DESC')->where('subpage_id','!=', null)->where('active','=',true)->get();
+
+
+        /*
+        *  assign user to post
+         */
+
         foreach($posts as $post){
             if($post->active){
                 $user = User::select(array('id','name','email','admin'))->where('id','=', $post->user_id)->first();
                 $post->user = $user;
             }
-            else{
-                unset($posts[$i]);
-            }
-            $i++;
         }
 
         return $posts;
@@ -121,16 +127,18 @@ class PostsController extends Controller
     }
 
     public function update(Request $request){
-        return $request;
-        //return $request->file('images[]');
+        //return $request;
+        /*return response()->json([
+            's'=> $request->hasFile('images')
+        ]);*/
         try{
-        
+
             /*
              * Auxiliary variables
              */
 
             $post_images_ids = [];
-        
+
 
             /*
              *  Get and update post
@@ -139,27 +147,27 @@ class PostsController extends Controller
             $post->title = $request->title;
             $post->description = $request->description;
             $post->price = $request->price;
-            $post->user_id = $request->user_id;
             $post->subpage_id = $request->subpage_id;
-    
-    
+
+
 
             /*
              * delete images
             */
             foreach ($post->images as $image) {
-                if(in_array($image->id,$request->updated_images)){
-                    array_push($post_images_ids,$image->id);
+                if(in_array(strval($image->id),$request->updated_images)){
+                    array_push($post_images_ids,(int)$image->id);
+
                 }
                 else{
                     if(unlink($image->path)){
                         $image->delete();
-                    }   
+                    }
                     else{
                         return response('Obrázok sa nedal vymazať');
                     }
                 }
-                
+
             }
 
 
@@ -172,56 +180,54 @@ class PostsController extends Controller
             $validator = Validator::make(['data' => $request->images], [
                 'data.*.name' => 'required|image|mimes:jpeg,png,jpg,gif,svg'
             ]);
-            /*
-            *   check if request has images
-            */
-
-                //TO DO
 
 
 
             /*
              *  Images storage process
              *  foreach pass over every image, change name and save it
-            */
-            
-            foreach($request->images as $image_file){
+             */
+            if($request->hasFile('images')){
+                foreach($request->images as $image_file){
 
-                /*
-                 *  Crafting new image name
-                 */
+                    /*
+                    *  Crafting new image name
+                    */
 
-                $image_name = time().Str::random(5).".".$image_file->getClientOriginalExtension();
+                    $image_name = time().Str::random(5).".".$image_file->getClientOriginalExtension();
 
-                /*
-                *  Move image to public folder
-                */
+                    /*
+                    *  Move image to public folder
+                    */
 
-                $image_file->move(public_path('img/'),$image_name);
+                    $image_file->move(public_path('img/'),$image_name);
 
-                /*
-                 *  Creating new database entry for Image and save
-                 */
+                    /*
+                    *  Creating new database entry for Image and save
+                    */
 
-                $image = new Image;
-                $image->title = $image_name;
-                $image->alt = $image_file->getClientOriginalName();
-                $image->path = public_path('img/'.$image_name);
-                $image->save();
+                    $image = new Image;
+                    $image->title = $image_name;
+                    $image->alt = $image_file->getClientOriginalName();
+                    $image->path = public_path('img/'.$image_name);
+                    $image->save();
 
-                array_push($post_images_ids,$image->id);
+                    array_push($post_images_ids,$image->id);
 
-            }
-            if ($post->save()) {
-                if(sizeof($request->images)>0){
-                    if($post->images()->attach($post_images_ids)){
-                        return $post->images();
-                        return response(200);
-                    }
                 }
-                else {
+            }
+
+            if ($post->save()) {
+
+                $post->images()->sync([]);
+                $post->images()->attach($post_images_ids);
+                $post_cover = Post::with('images')->find($post->id);
+
+                $post_cover->image = $post_cover->images[0]->path;
+                if($post_cover->save()){
                     return response(200);
                 }
+
             }
             else {
                 return response(422);
@@ -232,7 +238,17 @@ class PostsController extends Controller
     }
 
     public function delete(Request $request){
+
+        /*
+        *   get post
+         */
+        return $request;
         $post = Post::find($request->id);
+
+        /*
+        *  set active to false and save post
+         */
+
         $post->active = false;
         $post->save();
         return response(200);

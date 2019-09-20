@@ -11,32 +11,62 @@ use App\User;
 class MainController extends Controller
 {
     public function news(){
-        $news = DB::table('posts')->where('subpage_id','=', null)->get();
-        $data =  [];
-        foreach( $news as $x){
-            $user = User::select(array('id','name','email','admin'))->where('id','=',$x->user_id)->first();
-            $x->user = $user;
-            array_push($data, $x);
+                
+        /*
+        *  get news
+         */
+
+        $news = Post::orderBy('created_at', 'DESC')->where('subpage_id','=', null)->where('active','=',true)->get();
+        
+        /*
+        *  assign user to news
+         */
+
+        foreach( $news as $n){
+            $user = User::select(array('id','name','email','admin'))->where('id','=',$n->user_id)->first();
+            $n->user = $user;
         }
-        return $data;
+
+        return $news;
     }
 
     public function subpages(){
+                
+        /*
+        *   get subpages
+         */
+
         $subpages = DB::table('subpages')->select(array('title', 'title_link'))->get();
 
         return $subpages;
-
     }
 
     public function author($id){
-        $data = User::with('posts')->select('*')->where('id','=',$id)->first();
+                        
+        /*
+        *   get user and his posts
+         */
+
+        $user = User::with('posts')->select(['id','name','email'])->where('id','=',$id)->first();
+        $posts = Post::orderBy('created_at', 'DESC')->where('user_id','=',$user->id)->where('active','=',true)->get();
+                
+        /*
+        *   assign post to user
+         */
+
+        $user->posts = $posts;
 
         return response()->json([
-            'data' => $data
+            'data' => $user
         ]);
     }
 
     public function post($id){
+                        
+        /*
+        *   get post with subpage and images
+         */
+
         $post = Post::with(['subpage','images'])->where('id','=',$id)->first();
 
         return $post;
@@ -45,14 +75,27 @@ class MainController extends Controller
 
 
     public function subpage($option){
+                        
+        /*
+        *   get subpage and its posts
+         */
+
         $subpage = Subpage::select('*')->where('title_link','=',$option)->first();
-        $posts = Post::where('subpage_id','=',$subpage->id)->where('active','=',true)->get();
+        $posts = Post::orderBy('created_at', 'DESC')->where('subpage_id','=',$subpage->id)->where('active','=',true)->get();
+                        
+        /*
+        *   assign users to posts 
+         */
 
         foreach ($posts as $post) {
             $user = User::select(['id','name','email'])->where('id','=',$post->user_id)->first();
             $post->user = $user;
         }
-        
+                        
+        /*
+        *   assign posts to subpage
+         */
+
         $subpage->posts = $posts;
 
 
