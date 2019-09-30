@@ -95,7 +95,7 @@ export const Main = (props) => {
                                     className={`subpage-cover-image | col-xl-2 col-lg-2 d-xl-flex d-lg-flex d-sm-none d-md-none d-none row p-0 align-items-center position-fixed justify-content-end`}
                                     style={{height : window.innerHeight - bodyMargin - 35}}>
                                     <div className={`p-0`}>
-                                        <img src={`img/subpages/${pathname.replace("/","")}.png`}
+                                        <img src={`../img/subpages/${pathname.includes(`posts`) ? `posts` : pathname.replace(`/`, ``) }.png`}
                                              alt={`cover-image`}
                                              className={`col-12 p-0`}/>
                                     </div>

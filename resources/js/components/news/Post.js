@@ -188,10 +188,10 @@ export const Post = ({ id, logged, make = f => f , location }) => {
                         <hr className={"m-0 mt-2 col-2"}/>
                 </div>
 
-                <div className={"description col-lg-12 col-sm-10 mb-5 row p-2 justify-content-start"}>
+                <div className={"description col-lg-11 col-sm-10 mb-5 row p-2 justify-content-start"}>
                     <p>{postData.description}</p>
                 </div>
-                <div className={"col-lg-12 col-sm-10 mb-5 row autor p-2 justify-content-start"} htmlFor="autor">
+                <div className={"col-lg-12 col-sm-10 mb-5 row autor p-2 justify-content-start"}>
                     <p className={"col-lg-6 col-sm-12 px-0 py-2 "} >{user.data.name}</p>
                     <p className={"col-lg-6 col-sm-12 px-0 py-2 "}>{new Date(postData.updated_at).toLocaleDateString("en-US")} </p>
                 </div>

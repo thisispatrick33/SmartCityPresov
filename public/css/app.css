@@ -14572,8 +14572,16 @@ body .main-container .subpage .project-details-frame .project-content .content .
 }
 
 body .main-container .subpage .project-details-frame .project-content .content .post-data {
-  font-family: Gilroy-SemiBold;
+  font-family: Gilroy-SemiBold, serif;
   font-size: 1em;
+}
+
+body .main-container .subpage .project-details-frame .project-content .content .price {
+  font-family: Gilroy-Regular;
+}
+
+body .main-container .subpage .project-details-frame .project-content .content .price span {
+  font-family: Gilroy-SemiBold;
 }
 
 body .main-container .subpage .project-details-frame .project-content .gallery .cover-image {

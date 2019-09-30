@@ -9,6 +9,7 @@ export const Subpage = ({ id, logged, hide = f => f }) => {
     {/*
         Auxiliary variable for store subpage, project and author data
     */}
+
     const [subpage, setSubpage] = useState([]);
     const [project, setProject] = useState(null);
     const [author, setAuthor] = useState([]);

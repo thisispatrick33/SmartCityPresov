@@ -242,7 +242,6 @@ class PostsController extends Controller
         /*
         *   get post
          */
-        return $request;
         $post = Post::find($request->id);
 
         /*

@@ -151,8 +151,8 @@ const App = () => {
     const _deletePost = (id, title_link) => {
         axios.put(`/api/post/delete`, {id : id},{
             headers : {
-                'Content-Type' : `multipart/form-data`,
-                'Accept' : `multipart/form-data`,
+                'Content-Type' : `application/json`,
+                'Accept' : `application/json`,
                 'Authorization' : `Bearer ${authState.user.auth_token}`
             }
         })
@@ -160,7 +160,7 @@ const App = () => {
                 console.log(response);
             })
             .then(( {data} ) => {
-                alert(data.success ? `Článok sa úspešne vymazal` : `Článok sa nepodarilo vymazať!`);
+                alert(data === 200 ? `Článok sa úspešne vymazal` : `Článok sa nepodarilo vymazať!`);
             });
         navigate(`/${title_link}`);
     };

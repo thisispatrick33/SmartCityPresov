@@ -260,8 +260,14 @@ body{
               font-size: 1.1em;
             }
             .post-data{
-              font-family: Gilroy-SemiBold;
+              font-family: Gilroy-SemiBold, serif;
               font-size: 1em;
+            }
+            .price{
+              span{
+                font-family: Gilroy-SemiBold;
+              }
+              font-family: Gilroy-Regular;
             }
           }
           .gallery{

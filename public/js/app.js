@@ -65683,15 +65683,15 @@ var App = function App() {
       id: id
     }, {
       headers: {
-        'Content-Type': "multipart/form-data",
-        'Accept': "multipart/form-data",
+        'Content-Type': "application/json",
+        'Accept': "application/json",
         'Authorization': "Bearer ".concat(authState.user.auth_token)
       }
     }).then(function (response) {
       console.log(response);
     }).then(function (_ref6) {
       var data = _ref6.data;
-      alert(data.success ? "\u010Cl\xE1nok sa \xFAspe\u0161ne vymazal" : "\u010Cl\xE1nok sa nepodarilo vymaza\u0165!");
+      alert(data === 200 ? "\u010Cl\xE1nok sa \xFAspe\u0161ne vymazal" : "\u010Cl\xE1nok sa nepodarilo vymaza\u0165!");
     });
     Object(_reach_router__WEBPACK_IMPORTED_MODULE_2__["navigate"])("/".concat(title_link));
   };
@@ -65880,7 +65880,7 @@ var Main = function Main(props) {
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "p-0"
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
-    src: "img/subpages/".concat(pathname.replace("/", ""), ".png"),
+    src: "../img/subpages/".concat(pathname.includes("posts") ? "posts" : pathname.replace("/", ""), ".png"),
     alt: "cover-image",
     className: "col-12 p-0"
   })))))));
@@ -66006,7 +66006,9 @@ var Navigation = react__WEBPACK_IMPORTED_MODULE_0___default.a.forwardRef(functio
     var title = _ref2.title,
         title_link = _ref2.title_link;
     return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-      onClick: window.innerWidth <= 991 ? open : null,
+      onClick: function onClick() {
+        return window.scrollTo(0, 0);
+      },
       key: title_link,
       className: "nav-item | row col-xl-auto col-lg-2 col-12 | justify-content-xl-start justify-content-lg-start justify-content-center | text-center | p-0 ".concat(path.includes("".concat(title_link)) ? "on" : "")
     }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_reach_router__WEBPACK_IMPORTED_MODULE_1__["Link"], {
@@ -66594,10 +66596,9 @@ var Post = function Post(_ref) {
     }, postData.title)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("hr", {
       className: "m-0 mt-2 col-2"
     })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-      className: "description col-lg-12 col-sm-10 mb-5 row p-2 justify-content-start"
+      className: "description col-lg-11 col-sm-10 mb-5 row p-2 justify-content-start"
     }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, postData.description)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-      className: "col-lg-12 col-sm-10 mb-5 row autor p-2 justify-content-start",
-      htmlFor: "autor"
+      className: "col-lg-12 col-sm-10 mb-5 row autor p-2 justify-content-start"
     }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
       className: "col-lg-6 col-sm-12 px-0 py-2 "
     }, user.data.name), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
@@ -66696,6 +66697,7 @@ var Project = function Project(_ref) {
       close = _ref$close === void 0 ? function (f) {
     return f;
   } : _ref$close;
+  var written = new Date(data.updated_at.replace(' ', 'T'));
 
   var _useState = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(false),
       _useState2 = _slicedToArray(_useState, 2),
@@ -66757,7 +66759,7 @@ var Project = function Project(_ref) {
     className: "col-12 row mt-5 px-5 title p-0"
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", {
     className: "col-11 mb-2"
-  }, data.title, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null, ".")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+  }, data.title.replace('.', ''), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null, ".")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
     onClick: function onClick() {
       return close();
     },
@@ -66779,11 +66781,11 @@ var Project = function Project(_ref) {
     className: "col-12 row price mt-4 py-2 px-5"
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
     className: "col-11 mb-3"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, "Cena projektu : "), data.price)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null, "Cena projektu : "), data.price, "\u20AC")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "col-11 row post-data my-4 py-2 px-5"
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
     className: "col-12 mb-0 text-right"
-  }, new Date(data.updated_at).toLocaleDateString("en-US")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
+  }, String(written.getDay()) + "/" + (written.getMonth() + 1) + "/" + written.getFullYear()), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
     className: "col-12 mb-0 text-right"
   }, user.name))))));
 };
