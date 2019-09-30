@@ -65557,8 +65557,8 @@ var App = function App() {
   }, [authState]);
   {
     /*
-        User Functions
-    */
+         User Functions
+     */
   }
 
   var _loginUser = function _loginUser(email, password) {
@@ -65610,8 +65610,8 @@ var App = function App() {
 
   {
     /*
-        Post Functions
-    */
+         Post Functions
+     */
   }
 
   var _createPost = function _createPost(_ref2) {
@@ -66984,7 +66984,7 @@ var Subpage = function Subpage(_ref) {
         className: "read_more"
       }, "Objav viac")), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("p", {
         className: "col-12 | mb-0 py-0  px-3"
-      }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("span", null, "D\xE1tum : "), new Date(updated_at).toDateString()), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("p", {
+      }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("span", null, "D\xE1tum : "), String(new Date(updated_at).getDay()) + "/" + (new Date(updated_at).getMonth() + 1) + "/" + new Date(updated_at).getFullYear()), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("p", {
         className: "col-12 | py-0 px-3"
       }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("span", null, "Autor : "), user.name), logged.name !== user.name ? "" : react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
         className: "col-12 row mb-2"
@@ -67078,6 +67078,7 @@ var Subpage = function Subpage(_ref) {
           user = _ref5.user,
           image = _ref5.image,
           updated_at = _ref5.updated_at;
+      var written = new Date(updated_at.replace(' ', 'T'));
       return react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
         onClick: function onClick() {
           return handleGet(id);
@@ -67107,7 +67108,7 @@ var Subpage = function Subpage(_ref) {
         className: "read_more"
       }, "Objav viac")), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("p", {
         className: "col-12 | mb-0 py-0  px-3"
-      }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("span", null, "D\xE1tum : "), new Date(updated_at).toDateString()), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("p", {
+      }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("span", null, "D\xE1tum : "), String(new Date(written).getDay()) + "/" + (new Date(written).getMonth() + 1) + "/" + new Date(written).getFullYear()), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("p", {
         className: "col-12 | py-0 px-3"
       }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("span", null, "Autor : "), user.name)));
     }))), project !== null ? react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_Project__WEBPACK_IMPORTED_MODULE_3__["Project"], {
@@ -67138,8 +67139,8 @@ var Subpage = function Subpage(_ref) {
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! /Users/patrik/Projects/Webs/SmartCityPresov/resources/js/app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! /Users/patrik/Projects/Webs/SmartCityPresov/resources/sass/app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! C:\Users\Mamuss\PhpstormProjects\SmartCityPresov\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! C:\Users\Mamuss\PhpstormProjects\SmartCityPresov\resources\sass\app.scss */"./resources/sass/app.scss");
 
 
 /***/ })
