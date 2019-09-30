@@ -66311,10 +66311,10 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 var Post = function Post(_ref) {
   var id = _ref.id,
       logged = _ref.logged,
-      _ref$make = _ref.make,
-      make = _ref$make === void 0 ? function (f) {
+      _ref$post = _ref.post,
+      post = _ref$post === void 0 ? function (f) {
     return f;
-  } : _ref$make,
+  } : _ref$post,
       location = _ref.location;
 
   var _idControl = id !== undefined;
@@ -66352,7 +66352,7 @@ var Post = function Post(_ref) {
 
   var handleSubmit = function handleSubmit(e) {
     e.preventDefault();
-    make(_objectSpread({}, postData, {
+    post(_objectSpread({}, postData, {
       updated_images: images.map(function (_ref2) {
         var id = _ref2.id;
         return id;

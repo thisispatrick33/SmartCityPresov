@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Loader } from "../Utillities";
 
-export const Post = ({ id, logged, make = f => f , location }) => {
+export const Post = ({ id, logged, post = f => f , location }) => {
     let _idControl = (id !== undefined);
     const [postData, setPostData] = useState([]);
     const [user, setUser] = useState([]);
@@ -23,7 +23,7 @@ export const Post = ({ id, logged, make = f => f , location }) => {
     }
     const handleSubmit = e => {
         e.preventDefault();
-        make({
+        post({
             ...postData,
             updated_images : images.map(({id}) => id),
             user_id : _idControl ? user.data.id : logged.id,
