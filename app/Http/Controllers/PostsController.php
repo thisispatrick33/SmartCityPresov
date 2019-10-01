@@ -55,7 +55,10 @@ class PostsController extends Controller
             $post = new Post;
             $post->title = $request->title;
             $post->description = $request->description;
-            $post->price = $request->price;
+            if (is_numeric($request->price)){
+                $post->price = $request->price;
+            }
+
             $post->user_id = $request->user_id;
             $post->subpage_id = $request->subpage_id;
 
@@ -72,43 +75,48 @@ class PostsController extends Controller
              *  Images storage process
              *  foreach pass over every image, change name and save it
             */
-            foreach($request->images as $image_file){
+            if($request->hasFile('images')){
+                foreach($request->images as $image_file){
 
-                /*
-                 *  Crafting new image name
-                 */
+                    /*
+                     *  Crafting new image name
+                     */
 
-                $image_name = time().Str::random(5).".".$image_file->getClientOriginalExtension();
+                    $image_name = time().Str::random(5).".".$image_file->getClientOriginalExtension();
 
-                /*
-                *  Move image to public folder
-                */
+                    /*
+                    *  Move image to public folder
+                    */
 
-                $image_file->move(public_path('img/'),$image_name);
+                    $image_file->move(public_path('img/'),$image_name);
 
-                /*
-                 *  Creating new database entry for Image and save
-                 */
+                    /*
+                     *  Creating new database entry for Image and save
+                     */
 
-                $image = new Image;
-                $image->title = $image_name;
-                $image->alt = $image_file->getClientOriginalName();
-                $image->path = public_path('img/'.$image_name);
-                $image->save();
+                    $image = new Image;
+                    $image->title = $image_name;
+                    $image->alt = $image_file->getClientOriginalName();
+                    $image->path = public_path('img/'.$image_name);
+                    $image->save();
 
-                array_push($post_images_ids,$image->id);
+                    array_push($post_images_ids,$image->id);
 
-                /*
-                 *  Select cover image | first image = cover image
-                 */
+                    /*
+                     *  Select cover image | first image = cover image
+                     */
 
-                if ($first) {
-                    $post->image = public_path('img/'.$image_name);
-                    $first = false;
+                    if ($first) {
+                        $post->image = public_path('img/'.$image_name);
+                        $first = false;
+                    }
                 }
             }
+
+
             if ($post->save()) {
-                if(sizeof($request->images)>0){
+
+                if($request->hasFile('images')){
                     if($post->images()->attach($post_images_ids)){
                         return response(200);
                     }

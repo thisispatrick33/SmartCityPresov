@@ -23,12 +23,23 @@ export const Post = ({ id, logged, post = f => f , location }) => {
     }
     const handleSubmit = e => {
         e.preventDefault();
-        post({
-            ...postData,
-            updated_images : images.map(({id}) => id),
-            user_id : _idControl ? user.data.id : logged.id,
-            subpage_id : location.state.subpage ? location.state.subpage : null
-        });
+        console.log(postData);
+        console.log(location.state.subpage);
+        console.log(images.map(({id}) => id));
+
+        if((location.state.subpage)&&(!postData.images)){
+            alert("Nenahral si žiaden obrázok!")
+        }
+        else {
+            post({
+                ...postData,
+                updated_images: images.map(({id}) => id),
+                user_id: _idControl ? user.data.id : logged.id,
+                subpage_id: location.state.subpage ? location.state.subpage : ""
+            });
+        }
+
+
     };
 
     const handleImages = index => setImages(images.filter((image) => image.id !== index));
@@ -179,21 +190,23 @@ export const Post = ({ id, logged, post = f => f , location }) => {
 
         );
     }else{
+        let written = new Date(postData.updated_at.replace(' ', 'T'));
         return (
+
             <div className={"post-details mt-4 ml-5 row col-auto justify-content-center"}>
-                <div className={"col-lg-12 col-sm-10 mb-5 row title p-2 justify-content-start"}>
+                <div className={"col-10 mb-5 row title p-2 justify-content-start"}>
                     <div className={"col-12 row p-0"}>
                         <h2 className="mb-0 p-0 pb-3 mb-0 col-auto">{postData.title}</h2>
                     </div>
                         <hr className={"m-0 mt-2 col-2"}/>
                 </div>
 
-                <div className={"description col-lg-11 col-sm-10 mb-5 row p-2 justify-content-start"}>
+                <div className={"description col-10 mb-5 row p-2 justify-content-start"}>
                     <p>{postData.description}</p>
                 </div>
-                <div className={"col-lg-12 col-sm-10 mb-5 row autor p-2 justify-content-start"}>
+                <div className={"col-10 mb-5 row autor p-2 justify-content-start"}>
                     <p className={"col-lg-6 col-sm-12 px-0 py-2 "} >{user.data.name}</p>
-                    <p className={"col-lg-6 col-sm-12 px-0 py-2 "}>{new Date(postData.updated_at).toLocaleDateString("en-US")} </p>
+                    <p className={"col-lg-6 col-sm-12 px-0 py-2 "}>{ String(new Date(written).getDay()) + `/` + (new Date(written).getMonth()+1) + `/` + new Date(written).getFullYear() } </p>
                 </div>
 
             </div>

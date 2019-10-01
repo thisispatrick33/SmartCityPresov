@@ -105,7 +105,14 @@ const App = () => {
         formData.append(`price`, price);
         formData.append(`user_id`, user_id);
         formData.append(`subpage_id`, subpage_id);
-        Array.from(images).forEach(image => formData.append(`images[]`, image));
+        if(!images){
+            console.log("sem som");
+        }
+        else {
+            console.log("aj tu som");
+            Array.from(images).forEach(image => formData.append(`images[]`, image));
+        }
+
         axios
             .post(`/api/post`, formData,{
                 headers : {

@@ -65557,8 +65557,8 @@ var App = function App() {
   }, [authState]);
   {
     /*
-        User Functions
-    */
+         User Functions
+     */
   }
 
   var _loginUser = function _loginUser(email, password) {
@@ -65610,8 +65610,8 @@ var App = function App() {
 
   {
     /*
-        Post Functions
-    */
+         Post Functions
+     */
   }
 
   var _createPost = function _createPost(_ref2) {
@@ -65627,9 +65627,16 @@ var App = function App() {
     formData.append("price", price);
     formData.append("user_id", user_id);
     formData.append("subpage_id", subpage_id);
-    Array.from(images).forEach(function (image) {
-      return formData.append("images[]", image);
-    });
+
+    if (!images) {
+      console.log("sem som");
+    } else {
+      console.log("aj tu som");
+      Array.from(images).forEach(function (image) {
+        return formData.append("images[]", image);
+      });
+    }
+
     axios__WEBPACK_IMPORTED_MODULE_8___default.a.post("/api/post", formData, {
       headers: {
         'Content-Type': "multipart/form-data",
@@ -66352,14 +66359,25 @@ var Post = function Post(_ref) {
 
   var handleSubmit = function handleSubmit(e) {
     e.preventDefault();
-    post(_objectSpread({}, postData, {
-      updated_images: images.map(function (_ref2) {
-        var id = _ref2.id;
-        return id;
-      }),
-      user_id: _idControl ? user.data.id : logged.id,
-      subpage_id: location.state.subpage ? location.state.subpage : null
+    console.log(postData);
+    console.log(location.state.subpage);
+    console.log(images.map(function (_ref2) {
+      var id = _ref2.id;
+      return id;
     }));
+
+    if (location.state.subpage && !postData.images) {
+      alert("Nenahral si žiaden obrázok!");
+    } else {
+      post(_objectSpread({}, postData, {
+        updated_images: images.map(function (_ref3) {
+          var id = _ref3.id;
+          return id;
+        }),
+        user_id: _idControl ? user.data.id : logged.id,
+        subpage_id: location.state.subpage ? location.state.subpage : ""
+      }));
+    }
   };
 
   var handleImages = function handleImages(index) {
@@ -66539,9 +66557,9 @@ var Post = function Post(_ref) {
       className: "col-4 | ml-4 p-0"
     }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("hr", null)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
       className: "col-12 row"
-    }, images.map(function (_ref3) {
-      var path = _ref3.path,
-          id = _ref3.id;
+    }, images.map(function (_ref4) {
+      var path = _ref4.path,
+          id = _ref4.id;
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
         onClick: function onClick() {
           handleImages(id);
@@ -66585,10 +66603,11 @@ var Post = function Post(_ref) {
       value: "potvrdiť"
     })));
   } else {
+    var written = new Date(postData.updated_at.replace(' ', 'T'));
     return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
       className: "post-details mt-4 ml-5 row col-auto justify-content-center"
     }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-      className: "col-lg-12 col-sm-10 mb-5 row title p-2 justify-content-start"
+      className: "col-10 mb-5 row title p-2 justify-content-start"
     }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
       className: "col-12 row p-0"
     }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h2", {
@@ -66596,14 +66615,14 @@ var Post = function Post(_ref) {
     }, postData.title)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("hr", {
       className: "m-0 mt-2 col-2"
     })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-      className: "description col-lg-11 col-sm-10 mb-5 row p-2 justify-content-start"
+      className: "description col-10 mb-5 row p-2 justify-content-start"
     }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, postData.description)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-      className: "col-lg-12 col-sm-10 mb-5 row autor p-2 justify-content-start"
+      className: "col-10 mb-5 row autor p-2 justify-content-start"
     }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
       className: "col-lg-6 col-sm-12 px-0 py-2 "
     }, user.data.name), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
       className: "col-lg-6 col-sm-12 px-0 py-2 "
-    }, new Date(postData.updated_at).toLocaleDateString("en-US"), " ")));
+    }, String(new Date(written).getDay()) + "/" + (new Date(written).getMonth() + 1) + "/" + new Date(written).getFullYear(), " ")));
   }
 };
 
@@ -67139,8 +67158,8 @@ var Subpage = function Subpage(_ref) {
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! /Users/patrik/Projects/Webs/SmartCityPresov/resources/js/app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! /Users/patrik/Projects/Webs/SmartCityPresov/resources/sass/app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! C:\Users\Mamuss\PhpstormProjects\SmartCityPresov\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! C:\Users\Mamuss\PhpstormProjects\SmartCityPresov\resources\sass\app.scss */"./resources/sass/app.scss");
 
 
 /***/ })

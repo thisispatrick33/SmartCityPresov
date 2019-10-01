@@ -17,7 +17,7 @@ class CreatePostsTable extends Migration
             $table->string('title');
             $table->text('description');
             $table->string('image');
-            $table->double('price',20,2)->nullable()->default(null);
+            $table->double('price',20,2)->nullable()->default(0.00);
             //$table->unsignedBigInteger('user_id');
             //$table->unsignedBigInteger('subpage_id');
             /*$table->foreign(['user_id', 'subpage_id'])->references(['id', 'id'])->on( ['users', 'subpages'])
