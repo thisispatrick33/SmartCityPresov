@@ -14,8 +14,8 @@ export const Project = ({data,user, close = f => f}) => {
     }, []);
     return (
         <div  className={"project-details-frame row p-0 justify-content-center"} style={{display : `none`}}>
-            <div className="project-content col-xl-9 col-lg-9 col-md-10 col-sm-11 col-11 row shadow p-0 justify-content-start align-items-start" style={{marginTop : '100vh', minHeight : '80%'}}>
-                <div className="gallery col-xl-2 col-lg-2 col-12 order-xl-1 order-lg-1 order-2 row p-0">
+            <div className="project-content col-xl-9 col-lg-9 col-md-10 col-sm-11 col-11 row shadow p-0 justify-content-start align-items-start" style={{marginTop : '100vh', marginBottom : '10vh', minHeight : '80%'}}>
+                <div className="gallery col-xl-2 col-lg-2 col-12 order-xl-1 order-lg-1 order-2 row p-0 ">
                     <div className="col-12 p-0 mt-5 title">
                         <h3 className={"text-center"}>galéria</h3>
                     </div>

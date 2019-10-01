@@ -59,6 +59,7 @@ export const Subpage = ({ id, logged, hide = f => f }) => {
                     <h3 className={`projects-title | col-12 | my-5 p-0`}>projekty smartcity prešov - <span className={"projects-category"}>{subpage.title}</span></h3>
                     <div className={`projects | row col-12 | p-0`}>
                         {subpage.posts.map(({id, title, description, user, image, updated_at}) => {
+                            let written = new Date(updated_at.replace(' ', 'T'));
                             return ( <div className={`project-frame | row col-xl-4 col-lg-4 col-md-6 col-sm-12 col-12 | justify-content-xl-start justify-content-lg-start justify-content-md-center justify-content-sm-center justify-content-center | mb-4 p-0`} key={id}>
                                 <div className={`shadow project | row col-10 | align-items-start | p-0 `}>
                                     <div className={`row col-12 | p-0 `}>
@@ -66,7 +67,7 @@ export const Subpage = ({ id, logged, hide = f => f }) => {
                                     </div>
                                     <h3 className={`col-12 | mt-3 py-0 px-3`}>{title}</h3>
                                     <p className={`col-12 | mb-3 py-0 px-3`}>{description.substring(0, description.includes(".") ? description.indexOf(".")+1 : 50)} <a href={`/api/post/${id}`} className={"read_more"}>Objav viac</a></p>
-                                    <p className={`col-12 | mb-0 py-0  px-3`}><span>Dátum : </span>{ String(new Date(updated_at).getDay()) + `/` + (new Date(updated_at).getMonth()+1) + `/` + new Date(updated_at).getFullYear() }</p>
+                                    <p className={`col-12 | mb-0 py-0  px-3`}><span>Dátum : </span>{ String(new Date(written).getDay()) + `/` + (new Date(written).getMonth()+1) + `/` + new Date(written).getFullYear() }</p>
                                     <p className={`col-12 | py-0 px-3`}><span>Autor : </span>{user.name}</p>
                                     {
                                         logged.name !== user.name ? `` : <div className="col-12 row mb-2">

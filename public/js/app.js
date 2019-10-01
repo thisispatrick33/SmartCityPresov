@@ -65644,21 +65644,18 @@ var App = function App() {
         'Authorization': "Bearer ".concat(authState.user.auth_token)
       }
     }).then(function (response) {
-      console.log(response);
-    }).then(function (_ref3) {
-      var data = _ref3.data;
-      alert(data.success ? "\xDAspe\u0161ne si vytvoril \u010Dl\xE1nok." : "\u010Cl\xE1nok sa nepodarilo vytvori\u0165!");
+      alert(response.status == 200 ? "\xDAspe\u0161ne si vytvoril \u010Dl\xE1nok." : "\u010Cl\xE1nok sa nepodarilo vytvori\u0165!");
     });
   };
 
-  var _updatePost = function _updatePost(_ref4) {
-    var id = _ref4.id,
-        title = _ref4.title,
-        description = _ref4.description,
-        price = _ref4.price,
-        subpage_id = _ref4.subpage_id,
-        images = _ref4.images,
-        updated_images = _ref4.updated_images;
+  var _updatePost = function _updatePost(_ref3) {
+    var id = _ref3.id,
+        title = _ref3.title,
+        description = _ref3.description,
+        price = _ref3.price,
+        subpage_id = _ref3.subpage_id,
+        images = _ref3.images,
+        updated_images = _ref3.updated_images;
     var formData = new FormData();
     formData.append("id", id);
     formData.append("title", title);
@@ -65679,13 +65676,14 @@ var App = function App() {
       }
     }).then(function (response) {
       return response;
-    }).then(function (_ref5) {
-      var data = _ref5.data;
-      alert(data.success ? "\xDAspe\u0161ne si \xFApravil \u010Dl\xE1nok." : "\u010Cl\xE1nok sa nepodarilo upravi\u0165!");
+    }).then(function (_ref4) {
+      var data = _ref4.data;
+      alert(data == 200 ? "\xDAspe\u0161ne si \xFApravil \u010Dl\xE1nok." : "\u010Cl\xE1nok sa nepodarilo upravi\u0165!");
     });
   };
 
   var _deletePost = function _deletePost(id, title_link) {
+    console.log(title_link);
     axios__WEBPACK_IMPORTED_MODULE_8___default.a.put("/api/post/delete", {
       id: id
     }, {
@@ -65695,11 +65693,9 @@ var App = function App() {
         'Authorization': "Bearer ".concat(authState.user.auth_token)
       }
     }).then(function (response) {
-      console.log(response);
-    }).then(function (_ref6) {
-      var data = _ref6.data;
-      alert(data === 200 ? "\u010Cl\xE1nok sa \xFAspe\u0161ne vymazal" : "\u010Cl\xE1nok sa nepodarilo vymaza\u0165!");
+      alert(response.status == 200 ? "\u010Cl\xE1nok sa \xFAspe\u0161ne vymazal" : "\u010Cl\xE1nok sa nepodarilo vymaza\u0165!");
     });
+    console.log(title_link);
     Object(_reach_router__WEBPACK_IMPORTED_MODULE_2__["navigate"])("/".concat(title_link));
   };
 
@@ -65762,7 +65758,19 @@ var Home = function Home() {
       width: '100vw',
       height: '100vh'
     }
-  }, "home");
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: " row col-7"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: " subpage-content | row col-12 | justify-content-center | align-items-start"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", {
+    className: " title | col-xl-12 col-lg-12 col-11 | mt-4 | text-center"
+  }, "Co je Smart City."), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
+    className: " description | col-xl-12 col-lg-12 col-11 | mt-5 | text-center"
+  }, "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce sit amet urna vel quam fermentum scelerisque. Praesent a ullamcorper ex, vitae accumsan enim. Etiam vel tortor at nisi placerat mollis. Vivamus interdum, augue feugiat egestas ultrices, libero arcu laoreet ex, at rutrum turpis orci et nisl. Quisque tincidunt elit vel pharetra fermentum. Morbi ultrices laoreet est, sit amet lacinia libero dictum sit amet. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Duis maximus purus vitae velit rhoncus mattis. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. "), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: " projects-frame | row col-xl-12 col-lg-12 col-11 | justify-content-center "
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", {
+    className: "projects-title | col-12 | my-5 p-0"
+  }, "projekty smartcity pre\u0161ov")))));
 };
 
 /***/ }),
@@ -66740,10 +66748,11 @@ var Project = function Project(_ref) {
     className: "project-content col-xl-9 col-lg-9 col-md-10 col-sm-11 col-11 row shadow p-0 justify-content-start align-items-start",
     style: {
       marginTop: '100vh',
+      marginBottom: '10vh',
       minHeight: '80%'
     }
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "gallery col-xl-2 col-lg-2 col-12 order-xl-1 order-lg-1 order-2 row p-0"
+    className: "gallery col-xl-2 col-lg-2 col-12 order-xl-1 order-lg-1 order-2 row p-0 "
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "col-12 p-0 mt-5 title"
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", {
@@ -66978,6 +66987,7 @@ var Subpage = function Subpage(_ref) {
           user = _ref4.user,
           image = _ref4.image,
           updated_at = _ref4.updated_at;
+      var written = new Date(updated_at.replace(' ', 'T'));
       return react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
         className: "project-frame | row col-xl-4 col-lg-4 col-md-6 col-sm-12 col-12 | justify-content-xl-start justify-content-lg-start justify-content-md-center justify-content-sm-center justify-content-center | mb-4 p-0",
         key: id
@@ -67003,7 +67013,7 @@ var Subpage = function Subpage(_ref) {
         className: "read_more"
       }, "Objav viac")), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("p", {
         className: "col-12 | mb-0 py-0  px-3"
-      }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("span", null, "D\xE1tum : "), String(new Date(updated_at).getDay()) + "/" + (new Date(updated_at).getMonth() + 1) + "/" + new Date(updated_at).getFullYear()), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("p", {
+      }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("span", null, "D\xE1tum : "), String(new Date(written).getDay()) + "/" + (new Date(written).getMonth() + 1) + "/" + new Date(written).getFullYear()), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("p", {
         className: "col-12 | py-0 px-3"
       }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("span", null, "Autor : "), user.name), logged.name !== user.name ? "" : react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
         className: "col-12 row mb-2"

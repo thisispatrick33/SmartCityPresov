@@ -14584,6 +14584,11 @@ body .main-container .subpage .project-details-frame .project-content .content .
   font-family: Gilroy-SemiBold;
 }
 
+body .main-container .subpage .project-details-frame .project-content .gallery {
+  background: #191919;
+  border-radius: 10px 0 0 10px;
+}
+
 body .main-container .subpage .project-details-frame .project-content .gallery .cover-image {
   border: 4px solid #D71920;
 }
@@ -14840,6 +14845,14 @@ hr {
 }
 
 @media (max-width: 991.98px) {
+  .gallery {
+    border-radius: 0 0 10px 10px !important;
+  }
+
+  div.content.shadow.col-xl-10.col-lg-10.col-12.order-xl-2.order-lg-2.order-1.row.justify-content-end.p-0.align-items-start > div > div.col-12.row.mt-5.px-5.title.p-0 > h1 {
+    font-size: 1.25rem;
+  }
+
   .project-details-frame .content {
     border-width: 0 0 10px 0;
     border-style: solid;

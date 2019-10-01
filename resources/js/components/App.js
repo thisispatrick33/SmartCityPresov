@@ -122,11 +122,10 @@ const App = () => {
                 }
             })
             .then(response => {
-                console.log(response)
+
+                alert(response.status==200 ? `Úspešne si vytvoril článok.` : `Článok sa nepodarilo vytvoriť!`);
             })
-            .then(( {data} ) => {
-                alert(data.success ? `Úspešne si vytvoril článok.` : `Článok sa nepodarilo vytvoriť!`);
-            });
+
     };
 
     const _updatePost = ( {id, title, description, price, subpage_id, images, updated_images} ) => {
@@ -150,12 +149,13 @@ const App = () => {
                 return response;
             })
             .then(( {data} ) => {
-                alert(data.success ? `Úspešne si úpravil článok.` : `Článok sa nepodarilo upraviť!`);
+                alert(data==200? `Úspešne si úpravil článok.` : `Článok sa nepodarilo upraviť!`);
             });
     };
 
 
     const _deletePost = (id, title_link) => {
+        console.log(title_link);
         axios.put(`/api/post/delete`, {id : id},{
             headers : {
                 'Content-Type' : `application/json`,
@@ -164,11 +164,9 @@ const App = () => {
             }
         })
             .then(response => {
-                console.log(response);
+                alert(response.status==200 ? `Článok sa úspešne vymazal` : `Článok sa nepodarilo vymazať!`);
             })
-            .then(( {data} ) => {
-                alert(data === 200 ? `Článok sa úspešne vymazal` : `Článok sa nepodarilo vymazať!`);
-            });
+        console.log(title_link);
         navigate(`/${title_link}`);
     };
     return (

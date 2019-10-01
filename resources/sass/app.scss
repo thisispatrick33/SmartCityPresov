@@ -271,6 +271,10 @@ body{
             }
           }
           .gallery{
+            background: $secondaryColor;
+            -webkit-border-radius: 10px 0 0 10px;
+            -moz-border-radius: 10px 0 0 10px;
+            border-radius: 10px 0 0 10px;
             .cover-image{
                 border: 4px solid $primaryColor;
             }
@@ -462,6 +466,14 @@ hr{
 }
 
 @include media-breakpoint-down(md) {
+  .gallery{
+    -webkit-border-radius: 0 0 10px 10px !important;
+    -moz-border-radius: 0 0 10px 10px !important;
+    border-radius: 0 0 10px 10px !important;
+  }
+  div.content.shadow.col-xl-10.col-lg-10.col-12.order-xl-2.order-lg-2.order-1.row.justify-content-end.p-0.align-items-start > div > div.col-12.row.mt-5.px-5.title.p-0 > h1{
+    font-size: 1.25rem;
+  }
   .project-details-frame .content{
     border-width : 0 0 10px 0;
     border-style : solid;
