@@ -1179,426 +1179,6 @@ var reservedNames = ["uri", "path"];
 
 /***/ }),
 
-/***/ "./node_modules/@tinymce/tinymce-react/lib/es2015/main/ts/ScriptLoader.js":
-/*!********************************************************************************!*\
-  !*** ./node_modules/@tinymce/tinymce-react/lib/es2015/main/ts/ScriptLoader.js ***!
-  \********************************************************************************/
-/*! exports provided: create, load */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "create", function() { return create; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "load", function() { return load; });
-/* harmony import */ var _Utils__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Utils */ "./node_modules/@tinymce/tinymce-react/lib/es2015/main/ts/Utils.js");
-/**
- * Copyright (c) 2017-present, Ephox, Inc.
- *
- * This source code is licensed under the Apache 2 license found in the
- * LICENSE file in the root directory of this source tree.
- *
- */
-
-var injectScriptTag = function (scriptId, doc, url, callback) {
-    var scriptTag = doc.createElement('script');
-    scriptTag.type = 'application/javascript';
-    scriptTag.id = scriptId;
-    scriptTag.addEventListener('load', callback);
-    scriptTag.src = url;
-    if (doc.head) {
-        doc.head.appendChild(scriptTag);
-    }
-};
-var create = function () {
-    return {
-        listeners: [],
-        scriptId: Object(_Utils__WEBPACK_IMPORTED_MODULE_0__["uuid"])('tiny-script'),
-        scriptLoaded: false
-    };
-};
-var load = function (state, doc, url, callback) {
-    if (state.scriptLoaded) {
-        callback();
-    }
-    else {
-        state.listeners.push(callback);
-        if (!doc.getElementById(state.scriptId)) {
-            injectScriptTag(state.scriptId, doc, url, function () {
-                state.listeners.forEach(function (fn) { return fn(); });
-                state.scriptLoaded = true;
-            });
-        }
-    }
-};
-
-
-/***/ }),
-
-/***/ "./node_modules/@tinymce/tinymce-react/lib/es2015/main/ts/TinyMCE.js":
-/*!***************************************************************************!*\
-  !*** ./node_modules/@tinymce/tinymce-react/lib/es2015/main/ts/TinyMCE.js ***!
-  \***************************************************************************/
-/*! exports provided: getTinymce */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* WEBPACK VAR INJECTION */(function(global) {/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getTinymce", function() { return getTinymce; });
-/**
- * Copyright (c) 2017-present, Ephox, Inc.
- *
- * This source code is licensed under the Apache 2 license found in the
- * LICENSE file in the root directory of this source tree.
- *
- */
-var getGlobal = function () { return (typeof window !== 'undefined' ? window : global); };
-var getTinymce = function () {
-    var global = getGlobal();
-    return global && global.tinymce ? global.tinymce : null;
-};
-
-
-/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./../../../../../../webpack/buildin/global.js */ "./node_modules/webpack/buildin/global.js")))
-
-/***/ }),
-
-/***/ "./node_modules/@tinymce/tinymce-react/lib/es2015/main/ts/Utils.js":
-/*!*************************************************************************!*\
-  !*** ./node_modules/@tinymce/tinymce-react/lib/es2015/main/ts/Utils.js ***!
-  \*************************************************************************/
-/*! exports provided: isFunction, bindHandlers, uuid, isTextarea, mergePlugins */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "isFunction", function() { return isFunction; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "bindHandlers", function() { return bindHandlers; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "uuid", function() { return uuid; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "isTextarea", function() { return isTextarea; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "mergePlugins", function() { return mergePlugins; });
-/* harmony import */ var _components_EditorPropTypes__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./components/EditorPropTypes */ "./node_modules/@tinymce/tinymce-react/lib/es2015/main/ts/components/EditorPropTypes.js");
-/**
- * Copyright (c) 2017-present, Ephox, Inc.
- *
- * This source code is licensed under the Apache 2 license found in the
- * LICENSE file in the root directory of this source tree.
- *
- */
-
-var isValidKey = function (keys) { return function (key) { return keys.indexOf(key) !== -1; }; };
-// tslint:disable-next-line:ban-types
-var isFunction = function (x) { return typeof x === 'function'; };
-var bindHandlers = function (props, editor, initEvent) {
-    Object.keys(props)
-        .filter(isValidKey(Object.keys(_components_EditorPropTypes__WEBPACK_IMPORTED_MODULE_0__["eventPropTypes"])))
-        .forEach(function (key) {
-        var handler = props[key];
-        if (isFunction(handler)) {
-            if (key === 'onInit') {
-                handler(initEvent, editor);
-            }
-            else {
-                editor.on(key.substring(2), function (e) { return handler(e, editor); });
-            }
-        }
-    });
-};
-var unique = 0;
-var uuid = function (prefix) {
-    var date = new Date();
-    var time = date.getTime();
-    var random = Math.floor(Math.random() * 1000000000);
-    unique++;
-    return prefix + '_' + random + unique + String(time);
-};
-var isTextarea = function (element) {
-    return element !== null && element.tagName.toLowerCase() === 'textarea';
-};
-var normalizePluginArray = function (plugins) {
-    if (typeof plugins === 'undefined' || plugins === '') {
-        return [];
-    }
-    return Array.isArray(plugins) ? plugins : plugins.split(' ');
-};
-var mergePlugins = function (initPlugins, inputPlugins) {
-    return normalizePluginArray(initPlugins).concat(normalizePluginArray(inputPlugins));
-};
-
-
-/***/ }),
-
-/***/ "./node_modules/@tinymce/tinymce-react/lib/es2015/main/ts/components/Editor.js":
-/*!*************************************************************************************!*\
-  !*** ./node_modules/@tinymce/tinymce-react/lib/es2015/main/ts/components/Editor.js ***!
-  \*************************************************************************************/
-/*! exports provided: Editor */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "Editor", function() { return Editor; });
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _ScriptLoader__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../ScriptLoader */ "./node_modules/@tinymce/tinymce-react/lib/es2015/main/ts/ScriptLoader.js");
-/* harmony import */ var _TinyMCE__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../TinyMCE */ "./node_modules/@tinymce/tinymce-react/lib/es2015/main/ts/TinyMCE.js");
-/* harmony import */ var _Utils__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../Utils */ "./node_modules/@tinymce/tinymce-react/lib/es2015/main/ts/Utils.js");
-/* harmony import */ var _EditorPropTypes__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./EditorPropTypes */ "./node_modules/@tinymce/tinymce-react/lib/es2015/main/ts/components/EditorPropTypes.js");
-/**
- * Copyright (c) 2017-present, Ephox, Inc.
- *
- * This source code is licensed under the Apache 2 license found in the
- * LICENSE file in the root directory of this source tree.
- *
- */
-var __extends = (undefined && undefined.__extends) || (function () {
-    var extendStatics = function (d, b) {
-        extendStatics = Object.setPrototypeOf ||
-            ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
-            function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
-        return extendStatics(d, b);
-    };
-    return function (d, b) {
-        extendStatics(d, b);
-        function __() { this.constructor = d; }
-        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
-    };
-})();
-var __assign = (undefined && undefined.__assign) || function () {
-    __assign = Object.assign || function(t) {
-        for (var s, i = 1, n = arguments.length; i < n; i++) {
-            s = arguments[i];
-            for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p))
-                t[p] = s[p];
-        }
-        return t;
-    };
-    return __assign.apply(this, arguments);
-};
-
-
-
-
-
-var scriptState = _ScriptLoader__WEBPACK_IMPORTED_MODULE_1__["create"]();
-var Editor = /** @class */ (function (_super) {
-    __extends(Editor, _super);
-    function Editor() {
-        var _this = _super !== null && _super.apply(this, arguments) || this;
-        _this.element = null;
-        _this.initialise = function () {
-            var finalInit = __assign({}, _this.props.init, { target: _this.element, readonly: _this.props.disabled, inline: _this.inline, plugins: Object(_Utils__WEBPACK_IMPORTED_MODULE_3__["mergePlugins"])(_this.props.init && _this.props.init.plugins, _this.props.plugins), toolbar: _this.props.toolbar || (_this.props.init && _this.props.init.toolbar), setup: function (editor) {
-                    _this.editor = editor;
-                    editor.on('init', function (e) {
-                        _this.initEditor(e, editor);
-                    });
-                    if (_this.props.init && typeof _this.props.init.setup === 'function') {
-                        _this.props.init.setup(editor);
-                    }
-                } });
-            if (Object(_Utils__WEBPACK_IMPORTED_MODULE_3__["isTextarea"])(_this.element)) {
-                _this.element.style.visibility = '';
-            }
-            Object(_TinyMCE__WEBPACK_IMPORTED_MODULE_2__["getTinymce"])().init(finalInit);
-        };
-        return _this;
-    }
-    Editor.prototype.componentWillMount = function () {
-        this.id = this.id || this.props.id || Object(_Utils__WEBPACK_IMPORTED_MODULE_3__["uuid"])('tiny-react');
-        this.inline = this.props.inline ? this.props.inline : this.props.init && this.props.init.inline;
-    };
-    Editor.prototype.componentDidMount = function () {
-        if (Object(_TinyMCE__WEBPACK_IMPORTED_MODULE_2__["getTinymce"])() !== null) {
-            this.initialise();
-        }
-        else if (this.element && this.element.ownerDocument) {
-            var doc = this.element.ownerDocument;
-            var channel = this.props.cloudChannel;
-            var apiKey = this.props.apiKey ? this.props.apiKey : 'no-api-key';
-            _ScriptLoader__WEBPACK_IMPORTED_MODULE_1__["load"](scriptState, doc, "https://cdn.tiny.cloud/1/" + apiKey + "/tinymce/" + channel + "/tinymce.min.js", this.initialise);
-        }
-    };
-    Editor.prototype.componentWillUnmount = function () {
-        if (Object(_TinyMCE__WEBPACK_IMPORTED_MODULE_2__["getTinymce"])() !== null) {
-            Object(_TinyMCE__WEBPACK_IMPORTED_MODULE_2__["getTinymce"])().remove(this.editor);
-        }
-    };
-    Editor.prototype.componentWillReceiveProps = function (nextProps) {
-        if (this.editor && this.editor.initialized) {
-            this.currentContent = this.currentContent || this.editor.getContent();
-            if (typeof nextProps.value === 'string' && nextProps.value !== this.props.value && nextProps.value !== this.currentContent) {
-                this.editor.setContent(nextProps.value);
-            }
-            if (typeof nextProps.disabled === 'boolean' && nextProps.disabled !== this.props.disabled) {
-                this.editor.setMode(nextProps.disabled ? 'readonly' : 'design');
-            }
-        }
-    };
-    Editor.prototype.render = function () {
-        return this.inline ? this.renderInline() : this.renderIframe();
-    };
-    Editor.prototype.initEditor = function (initEvent, editor) {
-        var _this = this;
-        var value = typeof this.props.value === 'string' ? this.props.value : typeof this.props.initialValue === 'string' ? this.props.initialValue : '';
-        editor.setContent(value);
-        if (Object(_Utils__WEBPACK_IMPORTED_MODULE_3__["isFunction"])(this.props.onEditorChange)) {
-            editor.on('change keyup setcontent', function (e) {
-                _this.currentContent = editor.getContent();
-                if (Object(_Utils__WEBPACK_IMPORTED_MODULE_3__["isFunction"])(_this.props.onEditorChange)) {
-                    _this.props.onEditorChange(_this.currentContent, editor);
-                }
-            });
-        }
-        Object(_Utils__WEBPACK_IMPORTED_MODULE_3__["bindHandlers"])(this.props, editor, initEvent);
-    };
-    Editor.prototype.renderInline = function () {
-        var _this = this;
-        var _a = this.props.tagName, tagName = _a === void 0 ? 'div' : _a;
-        return react__WEBPACK_IMPORTED_MODULE_0__["createElement"](tagName, {
-            ref: function (elm) { return (_this.element = elm); },
-            id: this.id
-        });
-    };
-    Editor.prototype.renderIframe = function () {
-        var _this = this;
-        return react__WEBPACK_IMPORTED_MODULE_0__["createElement"]("textarea", { ref: function (elm) { return (_this.element = elm); }, style: { visibility: 'hidden' }, id: this.id, name: this.props.textareaName });
-    };
-    Editor.propTypes = _EditorPropTypes__WEBPACK_IMPORTED_MODULE_4__["EditorPropTypes"];
-    Editor.defaultProps = {
-        cloudChannel: '5'
-    };
-    return Editor;
-}(react__WEBPACK_IMPORTED_MODULE_0__["Component"]));
-
-
-
-/***/ }),
-
-/***/ "./node_modules/@tinymce/tinymce-react/lib/es2015/main/ts/components/EditorPropTypes.js":
-/*!**********************************************************************************************!*\
-  !*** ./node_modules/@tinymce/tinymce-react/lib/es2015/main/ts/components/EditorPropTypes.js ***!
-  \**********************************************************************************************/
-/*! exports provided: eventPropTypes, EditorPropTypes */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "eventPropTypes", function() { return eventPropTypes; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "EditorPropTypes", function() { return EditorPropTypes; });
-/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! prop-types */ "./node_modules/prop-types/index.js");
-/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(prop_types__WEBPACK_IMPORTED_MODULE_0__);
-/**
- * Copyright (c) 2017-present, Ephox, Inc.
- *
- * This source code is licensed under the Apache 2 license found in the
- * LICENSE file in the root directory of this source tree.
- *
- */
-var __assign = (undefined && undefined.__assign) || function () {
-    __assign = Object.assign || function(t) {
-        for (var s, i = 1, n = arguments.length; i < n; i++) {
-            s = arguments[i];
-            for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p))
-                t[p] = s[p];
-        }
-        return t;
-    };
-    return __assign.apply(this, arguments);
-};
-
-var eventPropTypes = {
-    onActivate: prop_types__WEBPACK_IMPORTED_MODULE_0__["func"],
-    onAddUndo: prop_types__WEBPACK_IMPORTED_MODULE_0__["func"],
-    onBeforeAddUndo: prop_types__WEBPACK_IMPORTED_MODULE_0__["func"],
-    onBeforeExecCommand: prop_types__WEBPACK_IMPORTED_MODULE_0__["func"],
-    onBeforeGetContent: prop_types__WEBPACK_IMPORTED_MODULE_0__["func"],
-    onBeforeRenderUI: prop_types__WEBPACK_IMPORTED_MODULE_0__["func"],
-    onBeforeSetContent: prop_types__WEBPACK_IMPORTED_MODULE_0__["func"],
-    onBeforePaste: prop_types__WEBPACK_IMPORTED_MODULE_0__["func"],
-    onBlur: prop_types__WEBPACK_IMPORTED_MODULE_0__["func"],
-    onChange: prop_types__WEBPACK_IMPORTED_MODULE_0__["func"],
-    onClearUndos: prop_types__WEBPACK_IMPORTED_MODULE_0__["func"],
-    onClick: prop_types__WEBPACK_IMPORTED_MODULE_0__["func"],
-    onContextMenu: prop_types__WEBPACK_IMPORTED_MODULE_0__["func"],
-    onCopy: prop_types__WEBPACK_IMPORTED_MODULE_0__["func"],
-    onCut: prop_types__WEBPACK_IMPORTED_MODULE_0__["func"],
-    onDblclick: prop_types__WEBPACK_IMPORTED_MODULE_0__["func"],
-    onDeactivate: prop_types__WEBPACK_IMPORTED_MODULE_0__["func"],
-    onDirty: prop_types__WEBPACK_IMPORTED_MODULE_0__["func"],
-    onDrag: prop_types__WEBPACK_IMPORTED_MODULE_0__["func"],
-    onDragDrop: prop_types__WEBPACK_IMPORTED_MODULE_0__["func"],
-    onDragEnd: prop_types__WEBPACK_IMPORTED_MODULE_0__["func"],
-    onDragGesture: prop_types__WEBPACK_IMPORTED_MODULE_0__["func"],
-    onDragOver: prop_types__WEBPACK_IMPORTED_MODULE_0__["func"],
-    onDrop: prop_types__WEBPACK_IMPORTED_MODULE_0__["func"],
-    onExecCommand: prop_types__WEBPACK_IMPORTED_MODULE_0__["func"],
-    onFocus: prop_types__WEBPACK_IMPORTED_MODULE_0__["func"],
-    onFocusIn: prop_types__WEBPACK_IMPORTED_MODULE_0__["func"],
-    onFocusOut: prop_types__WEBPACK_IMPORTED_MODULE_0__["func"],
-    onGetContent: prop_types__WEBPACK_IMPORTED_MODULE_0__["func"],
-    onHide: prop_types__WEBPACK_IMPORTED_MODULE_0__["func"],
-    onInit: prop_types__WEBPACK_IMPORTED_MODULE_0__["func"],
-    onKeyDown: prop_types__WEBPACK_IMPORTED_MODULE_0__["func"],
-    onKeyPress: prop_types__WEBPACK_IMPORTED_MODULE_0__["func"],
-    onKeyUp: prop_types__WEBPACK_IMPORTED_MODULE_0__["func"],
-    onLoadContent: prop_types__WEBPACK_IMPORTED_MODULE_0__["func"],
-    onMouseDown: prop_types__WEBPACK_IMPORTED_MODULE_0__["func"],
-    onMouseEnter: prop_types__WEBPACK_IMPORTED_MODULE_0__["func"],
-    onMouseLeave: prop_types__WEBPACK_IMPORTED_MODULE_0__["func"],
-    onMouseMove: prop_types__WEBPACK_IMPORTED_MODULE_0__["func"],
-    onMouseOut: prop_types__WEBPACK_IMPORTED_MODULE_0__["func"],
-    onMouseOver: prop_types__WEBPACK_IMPORTED_MODULE_0__["func"],
-    onMouseUp: prop_types__WEBPACK_IMPORTED_MODULE_0__["func"],
-    onNodeChange: prop_types__WEBPACK_IMPORTED_MODULE_0__["func"],
-    onObjectResizeStart: prop_types__WEBPACK_IMPORTED_MODULE_0__["func"],
-    onObjectResized: prop_types__WEBPACK_IMPORTED_MODULE_0__["func"],
-    onObjectSelected: prop_types__WEBPACK_IMPORTED_MODULE_0__["func"],
-    onPaste: prop_types__WEBPACK_IMPORTED_MODULE_0__["func"],
-    onPostProcess: prop_types__WEBPACK_IMPORTED_MODULE_0__["func"],
-    onPostRender: prop_types__WEBPACK_IMPORTED_MODULE_0__["func"],
-    onPreProcess: prop_types__WEBPACK_IMPORTED_MODULE_0__["func"],
-    onProgressState: prop_types__WEBPACK_IMPORTED_MODULE_0__["func"],
-    onRedo: prop_types__WEBPACK_IMPORTED_MODULE_0__["func"],
-    onRemove: prop_types__WEBPACK_IMPORTED_MODULE_0__["func"],
-    onReset: prop_types__WEBPACK_IMPORTED_MODULE_0__["func"],
-    onSaveContent: prop_types__WEBPACK_IMPORTED_MODULE_0__["func"],
-    onSelectionChange: prop_types__WEBPACK_IMPORTED_MODULE_0__["func"],
-    onSetAttrib: prop_types__WEBPACK_IMPORTED_MODULE_0__["func"],
-    onSetContent: prop_types__WEBPACK_IMPORTED_MODULE_0__["func"],
-    onShow: prop_types__WEBPACK_IMPORTED_MODULE_0__["func"],
-    onSubmit: prop_types__WEBPACK_IMPORTED_MODULE_0__["func"],
-    onUndo: prop_types__WEBPACK_IMPORTED_MODULE_0__["func"],
-    onVisualAid: prop_types__WEBPACK_IMPORTED_MODULE_0__["func"]
-};
-var EditorPropTypes = __assign({ apiKey: prop_types__WEBPACK_IMPORTED_MODULE_0__["string"], id: prop_types__WEBPACK_IMPORTED_MODULE_0__["string"], inline: prop_types__WEBPACK_IMPORTED_MODULE_0__["bool"], init: prop_types__WEBPACK_IMPORTED_MODULE_0__["object"], initialValue: prop_types__WEBPACK_IMPORTED_MODULE_0__["string"], onEditorChange: prop_types__WEBPACK_IMPORTED_MODULE_0__["func"], value: prop_types__WEBPACK_IMPORTED_MODULE_0__["string"], tagName: prop_types__WEBPACK_IMPORTED_MODULE_0__["string"], cloudChannel: prop_types__WEBPACK_IMPORTED_MODULE_0__["string"], plugins: prop_types__WEBPACK_IMPORTED_MODULE_0__["oneOfType"]([prop_types__WEBPACK_IMPORTED_MODULE_0__["string"], prop_types__WEBPACK_IMPORTED_MODULE_0__["array"]]), toolbar: prop_types__WEBPACK_IMPORTED_MODULE_0__["oneOfType"]([prop_types__WEBPACK_IMPORTED_MODULE_0__["string"], prop_types__WEBPACK_IMPORTED_MODULE_0__["array"]]), disabled: prop_types__WEBPACK_IMPORTED_MODULE_0__["bool"], textareaName: prop_types__WEBPACK_IMPORTED_MODULE_0__["string"] }, eventPropTypes);
-
-
-/***/ }),
-
-/***/ "./node_modules/@tinymce/tinymce-react/lib/es2015/main/ts/index.js":
-/*!*************************************************************************!*\
-  !*** ./node_modules/@tinymce/tinymce-react/lib/es2015/main/ts/index.js ***!
-  \*************************************************************************/
-/*! exports provided: Editor */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _components_Editor__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./components/Editor */ "./node_modules/@tinymce/tinymce-react/lib/es2015/main/ts/components/Editor.js");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "Editor", function() { return _components_Editor__WEBPACK_IMPORTED_MODULE_0__["Editor"]; });
-
-/**
- * Copyright (c) 2017-present, Ephox, Inc.
- *
- * This source code is licensed under the Apache 2 license found in the
- * LICENSE file in the root directory of this source tree.
- *
- */
-
-
-
-
-/***/ }),
-
 /***/ "./node_modules/axios/index.js":
 /*!*************************************!*\
   !*** ./node_modules/axios/index.js ***!
@@ -65748,10 +65328,73 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "Home", function() { return Home; });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _tinymce_tinymce_react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @tinymce/tinymce-react */ "./node_modules/@tinymce/tinymce-react/lib/es2015/main/ts/index.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! jquery */ "./node_modules/jquery/dist/jquery.js");
+/* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(jquery__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var _subpage_Project__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./subpage/Project */ "./resources/js/components/subpage/Project.js");
+function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _nonIterableRest(); }
+
+function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance"); }
+
+function _iterableToArrayLimit(arr, i) { var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
+
+function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
+
+
+
 
 
 var Home = function Home() {
+  var _useState = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])([]),
+      _useState2 = _slicedToArray(_useState, 2),
+      post = _useState2[0],
+      setPost = _useState2[1];
+
+  var _useState3 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(null),
+      _useState4 = _slicedToArray(_useState3, 2),
+      project = _useState4[0],
+      setProject = _useState4[1];
+
+  var _useState5 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])([]),
+      _useState6 = _slicedToArray(_useState5, 2),
+      author = _useState6[0],
+      setAuthor = _useState6[1];
+
+  var getPost = function getPost() {
+    axios__WEBPACK_IMPORTED_MODULE_1___default.a.get("/api/post").then(function (res) {
+      setPost(res.data);
+    });
+  };
+
+  var handleGet = function handleGet(_id) {
+    fetch("/api/post/".concat(_id)).then(function (response) {
+      return response.json();
+    }).then(function (postData) {
+      setProject(postData);
+      console.log(postData);
+      fetch("/api/author/".concat(postData.user_id)).then(function (response) {
+        return response.json();
+      }).then(function (_ref) {
+        var data = _ref.data;
+        setAuthor(data);
+      });
+    });
+  };
+
+  var close = function close() {
+    jquery__WEBPACK_IMPORTED_MODULE_2___default()('.project-details-frame .project-content').animate({
+      marginTop: '100vh',
+      easing: 'easeInOutCirc'
+    }, 1000);
+    jquery__WEBPACK_IMPORTED_MODULE_2___default()('.project-details-frame').fadeToggle("slow", function () {
+      return setProject(null);
+    });
+  };
+
+  Object(react__WEBPACK_IMPORTED_MODULE_0__["useEffect"])(function () {
+    getPost();
+  }, []);
   return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "App",
     style: {
@@ -65766,11 +65409,57 @@ var Home = function Home() {
     className: " title | col-xl-12 col-lg-12 col-11 | mt-4 | text-center"
   }, "Co je Smart City."), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
     className: " description | col-xl-12 col-lg-12 col-11 | mt-5 | text-center"
-  }, "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce sit amet urna vel quam fermentum scelerisque. Praesent a ullamcorper ex, vitae accumsan enim. Etiam vel tortor at nisi placerat mollis. Vivamus interdum, augue feugiat egestas ultrices, libero arcu laoreet ex, at rutrum turpis orci et nisl. Quisque tincidunt elit vel pharetra fermentum. Morbi ultrices laoreet est, sit amet lacinia libero dictum sit amet. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Duis maximus purus vitae velit rhoncus mattis. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. "), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+  }, "Ut nemo quia aliquam omnis vero quidem. Repudiandae et laboriosam corrupti architecto laborum laboriosam quo quasi. Facere earum architecto voluptates placeat praesentium eveniet enim. Dolor deleniti et dolorem nisi dolore deserunt nulla est."), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: " projects-frame | row col-xl-12 col-lg-12 col-11 | justify-content-center "
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", {
     className: "projects-title | col-12 | my-5 p-0"
-  }, "projekty smartcity pre\u0161ov")))));
+  }, "projekty smartcity pre\u0161ov"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "col-12 row projects p-0 align-items-start"
+  }, post.map(function (_ref2) {
+    var id = _ref2.id,
+        title = _ref2.title,
+        description = _ref2.description,
+        user = _ref2.user,
+        image = _ref2.image,
+        updated_at = _ref2.updated_at;
+    var written = new Date(updated_at.replace(' ', 'T'));
+    return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      onClick: function onClick() {
+        return handleGet(id);
+      },
+      className: "project-frame | row col-xl-4 col-lg-4 col-md-6 col-sm-12 col-12 | justify-content-xl-start justify-content-lg-start justify-content-md-center justify-content-sm-center justify-content-center | mb-4 p-0",
+      key: id
+    }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      className: "shadow project | row col-10 | align-items-start | p-0 "
+    }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      className: "row col-12 | p-0 "
+    }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      className: "col-12 | p-0"
+    }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
+      src: "../".concat(image.substr(image.indexOf('img'))),
+      alt: "",
+      className: "col-12 | p-0",
+      style: {
+        borderRadius: "10px 10px 0 0"
+      }
+    }))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", {
+      className: "col-12 | mt-3 py-0 px-3"
+    }, title), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
+      className: "col-12 | mb-0 py-0 px-3"
+    }, description.substring(0, 50)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
+      className: "col-12 | mb-3 py-0 px-3"
+    }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
+      className: "read_more"
+    }, "Objav viac")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
+      className: "col-12 | mb-0 py-0  px-3"
+    }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null, "D\xE1tum : "), String(new Date(written).getDay()) + "/" + (new Date(written).getMonth() + 1) + "/" + new Date(written).getFullYear()), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
+      className: "col-12 | py-0 px-3"
+    }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null, "Autor : "), user.name)));
+  })), project !== null ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_subpage_Project__WEBPACK_IMPORTED_MODULE_3__["Project"], {
+    data: project,
+    user: author,
+    close: close
+  }) : null))));
 };
 
 /***/ }),

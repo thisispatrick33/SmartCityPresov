@@ -22,7 +22,7 @@ class PostsController extends Controller
         *   get all posts
          */
 
-        $posts = Post::orderBy('created_at', 'DESC')->where('subpage_id','!=', null)->where('active','=',true)->get();
+        $posts = Post::orderBy('created_at', 'DESC')->where('subpage_id','!=', null)->where('active','=',true)->get()->take(6);
 
 
         /*
