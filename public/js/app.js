@@ -65224,6 +65224,7 @@ var App = function App() {
         'Authorization': "Bearer ".concat(authState.user.auth_token)
       }
     }).then(function (response) {
+      console.log(response);
       alert(response.status == 200 ? "\xDAspe\u0161ne si vytvoril \u010Dl\xE1nok." : "\u010Cl\xE1nok sa nepodarilo vytvori\u0165!");
     });
   };
@@ -66474,9 +66475,7 @@ var Project = function Project(_ref) {
     className: "col-12 row p-0"
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "col-12 row mt-5 px-5 title p-0"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", {
-    className: "col-11 mb-2"
-  }, data.title.replace('.', ''), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null, ".")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
     onClick: function onClick() {
       return close();
     },

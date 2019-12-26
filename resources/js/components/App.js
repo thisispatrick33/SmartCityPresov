@@ -122,7 +122,7 @@ const App = () => {
                 }
             })
             .then(response => {
-
+                console.log(response);
                 alert(response.status==200 ? `Úspešne si vytvoril článok.` : `Článok sa nepodarilo vytvoriť!`);
             })
 
