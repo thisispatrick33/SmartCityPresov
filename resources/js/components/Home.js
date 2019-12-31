@@ -5,38 +5,9 @@ import {Project} from "./subpage/Project";
 
 export const Home =( ) => {
 
-    const [post, setPost] = useState([]);
-    const [project, setProject] = useState(null);
-    const [author, setAuthor] = useState([]);
-
-    const  getPost=()=>{
-        axios
-            .get("/api/post")
-            .then(res => {
-                setPost(res.data)
-            })
-    }
-
-    const handleGet = (_id) => {
-        fetch(`/api/post/${_id}`)
-            .then(response => response.json())
-            .then(postData => {
-                setProject(postData);
-                console.log(postData);
-                fetch(`/api/author/${postData.user_id}`)
-                    .then(response => response.json())
-                    .then(({data}) => {
-                        setAuthor( data );
-                    })
-            })
-    }
-    const close = () => {
-        $('.project-details-frame .project-content').animate({
-            marginTop: '100vh',
-            easing: 'easeInOutCirc'
-        },1000);
-        $('.project-details-frame').fadeToggle("slow", () => setProject(null));
-    }
+    const kiko = () =>{
+      console.log("sem som");
+    };
     useEffect( () => {  getPost() },[]);
     return (
         <div className="App" style={{width: '100vw', height : '100vh'}}>
