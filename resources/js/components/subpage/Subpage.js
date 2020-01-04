@@ -2,10 +2,9 @@ import React, {useEffect, useState} from "react";
 import { Loader } from "../Utillities";
 import { Project } from './Project';
 import { Link } from "@reach/router";
-import axios from "axios";
 import $ from "jquery";
 
-export const Subpage = ({ id, logged, hide = f => f }) => {
+export const Subpage = ({id, logged, hide = f => f, data}) => {
 
     {/*
         Auxiliary variable for store subpage, project and author data
@@ -20,11 +19,8 @@ export const Subpage = ({ id, logged, hide = f => f }) => {
     */}
     const handleDelete = (_id,_title_link) => {
         hide(_id, _title_link);
-    }
-    const fetchData = async () => {
-        const response = await axios.get(`api/${id}`);
-        setSubpage(response.data.subpage)
     };
+
 
     const close = () => {
         $('.project-details-frame .project-content').animate({
@@ -32,7 +28,7 @@ export const Subpage = ({ id, logged, hide = f => f }) => {
             easing: 'easeInOutCirc'
         },1000);
         $('.project-details-frame').fadeToggle("slow", () => setProject(null));
-    }
+    };
     const handleGet = (_id) => {
         fetch(`/api/post/${_id}`)
             .then(response => response.json())
@@ -44,10 +40,14 @@ export const Subpage = ({ id, logged, hide = f => f }) => {
                         setAuthor( data );
                     })
             })
-    }
-    useEffect( () => {  fetchData(subpage) }, [ id ] );
+    };
+    useEffect( () => {
+        console.log(data);
+        setSubpage(data);
+    },[data]);
+
     if(logged){
-        if(!subpage.title){
+        if(subpage===null || !subpage.title){
             return <Loader/>;
         }
 
@@ -100,7 +100,7 @@ export const Subpage = ({ id, logged, hide = f => f }) => {
         {/*
            Subpage content, for public
         */}
-        if(!subpage.title){
+        if(subpage===null ||!subpage.title){
             return <Loader/>;
         }
         return (

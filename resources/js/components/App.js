@@ -19,24 +19,40 @@ const App = () => {
         isLoggedIn: false,
         user: {}
     });
+    const [post, setPost] = useState(null);
+    const [subpageData, setSubpageData] = useState(null);
+
+    const config = {
+        headers : {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
+        }
+    };
 
     {/*
         Before start check state of user isLoggedIn
     */}
 
-   useEffect(() => {
+   useEffect( () => {
         let state = localStorage[`authState`];
         if (state) {
             let AppState = JSON.parse(state);
             setAuthState(AppState);
         }
-    },[authState]);
+        getPost();
+        subpageFetchData();
+    },[]);
 
     {/*
 
         User Functions
 
     */}
+    const _postData = async (url, data) => await axios.post(url, data, config);
+
+    const _getData = async url => await axios.get(url, config);
+
+    const _deleteData = async url => await axios.delete(url, config);
 
     const _loginUser = (email,password) => {
         let formData = new FormData();
@@ -169,12 +185,25 @@ const App = () => {
         console.log(title_link);
         navigate(`/${title_link}`);
     };
+
+    const getPost = () => {
+        axios.get("/api/post").then(res => {
+            setPost(res.data);
+        });
+    };
+
+    const subpageFetchData = () => {
+        axios.get(`api${window.location.pathname}`).then( res => {
+            setSubpageData(res.data.subpage);
+        });
+    };
+
     return (
         <div className={`row col-12 | p-0`}>
                 <Router>
-                    <Main path={`/`} auth={authState} logout={_logoutUser}>
-                        <Home path={`/`} />
-                        <Subpage path={`:id`} hide={_deletePost} logged={authState.isLoggedIn ? authState.user : false}/>
+                    <Main path={`/`} auth={authState} logout={_logoutUser} changeSubpage={subpageFetchData}>
+                        <Home path={`/`} getpost={post}/>
+                        <Subpage path={`:id`} hide={_deletePost} logged={authState.isLoggedIn ? authState.user : false} data={subpageData}/>
                         <Post path={"/posts/:id"} logged={authState.user} post={_updatePost} hide={_deletePost}/>
                         <Post path={"/post-create"} logged={authState.user} post={_createPost}/>
                         <Login path={"/login"} login={_loginUser} logout={_logoutUser}/>

@@ -11,10 +11,6 @@ export const Main = (props) => {
     const [pageYOffset, setPageYOffset] = useState(window.pageYOffset);
     let { pathname } = props.location;
 
-    open = () =>{
-        setNews(!news);
-    };
-
     useEffect(() => {
         const handleResize = () => setWidth(window.innerWidth);
         const handleScroll = () => setPageYOffset(window.pageYOffset);
@@ -35,8 +31,9 @@ export const Main = (props) => {
             window.removeEventListener('resize', handleResize);
             window.removeEventListener('scroll', handleScroll);
         }
-
     }, [pageYOffset]);
+
+
     return (
         <>
             {/* Navigation */}
@@ -46,6 +43,7 @@ export const Main = (props) => {
                 auth={props.auth}
                 logout={props.logout}
                 scroll={pageYOffset}
+                changeSubpage={props.changeSubpage}
             />
 
             {/* News */}
@@ -67,7 +65,7 @@ export const Main = (props) => {
                         <button
                             className={`news-button | ${news ? `offset-md-5 offset-sm-9 offset-8` : ``} shadow position-fixed py-2 mt-4`}
                             style={{top : bodyMargin, transition: `all 450ms ease`}}
-                            onClick={open}
+                            onClick={()=>setNews(!news)}
                         >
                         <span>a</span><br/>
                         <span>k</span><br/>

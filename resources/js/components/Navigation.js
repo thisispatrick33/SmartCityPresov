@@ -3,7 +3,7 @@ import { Link } from "@reach/router";
 import { NonLogged, Logged, Loader } from "./Utillities";
 import $ from 'jquery';
 
-export const Navigation = React.forwardRef(({path, auth, logout, scroll}, ref) => {
+export const Navigation = React.forwardRef(({path, auth, logout, scroll, changeSubpage}, ref) => {
     const [menu, setMenu] = useState(true);
     const [subpages, setSubpages] = useState([]);
     const [scrollControl, setScrollControl] = useState(false);
@@ -28,6 +28,10 @@ export const Navigation = React.forwardRef(({path, auth, logout, scroll}, ref) =
     if(!subpages){
         return <Loader />;
     }
+    const _changeSubpage = () =>{
+        window.scrollTo(0, 0);
+        changeSubpage();
+    };
 
     return (
             <nav ref={ref} className={`navigation | row col-12 | justify-content-around | align-items-center | position-fixed | ${scrollControl ? `shadow-sm` : ``} | p-0`}>
@@ -47,7 +51,7 @@ export const Navigation = React.forwardRef(({path, auth, logout, scroll}, ref) =
                 <div className={`navigation-items | row col-xl-10 col-lg-10 col-12 | justify-content-around | align-items-center | p-lg-0 my-3`} style={{display : (window.innerWidth > 991 ? `flex` : `none`)}}>
                     {subpages.map(({title, title_link}) => {
                         return (
-                            <div onClick={() => window.scrollTo(0, 0)} key={title_link} className={`nav-item | row col-xl-auto col-lg-2 col-12 | justify-content-xl-start justify-content-lg-start justify-content-center | text-center | p-0 ${path.includes(`${title_link}`) ? `on` : ``}`}>
+                            <div onClick={() => _changeSubpage()} key={title_link} className={`nav-item | row col-xl-auto col-lg-2 col-12 | justify-content-xl-start justify-content-lg-start justify-content-center | text-center | p-0 ${path.includes(`${title_link}`) ? `on` : ``}`}>
                                 <Link className={`col-xl-12 col-lg-10 col-auto | px-xl-0 px-lg-0 px-2| mb-xl-0 mb-lg-0 my-2 | text-center `} to={`/${title_link}`}>{title}</Link>
                                 <hr className={`underline | col-5 | d-xl-flex d-lg-flex d-none | m-0 my-2`}/>
                             </div>
