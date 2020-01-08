@@ -45,6 +45,9 @@ export const Project = ({data,user, close = f => f}) => {
                                 </svg>
                             </span>
                         </div>
+                        <div className="col-12 row price mt-4 py-2 px-5">
+                            <p className={"col-11 mb-3"}>{data.title}</p>
+                        </div>
                         <div className="col-12 row description mt-4 py-2 px-5">
                             <p className={"col-11 mb-3"}>{data.description}</p>
                         </div>

@@ -65140,10 +65140,38 @@ var App = function App() {
       subpageData = _useState6[0],
       setSubpageData = _useState6[1];
 
-  var config = {
+  var _useState7 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(null),
+      _useState8 = _slicedToArray(_useState7, 2),
+      project = _useState8[0],
+      setProject = _useState8[1];
+
+  var _useState9 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(null),
+      _useState10 = _slicedToArray(_useState9, 2),
+      author = _useState10[0],
+      setAuthor = _useState10[1];
+
+  var _useState11 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])([]),
+      _useState12 = _slicedToArray(_useState11, 2),
+      newsPosts = _useState12[0],
+      setNewsPosts = _useState12[1];
+
+  var _useState13 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(null),
+      _useState14 = _slicedToArray(_useState13, 2),
+      subpages = _useState14[0],
+      setSubpages = _useState14[1];
+
+  var config_aplication_json = {
     headers: {
       'Accept': 'application/json',
-      'Content-Type': 'application/json'
+      'Content-Type': 'application/json',
+      'Authorization': ''
+    }
+  };
+  var config_multipart_form_data = {
+    headers: {
+      'Accept': "multipart/form-data",
+      'Content-Type': "multipart/form-data",
+      'Authorization': ''
     }
   };
   {
@@ -65159,8 +65187,9 @@ var App = function App() {
       setAuthState(AppState);
     }
 
-    getPost();
+    getPosts();
     subpageFetchData();
+    getSubpages();
   }, []);
   {
     /*
@@ -65173,7 +65202,7 @@ var App = function App() {
   function () {
     var _ref = _asyncToGenerator(
     /*#__PURE__*/
-    _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee(url, data) {
+    _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee(url, data, config) {
       return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee$(_context) {
         while (1) {
           switch (_context.prev = _context.next) {
@@ -65192,7 +65221,7 @@ var App = function App() {
       }, _callee);
     }));
 
-    return function _postData(_x, _x2) {
+    return function _postData(_x, _x2, _x3) {
       return _ref.apply(this, arguments);
     };
   }();
@@ -65202,7 +65231,7 @@ var App = function App() {
   function () {
     var _ref2 = _asyncToGenerator(
     /*#__PURE__*/
-    _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee2(url) {
+    _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee2(url, config) {
       return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee2$(_context2) {
         while (1) {
           switch (_context2.prev = _context2.next) {
@@ -65221,23 +65250,23 @@ var App = function App() {
       }, _callee2);
     }));
 
-    return function _getData(_x3) {
+    return function _getData(_x4, _x5) {
       return _ref2.apply(this, arguments);
     };
   }();
 
-  var _deleteData =
+  var _putData =
   /*#__PURE__*/
   function () {
     var _ref3 = _asyncToGenerator(
     /*#__PURE__*/
-    _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee3(url) {
+    _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee3(url, data, config) {
       return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee3$(_context3) {
         while (1) {
           switch (_context3.prev = _context3.next) {
             case 0:
               _context3.next = 2;
-              return axios__WEBPACK_IMPORTED_MODULE_9___default.a["delete"](url, config);
+              return axios__WEBPACK_IMPORTED_MODULE_9___default.a.put(url, data, config);
 
             case 2:
               return _context3.abrupt("return", _context3.sent);
@@ -65250,7 +65279,7 @@ var App = function App() {
       }, _callee3);
     }));
 
-    return function _deleteData(_x4) {
+    return function _putData(_x6, _x7, _x8) {
       return _ref3.apply(this, arguments);
     };
   }();
@@ -65259,14 +65288,8 @@ var App = function App() {
     var formData = new FormData();
     formData.append("email", email);
     formData.append("password", password);
-    axios__WEBPACK_IMPORTED_MODULE_9___default.a.post("/api/auth/login/", formData, {
-      headers: {
-        'Content-Type': "application/json",
-        'Accept': "application/json"
-      }
-    }).then(function (response) {
-      return response;
-    }).then(function (_ref4) {
+
+    _postData("/api/auth/login/", formData, config_aplication_json).then(function (_ref4) {
       var data = _ref4.data;
 
       if (data.success) {
@@ -65283,6 +65306,8 @@ var App = function App() {
         };
         localStorage["authState"] = JSON.stringify(_authState);
         setAuthState(_authState.user);
+        config_aplication_json.headers['Authorization'] = 'Bearer ' + _authState.user.auth_token;
+        config_multipart_form_data.headers['Authorization'] = 'Bearer ' + _authState.user.auth_token;
         Object(_reach_router__WEBPACK_IMPORTED_MODULE_3__["navigate"])("/");
       } else alert("Nespr\xE1vne prihlasovacie \xFAdaje");
 
@@ -65300,6 +65325,8 @@ var App = function App() {
     };
     localStorage["authState"] = JSON.stringify(authState);
     setAuthState(authState);
+    config_aplication_json.headers['Authorization'] = null;
+    config_multipart_form_data.headers['Authorization'] = null;
   };
 
   {
@@ -65315,6 +65342,7 @@ var App = function App() {
         user_id = _ref5.user_id,
         subpage_id = _ref5.subpage_id,
         images = _ref5.images;
+    config_multipart_form_data.headers['Authorization'] = 'Bearer ' + authState.user.auth_token;
     var formData = new FormData();
     formData.append("title", title);
     formData.append("description", description);
@@ -65322,22 +65350,13 @@ var App = function App() {
     formData.append("user_id", user_id);
     formData.append("subpage_id", subpage_id);
 
-    if (!images) {
-      console.log("sem som");
-    } else {
-      console.log("aj tu som");
+    if (!images) {} else {
       Array.from(images).forEach(function (image) {
         return formData.append("images[]", image);
       });
     }
 
-    axios__WEBPACK_IMPORTED_MODULE_9___default.a.post("/api/post", formData, {
-      headers: {
-        'Content-Type': "multipart/form-data",
-        'Accept': "multipart/form-data",
-        'Authorization': "Bearer ".concat(authState.user.auth_token)
-      }
-    }).then(function (response) {
+    _postData("/api/post", formData, config_multipart_form_data).then(function (response) {
       console.log(response);
       alert(response.status == 200 ? "\xDAspe\u0161ne si vytvoril \u010Dl\xE1nok." : "\u010Cl\xE1nok sa nepodarilo vytvori\u0165!");
     });
@@ -65351,6 +65370,7 @@ var App = function App() {
         subpage_id = _ref6.subpage_id,
         images = _ref6.images,
         updated_images = _ref6.updated_images;
+    config_multipart_form_data.headers['Authorization'] = 'Bearer ' + authState.user.auth_token;
     var formData = new FormData();
     formData.append("id", id);
     formData.append("title", title);
@@ -65363,13 +65383,8 @@ var App = function App() {
     Array.from(updated_images).forEach(function (image) {
       return formData.append("updated_images[]", image);
     });
-    axios__WEBPACK_IMPORTED_MODULE_9___default.a.post("/api/post/edit", formData, {
-      headers: {
-        'Content-Type': "multipart/form-data",
-        'Accept': "multipart/form-data",
-        'Authorization': "Bearer ".concat(authState.user.auth_token)
-      }
-    }).then(function (response) {
+
+    _postData("/api/post/edit", formData, config_multipart_form_data).then(function (response) {
       return response;
     }).then(function (_ref7) {
       var data = _ref7.data;
@@ -65378,31 +65393,63 @@ var App = function App() {
   };
 
   var _deletePost = function _deletePost(id, title_link) {
-    console.log(title_link);
-    axios__WEBPACK_IMPORTED_MODULE_9___default.a.put("/api/post/delete", {
+    config_aplication_json.headers['Authorization'] = 'Bearer ' + authState.user.auth_token;
+    console.log(config_aplication_json);
+
+    _putData("/api/post/delete", {
       id: id
-    }, {
-      headers: {
-        'Content-Type': "application/json",
-        'Accept': "application/json",
-        'Authorization': "Bearer ".concat(authState.user.auth_token)
-      }
-    }).then(function (response) {
+    }, config_aplication_json).then(function (response) {
       alert(response.status == 200 ? "\u010Cl\xE1nok sa \xFAspe\u0161ne vymazal" : "\u010Cl\xE1nok sa nepodarilo vymaza\u0165!");
     });
-    console.log(title_link);
+
     Object(_reach_router__WEBPACK_IMPORTED_MODULE_3__["navigate"])("/".concat(title_link));
   };
 
-  var getPost = function getPost() {
-    axios__WEBPACK_IMPORTED_MODULE_9___default.a.get("/api/post").then(function (res) {
+  var getPosts = function getPosts() {
+    _getData("/api/post", config_aplication_json).then(function (res) {
       setPost(res.data);
     });
   };
 
   var subpageFetchData = function subpageFetchData() {
-    axios__WEBPACK_IMPORTED_MODULE_9___default.a.get("api".concat(window.location.pathname)).then(function (res) {
+    _getData("api".concat(window.location.pathname), config_aplication_json).then(function (res) {
       setSubpageData(res.data.subpage);
+    });
+  };
+
+  var getPost = function getPost(_id) {
+    fetch("/api/post/".concat(_id)).then(function (response) {
+      return response.json();
+    }).then(function (postData) {
+      setProject(postData);
+      console.log(postData);
+      fetch("/api/author/".concat(postData.user_id)).then(function (response) {
+        return response.json();
+      }).then(function (_ref8) {
+        var data = _ref8.data;
+        setAuthor(data);
+      });
+    });
+  };
+
+  var getNews = function getNews() {
+    fetch("/api/news").then(function (response) {
+      return response.json();
+    }).then(function (posts) {
+      setNewsPosts(posts.reverse());
+    });
+  };
+
+  var closePost = function closePost() {
+    setProject(null);
+    setAuthor([]);
+  };
+
+  var getSubpages = function getSubpages() {
+    fetch("/api/").then(function (response) {
+      return response.json();
+    }).then(function (subpages) {
+      setSubpages(subpages);
     });
   };
 
@@ -65412,23 +65459,40 @@ var App = function App() {
     path: "/",
     auth: authState,
     logout: _logoutUser,
-    changeSubpage: subpageFetchData
+    changeSubpage: subpageFetchData,
+    getNewsPosts: getNews,
+    newsPosts: newsPosts,
+    subpages: subpages
   }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_Home__WEBPACK_IMPORTED_MODULE_4__["Home"], {
     path: "/",
-    getpost: post
+    getposts: post,
+    getpost: getPost,
+    project: project,
+    author: author,
+    closePost: closePost
   }), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_subpage_Subpage__WEBPACK_IMPORTED_MODULE_6__["Subpage"], {
     path: ":id",
     hide: _deletePost,
     logged: authState.isLoggedIn ? authState.user : false,
-    data: subpageData
+    data: subpageData,
+    getpost: getPost,
+    project: project,
+    author: author,
+    closePost: closePost
   }), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_news_Post__WEBPACK_IMPORTED_MODULE_7__["Post"], {
     path: "/posts/:id",
     logged: authState.user,
+    getpost: getPost,
+    project: project,
+    author: author,
     post: _updatePost,
     hide: _deletePost
   }), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_news_Post__WEBPACK_IMPORTED_MODULE_7__["Post"], {
     path: "/post-create",
     logged: authState.user,
+    getpost: getPost,
+    project: project,
+    author: author,
     post: _createPost
   }), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_admin_Login__WEBPACK_IMPORTED_MODULE_8__["Login"], {
     path: "/login",
@@ -65475,51 +65539,31 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 
 var Home = function Home(_ref) {
-  var getpost = _ref.getpost;
+  var getposts = _ref.getposts,
+      _ref$getpost = _ref.getpost,
+      getpost = _ref$getpost === void 0 ? function (f) {
+    return f;
+  } : _ref$getpost,
+      project = _ref.project,
+      author = _ref.author,
+      closePost = _ref.closePost;
 
   var _useState = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])([]),
       _useState2 = _slicedToArray(_useState, 2),
       post = _useState2[0],
       setPost = _useState2[1];
 
-  var _useState3 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(null),
-      _useState4 = _slicedToArray(_useState3, 2),
-      project = _useState4[0],
-      setProject = _useState4[1];
-
-  var _useState5 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])([]),
-      _useState6 = _slicedToArray(_useState5, 2),
-      author = _useState6[0],
-      setAuthor = _useState6[1];
-
-  var handleGet = function handleGet(_id) {
-    fetch("/api/post/".concat(_id)).then(function (response) {
-      return response.json();
-    }).then(function (postData) {
-      setProject(postData);
-      console.log(postData);
-      fetch("/api/author/".concat(postData.user_id)).then(function (response) {
-        return response.json();
-      }).then(function (_ref2) {
-        var data = _ref2.data;
-        setAuthor(data);
-      });
-    });
-  };
-
   var close = function close() {
     jquery__WEBPACK_IMPORTED_MODULE_1___default()(".project-details-frame .project-content").animate({
       marginTop: "100vh",
       easing: "easeInOutCirc"
     }, 1000);
-    jquery__WEBPACK_IMPORTED_MODULE_1___default()(".project-details-frame").fadeToggle("slow", function () {
-      return setProject(null);
-    });
+    jquery__WEBPACK_IMPORTED_MODULE_1___default()(".project-details-frame").fadeToggle("slow", closePost);
   };
 
   Object(react__WEBPACK_IMPORTED_MODULE_0__["useEffect"])(function () {
-    setPost(getpost);
-  }, [getpost]);
+    setPost(getposts);
+  }, [getposts]);
 
   if (post !== null) {
     return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
@@ -65542,17 +65586,17 @@ var Home = function Home(_ref) {
       className: "projects-title | col-12 | my-5 p-0"
     }, "projekty smartcity pre\u0161ov"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
       className: "col-12 row projects p-0 align-items-start"
-    }, post.map(function (_ref3) {
-      var id = _ref3.id,
-          title = _ref3.title,
-          description = _ref3.description,
-          user = _ref3.user,
-          image = _ref3.image,
-          updated_at = _ref3.updated_at;
+    }, post.map(function (_ref2) {
+      var id = _ref2.id,
+          title = _ref2.title,
+          description = _ref2.description,
+          user = _ref2.user,
+          image = _ref2.image,
+          updated_at = _ref2.updated_at;
       var written = new Date(updated_at.replace(" ", "T"));
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         onClick: function onClick() {
-          return handleGet(id);
+          return getpost(id);
         },
         className: "project-frame | row col-xl-4 col-lg-4 col-md-6 col-sm-12 col-12 | justify-content-xl-start justify-content-lg-start justify-content-md-center justify-content-sm-center justify-content-center | mb-4 p-0",
         key: id
@@ -65671,7 +65715,8 @@ var Main = function Main(props) {
     auth: props.auth,
     logout: props.logout,
     scroll: pageYOffset,
-    changeSubpage: props.changeSubpage
+    changeSubpage: props.changeSubpage,
+    subpages: props.subpages
   }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "main-container | row",
     style: {
@@ -65688,7 +65733,9 @@ var Main = function Main(props) {
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "col-12 p-0 row"
   }, pathname.length > 1 ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_news_News__WEBPACK_IMPORTED_MODULE_1__["News"], {
-    loggedIn: props.auth.isLoggedIn
+    loggedIn: props.auth.isLoggedIn,
+    getposts: props.getNewsPosts,
+    posts: props.newsPosts
   }) : "")), width <= 991 ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
     className: "news-button | ".concat(news ? "offset-md-5 offset-sm-9 offset-8" : "", " shadow position-fixed py-2 mt-4"),
     style: {
@@ -65753,34 +65800,13 @@ var Navigation = react__WEBPACK_IMPORTED_MODULE_0___default.a.forwardRef(functio
       auth = _ref.auth,
       logout = _ref.logout,
       scroll = _ref.scroll,
-      changeSubpage = _ref.changeSubpage;
+      changeSubpage = _ref.changeSubpage,
+      subpages = _ref.subpages;
 
   var _useState = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(true),
       _useState2 = _slicedToArray(_useState, 2),
       menu = _useState2[0],
       setMenu = _useState2[1];
-
-  var _useState3 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])([]),
-      _useState4 = _slicedToArray(_useState3, 2),
-      subpages = _useState4[0],
-      setSubpages = _useState4[1];
-
-  var _useState5 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(false),
-      _useState6 = _slicedToArray(_useState5, 2),
-      scrollControl = _useState6[0],
-      setScrollControl = _useState6[1];
-
-  Object(react__WEBPACK_IMPORTED_MODULE_0__["useEffect"])(function () {
-    setScrollControl(scroll > 0);
-
-    if (subpages[0] === undefined) {
-      fetch("/api/").then(function (response) {
-        return response.json();
-      }).then(function (subpages) {
-        setSubpages(subpages);
-      });
-    }
-  }, [scroll]);
 
   open = function open(e) {
     e.preventDefault();
@@ -65800,7 +65826,7 @@ var Navigation = react__WEBPACK_IMPORTED_MODULE_0___default.a.forwardRef(functio
 
   return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("nav", {
     ref: ref,
-    className: "navigation | row col-12 | justify-content-around | align-items-center | position-fixed | ".concat(scrollControl ? "shadow-sm" : "", " | p-0")
+    className: "navigation | row col-12 | justify-content-around | align-items-center | position-fixed | ".concat(scroll > 0 ? "shadow-sm" : "", " | p-0")
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "navigation-header | row col-xl-auto col-lg-auto col-md-12 col-sm-12 col-12 | justify-content-xl-start justify-content-lg-start justify-content-end | p-0"
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_reach_router__WEBPACK_IMPORTED_MODULE_1__["Link"], {
@@ -66017,32 +66043,16 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _Utillities__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../Utillities */ "./resources/js/components/Utillities.js");
 /* harmony import */ var _PostLookup__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./PostLookup */ "./resources/js/components/news/PostLookup.js");
 /* harmony import */ var _reach_router__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @reach/router */ "./node_modules/@reach/router/es/index.js");
-function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _nonIterableRest(); }
-
-function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance"); }
-
-function _iterableToArrayLimit(arr, i) { var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
-
-function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
-
 
 
 
 
 var News = function News(_ref) {
-  var loggedIn = _ref.loggedIn;
-
-  var _useState = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])([]),
-      _useState2 = _slicedToArray(_useState, 2),
-      posts = _useState2[0],
-      setPosts = _useState2[1];
-
+  var loggedIn = _ref.loggedIn,
+      getposts = _ref.getposts,
+      posts = _ref.posts;
   Object(react__WEBPACK_IMPORTED_MODULE_0__["useEffect"])(function () {
-    fetch("/api/news").then(function (response) {
-      return response.json();
-    }).then(function (posts) {
-      setPosts(posts.reverse());
-    });
+    getposts();
   }, []);
 
   if (!posts) {
@@ -66153,7 +66163,13 @@ var Post = function Post(_ref) {
       post = _ref$post === void 0 ? function (f) {
     return f;
   } : _ref$post,
-      location = _ref.location;
+      location = _ref.location,
+      _ref$getpost = _ref.getpost,
+      getpost = _ref$getpost === void 0 ? function (f) {
+    return f;
+  } : _ref$getpost,
+      project = _ref.project,
+      author = _ref.author;
 
   var _idControl = id !== undefined;
 
@@ -66174,18 +66190,17 @@ var Post = function Post(_ref) {
 
   if (_idControl) {
     Object(react__WEBPACK_IMPORTED_MODULE_0__["useEffect"])(function () {
-      fetch("/api/post/".concat(id)).then(function (response) {
-        return response.json();
-      }).then(function (postData) {
-        setPostData(postData);
-        setImages(postData.images);
-        fetch("/api/author/".concat(postData.user_id)).then(function (response) {
-          return response.json();
-        }).then(function (user) {
-          setUser(user);
-        });
-      });
-    }, [id]);
+      if (!author) {
+        getpost(id);
+      } else {
+        console.log('project');
+        console.log(project);
+        console.log(author);
+        setPostData(project);
+        setImages(project.images);
+        setUser(author);
+      }
+    }, [id, project]);
   }
 
   var handleSubmit = function handleSubmit(e) {
@@ -66205,7 +66220,7 @@ var Post = function Post(_ref) {
           var id = _ref3.id;
           return id;
         }),
-        user_id: _idControl ? user.data.id : logged.id,
+        user_id: _idControl ? user.id : logged.id,
         subpage_id: location.state.subpage ? location.state.subpage : ""
       }));
     }
@@ -66219,11 +66234,14 @@ var Post = function Post(_ref) {
 
   var date = new Date();
 
-  if ((!postData || !user.data) && _idControl) {
+  if ((!postData || !user) && _idControl) {
+    console.log('loader');
+    console.log(postData);
+    console.log(user);
     return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Utillities__WEBPACK_IMPORTED_MODULE_1__["Loader"], null);
   }
 
-  var control = _idControl ? user.data.name === logged.name : true;
+  var control = _idControl ? user.name === logged.name : true;
 
   if (logged.name) {
     return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("form", {
@@ -66356,7 +66374,7 @@ var Post = function Post(_ref) {
       disabled: true,
       name: "user_id",
       className: "col-8 px-0 py-2 ml-4",
-      value: _idControl ? user.data.name : logged.name
+      value: _idControl ? user.name : logged.name
     })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
       className: "date | row col-xl-6 col-lg-6 col-12 | justify-content-start | mb-5 p-2 ",
       htmlFor: "title"
@@ -66451,7 +66469,7 @@ var Post = function Post(_ref) {
       className: "col-10 mb-5 row autor p-2 justify-content-start"
     }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
       className: "col-lg-6 col-sm-12 px-0 py-2 "
-    }, user.data.name), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
+    }, user.name), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
       className: "col-lg-6 col-sm-12 px-0 py-2 "
     }, String(new Date(written).getDay()) + "/" + (new Date(written).getMonth() + 1) + "/" + new Date(written).getFullYear(), " ")));
   }
@@ -66623,6 +66641,10 @@ var Project = function Project(_ref) {
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("polygon", {
     points: "357 35.7 321.3 0 178.5 142.8 35.7 0 0 35.7 142.8 178.5 0 321.3 35.7 357 178.5 214.2 321.3 357 357 321.3 214.2 178.5"
   })))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "col-12 row price mt-4 py-2 px-5"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
+    className: "col-11 mb-3"
+  }, data.title)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "col-12 row description mt-4 py-2 px-5"
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
     className: "col-11 mb-3"
@@ -66678,7 +66700,14 @@ var Subpage = function Subpage(_ref) {
       hide = _ref$hide === void 0 ? function (f) {
     return f;
   } : _ref$hide,
-      data = _ref.data;
+      data = _ref.data,
+      _ref$getpost = _ref.getpost,
+      getpost = _ref$getpost === void 0 ? function (f) {
+    return f;
+  } : _ref$getpost,
+      project = _ref.project,
+      author = _ref.author,
+      closePost = _ref.closePost;
   {
     /*
        Auxiliary variable for store subpage, project and author data
@@ -66689,16 +66718,6 @@ var Subpage = function Subpage(_ref) {
       _useState2 = _slicedToArray(_useState, 2),
       subpage = _useState2[0],
       setSubpage = _useState2[1];
-
-  var _useState3 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(null),
-      _useState4 = _slicedToArray(_useState3, 2),
-      project = _useState4[0],
-      setProject = _useState4[1];
-
-  var _useState5 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])([]),
-      _useState6 = _slicedToArray(_useState5, 2),
-      author = _useState6[0],
-      setAuthor = _useState6[1];
 
   {
     /*
@@ -66715,23 +66734,7 @@ var Subpage = function Subpage(_ref) {
       marginTop: '100vh',
       easing: 'easeInOutCirc'
     }, 1000);
-    jquery__WEBPACK_IMPORTED_MODULE_4___default()('.project-details-frame').fadeToggle("slow", function () {
-      return setProject(null);
-    });
-  };
-
-  var handleGet = function handleGet(_id) {
-    fetch("/api/post/".concat(_id)).then(function (response) {
-      return response.json();
-    }).then(function (postData) {
-      setProject(postData);
-      fetch("/api/author/".concat(postData.user_id)).then(function (response) {
-        return response.json();
-      }).then(function (_ref2) {
-        var data = _ref2.data;
-        setAuthor(data);
-      });
-    });
+    jquery__WEBPACK_IMPORTED_MODULE_4___default()('.project-details-frame').fadeToggle("slow", closePost);
   };
 
   Object(react__WEBPACK_IMPORTED_MODULE_0__["useEffect"])(function () {
@@ -66740,7 +66743,7 @@ var Subpage = function Subpage(_ref) {
   }, [data]);
 
   if (logged) {
-    if (subpage === null || !subpage.title) {
+    if (subpage === null || subpage === undefined || !subpage.title) {
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Utillities__WEBPACK_IMPORTED_MODULE_1__["Loader"], null);
     }
 
@@ -66761,13 +66764,13 @@ var Subpage = function Subpage(_ref) {
       className: "projects-category"
     }, subpage.title)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
       className: "projects | row col-12 | p-0"
-    }, subpage.posts.map(function (_ref3) {
-      var id = _ref3.id,
-          title = _ref3.title,
-          description = _ref3.description,
-          user = _ref3.user,
-          image = _ref3.image,
-          updated_at = _ref3.updated_at;
+    }, subpage.posts.map(function (_ref2) {
+      var id = _ref2.id,
+          title = _ref2.title,
+          description = _ref2.description,
+          user = _ref2.user,
+          image = _ref2.image,
+          updated_at = _ref2.updated_at;
       var written = new Date(updated_at.replace(' ', 'T'));
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "project-frame | row col-xl-4 col-lg-4 col-md-6 col-sm-12 col-12 | justify-content-xl-start justify-content-lg-start justify-content-md-center justify-content-sm-center justify-content-center | mb-4 p-0",
@@ -66860,7 +66863,7 @@ var Subpage = function Subpage(_ref) {
       */
     }
 
-    if (subpage === null || !subpage.title) {
+    if (subpage === null || subpage === undefined || !subpage.title) {
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Utillities__WEBPACK_IMPORTED_MODULE_1__["Loader"], null);
     }
 
@@ -66881,17 +66884,17 @@ var Subpage = function Subpage(_ref) {
       className: "projects-category"
     }, subpage.title)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
       className: "col-12 row projects p-0 align-items-start"
-    }, subpage.posts.map(function (_ref4) {
-      var id = _ref4.id,
-          title = _ref4.title,
-          description = _ref4.description,
-          user = _ref4.user,
-          image = _ref4.image,
-          updated_at = _ref4.updated_at;
+    }, subpage.posts.map(function (_ref3) {
+      var id = _ref3.id,
+          title = _ref3.title,
+          description = _ref3.description,
+          user = _ref3.user,
+          image = _ref3.image,
+          updated_at = _ref3.updated_at;
       var written = new Date(updated_at.replace(' ', 'T'));
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         onClick: function onClick() {
-          return handleGet(id);
+          return getpost(id);
         },
         className: "project-frame | row col-xl-4 col-lg-4 col-md-6 col-sm-12 col-12 | justify-content-xl-start justify-content-lg-start justify-content-md-center justify-content-sm-center justify-content-center | mb-4 p-0",
         key: id

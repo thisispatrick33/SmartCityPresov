@@ -1,25 +1,25 @@
 import React, { useEffect, useState } from "react";
 import { Loader } from "../Utillities";
 
-export const Post = ({ id, logged, post = f => f , location }) => {
+export const Post = ({ id, logged, post = f => f , location, getpost = f => f, project, author }) => {
     let _idControl = (id !== undefined);
     const [postData, setPostData] = useState([]);
     const [user, setUser] = useState([]);
     const [images, setImages] = useState([]);
     if(_idControl){
         useEffect(() => {
-            fetch(`/api/post/${id}`)
-                .then(response => response.json())
-                .then(postData => {
-                    setPostData(postData);
-                    setImages(postData.images)
-                    fetch(`/api/author/${postData.user_id}`)
-                        .then(response => response.json())
-                        .then(user => {
-                            setUser(user);
-                        })
-                })
-        }, [id]);
+            if(!author){
+                getpost(id);
+            }
+            else {
+                console.log('project');
+                console.log(project);
+                console.log(author);
+                setPostData(project);
+                setImages(project.images);
+                setUser(author);
+            }
+        }, [id, project]);
     }
     const handleSubmit = e => {
         e.preventDefault();
@@ -34,7 +34,7 @@ export const Post = ({ id, logged, post = f => f , location }) => {
             post({
                 ...postData,
                 updated_images: images.map(({id}) => id),
-                user_id: _idControl ? user.data.id : logged.id,
+                user_id: _idControl ? user.id : logged.id,
                 subpage_id: location.state.subpage ? location.state.subpage : ""
             });
         }
@@ -45,10 +45,13 @@ export const Post = ({ id, logged, post = f => f , location }) => {
     const handleImages = index => setImages(images.filter((image) => image.id !== index));
 
     const date = new Date();
-    if((!postData || !user.data) && _idControl){
+    if((!postData || !user) && _idControl){
+        console.log('loader');
+        console.log(postData);
+        console.log(user);
         return <Loader />;
     }
-    let control = _idControl ? (user.data.name  === logged.name)  : true;
+    let control = _idControl ? (user.name  === logged.name)  : true;
     if(logged.name){
         return (
             <form encType="multipart/form-data" onSubmit={handleSubmit} method={_idControl ? `PUT` : `POST`} className={`post-form | row col-12 | mt-4`}>
@@ -135,7 +138,7 @@ export const Post = ({ id, logged, post = f => f , location }) => {
                                     <hr/>
                                 </div>
                                 <br/>
-                                <input disabled={true} name={"user_id"} className={"col-8 px-0 py-2 ml-4"} value={_idControl ? user.data.name : logged.name} />
+                                <input disabled={true} name={"user_id"} className={"col-8 px-0 py-2 ml-4"} value={_idControl ? user.name : logged.name} />
                             </label>
                             <label className={`date | row col-xl-6 col-lg-6 col-12 | justify-content-start | mb-5 p-2 `} htmlFor="title">
                                 <h4 className={`col-11 | mb-0 ml-4 mb-0 p-0`}>dátum - posledná zmena</h4>
@@ -205,7 +208,7 @@ export const Post = ({ id, logged, post = f => f , location }) => {
                     <p>{postData.description}</p>
                 </div>
                 <div className={"col-10 mb-5 row autor p-2 justify-content-start"}>
-                    <p className={"col-lg-6 col-sm-12 px-0 py-2 "} >{user.data.name}</p>
+                    <p className={"col-lg-6 col-sm-12 px-0 py-2 "} >{user.name}</p>
                     <p className={"col-lg-6 col-sm-12 px-0 py-2 "}>{ String(new Date(written).getDay()) + `/` + (new Date(written).getMonth()+1) + `/` + new Date(written).getFullYear() } </p>
                 </div>
 

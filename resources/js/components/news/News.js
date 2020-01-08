@@ -2,16 +2,13 @@ import React, {useEffect, useState} from "react";
 import { Loader } from "../Utillities";
 import { PostLookup } from "./PostLookup";
 import { Link } from "@reach/router";
-export const News = ({loggedIn}) => {
-    const [posts, setPosts] = useState([]);
+export const News = ({loggedIn, getposts, posts}) => {
 
     useEffect(() => {
-        fetch(`/api/news`)
-            .then(response => response.json())
-            .then(posts => {
-                setPosts(posts.reverse());
-            });
+        getposts();
     }, []);
+
+
     if(!posts){
         return <Loader />;
     }

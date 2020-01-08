@@ -4,15 +4,13 @@ import { Project } from './Project';
 import { Link } from "@reach/router";
 import $ from "jquery";
 
-export const Subpage = ({id, logged, hide = f => f, data}) => {
+export const Subpage = ({id, logged, hide = f => f, data, getpost = f => f, project, author, closePost}) => {
 
     {/*
         Auxiliary variable for store subpage, project and author data
     */}
 
     const [subpage, setSubpage] = useState([]);
-    const [project, setProject] = useState(null);
-    const [author, setAuthor] = useState([]);
 
     {/*
         Handlers
@@ -27,27 +25,16 @@ export const Subpage = ({id, logged, hide = f => f, data}) => {
             marginTop: '100vh',
             easing: 'easeInOutCirc'
         },1000);
-        $('.project-details-frame').fadeToggle("slow", () => setProject(null));
+        $('.project-details-frame').fadeToggle("slow", closePost);
     };
-    const handleGet = (_id) => {
-        fetch(`/api/post/${_id}`)
-            .then(response => response.json())
-            .then(postData => {
-                setProject(postData);
-                fetch(`/api/author/${postData.user_id}`)
-                    .then(response => response.json())
-                    .then(({data}) => {
-                        setAuthor( data );
-                    })
-            })
-    };
+
     useEffect( () => {
         console.log(data);
         setSubpage(data);
     },[data]);
 
     if(logged){
-        if(subpage===null || !subpage.title){
+        if(subpage===null || subpage===undefined || !subpage.title){
             return <Loader/>;
         }
 
@@ -96,11 +83,10 @@ export const Subpage = ({id, logged, hide = f => f, data}) => {
         );
     }
     else{
-
         {/*
            Subpage content, for public
         */}
-        if(subpage===null ||!subpage.title){
+        if(subpage===null || subpage===undefined || !subpage.title){
             return <Loader/>;
         }
         return (
@@ -112,7 +98,7 @@ export const Subpage = ({id, logged, hide = f => f, data}) => {
                     <div className="col-12 row projects p-0 align-items-start">
                         {subpage.posts.map(({id, title, description, user, image, updated_at}) => {
                             let written = new Date(updated_at.replace(' ', 'T'));
-                            return ( <div onClick={() => handleGet(id)} className={`project-frame | row col-xl-4 col-lg-4 col-md-6 col-sm-12 col-12 | justify-content-xl-start justify-content-lg-start justify-content-md-center justify-content-sm-center justify-content-center | mb-4 p-0`} key={id}>
+                            return ( <div onClick={() => getpost(id)} className={`project-frame | row col-xl-4 col-lg-4 col-md-6 col-sm-12 col-12 | justify-content-xl-start justify-content-lg-start justify-content-md-center justify-content-sm-center justify-content-center | mb-4 p-0`} key={id}>
                                     <div className={`shadow project | row col-10 | align-items-start | p-0 `}>
                                         <div className={`row col-12 | p-0 `}>
                                             <div className={`col-12 | p-0`}><img src={`../${image.substr(image.indexOf('img'))}`} alt="" className={`col-12 | p-0`} style={{borderRadius : "10px 10px 0 0"}}/></div>

@@ -15,17 +15,31 @@ const App = () => {
         Auxiliary variable for store user data
     */}
 
-    const [authState, setAuthState] = useState({
-        isLoggedIn: false,
-        user: {}
-    });
+    const [authState, setAuthState] = useState({isLoggedIn: false, user: {}});
     const [post, setPost] = useState(null);
     const [subpageData, setSubpageData] = useState(null);
 
-    const config = {
+    const [project, setProject] = useState(null);
+    const [author, setAuthor] = useState(null);
+
+    const [newsPosts, setNewsPosts] = useState([]);
+
+    const [subpages, setSubpages] = useState(null);
+
+
+    const config_aplication_json = {
         headers : {
             'Accept': 'application/json',
             'Content-Type': 'application/json',
+            'Authorization' : '',
+        }
+    };
+
+    const config_multipart_form_data = {
+        headers : {
+            'Accept' : `multipart/form-data`,
+            'Content-Type' : `multipart/form-data`,
+            'Authorization' : '',
         }
     };
 
@@ -38,9 +52,12 @@ const App = () => {
         if (state) {
             let AppState = JSON.parse(state);
             setAuthState(AppState);
+
         }
-        getPost();
+        getPosts();
         subpageFetchData();
+        getSubpages();
+
     },[]);
 
     {/*
@@ -48,26 +65,17 @@ const App = () => {
         User Functions
 
     */}
-    const _postData = async (url, data) => await axios.post(url, data, config);
+    const _postData = async (url, data, config) => await axios.post(url, data, config);
 
-    const _getData = async url => await axios.get(url, config);
+    const _getData = async (url, config) => await axios.get(url, config);
 
-    const _deleteData = async url => await axios.delete(url, config);
+    const _putData = async (url, data, config) => await axios.put(url, data, config);
 
     const _loginUser = (email,password) => {
         let formData = new FormData();
         formData.append(`email`, email);
         formData.append(`password`, password);
-        axios
-            .post(`/api/auth/login/`, formData,{
-                headers : {
-                    'Content-Type' : `application/json`,
-                    'Accept' : `application/json`,
-                }
-            })
-            .then(response => {
-                return response;
-            })
+        _postData(`/api/auth/login/`, formData, config_aplication_json)
             .then(({data}) => {
                 if (data.success) {
                     alert(`Prihlásenie prebehlo úspešne !`);
@@ -83,6 +91,8 @@ const App = () => {
                     };
                     localStorage[`authState`] = JSON.stringify(authState);
                     setAuthState(authState.user);
+                    config_aplication_json.headers['Authorization'] =  'Bearer '+authState.user.auth_token;
+                    config_multipart_form_data.headers['Authorization'] =  'Bearer '+authState.user.auth_token;
                     navigate(`/`);
                 } else alert(`Nesprávne prihlasovacie údaje`);
 
@@ -98,13 +108,11 @@ const App = () => {
             });
     };
     const _logoutUser = () => {
-        let authState = {
-            isLoggedIn: false,
-            user: {}
-        };
-
+        let authState = { isLoggedIn: false, user: {}};
         localStorage[`authState`] = JSON.stringify(authState);
         setAuthState(authState);
+        config_aplication_json.headers['Authorization'] =  null;
+        config_multipart_form_data.headers['Authorization'] =  null;
     };
 
 
@@ -115,6 +123,7 @@ const App = () => {
     */}
 
     const _createPost = ( {title, description, price, user_id, subpage_id, images } ) => {
+        config_multipart_form_data.headers['Authorization'] =  'Bearer '+authState.user.auth_token;
         let formData = new FormData();
         formData.append(`title`, title);
         formData.append(`description`, description);
@@ -122,21 +131,12 @@ const App = () => {
         formData.append(`user_id`, user_id);
         formData.append(`subpage_id`, subpage_id);
         if(!images){
-            console.log("sem som");
         }
         else {
-            console.log("aj tu som");
             Array.from(images).forEach(image => formData.append(`images[]`, image));
         }
 
-        axios
-            .post(`/api/post`, formData,{
-                headers : {
-                    'Content-Type' : `multipart/form-data`,
-                    'Accept' : `multipart/form-data`,
-                    'Authorization' : `Bearer ${authState.user.auth_token}`
-                }
-            })
+        _postData(`/api/post`, formData, config_multipart_form_data)
             .then(response => {
                 console.log(response);
                 alert(response.status==200 ? `Úspešne si vytvoril článok.` : `Článok sa nepodarilo vytvoriť!`);
@@ -145,6 +145,7 @@ const App = () => {
     };
 
     const _updatePost = ( {id, title, description, price, subpage_id, images, updated_images} ) => {
+        config_multipart_form_data.headers['Authorization'] =  'Bearer '+authState.user.auth_token;
         const formData = new FormData();
         formData.append(`id`, id);
         formData.append(`title`, title);
@@ -154,13 +155,7 @@ const App = () => {
         Array.from(images).forEach(image => formData.append(`images[]`, image));
         Array.from(updated_images).forEach(image => formData.append(`updated_images[]`, image));
 
-        axios.post(`/api/post/edit`, formData,{
-            headers : {
-                'Content-Type' : `multipart/form-data`,
-                'Accept' : `multipart/form-data`,
-                'Authorization' : `Bearer ${authState.user.auth_token}`
-            }
-        })
+        _postData(`/api/post/edit`, formData, config_multipart_form_data)
             .then(response => {
                 return response;
             })
@@ -171,41 +166,61 @@ const App = () => {
 
 
     const _deletePost = (id, title_link) => {
-        console.log(title_link);
-        axios.put(`/api/post/delete`, {id : id},{
-            headers : {
-                'Content-Type' : `application/json`,
-                'Accept' : `application/json`,
-                'Authorization' : `Bearer ${authState.user.auth_token}`
-            }
-        })
-            .then(response => {
+        config_aplication_json.headers['Authorization'] =  'Bearer '+authState.user.auth_token;
+        console.log(config_aplication_json);
+        _putData(`/api/post/delete`, {id : id}, config_aplication_json).then(response => {
                 alert(response.status==200 ? `Článok sa úspešne vymazal` : `Článok sa nepodarilo vymazať!`);
-            })
-        console.log(title_link);
+            });
         navigate(`/${title_link}`);
     };
 
-    const getPost = () => {
-        axios.get("/api/post").then(res => {
-            setPost(res.data);
-        });
+    const getPosts = () => { _getData("/api/post", config_aplication_json).then(res => { setPost(res.data); }); };
+
+    const subpageFetchData = () => { _getData(`api${window.location.pathname}`, config_aplication_json).then( res => { setSubpageData(res.data.subpage); }); };
+
+    const getPost = _id => {
+        fetch(`/api/post/${_id}`)
+            .then(response => response.json())
+            .then(postData => {
+                setProject(postData);
+                console.log(postData);
+                fetch(`/api/author/${postData.user_id}`)
+                    .then(response => response.json())
+                    .then(({ data }) => {
+                        setAuthor(data);
+                    });
+            });
     };
 
-    const subpageFetchData = () => {
-        axios.get(`api${window.location.pathname}`).then( res => {
-            setSubpageData(res.data.subpage);
-        });
+    const getNews = () => {
+        fetch(`/api/news`)
+            .then(response => response.json())
+            .then(posts => {
+                setNewsPosts(posts.reverse());
+            });
+    };
+
+    const closePost = () => {
+        setProject(null);
+        setAuthor([]);
+    };
+
+    const getSubpages = () =>{
+        fetch(`/api/`)
+            .then(response => response.json())
+            .then(subpages => {
+                setSubpages(subpages);
+            });
     };
 
     return (
         <div className={`row col-12 | p-0`}>
                 <Router>
-                    <Main path={`/`} auth={authState} logout={_logoutUser} changeSubpage={subpageFetchData}>
-                        <Home path={`/`} getpost={post}/>
-                        <Subpage path={`:id`} hide={_deletePost} logged={authState.isLoggedIn ? authState.user : false} data={subpageData}/>
-                        <Post path={"/posts/:id"} logged={authState.user} post={_updatePost} hide={_deletePost}/>
-                        <Post path={"/post-create"} logged={authState.user} post={_createPost}/>
+                    <Main path={`/`} auth={authState} logout={_logoutUser} changeSubpage={subpageFetchData} getNewsPosts={getNews} newsPosts={newsPosts} subpages={subpages}>
+                        <Home path={`/`} getposts={post} getpost={getPost} project={project} author={author} closePost={closePost}/>
+                        <Subpage path={`:id`} hide={_deletePost} logged={authState.isLoggedIn ? authState.user : false} data={subpageData} getpost={getPost} project={project} author={author} closePost={closePost} />
+                        <Post path={"/posts/:id"} logged={authState.user} getpost={getPost} project={project} author={author} post={_updatePost} hide={_deletePost}/>
+                        <Post path={"/post-create"} logged={authState.user} getpost={getPost} project={project} author={author} post={_createPost}/>
                         <Login path={"/login"} login={_loginUser} logout={_logoutUser}/>
                     </Main>
                 </Router>

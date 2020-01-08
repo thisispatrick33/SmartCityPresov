@@ -3,21 +3,8 @@ import { Link } from "@reach/router";
 import { NonLogged, Logged, Loader } from "./Utillities";
 import $ from 'jquery';
 
-export const Navigation = React.forwardRef(({path, auth, logout, scroll, changeSubpage}, ref) => {
+export const Navigation = React.forwardRef(({path, auth, logout, scroll, changeSubpage, subpages}, ref) => {
     const [menu, setMenu] = useState(true);
-    const [subpages, setSubpages] = useState([]);
-    const [scrollControl, setScrollControl] = useState(false);
-
-    useEffect(() => {
-        setScrollControl(scroll > 0);
-        if(subpages[0] === undefined){
-            fetch(`/api/`)
-                .then(response => response.json())
-                .then(subpages => {
-                    setSubpages(subpages)
-                });
-        }
-    },[scroll]);
 
     open = e => {
         e.preventDefault();
@@ -34,7 +21,7 @@ export const Navigation = React.forwardRef(({path, auth, logout, scroll, changeS
     };
 
     return (
-            <nav ref={ref} className={`navigation | row col-12 | justify-content-around | align-items-center | position-fixed | ${scrollControl ? `shadow-sm` : ``} | p-0`}>
+            <nav ref={ref} className={`navigation | row col-12 | justify-content-around | align-items-center | position-fixed | ${scroll > 0 ? `shadow-sm` : ``} | p-0`}>
                 <div className={`navigation-header | row col-xl-auto col-lg-auto col-md-12 col-sm-12 col-12 | justify-content-xl-start justify-content-lg-start justify-content-end | p-0`}>
                     <Link className={`logo | col-xl-12 col-lg-12 col-md-6 col-sm-6 col-6 | p-0 | text-center`} to={`/`}>
                         <img src={`../img/logo.png`} className={`col-12 | p-2`} alt={`Smartcity Logo`} style={window.pageYOffset > 0  ? { width : 90,height : 90} : {width : 100,height : 100}}/>

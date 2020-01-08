@@ -44,6 +44,7 @@ export const Main = (props) => {
                 logout={props.logout}
                 scroll={pageYOffset}
                 changeSubpage={props.changeSubpage}
+                subpages={props.subpages}
             />
 
             {/* News */}
@@ -56,7 +57,7 @@ export const Main = (props) => {
                     style={{height : window.innerHeight - bodyMargin, width : (news || width > 991 ? `100%` : "0%"), transition : `all 400ms ease`}}>
                     <div
                         className={`col-12 p-0 row`}>
-                        { pathname.length > 1 ? <News loggedIn={props.auth.isLoggedIn}/> : ``}
+                        { pathname.length > 1 ? <News loggedIn={props.auth.isLoggedIn} getposts={props.getNewsPosts} posts={props.newsPosts}/> : ``}
                     </div>
                 </div>
                 {/* news-button */}

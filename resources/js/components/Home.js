@@ -3,24 +3,9 @@ import $ from "jquery";
 import { Project } from "./subpage/Project";
 import { Loader } from "./Utillities";
 
-export const Home = ({getpost}) => {
+export const Home = ({getposts, getpost = f => f, project, author, closePost}) => {
     const [post, setPost] = useState([]);
-    const [project, setProject] = useState(null);
-    const [author, setAuthor] = useState([]);
 
-    const handleGet = _id => {
-        fetch(`/api/post/${_id}`)
-            .then(response => response.json())
-            .then(postData => {
-                setProject(postData);
-                console.log(postData);
-                fetch(`/api/author/${postData.user_id}`)
-                    .then(response => response.json())
-                    .then(({ data }) => {
-                        setAuthor(data);
-                    });
-            });
-    };
     const close = () => {
         $(".project-details-frame .project-content").animate(
             {
@@ -29,12 +14,12 @@ export const Home = ({getpost}) => {
             },
             1000
         );
-        $(".project-details-frame").fadeToggle("slow", () => setProject(null));
+        $(".project-details-frame").fadeToggle("slow", closePost);
     };
 
     useEffect(() => {
-        setPost(getpost);
-    }, [getpost]);
+        setPost(getposts);
+    }, [getposts]);
 
     if(post !== null){
         return (
@@ -78,7 +63,7 @@ export const Home = ({getpost}) => {
                                         );
                                         return (
                                             <div
-                                                onClick={() => handleGet(id)}
+                                                onClick={() => getpost(id)}
                                                 className={`project-frame | row col-xl-4 col-lg-4 col-md-6 col-sm-12 col-12 | justify-content-xl-start justify-content-lg-start justify-content-md-center justify-content-sm-center justify-content-center | mb-4 p-0`}
                                                 key={id}
                                             >
