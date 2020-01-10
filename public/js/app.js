@@ -65180,17 +65180,19 @@ var App = function App() {
     */
   }
   Object(react__WEBPACK_IMPORTED_MODULE_1__["useEffect"])(function () {
-    var state = localStorage["authState"];
+    console.log('useeffect');
+    var state = JSON.parse(localStorage["authState"]);
+    console.log(state);
 
-    if (state) {
-      var AppState = JSON.parse(state);
+    if (state.isLoggedIn && !authState.isLoggedIn) {
+      var AppState = state;
       setAuthState(AppState);
     }
 
     getPosts();
     subpageFetchData();
     getSubpages();
-  }, []);
+  }, [authState]);
   {
     /*
          User Functions
@@ -65702,7 +65704,7 @@ var Main = function Main(props) {
     window.addEventListener('resize', handleResize);
     window.addEventListener('scroll', handleScroll);
     setTimeout(function () {
-      setBodyMargin(refNavigation.current.clientHeight);
+      setBodyMargin($('.navigation').height());
     }.bind(_this), 200);
     return function () {
       window.removeEventListener('resize', handleResize);

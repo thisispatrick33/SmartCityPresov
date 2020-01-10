@@ -21,7 +21,7 @@ export const Main = (props) => {
 
         setTimeout(
             function() {
-                setBodyMargin(refNavigation.current.clientHeight);
+                setBodyMargin($('.navigation').height());
             }
                 .bind(this),
             200

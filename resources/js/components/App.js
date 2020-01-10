@@ -48,9 +48,11 @@ const App = () => {
     */}
 
    useEffect( () => {
-        let state = localStorage[`authState`];
-        if (state) {
-            let AppState = JSON.parse(state);
+       console.log('useeffect');
+        let state = JSON.parse(localStorage[`authState`]);
+        console.log(state);
+        if (state.isLoggedIn && !authState.isLoggedIn) {
+            let AppState = state;
             setAuthState(AppState);
 
         }
@@ -58,7 +60,7 @@ const App = () => {
         subpageFetchData();
         getSubpages();
 
-    },[]);
+    },[authState]);
 
     {/*
 
