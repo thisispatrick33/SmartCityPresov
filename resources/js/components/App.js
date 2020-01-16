@@ -185,7 +185,6 @@ const App = () => {
             .then(response => response.json())
             .then(postData => {
                 setProject(postData);
-                console.log(postData);
                 fetch(`/api/author/${postData.user_id}`)
                     .then(response => response.json())
                     .then(({ data }) => {

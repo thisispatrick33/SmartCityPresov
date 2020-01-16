@@ -142,7 +142,7 @@ export const Home = ({getposts, getpost = f => f, project, author, closePost}) =
                                     }
                                 )}
                             </div>
-                            {project !== null ? (
+                            {(project !== null && author !== null) ? (
                                 <Project
                                     data={project}
                                     user={author}

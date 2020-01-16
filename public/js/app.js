@@ -65424,7 +65424,6 @@ var App = function App() {
       return response.json();
     }).then(function (postData) {
       setProject(postData);
-      console.log(postData);
       fetch("/api/author/".concat(postData.user_id)).then(function (response) {
         return response.json();
       }).then(function (_ref8) {
@@ -65628,7 +65627,7 @@ var Home = function Home(_ref) {
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null, "D\xE1tum : "), String(new Date(written).getDay()) + "/" + (new Date(written).getMonth() + 1) + "/" + new Date(written).getFullYear()), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
         className: "col-12 | py-0 px-3"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null, "Autor : "), user.name)));
-    })), project !== null ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_subpage_Project__WEBPACK_IMPORTED_MODULE_2__["Project"], {
+    })), project !== null && author !== null ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_subpage_Project__WEBPACK_IMPORTED_MODULE_2__["Project"], {
       data: project,
       user: author,
       close: close
@@ -66549,6 +66548,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(jquery__WEBPACK_IMPORTED_MODULE_1__);
 /* harmony import */ var fslightbox_react__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! fslightbox-react */ "./node_modules/fslightbox-react/index.js");
 /* harmony import */ var fslightbox_react__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(fslightbox_react__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var _Utillities__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../Utillities */ "./resources/js/components/Utillities.js");
 function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _nonIterableRest(); }
 
 function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance"); }
@@ -66556,6 +66556,7 @@ function _nonIterableRest() { throw new TypeError("Invalid attempt to destructur
 function _iterableToArrayLimit(arr, i) { var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
 
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
+
 
 
 
@@ -66580,7 +66581,6 @@ var Project = function Project(_ref) {
       marginTop: '10vh',
       easing: 'easeInOutCirc'
     }, 1000);
-    console.log(data);
   }, []);
   return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "project-details-frame row p-0 justify-content-center",
@@ -66926,7 +66926,7 @@ var Subpage = function Subpage(_ref) {
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null, "D\xE1tum : "), String(new Date(written).getDay()) + "/" + (new Date(written).getMonth() + 1) + "/" + new Date(written).getFullYear()), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
         className: "col-12 | py-0 px-3"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null, "Autor : "), user.name)));
-    }))), project !== null ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Project__WEBPACK_IMPORTED_MODULE_2__["Project"], {
+    }))), author !== null && project !== null ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Project__WEBPACK_IMPORTED_MODULE_2__["Project"], {
       data: project,
       user: author,
       close: close

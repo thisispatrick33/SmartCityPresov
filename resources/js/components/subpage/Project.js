@@ -1,6 +1,7 @@
 import React, {useEffect, useState} from "react";
 import $ from 'jquery';
 import FsLightbox from 'fslightbox-react';
+import { Loader } from "../Utillities";
 export const Project = ({data,user, close = f => f}) => {
     const written = new Date(data.updated_at.replace(' ', 'T'));
     const [toggler, setToggler] = useState(false);
@@ -10,8 +11,8 @@ export const Project = ({data,user, close = f => f}) => {
             marginTop: '10vh',
             easing: 'easeInOutCirc'
         },1000);
-        console.log(data)
     }, []);
+
     return (
         <div  className={"project-details-frame row p-0 justify-content-center"} style={{display : `none`}}>
             <div className="project-content col-xl-9 col-lg-9 col-md-10 col-sm-11 col-11 row shadow p-0 justify-content-start align-items-start" style={{marginTop : '100vh', marginBottom : '10vh', minHeight : '80%'}}>

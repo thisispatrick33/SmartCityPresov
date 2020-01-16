@@ -117,7 +117,7 @@ export const Subpage = ({id, logged, hide = f => f, data, getpost = f => f, proj
                     </div>
                 </div>
                 {
-                    project !== null ? <Project data={project} user={author} close={close}/> : null
+                    (author !== null && project !==null) ? <Project data={project} user={author} close={close}/> : null
                 }
             </div>
         );
