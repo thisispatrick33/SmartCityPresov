@@ -28,7 +28,7 @@ class User extends Authenticatable implements JWTSubject
      * @var array
      */
     protected $hidden = [
-        'remember_token',
+        'remember_token','password',
     ];
 
     /**
@@ -41,9 +41,9 @@ class User extends Authenticatable implements JWTSubject
     ];
 
     public function posts(){
-        return $this->hasMany(Post::class);
+        return $this->hasMany(Post::class)->orderBy('created_at', 'DESC')->where('active',true);
     }
-
+    
         /**
      * Get the identifier that will be stored in the subject claim of the JWT.
      *

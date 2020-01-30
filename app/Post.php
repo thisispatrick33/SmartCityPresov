@@ -17,8 +17,8 @@ class Post extends Model
         'updated_at'
     ];
 
-    public function author(){
-        return $this->belongsTo(User::class);
+    public function user(){
+        return $this->belongsTo(User::class)->select(['id','name','email']);
     }
     public function subpage(){
         return $this->belongsTo(Subpage::class);
@@ -27,4 +27,5 @@ class Post extends Model
     public function images(){
         return $this->belongsToMany('App\Image', 'image_post');
     }
+
 }
