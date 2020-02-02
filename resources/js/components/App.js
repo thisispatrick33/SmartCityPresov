@@ -17,7 +17,8 @@ const App = () => {
 
     const [authState, setAuthState] = useState({isLoggedIn: false, user: {}});
     const [post, setPost] = useState(null);
-    const [subpageData, setSubpageData] = useState(null);
+    const [subpageData, setSubpageData] = useState(JSON.parse(localStorage.getItem("subpageData"))==null ? {data: null, version: 0} : JSON.parse(localStorage.getItem("subpageData")));
+    const [currentSubpage, setCurrenSubpage] = useState(null);
 
     const [project, setProject] = useState(null);
     const [author, setAuthor] = useState(null);
@@ -48,14 +49,12 @@ const App = () => {
     */}
 
    useEffect( () => {
-       console.log('useeffect');
-        let state = JSON.parse(localStorage[`authState`]);
-        console.log(state);
-        if (state.isLoggedIn && !authState.isLoggedIn) {
+        let state = JSON.parse(localStorage.getItem("authState"));
+        if (state !== null && state.isLoggedIn && !authState.isLoggedIn) {
             let AppState = state;
             setAuthState(AppState);
-
         }
+
         getPosts();
         subpageFetchData();
         getSubpages();
@@ -67,6 +66,7 @@ const App = () => {
         User Functions
 
     */}
+
     const _postData = async (url, data, config) => await axios.post(url, data, config);
 
     const _getData = async (url, config) => await axios.get(url, config);
@@ -140,8 +140,12 @@ const App = () => {
 
         _postData(`/api/post`, formData, config_multipart_form_data)
             .then(response => {
-                console.log(response);
-                alert(response.status==200 ? `Úspešne si vytvoril článok.` : `Článok sa nepodarilo vytvoriť!`);
+                if(response.status==200){
+                    alert(`Úspešne si vytvoril článok.`);
+                }
+                else {
+                    alert(`Článok sa nepodarilo vytvoriť!`);
+                }
             })
 
     };
@@ -178,7 +182,24 @@ const App = () => {
 
     const getPosts = () => { _getData("/api/post", config_aplication_json).then(res => { setPost(res.data); }); };
 
-    const subpageFetchData = () => { _getData(`api${window.location.pathname}`, config_aplication_json).then( res => { setSubpageData(res.data.subpage); }); };
+    const subpageFetchData = () => {
+        console.log(subpageData);
+        if(subpageData === null || subpageData.data===null || subpageData.data[window.location.pathname]===undefined || subpageData.data[window.location.pathname]===null){
+            _getData(`api${window.location.pathname}`, config_aplication_json)
+                .then( res => {
+                    setSubpageData({...subpageData, data : {...subpageData.data, [window.location.pathname]: res.data.subpage}});
+                    if(subpageData.data !== null){
+                        localStorage[`subpageData`] = JSON.stringify({...subpageData, data : {...subpageData.data, [window.location.pathname]: res.data.subpage}});
+                    }
+                    setCurrenSubpage(res.data.subpage);
+                    console.log(window.location.pathname);
+                });
+        }
+        else {
+            console.log("already saved");
+            setCurrenSubpage(subpageData.data[window.location.pathname]);
+        }
+    };
 
     const getPost = _id => {
         fetch(`/api/post/${_id}`)
@@ -219,7 +240,7 @@ const App = () => {
                 <Router>
                     <Main path={`/`} auth={authState} logout={_logoutUser} changeSubpage={subpageFetchData} getNewsPosts={getNews} newsPosts={newsPosts} subpages={subpages}>
                         <Home path={`/`} getposts={post} getpost={getPost} project={project} author={author} closePost={closePost}/>
-                        <Subpage path={`:id`} hide={_deletePost} logged={authState.isLoggedIn ? authState.user : false} data={subpageData} getpost={getPost} project={project} author={author} closePost={closePost} />
+                        <Subpage path={`:id`} hide={_deletePost} logged={authState.isLoggedIn ? authState.user : false} data={currentSubpage} getpost={getPost} project={project} author={author} closePost={closePost} />
                         <Post path={"/posts/:id"} logged={authState.user} getpost={getPost} project={project} author={author} post={_updatePost} hide={_deletePost}/>
                         <Post path={"/post-create"} logged={authState.user} getpost={getPost} project={project} author={author} post={_createPost}/>
                         <Login path={"/login"} login={_loginUser} logout={_logoutUser}/>

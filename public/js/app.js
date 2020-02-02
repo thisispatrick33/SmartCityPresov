@@ -65093,6 +65093,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_9___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_9__);
 
 
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; var ownKeys = Object.keys(source); if (typeof Object.getOwnPropertySymbols === 'function') { ownKeys = ownKeys.concat(Object.getOwnPropertySymbols(source).filter(function (sym) { return Object.getOwnPropertyDescriptor(source, sym).enumerable; })); } ownKeys.forEach(function (key) { _defineProperty(target, key, source[key]); }); } return target; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
 
 function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
@@ -65135,30 +65139,38 @@ var App = function App() {
       post = _useState4[0],
       setPost = _useState4[1];
 
-  var _useState5 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(null),
+  var _useState5 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(JSON.parse(localStorage.getItem("subpageData")) == null ? {
+    data: null,
+    version: 0
+  } : JSON.parse(localStorage.getItem("subpageData"))),
       _useState6 = _slicedToArray(_useState5, 2),
       subpageData = _useState6[0],
       setSubpageData = _useState6[1];
 
   var _useState7 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(null),
       _useState8 = _slicedToArray(_useState7, 2),
-      project = _useState8[0],
-      setProject = _useState8[1];
+      currentSubpage = _useState8[0],
+      setCurrenSubpage = _useState8[1];
 
   var _useState9 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(null),
       _useState10 = _slicedToArray(_useState9, 2),
-      author = _useState10[0],
-      setAuthor = _useState10[1];
+      project = _useState10[0],
+      setProject = _useState10[1];
 
-  var _useState11 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])([]),
+  var _useState11 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(null),
       _useState12 = _slicedToArray(_useState11, 2),
-      newsPosts = _useState12[0],
-      setNewsPosts = _useState12[1];
+      author = _useState12[0],
+      setAuthor = _useState12[1];
 
-  var _useState13 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(null),
+  var _useState13 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])([]),
       _useState14 = _slicedToArray(_useState13, 2),
-      subpages = _useState14[0],
-      setSubpages = _useState14[1];
+      newsPosts = _useState14[0],
+      setNewsPosts = _useState14[1];
+
+  var _useState15 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(null),
+      _useState16 = _slicedToArray(_useState15, 2),
+      subpages = _useState16[0],
+      setSubpages = _useState16[1];
 
   var config_aplication_json = {
     headers: {
@@ -65180,11 +65192,9 @@ var App = function App() {
     */
   }
   Object(react__WEBPACK_IMPORTED_MODULE_1__["useEffect"])(function () {
-    console.log('useeffect');
-    var state = JSON.parse(localStorage["authState"]);
-    console.log(state);
+    var state = JSON.parse(localStorage.getItem("authState"));
 
-    if (state.isLoggedIn && !authState.isLoggedIn) {
+    if (state !== null && state.isLoggedIn && !authState.isLoggedIn) {
       var AppState = state;
       setAuthState(AppState);
     }
@@ -65359,8 +65369,11 @@ var App = function App() {
     }
 
     _postData("/api/post", formData, config_multipart_form_data).then(function (response) {
-      console.log(response);
-      alert(response.status == 200 ? "\xDAspe\u0161ne si vytvoril \u010Dl\xE1nok." : "\u010Cl\xE1nok sa nepodarilo vytvori\u0165!");
+      if (response.status == 200) {
+        alert("\xDAspe\u0161ne si vytvoril \u010Dl\xE1nok.");
+      } else {
+        alert("\u010Cl\xE1nok sa nepodarilo vytvori\u0165!");
+      }
     });
   };
 
@@ -65414,9 +65427,27 @@ var App = function App() {
   };
 
   var subpageFetchData = function subpageFetchData() {
-    _getData("api".concat(window.location.pathname), config_aplication_json).then(function (res) {
-      setSubpageData(res.data.subpage);
-    });
+    console.log(subpageData);
+
+    if (subpageData === null || subpageData.data === null || subpageData.data[window.location.pathname] === undefined || subpageData.data[window.location.pathname] === null) {
+      _getData("api".concat(window.location.pathname), config_aplication_json).then(function (res) {
+        setSubpageData(_objectSpread({}, subpageData, {
+          data: _objectSpread({}, subpageData.data, _defineProperty({}, window.location.pathname, res.data.subpage))
+        }));
+
+        if (subpageData.data !== null) {
+          localStorage["subpageData"] = JSON.stringify(_objectSpread({}, subpageData, {
+            data: _objectSpread({}, subpageData.data, _defineProperty({}, window.location.pathname, res.data.subpage))
+          }));
+        }
+
+        setCurrenSubpage(res.data.subpage);
+        console.log(window.location.pathname);
+      });
+    } else {
+      console.log("already saved");
+      setCurrenSubpage(subpageData.data[window.location.pathname]);
+    }
   };
 
   var getPost = function getPost(_id) {
@@ -65475,7 +65506,7 @@ var App = function App() {
     path: ":id",
     hide: _deletePost,
     logged: authState.isLoggedIn ? authState.user : false,
-    data: subpageData,
+    data: currentSubpage,
     getpost: getPost,
     project: project,
     author: author,
@@ -65871,9 +65902,7 @@ var Navigation = react__WEBPACK_IMPORTED_MODULE_0___default.a.forwardRef(functio
     var title = _ref2.title,
         title_link = _ref2.title_link;
     return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-      onClick: function onClick() {
-        return _changeSubpage();
-      },
+      onClick: _changeSubpage,
       key: title_link,
       className: "nav-item | row col-xl-auto col-lg-2 col-12 | justify-content-xl-start justify-content-lg-start justify-content-center | text-center | p-0 ".concat(path.includes("".concat(title_link)) ? "on" : "")
     }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_reach_router__WEBPACK_IMPORTED_MODULE_1__["Link"], {
@@ -66740,8 +66769,9 @@ var Subpage = function Subpage(_ref) {
   };
 
   Object(react__WEBPACK_IMPORTED_MODULE_0__["useEffect"])(function () {
-    console.log(data);
-    setSubpage(data);
+    if (data !== null) {
+      setSubpage(data);
+    }
   }, [data]);
 
   if (logged) {

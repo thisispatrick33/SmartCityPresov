@@ -29,8 +29,9 @@ export const Subpage = ({id, logged, hide = f => f, data, getpost = f => f, proj
     };
 
     useEffect( () => {
-        console.log(data);
-        setSubpage(data);
+        if(data!==null){
+            setSubpage(data);
+        }
     },[data]);
 
     if(logged){
@@ -86,6 +87,7 @@ export const Subpage = ({id, logged, hide = f => f, data, getpost = f => f, proj
         {/*
            Subpage content, for public
         */}
+
         if(subpage===null || subpage===undefined || !subpage.title){
             return <Loader/>;
         }
