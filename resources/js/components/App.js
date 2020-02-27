@@ -183,8 +183,8 @@ const App = () => {
     const getPosts = () => { _getData("/api/post", config_aplication_json).then(res => { setPost(res.data); }); };
 
     const subpageFetchData = () => {
-        console.log(subpageData);
         if(subpageData === null || subpageData.data===null || subpageData.data[window.location.pathname]===undefined || subpageData.data[window.location.pathname]===null){
+            console.log("fetching from server");
             _getData(`api${window.location.pathname}`, config_aplication_json)
                 .then( res => {
                     setSubpageData({...subpageData, data : {...subpageData.data, [window.location.pathname]: res.data.subpage}});
@@ -236,10 +236,10 @@ const App = () => {
     };
 
     return (
-        <div className={`row col-12 | p-0`}>
+        <div className={`row col-12 | p-0 m-0`}>
                 <Router>
                     <Main path={`/`} auth={authState} logout={_logoutUser} changeSubpage={subpageFetchData} getNewsPosts={getNews} newsPosts={newsPosts} subpages={subpages}>
-                        <Home path={`/`} getposts={post} getpost={getPost} project={project} author={author} closePost={closePost}/>
+                        <Home path={`/`} getposts={post} getpost={getPost} project={project} author={author} closePost={closePost} changeSubpage={subpageFetchData}/>
                         <Subpage path={`:id`} hide={_deletePost} logged={authState.isLoggedIn ? authState.user : false} data={currentSubpage} getpost={getPost} project={project} author={author} closePost={closePost} />
                         <Post path={"/posts/:id"} logged={authState.user} getpost={getPost} project={project} author={author} post={_updatePost} hide={_deletePost}/>
                         <Post path={"/post-create"} logged={authState.user} getpost={getPost} project={project} author={author} post={_createPost}/>

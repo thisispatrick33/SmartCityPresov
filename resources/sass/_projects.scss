@@ -1,0 +1,43 @@
+.project-outlook-frame{
+  .project-outlook{
+    background: $white;
+    box-shadow: 0 3px 6px #00000029;
+    border-radius: 10px;
+    &:hover{
+      cursor: pointer;
+    }
+
+    .project-cover-image{
+      border-bottom: 8px solid $secondaryColor;
+      img{
+        border-radius: 10px 10px 0 0;
+      }
+      border-radius: 10px 10px 0 0;
+    }
+    .project-content{
+      border-radius: 0 0 10px 10px;
+      border-top: 8px solid $primaryColor;
+      .title{
+        font: {
+          family: SF-SemiBold;
+          size: 1.10rem;
+        }
+        color: $secondaryColor;
+        text-transform: uppercase;
+      }
+      .description{
+        font: {
+          family: SF-Regular;
+          size: 0.88rem;
+        }
+        .show-more{
+          color : $primaryColor;
+          &:hover{
+            cursor: pointer;
+          }
+        }
+      }
+    }
+
+  }
+}

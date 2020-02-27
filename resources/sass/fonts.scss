@@ -1,0 +1,107 @@
+@font-face {
+    font-family: SF-Regular;
+    src: url("../fonts/SF-Pro-Display-Regular.otf") format('opentype');
+}
+@font-face {
+font-family: SF-Light;
+src: url("../fonts/SF-Pro-Display-Light.otf") format('opentype');
+}
+@font-face {
+font-family: SF-Bold;
+src: url("../fonts/SF-Pro-Display-Bold.otf") format('opentype');
+}
+@font-face {
+font-family: SF-Semibold;
+src: url("../fonts/SF-Pro-Display-Semibold.otf") format('opentype');
+}
+
+.font-regular{
+    font-family: SF-Regular;
+}
+.font-light{
+    font-family: SF-Light;
+}
+.font-bold{
+    font-family: SF-Bold;
+}   
+.font-semibold{
+    font-family: SF-Semibold;
+}
+.home-main-title{
+    font-size: 10rem;
+    line-height: 8rem;
+}
+.home-main-text{
+    font-size: 1.6rem;
+}
+.home-text{
+    font-size: 1.25rem;
+}
+.home-title{
+    font-size: 1.85rem;
+}
+.home-cards{
+    font-size: 1.3rem;
+}
+
+.subpage-main-title{
+    &:first-child{
+        font-size: 7.75rem;
+    }
+    &:last-child{
+        font-size: 4.35rem;
+    }
+}
+.subpage-text{
+    font-size: 1.15rem;
+}
+.subpage-title{
+    font-size: 2.3rem;
+}
+
+footer{
+    font-size: 1.25rem;
+}
+
+@media (max-width : $md){
+    .home-main-title{
+        font-size: 4rem;
+        line-height: 3.2rem;
+    }
+    .home-main-text{
+        font-size: 1.1rem;
+    }
+    .home-cards{
+        font-size: .9rem;
+    }
+    .subpage-main-title{
+        &:first-child{
+            font-size: 5.25rem;
+        }
+        &:last-child{
+            font-size: 2.5rem;
+        }
+    }
+    .subpage-title{
+        font-size: 1.95rem;
+    }
+    footer{
+        font-size: .95rem;
+        p:first-child{
+            font-size: .8rem;
+        }
+    }
+}
+@media (max-width: $lg){
+    footer{
+        font-size: .95rem;
+        p{
+            &:first-child{
+                font-size: .65rem;
+            }
+            span{
+                color: $primaryColor;
+            }
+        }
+    }
+}

@@ -6,489 +6,123 @@
 // Bootstrap
 @import '~bootstrap/scss/bootstrap';
 
-
-@font-face {
-  font-family: NexaBold;
-  src: url('../fonts/NexaBold.otf');
-}
-@font-face {
-  font-family: NexaLight;
-  src: url('../fonts/NexaLight.otf');
-}
-@font-face {
-  font-family: Gilroy-Regular;
-  src: url('../fonts/Gilroy-Regular.ttf');
-}
-@font-face {
-  font-family: Gilroy-SemiBold;
-  src: url('../fonts/Gilroy-SemiBold.ttf');
-}
-h1,h2,h3,h4,h5,h6{
-  font-family: NexaBold, serif;
-  text-transform: uppercase;
-}
-h2{
-  font-size: 1.75rem;
-}
-.row{
-  margin-right: 0 !important;
-  margin-left: 0 !important;
-}
-
-html{
-  overflow-x: hidden;
-}
 body{
+  font-family: SF-Regular;
+  color: $secondaryColor;
+  background: #fff;
   overflow-x: hidden;
-  background : $colorOfPage;
-  //navigation
-  .navigation{
-    background: $colorOfPage;
-    z-index: 1000;
-    top: 0 !important;
-    left: 0 !important;
-    .navigation-header{
-      .logo{
-        img{
-          transition: 0.5s;
-        }
-      }
-    }
-    .navigation-items{
-      .nav-item{
-        animation-duration: 1.5s;
-        animation-delay: 1.75s;
-        color : $secondaryColor;
-        text-transform : uppercase;
-        font-size : 1.45rem;
-        font-family: NexaBold, serif;
-        hr{
-          border-top : 1px solid $colorOfPage;
-          width : 80%;
-        }
-        a {
-          color: $secondaryColor !important;
-          border-bottom: 1px solid $colorOfPage;
-        }
 
-        &:not(:hover){
-          hr{
-            border-top : 1px solid $colorOfPage;
-            transition: 1s;
-          }
-          a {
-            color: $secondaryColor !important;
-            border-bottom: 1px solid $colorOfPage;
-            transition: 1s;
-          }
-        }
-        &:hover, &.on{
-          hr{
-            border-top : 1px solid $primaryColor;
-            transition: 1s;
-          }
-          a{
-            color: $primaryColor !important;
-            text-decoration: none;
-            border-bottom: 1px solid $primaryColor;
-            transition: 1s;
-          }
-        }
-        a.reverse{
-          color: $colorOfPage !important;
-          background: $primaryColor;
-          transition: 1s;
-          padding: 10px;
-        }
-    }
-      .logout-button{
-        background : none;
-        border : none;
-        font : {
-          family: Gilroy-Regular;
-        }
-        text-transform : uppercase;
-      }
+  .silver-color{
+    color: $silver;
+  }
+  .primary-color{
+    color: $primaryColor;
+  }
+  .white-color{
+    color: #fff;
+  }
+  .background-secondary{
+    background: $secondaryColor;
+    color: #fff;
+  }
+  .background-primary{
+    background: $primaryColor;
+    color: #fff;
+  }
+  .background-white{
+    background: #fff;
+    color: #191919;
+  }
+  .space{
+    width: 100%;
+    height: 5rem;
+  }
+  .h-70{
+    height: 70%;
+  }
+  .h-30{
+    height: 30%;
+  }
+  div[role="group"]{
+    width: 100%;
+    height: 100%;
+  }
+  a{
+    text-decoration: none;
+    color: $secondaryColor;
+    &:hover{
+      text-decoration: none;
+      color: $secondaryColor;
     }
   }
-  //main-container
-  .main-container{
-    transition : 0.2s;
+  .project-details-frame{
+    position: fixed;
+    z-index: 1500;
     width: 100vw;
-    //news
-    .news-frame{
-      z-index: 101;
-      overflow-y : scroll;
-      .news{
-        background-color : $colorOfPage;
-        height: 100%;
+    top : 0;
+    left: 0;
+    height: 100vh;
+    overflow-y: scroll;
+    background : rgba(0,0,0,0.85);
+    .project-content{
+      border-radius: 10px;
+      background: $secondaryColor;
+      margin-bottom: 10vh;
+      .content{
+        background: white;
+        .close-button{
+          width: 30px;
+          height: 30px;
+          &:not(:hover){
+            fill : $secondaryColor;
+            transition: 0.2s;
+          }
+          &:hover{
+            fill : $primaryColor;
+            cursor: pointer;
+            transition: 0.2s;
+          }
 
-        .post{
-          background-color : $colorOfPage;
-          border-right : 1px solid $secondaryColor;
-          div:nth-child(2){
-            border-top: 1px solid $secondaryColor;
-          }
-          .content{
-            h3{
-              font-family: Gilroy-SemiBold;
-              font-size: 1rem;
-            }
-            .description{
-              font-family: Gilroy-Regular, serif;
-            }
-            a.read_more{
-              font-family: Gilroy-SemiBold, serif;
-              color: $secondaryColor;
-              &:link, &:visited,&:not(:hover){
-                color: $secondaryColor;
-                text-decoration: none;
-                transition: 0.2s;
-              }
-              &:hover{
-                cursor: pointer;
-                transition: 0.2s;
-                color : $primaryColor;
-              }
-            }
-            .detail_info{
-              font-family: NexaLight, serif;
-            }
-          }
-          hr{
-            background: $secondaryColor;
+        }
+        .title{
+          span{
+            color: $primaryColor;
           }
         }
-      }
-    }
-    .news-button{
-      left : 0;
-      max-width: 11vw;
-      min-width : 6vw;
-      z-index : 101;
-      border-radius: 0 10px 10px 0;
-      border : 0;
-      background: $primaryColor;
-      color : $colorOfPage;
-      font-family: NexaBold, serif;
-      text-transform: uppercase;
-      &:focus{
-        outline: 0;
-      }
-    }
-    //subpage
-    .subpage{
-      .subpage-content{
         .description{
-          font : {
-            family: Gilroy-Regular;
-            size : 1.250em;
-          }
-          text-transform: none;
+          color: $secondaryColor;
+          font-size: 1.1em;
         }
-        .projects-category{
-          color : $primaryColor;
+        .post-data{
+          font-family: Gilroy-SemiBold, serif;
+          font-size: 1em;
         }
-        .projects-frame{
-          .projects{
-            .project-frame{
-              .project{
-                h3{
-                  font-family: Gilroy-SemiBold,serif;
-                  font-size: 1.250em;
-                }
-                border-radius : 10px;
-                p{
-                  font-size: 1em;
-                  font-family: Gilroy-Regular, serif;
-                }
-                a.read_more{
-                  font-family: Gilroy-SemiBold, serif;
-                  color: $secondaryColor;
-                  &:link, &:visited,&:not(:hover){
-                    color: $secondaryColor;
-                    text-decoration: none;
-                    transition: 0.2s;
-                  }
-                  &:hover{
-                    cursor: pointer;
-                    transition: 0.2s;
-                    color : $primaryColor;
-                  }
-                }
-              }
-            }
+        .price{
+          span{
+            font-family: Gilroy-SemiBold;
           }
+          font-family: Gilroy-Regular;
         }
       }
-      .project-details-frame{
-        position: fixed;
-        z-index: 1500;
-        width: 100vw;
-        top : 0;
-        left: 0;
-        height: 100vh;
-        overflow-y: scroll;
-        background : rgba(0,0,0,0.85);
-        .project-content{
-          border-radius: 10px;
-          background: $secondaryColor;
-          margin-bottom: 10vh;
-          .content{
-            background: white;
-            .close-button{
-              width: 30px;
-              height: 30px;
-              &:not(:hover){
-                fill : $secondaryColor;
-                transition: 0.2s;
-              }
-              &:hover{
-                fill : $primaryColor;
-                cursor: pointer;
-                transition: 0.2s;
-              }
-
-            }
-            .title{
-              span{
-                color: $primaryColor;
-              }
-            }
-            .description{
-              color: $secondaryColor;
-              font-size: 1.1em;
-            }
-            .post-data{
-              font-family: Gilroy-SemiBold, serif;
-              font-size: 1em;
-            }
-            .price{
-              span{
-                font-family: Gilroy-SemiBold;
-              }
-              font-family: Gilroy-Regular;
-            }
-          }
-          .gallery{
-            background: $secondaryColor;
-            -webkit-border-radius: 10px 0 0 10px;
-            -moz-border-radius: 10px 0 0 10px;
-            border-radius: 10px 0 0 10px;
-            .cover-image{
-                border: 4px solid $primaryColor;
-            }
-            .title{
-              color: $colorOfPage;
-            }
-          }
+      .gallery{
+        background: $secondaryColor;
+        -webkit-border-radius: 10px 0 0 10px;
+        -moz-border-radius: 10px 0 0 10px;
+        border-radius: 10px 0 0 10px;
+        .cover-image{
+          border: 4px solid $primaryColor;
         }
-      }
-    }
-    .subpage-cover-image{
-      right: 0;
-      z-index : -1;
-      div{
-        height: 90%;
-        img{
-          height: 100%;
-          width: auto;
+        .title{
+          color: $colorOfPage;
         }
       }
     }
   }
-
-  form.post-form{
-    .warning{
-      color: $colorOfPage;
-      background: $primaryColor;
-    }
-    label{
-      .title,.description,.author,.date,.gallery{
-        border-left: 1px solid $primaryColor;
-      }
-      input[type="submit"]{
-        color: $colorOfPage;
-
-        text-transform: uppercase;
-        border-radius: 10px;
-        &:hover{
-          background: $primaryColor;
-          transition: 0.5s;
-          border: none !important;
-        }
-        &:not(:hover){
-          color: $primaryColor;
-          background: $colorOfPage;
-          border: 1px solid $primaryColor;
-          transition: 0.5s;
-        }
-      }
-      p{
-        font-family: Gilroy-Regular, serif ;
-      }
-      input,textarea{
-        resize: none;
-        font-family: Gilroy-Regular, serif ;
-        border : 0;
-        border-bottom: 1px solid $secondaryColor;
-        &:focus{
-          outline: 0;
-          border-color : $primaryColor;
-          transition: 2s;
-        }
-      }
-    }
-  }
-}
-.login-frame{
-  border-radius: 10px;
-}
-.loader{
-  position: fixed;
-  top : 0;
-  left : 0;
-  width: 100vw;
-  height: 100vh;
-  background: $colorOfPage;
-  z-index: 10000;
-  .lds-ellipsis {
-    display: inline-block;
-    position: relative;
-    width: 64px;
-    height: 64px;
-  }
-  .lds-ellipsis div {
-    position: absolute;
-    top: 27px;
-    width: 11px;
-    height: 11px;
-    border-radius: 50%;
-    background: red;
-    animation-timing-function: cubic-bezier(0, 1, 1, 0);
-  }
-  .lds-ellipsis div:nth-child(1) {
-    left: 6px;
-    animation: lds-ellipsis1 0.6s infinite;
-  }
-  .lds-ellipsis div:nth-child(2) {
-    left: 6px;
-    animation: lds-ellipsis2 0.6s infinite;
-  }
-  .lds-ellipsis div:nth-child(3) {
-    left: 26px;
-    animation: lds-ellipsis2 0.6s infinite;
-  }
-  .lds-ellipsis div:nth-child(4) {
-    left: 45px;
-    animation: lds-ellipsis3 0.6s infinite;
-  }
+  
 }
 
-@keyframes lds-ellipsis1 {
-  0% {
-    transform: scale(0);
-  }
-  100% {
-    transform: scale(1);
-  }
-}
-@keyframes lds-ellipsis3 {
-  0% {
-    transform: scale(1);
-  }
-  100% {
-    transform: scale(0);
-  }
-}
-@keyframes lds-ellipsis2 {
-  0% {
-    transform: translate(0, 0);
-  }
-  100% {
-    transform: translate(19px, 0);
-  }
-}
-hr{
-  background: white;
-}
-
-::-webkit-scrollbar {
-  width: 8px;
-}
-
-::-webkit-scrollbar-track {
-  background: $colorOfPage;
-}
-
-::-webkit-scrollbar-thumb {
-  border-radius: 5px;
-  background: #e3e3e3;
-}
-
-::-webkit-scrollbar-thumb:hover {
-  background: #cccccc;
-}
-::-moz-selection {
-  color : $colorOfPage;
-  background: rgba(215, 25, 32,0.7);
-}
-
-::selection {
-  color : $colorOfPage;
-  background: rgba(215, 25, 32,0.7);
-}
-.edit{
-   background: #FFD300;
-   border-radius: 50%;
-}
-.delete{
-  background: #D71920;
-  border-radius: 50%;
-}
-@import '~animate.css';
-.logged .body{
-  border-top: 1px solid #e3e3e3 ;
-  border-bottom: 1px solid #e3e3e3 ;
-}
-
-
-
-//Post Details - Mamuss
-.post-details{
-
-  h2{
-    border-bottom: 1px solid $primaryColor;
-  }
-  hr{
-    border-top: 1px solid $primaryColor ;
-  }
-}
-
-@include media-breakpoint-down(md) {
-  .gallery{
-    -webkit-border-radius: 0 0 10px 10px !important;
-    -moz-border-radius: 0 0 10px 10px !important;
-    border-radius: 0 0 10px 10px !important;
-  }
-  div.content.shadow.col-xl-10.col-lg-10.col-12.order-xl-2.order-lg-2.order-1.row.justify-content-end.p-0.align-items-start > div > div.col-12.row.mt-5.px-5.title.p-0 > h1{
-    font-size: 1.25rem;
-  }
-  .project-details-frame .content{
-    border-width : 0 0 10px 0;
-    border-style : solid;
-    border-color: $primaryColor;
-    border-radius: 10px 10px 0 0;
-    height : auto;
-  }
-}
-@include media-breakpoint-up(lg) {
-  .project-details-frame .content{
-    border-width : 0 0 0 10px;
-    border-style : solid;
-    border-color: $primaryColor;
-    border-radius: 0 10px 10px 0;
-    height : 100%;
-  }
-}
-
+@import 'fonts';
+@import '_news';
+@import '_projects';
+@import 'home';
+@import 'subpage';

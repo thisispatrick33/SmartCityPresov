@@ -14,7 +14,7 @@ use App\Image;
 class PostsController extends Controller
 {
     public function get(){
-        $posts = Post::with("user")->orderBy('created_at', 'DESC')->where('subpage_id','!=', null)->where('active',true)->get()->take(6);
+        $posts = Post::with("user")->orderBy('created_at', 'DESC')->where('subpage_id','!=', null)->where('active',true)->get()->take(3);
         return $posts;
     }
 

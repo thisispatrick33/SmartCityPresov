@@ -1,0 +1,62 @@
+.subpage{
+    height: 100%;
+
+    .partial-border{
+        font-size: 1.25rem;
+        &:after{
+            content: "";
+            display: block;
+            //margin: 0 auto;
+            width: 50%;
+            margin-top: 1rem;
+            margin-left: -10%;
+            border-top: 3px solid $primaryColor;
+        }
+    }
+    .preparing{
+        height: 110%;
+        left: 15%;
+        top: 25%;
+        z-index: -1;
+    }
+    .solved{
+        width: 60vw;
+        height: 90%;
+        left: 30%;
+        top: 25%;
+        z-index: 2;
+    }
+    .h-15rem{
+        height: 15rem;
+    }
+    .divider{
+        &:last-child{
+            display: none;
+        }
+    }
+
+
+    @media (max-width : $lg){
+        .preparing{
+            height: 110%;
+            left: 0%;
+            top: 25%;
+            z-index: -1;
+        }
+        .solved{
+            width: 95vw;
+        }
+    }
+    @media (max-width : $md){
+        .solved{
+            width: 100vw;
+            height: 100%;
+            left: 0;
+            top: 0;
+            z-index: 2;
+        }
+        .partial-border{
+            font-size: 1rem;
+        }
+    }
+}
