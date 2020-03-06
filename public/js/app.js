@@ -70576,7 +70576,7 @@ var App = function App() {
   var _useState7 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(null),
       _useState8 = _slicedToArray(_useState7, 2),
       currentSubpage = _useState8[0],
-      setCurrenSubpage = _useState8[1];
+      setCurrentSubpage = _useState8[1];
 
   var _useState9 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(null),
       _useState10 = _slicedToArray(_useState9, 2),
@@ -70623,6 +70623,17 @@ var App = function App() {
     if (state !== null && state.isLoggedIn && !authState.isLoggedIn) {
       var AppState = state;
       setAuthState(AppState);
+    }
+
+    var controlSubpage = JSON.parse(localStorage.getItem("subpageData"));
+    console.log("controlSubpgae");
+    console.log(controlSubpage);
+
+    if (controlSubpage === null) {
+      localStorage["subpageData"] = JSON.stringify({
+        data: null,
+        version: 0
+      });
     }
 
     getPosts();
@@ -70860,19 +70871,15 @@ var App = function App() {
         setSubpageData(_objectSpread({}, subpageData, {
           data: _objectSpread({}, subpageData.data, _defineProperty({}, window.location.pathname, res.data.subpage))
         }));
-
-        if (subpageData.data !== null) {
-          localStorage["subpageData"] = JSON.stringify(_objectSpread({}, subpageData, {
-            data: _objectSpread({}, subpageData.data, _defineProperty({}, window.location.pathname, res.data.subpage))
-          }));
-        }
-
-        setCurrenSubpage(res.data.subpage);
+        localStorage["subpageData"] = JSON.stringify(_objectSpread({}, subpageData, {
+          data: _objectSpread({}, subpageData.data, _defineProperty({}, window.location.pathname, res.data.subpage))
+        }));
+        setCurrentSubpage(res.data.subpage);
         console.log(window.location.pathname);
       });
     } else {
       console.log("already saved");
-      setCurrenSubpage(subpageData.data[window.location.pathname]);
+      setCurrentSubpage(subpageData.data[window.location.pathname]);
     }
   };
 

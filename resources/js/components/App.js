@@ -18,7 +18,7 @@ const App = () => {
     const [authState, setAuthState] = useState({isLoggedIn: false, user: {}});
     const [post, setPost] = useState(null);
     const [subpageData, setSubpageData] = useState(JSON.parse(localStorage.getItem("subpageData"))==null ? {data: null, version: 0} : JSON.parse(localStorage.getItem("subpageData")));
-    const [currentSubpage, setCurrenSubpage] = useState(null);
+    const [currentSubpage, setCurrentSubpage] = useState(null);
 
     const [project, setProject] = useState(null);
     const [author, setAuthor] = useState(null);
@@ -53,6 +53,12 @@ const App = () => {
         if (state !== null && state.isLoggedIn && !authState.isLoggedIn) {
             let AppState = state;
             setAuthState(AppState);
+        }
+       let controlSubpage = JSON.parse(localStorage.getItem("subpageData"));
+        console.log("controlSubpgae");
+        console.log(controlSubpage);
+        if(controlSubpage === null){
+            localStorage["subpageData"] = JSON.stringify({data:null, version:0});
         }
 
         getPosts();
@@ -188,16 +194,14 @@ const App = () => {
             _getData(`api${window.location.pathname}`, config_aplication_json)
                 .then( res => {
                     setSubpageData({...subpageData, data : {...subpageData.data, [window.location.pathname]: res.data.subpage}});
-                    if(subpageData.data !== null){
-                        localStorage[`subpageData`] = JSON.stringify({...subpageData, data : {...subpageData.data, [window.location.pathname]: res.data.subpage}});
-                    }
-                    setCurrenSubpage(res.data.subpage);
+                    localStorage[`subpageData`] = JSON.stringify({...subpageData, data : {...subpageData.data, [window.location.pathname]: res.data.subpage}});
+                    setCurrentSubpage(res.data.subpage);
                     console.log(window.location.pathname);
                 });
         }
         else {
             console.log("already saved");
-            setCurrenSubpage(subpageData.data[window.location.pathname]);
+            setCurrentSubpage(subpageData.data[window.location.pathname]);
         }
     };
 
