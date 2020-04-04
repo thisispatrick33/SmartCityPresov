@@ -10834,23 +10834,32 @@ body .project-details-frame .project-content .gallery .title {
 
 .home-main-title {
   font-size: 10rem;
-  line-height: 8rem;
+  line-height: 8.6rem;
 }
 
 .home-main-text {
   font-size: 1.6rem;
+  line-height: 1.8rem;
+  letter-spacing: 1.2px;
 }
 
 .home-text {
   font-size: 1.25rem;
+  line-height: 1.3em;
+  letter-spacing: 0px;
 }
 
 .home-title {
   font-size: 1.85rem;
 }
 
+.home-preparing {
+  font-synthesis: 1.85rem;
+}
+
 .home-cards {
   font-size: 1.3rem;
+  line-height: 1.2em;
 }
 
 .subpage-main-title:first-child {
@@ -10873,18 +10882,82 @@ footer {
   font-size: 1.25rem;
 }
 
-@media (max-width: 768px) {
+@media (max-width: 1400px) {
   .home-main-title {
-    font-size: 4rem;
-    line-height: 3.2rem;
+    font-size: 9rem;
+    line-height: 7.6rem;
   }
 
   .home-main-text {
-    font-size: 1.1rem;
+    font-size: 1.4rem;
+    line-height: 1.6rem;
+  }
+}
+
+@media (max-width: 1330px) {
+  .home-title {
+    font-size: 1.65rem;
+  }
+}
+
+@media (max-width: 1220px) {
+  .home-cards {
+    font-size: 1.2rem;
+    line-height: 1.1em;
   }
 
+  .home-title {
+    font-size: 1.55rem;
+  }
+}
+
+@media (max-width: 1120px) {
   .home-cards {
-    font-size: 0.9rem;
+    font-size: 1.1rem;
+    line-height: 1em;
+  }
+
+  .home-title {
+    font-size: 1.35rem;
+  }
+}
+
+@media (max-width: 992px) {
+  footer {
+    font-size: 0.95rem;
+  }
+
+  footer p:first-child {
+    font-size: 0.65rem;
+  }
+
+  footer p span {
+    color: #D61920;
+  }
+
+  .home-main-title {
+    font-size: 8rem;
+    line-height: 6.6rem;
+  }
+
+  .home-main-text {
+    font-size: 1.3rem;
+    line-height: 1.5rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .home-main-title {
+    font-size: 6rem;
+    line-height: 5.2rem;
+  }
+
+  .home-main-text {
+    font-size: 1.3rem;
+  }
+
+  .home-preparing {
+    font-size: 2rem;
   }
 
   .subpage-main-title:first-child {
@@ -10908,17 +10981,14 @@ footer {
   }
 }
 
-@media (max-width: 992px) {
-  footer {
-    font-size: 0.95rem;
+@media (max-width: 576px) {
+  .home-main-title {
+    font-size: 4rem;
+    line-height: 3.2rem;
   }
 
-  footer p:first-child {
-    font-size: 0.65rem;
-  }
-
-  footer p span {
-    color: #D61920;
+  .home-main-text {
+    font-size: 1.1rem;
   }
 }
 
@@ -10930,11 +11000,6 @@ footer {
 
 .news-outlook-frame .news-outlook:hover {
   cursor: pointer;
-  border: 3px solid #D61920;
-}
-
-.news-outlook-frame .news-outlook:not(:hover) {
-  border: 0;
 }
 
 .news-outlook-frame .news-outlook .news-content {
@@ -11017,40 +11082,56 @@ footer {
       -ms-writing-mode: tb-rl;
           writing-mode: vertical-rl;
   font-size: 1rem;
+  letter-spacing: 1.2px;
+  word-spacing: 5px;
 }
 
 .home .partial-border:after {
   content: "";
   display: block;
-  height: 80%;
-  padding-left: 2rem;
-  margin-top: -25%;
+  height: 74%;
+  padding-left: 1rem;
+  margin-top: -17%;
   border-left: 3px solid #D61920;
 }
 
 .home .absolute-img {
   position: absolute;
-  height: 60vh;
-  left: 12%;
-  top: 35%;
+  height: 65vh;
+  left: 16%;
+  top: 46%;
 }
 
 .home .absolute-red {
   position: absolute;
   background: red;
-  height: 75vh;
-  width: 18vw;
-  left: 40%;
-  top: 20%;
+  height: 81vh;
+  width: 20vw;
+  left: 33%;
+  top: 26%;
 }
 
 .home .sponsors img {
-  width: 95%;
+  width: 100%;
 }
 
 .home #home-dots {
   -webkit-transform: scale(0.85);
           transform: scale(0.85);
+}
+
+.home .map {
+  width: 100%;
+}
+
+.home .map-box {
+  max-height: 50vh;
+}
+
+@media (max-width: 1200px) {
+  .home .map-box {
+    max-height: unset;
+  }
 }
 
 @media (max-width: 992px) {
@@ -11082,6 +11163,12 @@ footer {
   .home .sponsors img {
     width: auto;
     height: 75%;
+  }
+}
+
+@media (max-width: 768px) {
+  .home .map {
+    height: 100%;
   }
 }
 

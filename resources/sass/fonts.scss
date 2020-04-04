@@ -29,19 +29,27 @@ src: url("../fonts/SF-Pro-Display-Semibold.otf") format('opentype');
 }
 .home-main-title{
     font-size: 10rem;
-    line-height: 8rem;
+    line-height: 8.6rem;
 }
 .home-main-text{
     font-size: 1.6rem;
+    line-height: 1.8rem;
+    letter-spacing: 1.2px;
 }
 .home-text{
     font-size: 1.25rem;
+    line-height: 1.3em;
+    letter-spacing: 0px;
 }
 .home-title{
     font-size: 1.85rem;
 }
+.home-preparing{
+    font-synthesis: 1.85rem;
+}
 .home-cards{
     font-size: 1.3rem;
+    line-height: 1.2em;
 }
 
 .subpage-main-title{
@@ -63,16 +71,70 @@ footer{
     font-size: 1.25rem;
 }
 
-@media (max-width : $md){
+@media (max-width: 1400px){
     .home-main-title{
-        font-size: 4rem;
-        line-height: 3.2rem;
+        font-size: 9rem;
+        line-height: 7.6rem;
     }
     .home-main-text{
-        font-size: 1.1rem;
+        font-size: 1.4rem;
+        line-height: 1.6rem;
     }
+}
+@media (max-width: 1330px){
+    .home-title{
+        font-size: 1.65rem;
+    }
+}
+@media (max-width: 1220px){
     .home-cards{
-        font-size: .9rem;
+        font-size: 1.2rem;
+        line-height: 1.1em;
+    }
+    .home-title{
+        font-size: 1.55rem;
+    }
+}
+@media (max-width: 1120px){
+    .home-cards{
+        font-size: 1.1rem;
+        line-height: 1em;
+    }
+    .home-title{
+        font-size: 1.35rem;
+    }
+}
+@media (max-width: $lg){
+    footer{
+        font-size: .95rem;
+        p{
+            &:first-child{
+                font-size: .65rem;
+            }
+            span{
+                color: $primaryColor;
+            }
+        }
+    }
+    .home-main-title{
+        font-size: 8rem;
+        line-height: 6.6rem;
+    }
+    .home-main-text{
+        font-size: 1.3rem;
+        line-height: 1.5rem;
+    }
+}
+@media (max-width : $md){
+    .home-main-title{
+        font-size: 6rem;
+        line-height: 5.2rem;
+    }
+    .home-main-text{
+        font-size: 1.3rem;
+    }
+    .home-preparing{
+        font-size: 2rem;
     }
     .subpage-main-title{
         &:first-child{
@@ -92,16 +154,12 @@ footer{
         }
     }
 }
-@media (max-width: $lg){
-    footer{
-        font-size: .95rem;
-        p{
-            &:first-child{
-                font-size: .65rem;
-            }
-            span{
-                color: $primaryColor;
-            }
-        }
+@media (max-width: $sm){
+    .home-main-title{
+        font-size: 4rem;
+        line-height: 3.2rem;
+    }
+    .home-main-text{
+        font-size: 1.1rem;
     }
 }

@@ -13,40 +13,55 @@
     .rotate{
         writing-mode: vertical-rl;
         font-size: 1rem;
+        letter-spacing: 1.2px;
+        word-spacing: 5px;
     }
     .partial-border{
         &:after{
             content: "";
             display: block;
             //margin: 0 auto;
-            height: 80%;
-            padding-left: 2rem;
-            margin-top: -25%;
+            height: 74%;
+            padding-left: 1rem;
+            margin-top: -17%;
             border-left: 3px solid $primaryColor;
         }
     }
     .absolute-img{
         position: absolute;
-        height: 60vh;
-        left: 12%;
-        top: 35%;
+        height: 65vh;
+        left: 16%;
+        top: 46%;
     }
     .absolute-red{
         position: absolute;
         background: red;
-        height: 75vh;
-        width: 18vw;
-        left: 40%;
-        top: 20%;
+        height: 81vh;
+        width: 20vw;
+        left: 33%;
+        top: 26%;
     }
     .sponsors{
         img{
-            width: 95%;
+            width: 100%;
         }
     }
 
     #home-dots{
         transform: scale(.85);
+    }
+    .map{
+        width:100%;
+        &-box{
+            max-height: 50vh;
+        }
+    }
+    @media (max-width: $xl){
+        .map{
+            &-box{
+                max-height: unset;
+            }
+        }
     }
     @media (max-width : $lg){
         .partial-border{
@@ -75,6 +90,11 @@
                 width: auto;
                 height: 75%;
             }
+        }
+    }
+    @media (max-width: $md){
+        .map{
+            height: 100%;
         }
     }
 }
