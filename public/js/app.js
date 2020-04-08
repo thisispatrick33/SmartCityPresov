@@ -70565,10 +70565,7 @@ var App = function App() {
       post = _useState4[0],
       setPost = _useState4[1];
 
-  var _useState5 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(JSON.parse(localStorage.getItem("subpageData")) == null ? {
-    data: null,
-    version: 0
-  } : JSON.parse(localStorage.getItem("subpageData"))),
+  var _useState5 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(JSON.parse(localStorage.getItem("subpageData")) == null ? null : JSON.parse(localStorage.getItem("subpageData")).data),
       _useState6 = _slicedToArray(_useState5, 2),
       subpageData = _useState6[0],
       setSubpageData = _useState6[1];
@@ -70598,6 +70595,18 @@ var App = function App() {
       subpages = _useState16[0],
       setSubpages = _useState16[1];
 
+  var requestVersions = {
+    "/mobilita": 40,
+    "/zivotne_prostredie": 4,
+    "/digitalne_mesto": 50,
+    "/energia": 12
+  };
+
+  var _useState17 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(JSON.parse(localStorage.getItem("subpageData")) == null ? null : JSON.parse(localStorage.getItem("subpageData")).version),
+      _useState18 = _slicedToArray(_useState17, 2),
+      version = _useState18[0],
+      setVersion = _useState18[1];
+
   var config_aplication_json = {
     headers: {
       'Accept': 'application/json',
@@ -70626,13 +70635,11 @@ var App = function App() {
     }
 
     var controlSubpage = JSON.parse(localStorage.getItem("subpageData"));
-    console.log("controlSubpgae");
-    console.log(controlSubpage);
 
     if (controlSubpage === null) {
       localStorage["subpageData"] = JSON.stringify({
         data: null,
-        version: 0
+        version: null
       });
     }
 
@@ -70864,22 +70871,26 @@ var App = function App() {
   };
 
   var subpageFetchData = function subpageFetchData() {
-    if (subpageData === null || subpageData.data === null || subpageData.data[window.location.pathname] === undefined || subpageData.data[window.location.pathname] === null) {
+    console.log(version);
+    console.log(subpageData);
+
+    if (version === null || version[window.location.pathname] === null || version[window.location.pathname] !== requestVersions[window.location.pathname] || subpageData === null || subpageData[window.location.pathname] === undefined || subpageData[window.location.pathname] === null) {
       console.log("fetching from server");
 
       _getData("api".concat(window.location.pathname), config_aplication_json).then(function (res) {
-        setSubpageData(_objectSpread({}, subpageData, {
-          data: _objectSpread({}, subpageData.data, _defineProperty({}, window.location.pathname, res.data.subpage))
-        }));
-        localStorage["subpageData"] = JSON.stringify(_objectSpread({}, subpageData, {
-          data: _objectSpread({}, subpageData.data, _defineProperty({}, window.location.pathname, res.data.subpage))
-        }));
+        setSubpageData(_objectSpread({}, subpageData, _defineProperty({}, window.location.pathname, res.data.subpage)));
+        setVersion(_objectSpread({}, version, _defineProperty({}, window.location.pathname, requestVersions[window.location.pathname])));
+        console.log(_objectSpread({}, subpageData, _defineProperty({}, window.location.pathname, res.data.subpage)));
+        localStorage["subpageData"] = JSON.stringify({
+          data: _objectSpread({}, subpageData, _defineProperty({}, window.location.pathname, res.data.subpage)),
+          version: _objectSpread({}, version, _defineProperty({}, window.location.pathname, requestVersions[window.location.pathname]))
+        });
         setCurrentSubpage(res.data.subpage);
         console.log(window.location.pathname);
       });
     } else {
       console.log("already saved");
-      setCurrentSubpage(subpageData.data[window.location.pathname]);
+      setCurrentSubpage(subpageData[window.location.pathname]);
     }
   };
 
@@ -76922,8 +76933,8 @@ var ProjectOutlook = function ProjectOutlook(_ref) {
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! D:\PROGRAMMING\web\SmartCityPresov\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! D:\PROGRAMMING\web\SmartCityPresov\resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! C:\Users\Mamuss\PhpstormProjects\SmartCityPresov\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! C:\Users\Mamuss\PhpstormProjects\SmartCityPresov\resources\sass\app.scss */"./resources/sass/app.scss");
 
 
 /***/ })

@@ -17,7 +17,7 @@ const App = () => {
 
     const [authState, setAuthState] = useState({isLoggedIn: false, user: {}});
     const [post, setPost] = useState(null);
-    const [subpageData, setSubpageData] = useState(JSON.parse(localStorage.getItem("subpageData"))==null ? {data: null, version: 0} : JSON.parse(localStorage.getItem("subpageData")));
+    const [subpageData, setSubpageData] = useState(JSON.parse(localStorage.getItem("subpageData"))==null ? null : JSON.parse(localStorage.getItem("subpageData")).data);
     const [currentSubpage, setCurrentSubpage] = useState(null);
 
     const [project, setProject] = useState(null);
@@ -26,6 +26,10 @@ const App = () => {
     const [newsPosts, setNewsPosts] = useState([]);
 
     const [subpages, setSubpages] = useState(null);
+
+    const requestVersions = {"/mobilita":40, "/zivotne_prostredie":4, "/digitalne_mesto":50, "/energia":12};
+
+    const [version, setVersion] = useState( JSON.parse(localStorage.getItem("subpageData"))==null ? null : JSON.parse(localStorage.getItem("subpageData")).version);
 
 
     const config_aplication_json = {
@@ -54,15 +58,15 @@ const App = () => {
             let AppState = state;
             setAuthState(AppState);
         }
-       let controlSubpage = JSON.parse(localStorage.getItem("subpageData"));
-        console.log("controlSubpgae");
-        console.log(controlSubpage);
+        let controlSubpage = JSON.parse(localStorage.getItem("subpageData"));
         if(controlSubpage === null){
-            localStorage["subpageData"] = JSON.stringify({data:null, version:0});
+            localStorage["subpageData"] = JSON.stringify({data:null, version:null});
         }
 
         getPosts();
+
         subpageFetchData();
+
         getSubpages();
 
     },[authState]);
@@ -189,19 +193,27 @@ const App = () => {
     const getPosts = () => { _getData("/api/post", config_aplication_json).then(res => { setPost(res.data); }); };
 
     const subpageFetchData = () => {
-        if(subpageData === null || subpageData.data===null || subpageData.data[window.location.pathname]===undefined || subpageData.data[window.location.pathname]===null){
+        console.log(version);
+        console.log(subpageData);
+        if (( version === null || version[window.location.pathname] === null || version[window.location.pathname] !== requestVersions[window.location.pathname]) || (subpageData === null || subpageData[window.location.pathname] === undefined || subpageData[window.location.pathname] === null)) {
             console.log("fetching from server");
             _getData(`api${window.location.pathname}`, config_aplication_json)
-                .then( res => {
-                    setSubpageData({...subpageData, data : {...subpageData.data, [window.location.pathname]: res.data.subpage}});
-                    localStorage[`subpageData`] = JSON.stringify({...subpageData, data : {...subpageData.data, [window.location.pathname]: res.data.subpage}});
+                .then(res => {
+                    setSubpageData({...subpageData, [window.location.pathname]: res.data.subpage});
+                    setVersion({...version, [window.location.pathname]: requestVersions[window.location.pathname]});
+
+                    console.log({...subpageData, [window.location.pathname]: res.data.subpage});
+                    localStorage[`subpageData`] = JSON.stringify({
+                        data: {...subpageData, [window.location.pathname]: res.data.subpage},
+                        version : {...version, [window.location.pathname]: requestVersions[window.location.pathname]}
+                    });
                     setCurrentSubpage(res.data.subpage);
                     console.log(window.location.pathname);
                 });
         }
         else {
             console.log("already saved");
-            setCurrentSubpage(subpageData.data[window.location.pathname]);
+            setCurrentSubpage(subpageData[window.location.pathname]);
         }
     };
 
