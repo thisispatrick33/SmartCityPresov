@@ -70594,13 +70594,8 @@ var App = function App() {
       _useState16 = _slicedToArray(_useState15, 2),
       subpages = _useState16[0],
       setSubpages = _useState16[1];
+  /*const requestVersions = {"/mobilita":40, "/zivotne_prostredie":4, "/digitalne_mesto":50, "/energia":12};*/
 
-  var requestVersions = {
-    "/mobilita": 40,
-    "/zivotne_prostredie": 4,
-    "/digitalne_mesto": 50,
-    "/energia": 12
-  };
 
   var _useState17 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(JSON.parse(localStorage.getItem("subpageData")) == null ? null : JSON.parse(localStorage.getItem("subpageData")).version),
       _useState18 = _slicedToArray(_useState17, 2),
@@ -70871,27 +70866,31 @@ var App = function App() {
   };
 
   var subpageFetchData = function subpageFetchData() {
-    console.log(version);
-    console.log(subpageData);
+    console.log("hi");
 
-    if (version === null || version[window.location.pathname] === null || version[window.location.pathname] !== requestVersions[window.location.pathname] || subpageData === null || subpageData[window.location.pathname] === undefined || subpageData[window.location.pathname] === null) {
-      console.log("fetching from server");
+    _getData("api/version", config_aplication_json).then(function (versionResponse) {
+      console.log(versionResponse.data);
+      console.log(versionResponse.data[window.location.pathname]);
 
-      _getData("api".concat(window.location.pathname), config_aplication_json).then(function (res) {
-        setSubpageData(_objectSpread({}, subpageData, _defineProperty({}, window.location.pathname, res.data.subpage)));
-        setVersion(_objectSpread({}, version, _defineProperty({}, window.location.pathname, requestVersions[window.location.pathname])));
-        console.log(_objectSpread({}, subpageData, _defineProperty({}, window.location.pathname, res.data.subpage)));
-        localStorage["subpageData"] = JSON.stringify({
-          data: _objectSpread({}, subpageData, _defineProperty({}, window.location.pathname, res.data.subpage)),
-          version: _objectSpread({}, version, _defineProperty({}, window.location.pathname, requestVersions[window.location.pathname]))
+      if (version === null || version[window.location.pathname] === null || version[window.location.pathname] !== versionResponse.data[window.location.pathname] || subpageData === null || subpageData[window.location.pathname] === undefined || subpageData[window.location.pathname] === null) {
+        console.log("fetching from server");
+
+        _getData("api".concat(window.location.pathname), config_aplication_json).then(function (res) {
+          setSubpageData(_objectSpread({}, subpageData, _defineProperty({}, window.location.pathname, res.data.subpage)));
+          setVersion(_objectSpread({}, version, _defineProperty({}, window.location.pathname, versionResponse.data[window.location.pathname])));
+          console.log(versionResponse.data[window.location.pathname]);
+          localStorage["subpageData"] = JSON.stringify({
+            data: _objectSpread({}, subpageData, _defineProperty({}, window.location.pathname, res.data.subpage)),
+            version: _objectSpread({}, version, _defineProperty({}, window.location.pathname, versionResponse.data[window.location.pathname]))
+          });
+          setCurrentSubpage(res.data.subpage);
+          console.log(window.location.pathname);
         });
-        setCurrentSubpage(res.data.subpage);
-        console.log(window.location.pathname);
-      });
-    } else {
-      console.log("already saved");
-      setCurrentSubpage(subpageData[window.location.pathname]);
-    }
+      } else {
+        console.log("already saved");
+        setCurrentSubpage(subpageData[window.location.pathname]);
+      }
+    });
   };
 
   var getPost = function getPost(_id) {

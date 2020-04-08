@@ -27,7 +27,7 @@ const App = () => {
 
     const [subpages, setSubpages] = useState(null);
 
-    const requestVersions = {"/mobilita":40, "/zivotne_prostredie":4, "/digitalne_mesto":50, "/energia":12};
+    /*const requestVersions = {"/mobilita":40, "/zivotne_prostredie":4, "/digitalne_mesto":50, "/energia":12};*/
 
     const [version, setVersion] = useState( JSON.parse(localStorage.getItem("subpageData"))==null ? null : JSON.parse(localStorage.getItem("subpageData")).version);
 
@@ -193,28 +193,31 @@ const App = () => {
     const getPosts = () => { _getData("/api/post", config_aplication_json).then(res => { setPost(res.data); }); };
 
     const subpageFetchData = () => {
-        console.log(version);
-        console.log(subpageData);
-        if (( version === null || version[window.location.pathname] === null || version[window.location.pathname] !== requestVersions[window.location.pathname]) || (subpageData === null || subpageData[window.location.pathname] === undefined || subpageData[window.location.pathname] === null)) {
-            console.log("fetching from server");
-            _getData(`api${window.location.pathname}`, config_aplication_json)
-                .then(res => {
-                    setSubpageData({...subpageData, [window.location.pathname]: res.data.subpage});
-                    setVersion({...version, [window.location.pathname]: requestVersions[window.location.pathname]});
+        console.log("hi");
+        _getData("api/version", config_aplication_json).then(versionResponse => {
+            console.log(versionResponse.data);
+            console.log(versionResponse.data[window.location.pathname]);
+            if (( version === null || version[window.location.pathname] === null || version[window.location.pathname] !== versionResponse.data[window.location.pathname]) || (subpageData === null || subpageData[window.location.pathname] === undefined || subpageData[window.location.pathname] === null)) {
+                console.log("fetching from server");
+                _getData(`api${window.location.pathname}`, config_aplication_json)
+                    .then(res => {
+                        setSubpageData({...subpageData, [window.location.pathname]: res.data.subpage});
+                        setVersion({...version, [window.location.pathname]: versionResponse.data[window.location.pathname]});
 
-                    console.log({...subpageData, [window.location.pathname]: res.data.subpage});
-                    localStorage[`subpageData`] = JSON.stringify({
-                        data: {...subpageData, [window.location.pathname]: res.data.subpage},
-                        version : {...version, [window.location.pathname]: requestVersions[window.location.pathname]}
+                        console.log(versionResponse.data[window.location.pathname]);
+                        localStorage[`subpageData`] = JSON.stringify({
+                            data: {...subpageData, [window.location.pathname]: res.data.subpage},
+                            version : {...version, [window.location.pathname]: versionResponse.data[window.location.pathname]}
+                        });
+                        setCurrentSubpage(res.data.subpage);
+                        console.log(window.location.pathname);
                     });
-                    setCurrentSubpage(res.data.subpage);
-                    console.log(window.location.pathname);
-                });
-        }
-        else {
-            console.log("already saved");
-            setCurrentSubpage(subpageData[window.location.pathname]);
-        }
+            }
+            else {
+                console.log("already saved");
+                setCurrentSubpage(subpageData[window.location.pathname]);
+            }
+        });
     };
 
     const getPost = _id => {
