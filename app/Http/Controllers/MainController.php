@@ -43,6 +43,9 @@ class MainController extends Controller
     }
     public function version(){
         $subpages = Subpage::select(['title_link','version'])->get();
+        foreach($subpages as $subpage){
+            $subpage->title_link = "/".$subpage->title_link;
+        }
         $versions = $subpages->pluck('version','title_link');
         return $versions;
     }
