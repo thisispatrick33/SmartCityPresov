@@ -2,9 +2,12 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="b40c9df6-0b96-4ac4-9038-e75470bb9bdd" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/resources/js/components/admin/CreatePost.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/js/components/admin/UpdatePost.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/public/js/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/js/app.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/js/components/App.js" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/App.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/routes/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/web.php" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -20,10 +23,46 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/resources/js/components/App.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="107">
-              <caret line="196" column="81" selection-start-line="196" selection-start-column="81" selection-end-line="196" selection-end-column="81" />
+            <state relative-caret-position="238">
+              <caret line="179" column="38" lean-forward="true" selection-start-line="179" selection-start-column="38" selection-end-line="179" selection-end-column="38" />
               <folding>
                 <element signature="e#0#49#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/resources/js/components/news/Post.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="480">
+              <caret line="38" column="13" selection-start-line="33" selection-start-column="17" selection-end-line="38" selection-end-column="13" />
+              <folding>
+                <element signature="e#0#51#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/resources/js/components/admin/UpdatePost.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="456">
+              <caret line="19" column="73" selection-start-line="19" selection-start-column="73" selection-end-line="19" selection-end-column="73" />
+              <folding>
+                <element signature="e#0#39#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/resources/js/components/admin/CreatePost.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="144">
+              <caret line="6" column="31" selection-start-line="6" selection-start-column="31" selection-end-line="6" selection-end-column="31" />
+              <folding>
+                <element signature="e#0#51#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -40,13 +79,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>nav</find>
-      <find>user</find>
-      <find>Proj</find>
-      <find>Loa</find>
-      <find>getPosts</find>
-      <find>chan</find>
-      <find>data</find>
       <find>su</find>
       <find>localStorage[`subpageData`]</find>
       <find>setSubpageData</find>
@@ -70,6 +102,13 @@
       <find>consol</find>
       <find>data: null</find>
       <find>_getData</find>
+      <find>_postData</find>
+      <find>navi</find>
+      <find>postData</find>
+      <find>setPostData</find>
+      <find>hi</find>
+      <find>getPost</find>
+      <find>subpageId</find>
     </findStrings>
     <dirStrings>
       <dir>suseState</dir>
@@ -110,9 +149,7 @@
         <option value="$PROJECT_DIR$/resources/js/components/news/PostLookup.js" />
         <option value="$PROJECT_DIR$/routes/api.php" />
         <option value="$PROJECT_DIR$/app/Http/Controllers/MainController.php" />
-        <option value="$PROJECT_DIR$/routes/web.php" />
         <option value="$PROJECT_DIR$/resources/js/components/news/News.js" />
-        <option value="$PROJECT_DIR$/resources/js/components/news/Post.js" />
         <option value="$PROJECT_DIR$/resources/js/components/subpage/Project.js" />
         <option value="$PROJECT_DIR$/resources/js/components/Navigation.js" />
         <option value="$PROJECT_DIR$/public/img/subpages/mobilita.svg" />
@@ -125,6 +162,10 @@
         <option value="$PROJECT_DIR$/resources/js/components/subpage/Subpage.js" />
         <option value="$PROJECT_DIR$/resources/js/components/Home.js" />
         <option value="$PROJECT_DIR$/.env" />
+        <option value="$PROJECT_DIR$/resources/js/components/news/Post.js" />
+        <option value="$PROJECT_DIR$/routes/web.php" />
+        <option value="$PROJECT_DIR$/resources/js/components/admin/CreatePost.js" />
+        <option value="$PROJECT_DIR$/resources/js/components/admin/UpdatePost.js" />
         <option value="$PROJECT_DIR$/resources/js/components/App.js" />
       </list>
     </option>
@@ -233,7 +274,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -259,10 +299,32 @@
               <item name="js" type="462c0819:PsiDirectoryNode" />
               <item name="components" type="462c0819:PsiDirectoryNode" />
             </path>
+            <path>
+              <item name="SmartCityPresov" type="b2602c69:ProjectViewProjectNode" />
+              <item name="SmartCityPresov" type="462c0819:PsiDirectoryNode" />
+              <item name="resources" type="462c0819:PsiDirectoryNode" />
+              <item name="js" type="462c0819:PsiDirectoryNode" />
+              <item name="components" type="462c0819:PsiDirectoryNode" />
+              <item name="admin" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="SmartCityPresov" type="b2602c69:ProjectViewProjectNode" />
+              <item name="SmartCityPresov" type="462c0819:PsiDirectoryNode" />
+              <item name="resources" type="462c0819:PsiDirectoryNode" />
+              <item name="js" type="462c0819:PsiDirectoryNode" />
+              <item name="components" type="462c0819:PsiDirectoryNode" />
+              <item name="news" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="SmartCityPresov" type="b2602c69:ProjectViewProjectNode" />
+              <item name="SmartCityPresov" type="462c0819:PsiDirectoryNode" />
+              <item name="routes" type="462c0819:PsiDirectoryNode" />
+            </path>
           </expand>
           <select />
         </subPane>
       </pane>
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -485,12 +547,15 @@
       <workItem from="1583500211251" duration="2261000" />
       <workItem from="1586334630178" duration="20000" />
       <workItem from="1586334657252" duration="6220000" />
-      <workItem from="1586349720375" duration="1482000" />
+      <workItem from="1586349720375" duration="2002000" />
+      <workItem from="1586359946647" duration="278000" />
+      <workItem from="1586360603440" duration="1195000" />
+      <workItem from="1586415445609" duration="6782000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="499425000" />
+    <option name="totallyTimeSpent" value="508200000" />
   </component>
   <component name="TodoView" selected-index="1">
     <todo-panel id="selected-file">
@@ -503,8 +568,9 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
+    <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.1705757" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.17537314" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="npm" order="2" side_tool="true" />
       <window_info id="Favorites" order="3" side_tool="true" />
@@ -519,7 +585,7 @@
       <window_info anchor="bottom" id="Version Control" order="8" weight="0.32923833" />
       <window_info anchor="bottom" id="Database Changes" order="9" />
       <window_info anchor="bottom" id="Event Log" order="10" side_tool="true" weight="0.32923833" />
-      <window_info active="true" anchor="bottom" id="Terminal" order="11" visible="true" weight="0.30010718" />
+      <window_info anchor="bottom" id="Terminal" order="11" visible="true" weight="0.30010718" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
@@ -570,9 +636,6 @@
     </option>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/public/img/1568288355gKaBX.jpg" />
-    <entry file="file://$PROJECT_DIR$/public/img/1568288355GMOtN.jpg" />
-    <entry file="file://$PROJECT_DIR$/public/img/1568288355Hmz2X.jpg" />
     <entry file="file://$PROJECT_DIR$/public/img/1568288355Jxrgt.png" />
     <entry file="file://$PROJECT_DIR$/public/img/1568288355LIBT2.png" />
     <entry file="file://$PROJECT_DIR$/public/img/156993857262zvg.jpg" />
@@ -627,16 +690,6 @@
           <caret line="20" column="14" selection-start-line="20" selection-start-column="14" selection-end-line="20" selection-end-column="14" />
           <folding>
             <element signature="e#0#26#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/resources/js/components/news/Post.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2607">
-          <caret line="217" selection-start-line="217" selection-end-line="217" />
-          <folding>
-            <element signature="e#0#51#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -770,16 +823,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/resources/js/components/Home.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="544">
-          <caret line="723" column="38" selection-start-line="723" selection-start-column="38" selection-end-line="723" selection-end-column="38" />
-          <folding>
-            <element signature="e#0#51#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/resources/js/components/subpage/Subpage.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="544">
@@ -790,18 +833,68 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/routes/api.php">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
     <entry file="file://$PROJECT_DIR$/config/app.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-3672" />
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/routes/api.php">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/js/components/Home.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="185">
+          <caret line="242" column="102" selection-start-line="242" selection-start-column="48" selection-end-line="242" selection-end-column="102" />
+          <folding>
+            <element signature="e#0#51#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/routes/web.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="480">
+          <caret line="29" column="26" selection-start-line="29" selection-start-column="26" selection-end-line="29" selection-end-column="26" />
+          <folding>
+            <element signature="e#7#389#0#PHP" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/js/components/admin/CreatePost.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="144">
+          <caret line="6" column="31" selection-start-line="6" selection-start-column="31" selection-end-line="6" selection-end-column="31" />
+          <folding>
+            <element signature="e#0#51#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/js/components/news/Post.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="480">
+          <caret line="38" column="13" selection-start-line="33" selection-start-column="17" selection-end-line="38" selection-end-column="13" />
+          <folding>
+            <element signature="e#0#51#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/js/components/admin/UpdatePost.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="456">
+          <caret line="19" column="73" selection-start-line="19" selection-start-column="73" selection-end-line="19" selection-end-column="73" />
+          <folding>
+            <element signature="e#0#39#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/resources/js/components/App.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="107">
-          <caret line="196" column="81" selection-start-line="196" selection-start-column="81" selection-end-line="196" selection-end-column="81" />
+        <state relative-caret-position="238">
+          <caret line="179" column="38" lean-forward="true" selection-start-line="179" selection-start-column="38" selection-end-line="179" selection-end-column="38" />
           <folding>
             <element signature="e#0#49#0" expanded="true" />
           </folding>

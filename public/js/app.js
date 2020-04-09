@@ -70517,6 +70517,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _admin_Login__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./admin/Login */ "./resources/js/components/admin/Login.js");
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_9___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_9__);
+/* harmony import */ var _admin_CreatePost__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./admin/CreatePost */ "./resources/js/components/admin/CreatePost.js");
+/* harmony import */ var _admin_UpdatePost__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./admin/UpdatePost */ "./resources/js/components/admin/UpdatePost.js");
 
 
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; var ownKeys = Object.keys(source); if (typeof Object.getOwnPropertySymbols === 'function') { ownKeys = ownKeys.concat(Object.getOwnPropertySymbols(source).filter(function (sym) { return Object.getOwnPropertyDescriptor(source, sym).enumerable; })); } ownKeys.forEach(function (key) { _defineProperty(target, key, source[key]); }); } return target; }
@@ -70534,6 +70536,8 @@ function _nonIterableRest() { throw new TypeError("Invalid attempt to destructur
 function _iterableToArrayLimit(arr, i) { var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
 
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
+
+
 
 
 
@@ -70594,8 +70598,6 @@ var App = function App() {
       _useState16 = _slicedToArray(_useState15, 2),
       subpages = _useState16[0],
       setSubpages = _useState16[1];
-  /*const requestVersions = {"/mobilita":40, "/zivotne_prostredie":4, "/digitalne_mesto":50, "/energia":12};*/
-
 
   var _useState17 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(JSON.parse(localStorage.getItem("subpageData")) == null ? null : JSON.parse(localStorage.getItem("subpageData")).version),
       _useState18 = _slicedToArray(_useState17, 2),
@@ -70639,7 +70641,11 @@ var App = function App() {
     }
 
     getPosts();
-    subpageFetchData();
+
+    if (window.location.pathname !== "/create" && window.location.pathname.indexOf("/update/") === -1 && window.location.pathname !== "/login") {
+      subpageFetchData();
+    }
+
     getSubpages();
   }, [authState]);
   {
@@ -70786,28 +70792,27 @@ var App = function App() {
      */
   }
 
-  var _createPost = function _createPost(_ref5) {
-    var title = _ref5.title,
-        description = _ref5.description,
-        price = _ref5.price,
-        user_id = _ref5.user_id,
-        subpage_id = _ref5.subpage_id,
-        images = _ref5.images;
+  var _createPost = function _createPost(creationData) {
+    console.log(creationData);
     config_multipart_form_data.headers['Authorization'] = 'Bearer ' + authState.user.auth_token;
     var formData = new FormData();
-    formData.append("title", title);
-    formData.append("description", description);
-    formData.append("price", price);
-    formData.append("user_id", user_id);
-    formData.append("subpage_id", subpage_id);
+    formData.append("title", creationData.title);
+    formData.append("description", creationData.description);
+    formData.append("price", creationData.price);
+    formData.append("user_id", 5);
+    formData.append("author", creationData.author);
+    formData.append("subpage_id", creationData.subpageId);
+    formData.append("done", creationData.done);
 
-    if (!images) {} else {
-      Array.from(images).forEach(function (image) {
+    if (!creationData.images) {} else {
+      Array.from(creationData.images).forEach(function (image) {
         return formData.append("images[]", image);
       });
     }
 
     _postData("/api/post", formData, config_multipart_form_data).then(function (response) {
+      console.log(response);
+
       if (response.status == 200) {
         alert("\xDAspe\u0161ne si vytvoril \u010Dl\xE1nok.");
       } else {
@@ -70816,32 +70821,30 @@ var App = function App() {
     });
   };
 
-  var _updatePost = function _updatePost(_ref6) {
-    var id = _ref6.id,
-        title = _ref6.title,
-        description = _ref6.description,
-        price = _ref6.price,
-        subpage_id = _ref6.subpage_id,
-        images = _ref6.images,
-        updated_images = _ref6.updated_images;
+  var _updatePost = function _updatePost(updatedData) {
+    console.log(updatedData);
     config_multipart_form_data.headers['Authorization'] = 'Bearer ' + authState.user.auth_token;
     var formData = new FormData();
-    formData.append("id", id);
-    formData.append("title", title);
-    formData.append("description", description);
-    formData.append("price", price);
-    formData.append("subpage_id", subpage_id);
-    Array.from(images).forEach(function (image) {
+    formData.append("id", updatedData.id);
+    formData.append("title", updatedData.title);
+    formData.append("description", updatedData.description);
+    formData.append("price", updatedData.price);
+    formData.append("subpage_id", updatedData.subpage_id);
+    Array.from(updatedData.images).forEach(function (image) {
       return formData.append("images[]", image);
     });
-    Array.from(updated_images).forEach(function (image) {
+    Array.from(updatedData.updated_images).forEach(function (image) {
       return formData.append("updated_images[]", image);
     });
+    formData.append("done", updatedData.done);
+    formData.append("user_id", 5);
+    formData.append("author", updatedData.author);
 
     _postData("/api/post/edit", formData, config_multipart_form_data).then(function (response) {
+      console.log(response);
       return response;
-    }).then(function (_ref7) {
-      var data = _ref7.data;
+    }).then(function (_ref5) {
+      var data = _ref5.data;
       alert(data == 200 ? "\xDAspe\u0161ne si \xFApravil \u010Dl\xE1nok." : "\u010Cl\xE1nok sa nepodarilo upravi\u0165!");
     });
   };
@@ -70866,8 +70869,6 @@ var App = function App() {
   };
 
   var subpageFetchData = function subpageFetchData() {
-    console.log("hi");
-
     _getData("api/version", config_aplication_json).then(function (versionResponse) {
       console.log(versionResponse.data);
       console.log(versionResponse.data[window.location.pathname]);
@@ -70893,17 +70894,11 @@ var App = function App() {
     });
   };
 
-  var getPost = function getPost(_id) {
-    fetch("/api/post/".concat(_id)).then(function (response) {
+  var getPost = function getPost(id) {
+    fetch("/api/post/".concat(id)).then(function (response) {
       return response.json();
     }).then(function (postData) {
       setProject(postData);
-      fetch("/api/author/".concat(postData.user_id)).then(function (response) {
-        return response.json();
-      }).then(function (_ref8) {
-        var data = _ref8.data;
-        setAuthor(data);
-      });
     });
   };
 
@@ -70974,6 +70969,18 @@ var App = function App() {
     path: "/login",
     login: _loginUser,
     logout: _logoutUser
+  }), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_admin_CreatePost__WEBPACK_IMPORTED_MODULE_10__["CreatePost"], {
+    path: "/create",
+    logged: authState.user,
+    changeSubpage: subpageFetchData,
+    post: _createPost
+  }), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_admin_UpdatePost__WEBPACK_IMPORTED_MODULE_11__["UpdatePost"], {
+    path: "/update/:id",
+    logged: authState.user,
+    changeSubpage: subpageFetchData,
+    post: _updatePost,
+    getpost: getPost,
+    project: project
   }))));
 };
 
@@ -75143,6 +75150,156 @@ var Loader = function Loader() {
 
 /***/ }),
 
+/***/ "./resources/js/components/admin/CreatePost.js":
+/*!*****************************************************!*\
+  !*** ./resources/js/components/admin/CreatePost.js ***!
+  \*****************************************************/
+/*! exports provided: CreatePost */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "CreatePost", function() { return CreatePost; });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _reach_router__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @reach/router */ "./node_modules/@reach/router/es/index.js");
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; var ownKeys = Object.keys(source); if (typeof Object.getOwnPropertySymbols === 'function') { ownKeys = ownKeys.concat(Object.getOwnPropertySymbols(source).filter(function (sym) { return Object.getOwnPropertyDescriptor(source, sym).enumerable; })); } ownKeys.forEach(function (key) { _defineProperty(target, key, source[key]); }); } return target; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _nonIterableRest(); }
+
+function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance"); }
+
+function _iterableToArrayLimit(arr, i) { var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
+
+function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
+
+
+
+var CreatePost = function CreatePost(_ref) {
+  var logged = _ref.logged,
+      changeSubpage = _ref.changeSubpage,
+      _ref$post = _ref.post,
+      post = _ref$post === void 0 ? function (f) {
+    return f;
+  } : _ref$post;
+
+  var _useState = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])({
+    title: null,
+    description: null,
+    price: null,
+    author: null,
+    subpage_id: null,
+    done: null
+  }),
+      _useState2 = _slicedToArray(_useState, 2),
+      creationData = _useState2[0],
+      setCreationData = _useState2[1];
+
+  var handleSubmit = function handleSubmit() {
+    post(creationData);
+  };
+
+  if (logged.id !== undefined) {
+    return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("form", {
+      encType: "multipart/form-data"
+    }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+      name: "title",
+      className: "col-10 offset-1",
+      value: creationData.title,
+      placeholder: "Zadajte n\xE1zov",
+      onChange: function onChange(e) {
+        setCreationData(_objectSpread({}, creationData, {
+          title: e.target.value
+        }));
+      },
+      required: true
+    }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("textarea", {
+      name: "description",
+      className: "col-10 offset-1",
+      placeholder: "Zadajte text \u010Dl\xE1nku",
+      value: creationData.description,
+      onChange: function onChange(e) {
+        setCreationData(_objectSpread({}, creationData, {
+          description: e.target.value
+        }));
+      },
+      required: true
+    }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+      name: "price",
+      className: "col-10 offset-1",
+      value: creationData.price,
+      placeholder: "Zadajte cenu projektu",
+      type: "number",
+      onChange: function onChange(e) {
+        setCreationData(_objectSpread({}, creationData, {
+          price: e.target.value
+        }));
+      },
+      required: true
+    }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+      name: "author",
+      className: "col-10 offset-1",
+      value: creationData.author,
+      placeholder: "Zadajte meno autora",
+      onChange: function onChange(e) {
+        setCreationData(_objectSpread({}, creationData, {
+          author: e.target.value
+        }));
+      },
+      required: true
+    }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+      name: "images[]",
+      className: "col-10 offset-1",
+      type: "file",
+      onChange: function onChange(e) {
+        setCreationData(_objectSpread({}, creationData, {
+          images: e.target.files
+        }));
+      },
+      multiple: true
+    }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+      name: "subpage_id",
+      className: "col-10 offset-1",
+      value: creationData.subpage_id,
+      placeholder: "Zadajte subpage_id",
+      onChange: function onChange(e) {
+        setCreationData(_objectSpread({}, creationData, {
+          subpage_id: e.target.value
+        }));
+      },
+      required: true
+    }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+      name: "done",
+      className: "col-10 offset-1",
+      value: creationData.done,
+      placeholder: "Zadajte stav",
+      onChange: function onChange(e) {
+        setCreationData(_objectSpread({}, creationData, {
+          done: e.target.value
+        }));
+      },
+      required: true
+    }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+      type: "button",
+      value: "potvrdiť",
+      onClick: function onClick() {
+        return handleSubmit();
+      }
+    }));
+  } else {
+    return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, "Unauthorized"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      onClick: function onClick() {
+        Object(_reach_router__WEBPACK_IMPORTED_MODULE_1__["navigate"])("/");
+        changeSubpage();
+      }
+    }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, "Go back!")));
+  }
+};
+
+/***/ }),
+
 /***/ "./resources/js/components/admin/Login.js":
 /*!************************************************!*\
   !*** ./resources/js/components/admin/Login.js ***!
@@ -75201,6 +75358,199 @@ var Login = function Login(_ref) {
     className: "landing-page-btn center-block text-center",
     id: "email-login-btn"
   }, "Login")));
+};
+
+/***/ }),
+
+/***/ "./resources/js/components/admin/UpdatePost.js":
+/*!*****************************************************!*\
+  !*** ./resources/js/components/admin/UpdatePost.js ***!
+  \*****************************************************/
+/*! exports provided: UpdatePost */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "UpdatePost", function() { return UpdatePost; });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _reach_router__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @reach/router */ "./node_modules/@reach/router/es/index.js");
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; var ownKeys = Object.keys(source); if (typeof Object.getOwnPropertySymbols === 'function') { ownKeys = ownKeys.concat(Object.getOwnPropertySymbols(source).filter(function (sym) { return Object.getOwnPropertyDescriptor(source, sym).enumerable; })); } ownKeys.forEach(function (key) { _defineProperty(target, key, source[key]); }); } return target; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _nonIterableRest(); }
+
+function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance"); }
+
+function _iterableToArrayLimit(arr, i) { var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
+
+function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
+
+
+
+var UpdatePost = function UpdatePost(_ref) {
+  var id = _ref.id,
+      logged = _ref.logged,
+      changeSubpage = _ref.changeSubpage,
+      _ref$post = _ref.post,
+      post = _ref$post === void 0 ? function (f) {
+    return f;
+  } : _ref$post,
+      _ref$getpost = _ref.getpost,
+      getpost = _ref$getpost === void 0 ? function (f) {
+    return f;
+  } : _ref$getpost,
+      project = _ref.project;
+
+  var _useState = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])({}),
+      _useState2 = _slicedToArray(_useState, 2),
+      updatedData = _useState2[0],
+      setUpdatedData = _useState2[1];
+
+  var _useState3 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])([]),
+      _useState4 = _slicedToArray(_useState3, 2),
+      images = _useState4[0],
+      setImages = _useState4[1];
+
+  Object(react__WEBPACK_IMPORTED_MODULE_0__["useEffect"])(function () {
+    if (project === null) {
+      getpost(id);
+    } else {
+      console.log(project);
+      setUpdatedData(project);
+      setImages(project.images);
+    }
+  }, [project]);
+
+  var handleSubmit = function handleSubmit() {
+    post(_objectSpread({}, updatedData, {
+      updated_images: images.map(function (_ref2) {
+        var id = _ref2.id;
+        return id;
+      })
+    }));
+  };
+
+  var handleImages = function handleImages(index) {
+    return setImages(images.filter(function (image) {
+      return image.id !== index;
+    }));
+  };
+
+  if (logged.id !== undefined) {
+    return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("form", {
+      encType: "multipart/form-data"
+    }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+      name: "title",
+      className: "col-10 offset-1",
+      value: updatedData.title,
+      placeholder: "Zadajte n\xE1zov",
+      onChange: function onChange(e) {
+        setUpdatedData(_objectSpread({}, updatedData, {
+          title: e.target.value
+        }));
+      },
+      required: true
+    }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("textarea", {
+      name: "description",
+      className: "col-10 offset-1",
+      placeholder: "Zadajte text \u010Dl\xE1nku",
+      value: updatedData.description,
+      onChange: function onChange(e) {
+        setUpdatedData(_objectSpread({}, updatedData, {
+          description: e.target.value
+        }));
+      },
+      required: true
+    }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+      name: "price",
+      className: "col-10 offset-1",
+      value: updatedData.price,
+      placeholder: "Zadajte cenu projektu",
+      type: "number",
+      onChange: function onChange(e) {
+        setUpdatedData(_objectSpread({}, updatedData, {
+          price: e.target.value
+        }));
+      },
+      required: true
+    }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+      name: "author",
+      className: "col-10 offset-1",
+      value: updatedData.author,
+      placeholder: "Zadajte meno autora",
+      onChange: function onChange(e) {
+        setUpdatedData(_objectSpread({}, updatedData, {
+          author: e.target.value
+        }));
+      },
+      required: true
+    }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      className: "col-10 offset-1"
+    }, images.map(function (_ref3) {
+      var path = _ref3.path,
+          id = _ref3.id;
+      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+        onClick: function onClick() {
+          handleImages(id);
+        }
+      }, "x"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
+        style: {
+          height: "100px",
+          width: "auto"
+        },
+        src: "../".concat(path.substr(path.indexOf('img'))),
+        className: "m-2",
+        alt: ""
+      }));
+    })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+      name: "images[]",
+      className: "col-10 offset-1",
+      type: "file",
+      onChange: function onChange(e) {
+        setUpdatedData(_objectSpread({}, updatedData, {
+          images: e.target.files
+        }));
+      },
+      multiple: true
+    }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+      name: "subpage_id",
+      className: "col-10 offset-1",
+      value: updatedData.subpage_id,
+      placeholder: "Zadajte subpageId",
+      onChange: function onChange(e) {
+        setUpdatedData(_objectSpread({}, updatedData, {
+          subpage_id: e.target.value
+        }));
+      },
+      required: true
+    }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+      name: "done",
+      className: "col-10 offset-1",
+      value: updatedData.done,
+      placeholder: "Zadajte stav",
+      onChange: function onChange(e) {
+        setUpdatedData(_objectSpread({}, updatedData, {
+          done: e.target.value
+        }));
+      },
+      required: true
+    }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+      type: "button",
+      value: "potvrdiť",
+      onClick: function onClick() {
+        return handleSubmit();
+      }
+    }));
+  } else {
+    return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, "Unauthorized"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      onClick: function onClick() {
+        Object(_reach_router__WEBPACK_IMPORTED_MODULE_1__["navigate"])("/");
+        changeSubpage();
+      }
+    }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, "Go back!")));
+  }
 };
 
 /***/ }),

@@ -8,6 +8,8 @@ import { Subpage }  from "./subpage/Subpage";
 import { Post } from "./news/Post";
 import { Login } from "./admin/Login";
 import axios from "axios";
+import {CreatePost} from "./admin/CreatePost";
+import {UpdatePost} from "./admin/UpdatePost";
 
 const App = () => {
 
@@ -26,8 +28,6 @@ const App = () => {
     const [newsPosts, setNewsPosts] = useState([]);
 
     const [subpages, setSubpages] = useState(null);
-
-    /*const requestVersions = {"/mobilita":40, "/zivotne_prostredie":4, "/digitalne_mesto":50, "/energia":12};*/
 
     const [version, setVersion] = useState( JSON.parse(localStorage.getItem("subpageData"))==null ? null : JSON.parse(localStorage.getItem("subpageData")).version);
 
@@ -65,7 +65,10 @@ const App = () => {
 
         getPosts();
 
-        subpageFetchData();
+        if(window.location.pathname!=="/create" && window.location.pathname.indexOf("/update/")===-1 && window.location.pathname!=="/login"){
+            subpageFetchData();
+        }
+
 
         getSubpages();
 
@@ -134,22 +137,25 @@ const App = () => {
 
     */}
 
-    const _createPost = ( {title, description, price, user_id, subpage_id, images } ) => {
+    const _createPost = ( creationData ) => {
+        console.log(creationData);
         config_multipart_form_data.headers['Authorization'] =  'Bearer '+authState.user.auth_token;
         let formData = new FormData();
-        formData.append(`title`, title);
-        formData.append(`description`, description);
-        formData.append(`price`, price);
-        formData.append(`user_id`, user_id);
-        formData.append(`subpage_id`, subpage_id);
-        if(!images){
+        formData.append(`title`, creationData.title);
+        formData.append(`description`, creationData.description);
+        formData.append(`price`, creationData.price);
+        formData.append(`user_id`, 5);
+        formData.append(`author`, creationData.author);
+        formData.append(`subpage_id`, creationData.subpageId);
+        formData.append(`done`, creationData.done);
+        if(!creationData.images){
         }
         else {
-            Array.from(images).forEach(image => formData.append(`images[]`, image));
+            Array.from(creationData.images).forEach(image => formData.append(`images[]`, image));
         }
-
         _postData(`/api/post`, formData, config_multipart_form_data)
             .then(response => {
+                console.log(response);
                 if(response.status==200){
                     alert(`Úspešne si vytvoril článok.`);
                 }
@@ -157,22 +163,26 @@ const App = () => {
                     alert(`Článok sa nepodarilo vytvoriť!`);
                 }
             })
-
     };
 
-    const _updatePost = ( {id, title, description, price, subpage_id, images, updated_images} ) => {
+    const _updatePost = ( updatedData ) => {
+        console.log(updatedData);
         config_multipart_form_data.headers['Authorization'] =  'Bearer '+authState.user.auth_token;
         const formData = new FormData();
-        formData.append(`id`, id);
-        formData.append(`title`, title);
-        formData.append(`description`, description);
-        formData.append(`price`, price);
-        formData.append(`subpage_id`, subpage_id);
-        Array.from(images).forEach(image => formData.append(`images[]`, image));
-        Array.from(updated_images).forEach(image => formData.append(`updated_images[]`, image));
+        formData.append(`id`, updatedData.id);
+        formData.append(`title`, updatedData.title);
+        formData.append(`description`, updatedData.description);
+        formData.append(`price`, updatedData.price);
+        formData.append(`subpage_id`, updatedData.subpage_id);
+        Array.from(updatedData.images).forEach(image => formData.append(`images[]`, image));
+        Array.from(updatedData.updated_images).forEach(image => formData.append(`updated_images[]`, image));
+        formData.append(`done`, updatedData.done);
+        formData.append(`user_id`, 5);
+        formData.append(`author`, updatedData.author);
 
         _postData(`/api/post/edit`, formData, config_multipart_form_data)
             .then(response => {
+                console.log(response);
                 return response;
             })
             .then(( {data} ) => {
@@ -193,7 +203,6 @@ const App = () => {
     const getPosts = () => { _getData("/api/post", config_aplication_json).then(res => { setPost(res.data); }); };
 
     const subpageFetchData = () => {
-        console.log("hi");
         _getData("api/version", config_aplication_json).then(versionResponse => {
             console.log(versionResponse.data);
             console.log(versionResponse.data[window.location.pathname]);
@@ -220,16 +229,11 @@ const App = () => {
         });
     };
 
-    const getPost = _id => {
-        fetch(`/api/post/${_id}`)
+    const getPost = id => {
+        fetch(`/api/post/${id}`)
             .then(response => response.json())
             .then(postData => {
                 setProject(postData);
-                fetch(`/api/author/${postData.user_id}`)
-                    .then(response => response.json())
-                    .then(({ data }) => {
-                        setAuthor(data);
-                    });
             });
     };
 
@@ -263,6 +267,8 @@ const App = () => {
                         <Post path={"/posts/:id"} logged={authState.user} getpost={getPost} project={project} author={author} post={_updatePost} hide={_deletePost}/>
                         <Post path={"/post-create"} logged={authState.user} getpost={getPost} project={project} author={author} post={_createPost}/>
                         <Login path={"/login"} login={_loginUser} logout={_logoutUser}/>
+                        <CreatePost path={"/create"} logged={authState.user} changeSubpage={subpageFetchData} post={_createPost}/>
+                        <UpdatePost path={"/update/:id"} logged={authState.user} changeSubpage={subpageFetchData} post={_updatePost} getpost={getPost} project={project}/>
                     </Main>
                 </Router>
         </div>
