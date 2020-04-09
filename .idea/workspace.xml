@@ -4,8 +4,7 @@
     <list default="true" id="b40c9df6-0b96-4ac4-9038-e75470bb9bdd" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/public/js/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/js/app.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/js/components/App.js" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/App.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/js/components/subpage/Project.js" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/subpage/Project.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/js/components/subpage/Subpage.js" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/subpage/Subpage.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/js/components/Home.js" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/Home.js" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -18,13 +17,25 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/resources/js/components/App.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1005">
-              <caret line="264" column="92" selection-start-line="264" selection-start-column="92" selection-end-line="264" selection-end-column="92" />
+            <state relative-caret-position="357">
+              <caret line="252" column="2" lean-forward="true" selection-start-line="252" selection-start-column="2" selection-end-line="252" selection-end-column="2" />
               <folding>
                 <element signature="e#0#49#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/resources/js/components/Home.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="408">
+              <caret line="22" column="21" lean-forward="true" selection-start-line="22" selection-start-column="21" selection-end-line="22" selection-end-column="21" />
+              <folding>
+                <element signature="e#0#51#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -42,7 +53,7 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/resources/js/components/subpage/Project.js">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="144">
@@ -92,9 +103,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>subpageData</find>
-      <find>setSu</find>
-      <find>setAuth</find>
       <find>setCurre</find>
       <find>subpageFet</find>
       <find>fail</find>
@@ -103,8 +111,6 @@
       <find>{</find>
       <find>}</find>
       <find>getposts</find>
-      <find>post</find>
-      <find>setPost</find>
       <find>sub</find>
       <find>console</find>
       <find>conso</find>
@@ -122,6 +128,11 @@
       <find>filter</find>
       <find>getSmallerArray</find>
       <find>chunk</find>
+      <find>setAuthor</find>
+      <find>post</find>
+      <find>setPost</find>
+      <find>getpost</find>
+      <find>getPosts</find>
     </findStrings>
     <dirStrings>
       <dir>suseState</dir>
@@ -171,15 +182,15 @@
         <option value="$PROJECT_DIR$/resources/js/components/subpage/outlook/NewsOutlook.js" />
         <option value="$PROJECT_DIR$/resources/sass/subpage.scss" />
         <option value="$PROJECT_DIR$/resources/sass/app.scss" />
-        <option value="$PROJECT_DIR$/resources/js/components/Home.js" />
         <option value="$PROJECT_DIR$/.env" />
         <option value="$PROJECT_DIR$/resources/js/components/news/Post.js" />
         <option value="$PROJECT_DIR$/routes/web.php" />
         <option value="$PROJECT_DIR$/resources/js/components/admin/UpdatePost.js" />
         <option value="$PROJECT_DIR$/resources/js/components/admin/CreatePost.js" />
-        <option value="$PROJECT_DIR$/resources/js/components/App.js" />
         <option value="$PROJECT_DIR$/resources/js/components/subpage/Subpage.js" />
         <option value="$PROJECT_DIR$/resources/js/components/subpage/Project.js" />
+        <option value="$PROJECT_DIR$/resources/js/components/Home.js" />
+        <option value="$PROJECT_DIR$/resources/js/components/App.js" />
       </list>
     </option>
   </component>
@@ -567,12 +578,12 @@
       <workItem from="1586349720375" duration="2002000" />
       <workItem from="1586359946647" duration="278000" />
       <workItem from="1586360603440" duration="1195000" />
-      <workItem from="1586415445609" duration="9989000" />
+      <workItem from="1586415445609" duration="10761000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="511407000" />
+    <option name="totallyTimeSpent" value="512179000" />
   </component>
   <component name="TodoView" selected-index="1">
     <todo-panel id="selected-file">
@@ -824,16 +835,6 @@
     <entry file="file://$PROJECT_DIR$/routes/api.php">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/resources/js/components/Home.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="185">
-          <caret line="242" column="102" selection-start-line="242" selection-start-column="48" selection-end-line="242" selection-end-column="102" />
-          <folding>
-            <element signature="e#0#51#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/routes/web.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="480">
@@ -878,16 +879,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/resources/js/components/App.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1005">
-          <caret line="264" column="92" selection-start-line="264" selection-start-column="92" selection-end-line="264" selection-end-column="92" />
-          <folding>
-            <element signature="e#0#49#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/resources/js/components/subpage/outlook/NewsOutlook.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="240">
@@ -909,6 +900,26 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="144">
           <caret line="6" column="27" selection-start-line="6" selection-start-column="27" selection-end-line="6" selection-end-column="27" />
+          <folding>
+            <element signature="e#0#49#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/js/components/Home.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="408">
+          <caret line="22" column="21" lean-forward="true" selection-start-line="22" selection-start-column="21" selection-end-line="22" selection-end-column="21" />
+          <folding>
+            <element signature="e#0#51#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/js/components/App.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="357">
+          <caret line="252" column="2" lean-forward="true" selection-start-line="252" selection-start-column="2" selection-end-line="252" selection-end-column="2" />
           <folding>
             <element signature="e#0#49#0" expanded="true" />
           </folding>

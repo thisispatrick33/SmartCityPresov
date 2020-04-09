@@ -70550,12 +70550,6 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 
 var App = function App() {
-  {
-    /*
-       Auxiliary variable for store user data
-    */
-  }
-
   var _useState = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])({
     isLoggedIn: false,
     user: {}
@@ -70566,8 +70560,8 @@ var App = function App() {
 
   var _useState3 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(null),
       _useState4 = _slicedToArray(_useState3, 2),
-      post = _useState4[0],
-      setPost = _useState4[1];
+      homeNewestPosts = _useState4[0],
+      setHomeNewestPosts = _useState4[1];
 
   var _useState5 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(JSON.parse(localStorage.getItem("subpageData")) == null ? null : JSON.parse(localStorage.getItem("subpageData")).data),
       _useState6 = _slicedToArray(_useState5, 2),
@@ -70584,25 +70578,20 @@ var App = function App() {
       project = _useState10[0],
       setProject = _useState10[1];
 
-  var _useState11 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(null),
+  var _useState11 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])([]),
       _useState12 = _slicedToArray(_useState11, 2),
-      author = _useState12[0],
-      setAuthor = _useState12[1];
+      newsPosts = _useState12[0],
+      setNewsPosts = _useState12[1];
 
-  var _useState13 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])([]),
+  var _useState13 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(null),
       _useState14 = _slicedToArray(_useState13, 2),
-      newsPosts = _useState14[0],
-      setNewsPosts = _useState14[1];
+      subpages = _useState14[0],
+      setSubpages = _useState14[1];
 
-  var _useState15 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(null),
+  var _useState15 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(JSON.parse(localStorage.getItem("subpageData")) == null ? null : JSON.parse(localStorage.getItem("subpageData")).version),
       _useState16 = _slicedToArray(_useState15, 2),
-      subpages = _useState16[0],
-      setSubpages = _useState16[1];
-
-  var _useState17 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(JSON.parse(localStorage.getItem("subpageData")) == null ? null : JSON.parse(localStorage.getItem("subpageData")).version),
-      _useState18 = _slicedToArray(_useState17, 2),
-      version = _useState18[0],
-      setVersion = _useState18[1];
+      version = _useState16[0],
+      setVersion = _useState16[1];
 
   var config_aplication_json = {
     headers: {
@@ -70618,11 +70607,6 @@ var App = function App() {
       'Authorization': ''
     }
   };
-  {
-    /*
-       Before start check state of user isLoggedIn
-    */
-  }
   Object(react__WEBPACK_IMPORTED_MODULE_1__["useEffect"])(function () {
     var state = JSON.parse(localStorage.getItem("authState"));
 
@@ -70640,7 +70624,7 @@ var App = function App() {
       });
     }
 
-    getPosts();
+    getHomePosts();
 
     if (window.location.pathname !== "/create" && window.location.pathname.indexOf("/update/") === -1 && window.location.pathname !== "/login") {
       subpageFetchData();
@@ -70648,11 +70632,6 @@ var App = function App() {
 
     getSubpages();
   }, [authState]);
-  {
-    /*
-         User Functions
-     */
-  }
 
   var _postData =
   /*#__PURE__*/
@@ -70786,12 +70765,6 @@ var App = function App() {
     config_multipart_form_data.headers['Authorization'] = null;
   };
 
-  {
-    /*
-         Post Functions
-     */
-  }
-
   var _createPost = function _createPost(creationData) {
     console.log(creationData.subpageId);
     config_multipart_form_data.headers['Authorization'] = 'Bearer ' + authState.user.auth_token;
@@ -70862,9 +70835,9 @@ var App = function App() {
     Object(_reach_router__WEBPACK_IMPORTED_MODULE_3__["navigate"])("/".concat(title_link));
   };
 
-  var getPosts = function getPosts() {
+  var getHomePosts = function getHomePosts() {
     _getData("/api/post", config_aplication_json).then(function (res) {
-      setPost(res.data);
+      setHomeNewestPosts(res.data);
     });
   };
 
@@ -70912,7 +70885,6 @@ var App = function App() {
 
   var closePost = function closePost() {
     setProject(null);
-    setAuthor([]);
   };
 
   var getSubpages = function getSubpages() {
@@ -70935,7 +70907,7 @@ var App = function App() {
     subpages: subpages
   }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_Home__WEBPACK_IMPORTED_MODULE_4__["Home"], {
     path: "/",
-    getposts: post,
+    _homeNewestPosts: homeNewestPosts,
     getpost: getPost,
     project: project,
     closePost: closePost,
@@ -70980,11 +70952,6 @@ var App = function App() {
   }))));
 };
 
-{
-  /*
-     React export
-  */
-}
 react_dom__WEBPACK_IMPORTED_MODULE_2___default.a.render(react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(App, null), document.getElementById("root"));
 
 /***/ }),
@@ -71046,7 +71013,7 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 
 var Home = function Home(_ref) {
-  var getposts = _ref.getposts,
+  var _homeNewestPosts = _ref._homeNewestPosts,
       _ref$getpost = _ref.getpost,
       getpost = _ref$getpost === void 0 ? function (f) {
     return f;
@@ -71070,10 +71037,10 @@ var Home = function Home(_ref) {
   };
 
   Object(react__WEBPACK_IMPORTED_MODULE_0__["useEffect"])(function () {
-    if (getposts !== null) {
-      setPost(getposts.slice(0, 3));
+    if (_homeNewestPosts !== null) {
+      setPost(_homeNewestPosts.slice(0, 3));
     }
-  }, [getposts]);
+  }, [_homeNewestPosts]);
 
   if (post !== null && post !== undefined) {
     return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {

@@ -13,17 +13,12 @@ import {UpdatePost} from "./admin/UpdatePost";
 
 const App = () => {
 
-    {/*
-        Auxiliary variable for store user data
-    */}
-
     const [authState, setAuthState] = useState({isLoggedIn: false, user: {}});
-    const [post, setPost] = useState(null);
+    const [homeNewestPosts, setHomeNewestPosts] = useState(null);
     const [subpageData, setSubpageData] = useState(JSON.parse(localStorage.getItem("subpageData"))==null ? null : JSON.parse(localStorage.getItem("subpageData")).data);
     const [currentSubpage, setCurrentSubpage] = useState(null);
 
     const [project, setProject] = useState(null);
-    const [author, setAuthor] = useState(null);
 
     const [newsPosts, setNewsPosts] = useState([]);
 
@@ -48,10 +43,6 @@ const App = () => {
         }
     };
 
-    {/*
-        Before start check state of user isLoggedIn
-    */}
-
    useEffect( () => {
         let state = JSON.parse(localStorage.getItem("authState"));
         if (state !== null && state.isLoggedIn && !authState.isLoggedIn) {
@@ -63,7 +54,7 @@ const App = () => {
             localStorage["subpageData"] = JSON.stringify({data:null, version:null});
         }
 
-        getPosts();
+        getHomePosts();
 
         if(window.location.pathname!=="/create" && window.location.pathname.indexOf("/update/")===-1 && window.location.pathname!=="/login"){
             subpageFetchData();
@@ -73,12 +64,6 @@ const App = () => {
         getSubpages();
 
     },[authState]);
-
-    {/*
-
-        User Functions
-
-    */}
 
     const _postData = async (url, data, config) => await axios.post(url, data, config);
 
@@ -129,13 +114,6 @@ const App = () => {
         config_aplication_json.headers['Authorization'] =  null;
         config_multipart_form_data.headers['Authorization'] =  null;
     };
-
-
-    {/*
-
-        Post Functions
-
-    */}
 
     const _createPost = ( creationData ) => {
         console.log(creationData.subpageId);
@@ -200,7 +178,7 @@ const App = () => {
         navigate(`/${title_link}`);
     };
 
-    const getPosts = () => { _getData("/api/post", config_aplication_json).then(res => { setPost(res.data); }); };
+    const getHomePosts = () => { _getData("/api/post", config_aplication_json).then(res => { setHomeNewestPosts(res.data); }); };
 
     const subpageFetchData = () => {
         _getData("api/version", config_aplication_json).then(versionResponse => {
@@ -247,7 +225,6 @@ const App = () => {
 
     const closePost = () => {
         setProject(null);
-        setAuthor([]);
     };
 
     const getSubpages = () =>{
@@ -262,7 +239,7 @@ const App = () => {
         <div className={`row col-12 | p-0 m-0`}>
                 <Router>
                     <Main path={`/`} auth={authState} logout={_logoutUser} changeSubpage={subpageFetchData} getNewsPosts={getNews} newsPosts={newsPosts} subpages={subpages}>
-                        <Home path={`/`} getposts={post} getpost={getPost} project={project} closePost={closePost} changeSubpage={subpageFetchData}/>
+                        <Home path={`/`} _homeNewestPosts={homeNewestPosts} getpost={getPost} project={project} closePost={closePost} changeSubpage={subpageFetchData}/>
                         <Subpage path={`:id`} hide={_deletePost} logged={authState.isLoggedIn ? authState.user : false} data={currentSubpage} getpost={getPost} project={project} closePost={closePost} />
                         <Post path={"/posts/:id"} logged={authState.user} getpost={getPost} project={project} post={_updatePost} hide={_deletePost}/>
                         <Post path={"/post-create"} logged={authState.user} getpost={getPost} project={project} post={_createPost}/>
@@ -274,9 +251,5 @@ const App = () => {
         </div>
     );
 };
-
-{/*
-    React export
-*/}
 
 ReactDOM.render(<App />, document.getElementById("root"));
