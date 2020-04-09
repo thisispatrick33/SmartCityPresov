@@ -70938,7 +70938,6 @@ var App = function App() {
     getposts: post,
     getpost: getPost,
     project: project,
-    author: author,
     closePost: closePost,
     changeSubpage: subpageFetchData
   }), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_subpage_Subpage__WEBPACK_IMPORTED_MODULE_6__["Subpage"], {
@@ -70948,14 +70947,12 @@ var App = function App() {
     data: currentSubpage,
     getpost: getPost,
     project: project,
-    author: author,
     closePost: closePost
   }), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_news_Post__WEBPACK_IMPORTED_MODULE_7__["Post"], {
     path: "/posts/:id",
     logged: authState.user,
     getpost: getPost,
     project: project,
-    author: author,
     post: _updatePost,
     hide: _deletePost
   }), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_news_Post__WEBPACK_IMPORTED_MODULE_7__["Post"], {
@@ -70963,7 +70960,6 @@ var App = function App() {
     logged: authState.user,
     getpost: getPost,
     project: project,
-    author: author,
     post: _createPost
   }), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_admin_Login__WEBPACK_IMPORTED_MODULE_8__["Login"], {
     path: "/login",
@@ -75920,7 +75916,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(jquery__WEBPACK_IMPORTED_MODULE_1__);
 /* harmony import */ var fslightbox_react__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! fslightbox-react */ "./node_modules/fslightbox-react/index.js");
 /* harmony import */ var fslightbox_react__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(fslightbox_react__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var _Utillities__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../Utillities */ "./resources/js/components/Utillities.js");
 function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _nonIterableRest(); }
 
 function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance"); }
@@ -75932,14 +75927,14 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 
 
-
 var Project = function Project(_ref) {
   var data = _ref.data,
-      user = _ref.user,
       _ref$close = _ref.close,
       close = _ref$close === void 0 ? function (f) {
     return f;
   } : _ref$close;
+  console.log("project");
+  console.log(data);
   var written = new Date(data.updated_at.replace(' ', 'T'));
 
   var _useState = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(false),
@@ -76032,7 +76027,7 @@ var Project = function Project(_ref) {
     className: "col-12 mb-0 text-right"
   }, String(written.getDay()) + "/" + (written.getMonth() + 1) + "/" + written.getFullYear()), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
     className: "col-12 mb-0 text-right"
-  }, user.name))))));
+  }, data.author))))));
 };
 
 /***/ }),
@@ -76099,7 +76094,6 @@ var Subpage = function Subpage(_ref) {
     return f;
   } : _ref$getpost,
       project = _ref.project,
-      author = _ref.author,
       closePost = _ref.closePost;
   var path = window.location.pathname;
   var settings = {
@@ -76184,9 +76178,8 @@ var Subpage = function Subpage(_ref) {
 
   return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "subpage container-fluid p-0 m-0"
-  }, author !== null && project !== null ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Project__WEBPACK_IMPORTED_MODULE_5__["Project"], {
+  }, project !== null ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Project__WEBPACK_IMPORTED_MODULE_5__["Project"], {
     data: project,
-    user: author,
     close: close
   }) : null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "py-4"

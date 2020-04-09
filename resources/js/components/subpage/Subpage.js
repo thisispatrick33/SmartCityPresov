@@ -10,7 +10,7 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 
 
-export const Subpage = ({id, logged, hide = f => f, data, getpost = f => f, project, author, closePost}) => {
+export const Subpage = ({id, logged, hide = f => f, data, getpost = f => f, project, closePost}) => {
     const path = window.location.pathname;
     const settings = {
         dots: false,
@@ -93,7 +93,7 @@ export const Subpage = ({id, logged, hide = f => f, data, getpost = f => f, proj
     return (
         <div className={`subpage container-fluid p-0 m-0`}>
             {
-                (author !== null && project !==null) ? <Project data={project} user={author} close={close}/> : null
+                (project !==null) ? <Project data={project} close={close}/> : null
             }
             <div className={`py-4`}>
                 <svg className={`ml-5 my-3`} style={{transform: `scale(1)`}} width={`47.031`} height={`33.966`} viewBox={`0 0 47.031 33.966`}><path d={`M45.071,126.587H1.96a1.96,1.96,0,1,1,0-3.919H45.071a1.96,1.96,0,1,1,0,3.919Zm0,0`} transform={`translate(0 -107.644)`}/><path d={`M45.071,3.919H1.96A1.96,1.96,0,0,1,1.96,0H45.071a1.96,1.96,0,1,1,0,3.919Zm0,0`}/><path d={`M45.071,249.251H1.96a1.96,1.96,0,1,1,0-3.919H45.071a1.96,1.96,0,1,1,0,3.919Zm0,0`} transform={`translate(0 -215.285)`}/></svg>

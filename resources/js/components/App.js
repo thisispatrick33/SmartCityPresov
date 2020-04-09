@@ -262,10 +262,10 @@ const App = () => {
         <div className={`row col-12 | p-0 m-0`}>
                 <Router>
                     <Main path={`/`} auth={authState} logout={_logoutUser} changeSubpage={subpageFetchData} getNewsPosts={getNews} newsPosts={newsPosts} subpages={subpages}>
-                        <Home path={`/`} getposts={post} getpost={getPost} project={project} author={author} closePost={closePost} changeSubpage={subpageFetchData}/>
-                        <Subpage path={`:id`} hide={_deletePost} logged={authState.isLoggedIn ? authState.user : false} data={currentSubpage} getpost={getPost} project={project} author={author} closePost={closePost} />
-                        <Post path={"/posts/:id"} logged={authState.user} getpost={getPost} project={project} author={author} post={_updatePost} hide={_deletePost}/>
-                        <Post path={"/post-create"} logged={authState.user} getpost={getPost} project={project} author={author} post={_createPost}/>
+                        <Home path={`/`} getposts={post} getpost={getPost} project={project} closePost={closePost} changeSubpage={subpageFetchData}/>
+                        <Subpage path={`:id`} hide={_deletePost} logged={authState.isLoggedIn ? authState.user : false} data={currentSubpage} getpost={getPost} project={project} closePost={closePost} />
+                        <Post path={"/posts/:id"} logged={authState.user} getpost={getPost} project={project} post={_updatePost} hide={_deletePost}/>
+                        <Post path={"/post-create"} logged={authState.user} getpost={getPost} project={project} post={_createPost}/>
                         <Login path={"/login"} login={_loginUser} logout={_logoutUser}/>
                         <CreatePost path={"/create"} logged={authState.user} changeSubpage={subpageFetchData} post={_createPost}/>
                         <UpdatePost path={"/update/:id"} logged={authState.user} changeSubpage={subpageFetchData} post={_updatePost} getpost={getPost} project={project}/>

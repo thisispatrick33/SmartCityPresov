@@ -1,8 +1,11 @@
 import React, {useEffect, useState} from "react";
 import $ from 'jquery';
 import FsLightbox from 'fslightbox-react';
-import { Loader } from "../Utillities";
-export const Project = ({data,user, close = f => f}) => {
+
+
+export const Project = ({data, close = f => f}) => {
+    console.log("project");
+    console.log(data);
     const written = new Date(data.updated_at.replace(' ', 'T'));
     const [toggler, setToggler] = useState(false);
     useEffect(() => {
@@ -57,7 +60,7 @@ export const Project = ({data,user, close = f => f}) => {
                         </div>
                         <div className="col-11 row post-data my-4 py-2 px-5">
                             <p className={"col-12 mb-0 text-right"}>{ String(written.getDay()) + `/` + (written.getMonth()+1) + `/` + written.getFullYear() }</p>
-                            <p className={"col-12 mb-0 text-right"}>{user.name}</p>
+                            <p className={"col-12 mb-0 text-right"}>{data.author}</p>
                         </div>
                     </div>
                </div>
