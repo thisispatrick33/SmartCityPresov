@@ -64,6 +64,7 @@ export const Subpage = ({id, logged, hide = f => f, data, getpost = f => f, proj
         return chunked_arr;
     };
 
+
     const getSmallerArray = (array) => {
         let size = 1;
         if(window.innerWidth >= 1200){
@@ -73,12 +74,13 @@ export const Subpage = ({id, logged, hide = f => f, data, getpost = f => f, proj
         }else if(window.innerWidth >= 768){
             size = 2;
         }
-        return array.slice(0, size);
+        return array.filter(item => item.done === 0).slice(0, size);
     };
 
     useEffect( () => {
         if(data!==null){
             setSubpage(data);
+            console.log(data);
         }
     },[data]);
 
@@ -162,7 +164,6 @@ export const Subpage = ({id, logged, hide = f => f, data, getpost = f => f, proj
                 <div className="col-6 col-md-8 col-lg-10 col-xl-9 row my-5">
                     {
                         getSmallerArray(subpage.posts).map((post)=>{
-
                             return(
                                 <NewsOutlook post={post} getPost={(id)=>getpost(id)}></NewsOutlook>
                             );
@@ -190,7 +191,7 @@ export const Subpage = ({id, logged, hide = f => f, data, getpost = f => f, proj
             <div className="row col-12 m-0 p-0 justify-content-center">
                 <div className="row col-md-11 col-8 m-0 p-0 justify-content-center">
                     {
-                        chunk(subpage.posts, 4).map((arr)=> {
+                        chunk(subpage.posts.filter(item => item.done === 1), 4).map((arr)=> {
                             return(
                                 <>
                                 <Slider {...settings} className="row col-md-11 col-8 m-0 p-0 justify-content-center">

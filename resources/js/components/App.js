@@ -138,7 +138,7 @@ const App = () => {
     */}
 
     const _createPost = ( creationData ) => {
-        console.log(creationData);
+        console.log(creationData.subpageId);
         config_multipart_form_data.headers['Authorization'] =  'Bearer '+authState.user.auth_token;
         let formData = new FormData();
         formData.append(`title`, creationData.title);
@@ -146,7 +146,7 @@ const App = () => {
         formData.append(`price`, creationData.price);
         formData.append(`user_id`, 5);
         formData.append(`author`, creationData.author);
-        formData.append(`subpage_id`, creationData.subpageId);
+        formData.append(`subpage_id`, creationData.subpage_id);
         formData.append(`done`, creationData.done);
         if(!creationData.images){
         }

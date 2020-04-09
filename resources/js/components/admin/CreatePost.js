@@ -16,7 +16,7 @@ export const CreatePost = ({logged, changeSubpage, post = f => f}) => {
                 <input name={`price`} className={"col-10 offset-1"} value={creationData.price} placeholder={`Zadajte cenu projektu`} type={`number`} onChange={e => {setCreationData({...creationData,price : e.target.value})}} required={true}/>
                 <input name={"author"} className={"col-10 offset-1"} value={creationData.author} placeholder={`Zadajte meno autora`} onChange={e => {setCreationData({...creationData,author : e.target.value})}} required={true}/>
                 <input name={`images[]`} className={"col-10 offset-1"} type={`file`} onChange={e => {setCreationData({...creationData,images : e.target.files})}} multiple/>
-                <input name={`subpage_id`} className={"col-10 offset-1"} value={creationData.subpage_id} placeholder={`Zadajte subpage_id`} onChange={e => {setCreationData({...creationData,subpage_id : e.target.value})}} required={true}/>
+                <input name={`subpage_id`} type={`number`} className={"col-10 offset-1"} value={creationData.subpage_id} placeholder={`Zadajte subpage_id`} onChange={e => {setCreationData({...creationData,subpage_id : e.target.value})}} required={true}/>
                 <input name={`done`} className={"col-10 offset-1"} value={creationData.done} placeholder={`Zadajte stav`} onChange={e => {setCreationData({...creationData,done : e.target.value})}} required={true}/>
                 <input type="button" value={"potvrdiť"} onClick={() => handleSubmit()}/>
             </form>

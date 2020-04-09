@@ -70793,7 +70793,7 @@ var App = function App() {
   }
 
   var _createPost = function _createPost(creationData) {
-    console.log(creationData);
+    console.log(creationData.subpageId);
     config_multipart_form_data.headers['Authorization'] = 'Bearer ' + authState.user.auth_token;
     var formData = new FormData();
     formData.append("title", creationData.title);
@@ -70801,7 +70801,7 @@ var App = function App() {
     formData.append("price", creationData.price);
     formData.append("user_id", 5);
     formData.append("author", creationData.author);
-    formData.append("subpage_id", creationData.subpageId);
+    formData.append("subpage_id", creationData.subpage_id);
     formData.append("done", creationData.done);
 
     if (!creationData.images) {} else {
@@ -75261,6 +75261,7 @@ var CreatePost = function CreatePost(_ref) {
       multiple: true
     }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
       name: "subpage_id",
+      type: "number",
       className: "col-10 offset-1",
       value: creationData.subpage_id,
       placeholder: "Zadajte subpage_id",
@@ -76165,12 +76166,15 @@ var Subpage = function Subpage(_ref) {
       size = 2;
     }
 
-    return array.slice(0, size);
+    return array.filter(function (item) {
+      return item.done === 0;
+    }).slice(0, size);
   };
 
   Object(react__WEBPACK_IMPORTED_MODULE_0__["useEffect"])(function () {
     if (data !== null) {
       setSubpage(data);
+      console.log(data);
     }
   }, [data]);
 
@@ -76891,7 +76895,9 @@ var Subpage = function Subpage(_ref) {
     className: "row col-12 m-0 p-0 justify-content-center"
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "row col-md-11 col-8 m-0 p-0 justify-content-center"
-  }, chunk(subpage.posts, 4).map(function (arr) {
+  }, chunk(subpage.posts.filter(function (item) {
+    return item.done === 1;
+  }), 4).map(function (arr) {
     return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_slick__WEBPACK_IMPORTED_MODULE_7___default.a, _extends({}, settings, {
       className: "row col-md-11 col-8 m-0 p-0 justify-content-center"
     }), arr.map(function (post) {
