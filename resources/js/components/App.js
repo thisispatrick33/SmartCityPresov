@@ -10,21 +10,22 @@ import { Login } from "./admin/Login";
 import axios from "axios";
 import {CreatePost} from "./admin/CreatePost";
 import {UpdatePost} from "./admin/UpdatePost";
+import {AdministrationPage} from "./admin/AdministrationPage";
 
 const App = () => {
 
     const [authState, setAuthState] = useState({isLoggedIn: false, user: {}});
-    const [homeNewestPosts, setHomeNewestPosts] = useState(null);
+    const [subpages, setSubpages] = useState(null);
+
     const [subpageData, setSubpageData] = useState(JSON.parse(localStorage.getItem("subpageData"))==null ? null : JSON.parse(localStorage.getItem("subpageData")).data);
     const [currentSubpage, setCurrentSubpage] = useState(null);
+    const [homeNewestPosts, setHomeNewestPosts] = useState(null);
 
     const [project, setProject] = useState(null);
 
-    const [newsPosts, setNewsPosts] = useState([]);
-
-    const [subpages, setSubpages] = useState(null);
-
     const [version, setVersion] = useState( JSON.parse(localStorage.getItem("subpageData"))==null ? null : JSON.parse(localStorage.getItem("subpageData")).version);
+
+    const [allPosts, setAllPosts] = useState(null);
 
 
     const config_aplication_json = {
@@ -56,7 +57,7 @@ const App = () => {
 
         getHomePosts();
 
-        if(window.location.pathname!=="/create" && window.location.pathname.indexOf("/update/")===-1 && window.location.pathname!=="/login"){
+        if(window.location.pathname!=="/administration" && window.location.pathname!=="/create" && window.location.pathname.indexOf("/update/")===-1 && window.location.pathname!=="/login"){
             subpageFetchData();
         }
 
@@ -93,7 +94,7 @@ const App = () => {
                     setAuthState(authState.user);
                     config_aplication_json.headers['Authorization'] =  'Bearer '+authState.user.auth_token;
                     config_multipart_form_data.headers['Authorization'] =  'Bearer '+authState.user.auth_token;
-                    navigate(`/`);
+                    navigate(`/administration`);
                 } else alert(`Nesprávne prihlasovacie údaje`);
 
                 $(`#login-form button`)
@@ -116,7 +117,7 @@ const App = () => {
     };
 
     const _createPost = ( creationData ) => {
-        console.log(creationData.subpageId);
+        console.log(creationData);
         config_multipart_form_data.headers['Authorization'] =  'Bearer '+authState.user.auth_token;
         let formData = new FormData();
         formData.append(`title`, creationData.title);
@@ -140,7 +141,11 @@ const App = () => {
                 else {
                     alert(`Článok sa nepodarilo vytvoriť!`);
                 }
-            })
+                setProject(null);
+                getAllPosts();
+                navigate(`/administration`);
+            });
+
     };
 
     const _updatePost = ( updatedData ) => {
@@ -165,17 +170,21 @@ const App = () => {
             })
             .then(( {data} ) => {
                 alert(data==200? `Úspešne si úpravil článok.` : `Článok sa nepodarilo upraviť!`);
+                setProject(null);
+                getAllPosts();
+                navigate(`/administration`);
             });
+
     };
 
 
-    const _deletePost = (id, title_link) => {
+    const _deletePost = (id) => {
         config_aplication_json.headers['Authorization'] =  'Bearer '+authState.user.auth_token;
         console.log(config_aplication_json);
         _putData(`/api/post/delete`, {id : id}, config_aplication_json).then(response => {
                 alert(response.status==200 ? `Článok sa úspešne vymazal` : `Článok sa nepodarilo vymazať!`);
             });
-        navigate(`/${title_link}`);
+        getAllPosts();
     };
 
     const getHomePosts = () => { _getData("/api/post", config_aplication_json).then(res => { setHomeNewestPosts(res.data); }); };
@@ -215,14 +224,6 @@ const App = () => {
             });
     };
 
-    const getNews = () => {
-        fetch(`/api/news`)
-            .then(response => response.json())
-            .then(posts => {
-                setNewsPosts(posts.reverse());
-            });
-    };
-
     const closePost = () => {
         setProject(null);
     };
@@ -235,10 +236,18 @@ const App = () => {
             });
     };
 
+    const getAllPosts = () =>{
+        _getData("/api/postAll", config_aplication_json)
+            .then(res => {
+                console.log(res);
+                setAllPosts(res.data);
+            });
+    };
+
     return (
         <div className={`row col-12 | p-0 m-0`}>
                 <Router>
-                    <Main path={`/`} auth={authState} logout={_logoutUser} changeSubpage={subpageFetchData} getNewsPosts={getNews} newsPosts={newsPosts} subpages={subpages}>
+                    <Main path={`/`} auth={authState} logout={_logoutUser} changeSubpage={subpageFetchData} subpages={subpages}>
                         <Home path={`/`} _homeNewestPosts={homeNewestPosts} getpost={getPost} project={project} closePost={closePost} changeSubpage={subpageFetchData}/>
                         <Subpage path={`:id`} hide={_deletePost} logged={authState.isLoggedIn ? authState.user : false} data={currentSubpage} getpost={getPost} project={project} closePost={closePost} />
                         <Post path={"/posts/:id"} logged={authState.user} getpost={getPost} project={project} post={_updatePost} hide={_deletePost}/>
@@ -246,6 +255,7 @@ const App = () => {
                         <Login path={"/login"} login={_loginUser} logout={_logoutUser}/>
                         <CreatePost path={"/create"} logged={authState.user} changeSubpage={subpageFetchData} post={_createPost}/>
                         <UpdatePost path={"/update/:id"} logged={authState.user} changeSubpage={subpageFetchData} post={_updatePost} getpost={getPost} project={project}/>
+                        <AdministrationPage path={"/administration"} logged={authState.user} changeSubpage={subpageFetchData} getAllPosts={getAllPosts} allPosts={allPosts} hide={_deletePost} clear={()=>setProject(null)}/>
                     </Main>
                 </Router>
         </div>

@@ -30,3 +30,6 @@ Route::get('/create', function(){
 Route::get('/update/{id}', function(){
     return view('welcome');
 });
+Route::get('/administration', function(){
+    return view('welcome');
+});

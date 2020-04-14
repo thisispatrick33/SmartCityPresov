@@ -18,7 +18,7 @@ class PostsController extends Controller
     }
 
     public function getAll(){
-	$posts = Post::with("user")->orderBy('created_at', 'DESC')->where('subpage_id','!=', null)->where('active',true)->get();
+	    $posts = Post::with("user")->orderBy('created_at', 'DESC')->where('subpage_id','!=', null)->where('active',true)->get();
     	return $posts;
     }
 

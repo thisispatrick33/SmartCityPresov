@@ -40,8 +40,23 @@ export const UpdatePost = ({id, logged, changeSubpage, post = f => f, getpost = 
                     })}
                 </div>
                 <input name={`images[]`} className={"col-10 offset-1"} type={`file`} onChange={e => {setUpdatedData({...updatedData,images : e.target.files})}} multiple/>
-                <input name={`subpage_id`} className={"col-10 offset-1"} value={updatedData.subpage_id} placeholder={`Zadajte subpageId`} onChange={e => {setUpdatedData({...updatedData,subpage_id : e.target.value})}} required={true}/>
-                <input name={`done`} className={"col-10 offset-1"} value={updatedData.done} placeholder={`Zadajte stav`} onChange={e => {setUpdatedData({...updatedData,done : e.target.value})}} required={true}/>
+
+                <h1>Subpage Id</h1>
+                <h1>Mobilita</h1>
+                <input type="radio" name="subpage_id" value="1" checked={updatedData.subpage_id === 1} onClick={e => {setUpdatedData({...updatedData,subpage_id :1})}}/>
+                <h1>Zivotne prostredie</h1>
+                <input type="radio" name="subpage_id" value="2" checked={updatedData.subpage_id === 2} onClick={e => {setUpdatedData({...updatedData,subpage_id : 2})}}/>
+                <h1>Digitalne mesto</h1>
+                <input type="radio" name="subpage_id" value="3" checked={updatedData.subpage_id === 3} onClick={e => {setUpdatedData({...updatedData,subpage_id : 3})}}/>
+                <h1>Energia</h1>
+                <input type="radio" name="subpage_id" value="4" checked={updatedData.subpage_id === 4} onClick={e => {setUpdatedData({...updatedData,subpage_id : 4})}}/>
+
+                <h1>Stav</h1>
+                <h1>Pripravujeme</h1>
+                <input type="radio" name="done" value="0" checked={updatedData.done === 0} onClick={e => {setUpdatedData({...updatedData,done : 0})}}/>
+                <h1>Ukoncene</h1>
+                <input type="radio" name="done" value="1" checked={updatedData.done === 1} onClick={e => {setUpdatedData({...updatedData,done : 1})}}/>
+
                 <input type="button" value={"potvrdiť"} onClick={() => handleSubmit()}/>
             </form>
 

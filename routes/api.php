@@ -15,7 +15,7 @@ use Illuminate\Http\Request;
 /*->middleware('auth.basic')*/
 Route::get('/version', 'MainController@version');
 Route::get('/post', 'PostsController@get');
-Route::get('/postAll','PostController@getAll');
+Route::get('/postAll','PostsController@getAll');
 Route::get('/', 'MainController@subpages');
 Route::get('/post/{id}', 'MainController@post');
 Route::get('/{option}', 'MainController@subpage');

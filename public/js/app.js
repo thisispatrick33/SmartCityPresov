@@ -70519,6 +70519,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_9___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_9__);
 /* harmony import */ var _admin_CreatePost__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./admin/CreatePost */ "./resources/js/components/admin/CreatePost.js");
 /* harmony import */ var _admin_UpdatePost__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./admin/UpdatePost */ "./resources/js/components/admin/UpdatePost.js");
+/* harmony import */ var _admin_AdministrationPage__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./admin/AdministrationPage */ "./resources/js/components/admin/AdministrationPage.js");
 
 
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; var ownKeys = Object.keys(source); if (typeof Object.getOwnPropertySymbols === 'function') { ownKeys = ownKeys.concat(Object.getOwnPropertySymbols(source).filter(function (sym) { return Object.getOwnPropertyDescriptor(source, sym).enumerable; })); } ownKeys.forEach(function (key) { _defineProperty(target, key, source[key]); }); } return target; }
@@ -70549,6 +70550,7 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 
 
+
 var App = function App() {
   var _useState = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])({
     isLoggedIn: false,
@@ -70560,8 +70562,8 @@ var App = function App() {
 
   var _useState3 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(null),
       _useState4 = _slicedToArray(_useState3, 2),
-      homeNewestPosts = _useState4[0],
-      setHomeNewestPosts = _useState4[1];
+      subpages = _useState4[0],
+      setSubpages = _useState4[1];
 
   var _useState5 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(JSON.parse(localStorage.getItem("subpageData")) == null ? null : JSON.parse(localStorage.getItem("subpageData")).data),
       _useState6 = _slicedToArray(_useState5, 2),
@@ -70575,23 +70577,23 @@ var App = function App() {
 
   var _useState9 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(null),
       _useState10 = _slicedToArray(_useState9, 2),
-      project = _useState10[0],
-      setProject = _useState10[1];
+      homeNewestPosts = _useState10[0],
+      setHomeNewestPosts = _useState10[1];
 
-  var _useState11 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])([]),
+  var _useState11 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(null),
       _useState12 = _slicedToArray(_useState11, 2),
-      newsPosts = _useState12[0],
-      setNewsPosts = _useState12[1];
+      project = _useState12[0],
+      setProject = _useState12[1];
 
-  var _useState13 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(null),
+  var _useState13 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(JSON.parse(localStorage.getItem("subpageData")) == null ? null : JSON.parse(localStorage.getItem("subpageData")).version),
       _useState14 = _slicedToArray(_useState13, 2),
-      subpages = _useState14[0],
-      setSubpages = _useState14[1];
+      version = _useState14[0],
+      setVersion = _useState14[1];
 
-  var _useState15 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(JSON.parse(localStorage.getItem("subpageData")) == null ? null : JSON.parse(localStorage.getItem("subpageData")).version),
+  var _useState15 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(null),
       _useState16 = _slicedToArray(_useState15, 2),
-      version = _useState16[0],
-      setVersion = _useState16[1];
+      allPosts = _useState16[0],
+      setAllPosts = _useState16[1];
 
   var config_aplication_json = {
     headers: {
@@ -70626,7 +70628,7 @@ var App = function App() {
 
     getHomePosts();
 
-    if (window.location.pathname !== "/create" && window.location.pathname.indexOf("/update/") === -1 && window.location.pathname !== "/login") {
+    if (window.location.pathname !== "/administration" && window.location.pathname !== "/create" && window.location.pathname.indexOf("/update/") === -1 && window.location.pathname !== "/login") {
       subpageFetchData();
     }
 
@@ -70744,7 +70746,7 @@ var App = function App() {
         setAuthState(_authState.user);
         config_aplication_json.headers['Authorization'] = 'Bearer ' + _authState.user.auth_token;
         config_multipart_form_data.headers['Authorization'] = 'Bearer ' + _authState.user.auth_token;
-        Object(_reach_router__WEBPACK_IMPORTED_MODULE_3__["navigate"])("/");
+        Object(_reach_router__WEBPACK_IMPORTED_MODULE_3__["navigate"])("/administration");
       } else alert("Nespr\xE1vne prihlasovacie \xFAdaje");
 
       $("#login-form button").removeAttr("disabled").html("Login");
@@ -70766,7 +70768,7 @@ var App = function App() {
   };
 
   var _createPost = function _createPost(creationData) {
-    console.log(creationData.subpageId);
+    console.log(creationData);
     config_multipart_form_data.headers['Authorization'] = 'Bearer ' + authState.user.auth_token;
     var formData = new FormData();
     formData.append("title", creationData.title);
@@ -70791,6 +70793,10 @@ var App = function App() {
       } else {
         alert("\u010Cl\xE1nok sa nepodarilo vytvori\u0165!");
       }
+
+      setProject(null);
+      getAllPosts();
+      Object(_reach_router__WEBPACK_IMPORTED_MODULE_3__["navigate"])("/administration");
     });
   };
 
@@ -70819,10 +70825,13 @@ var App = function App() {
     }).then(function (_ref5) {
       var data = _ref5.data;
       alert(data == 200 ? "\xDAspe\u0161ne si \xFApravil \u010Dl\xE1nok." : "\u010Cl\xE1nok sa nepodarilo upravi\u0165!");
+      setProject(null);
+      getAllPosts();
+      Object(_reach_router__WEBPACK_IMPORTED_MODULE_3__["navigate"])("/administration");
     });
   };
 
-  var _deletePost = function _deletePost(id, title_link) {
+  var _deletePost = function _deletePost(id) {
     config_aplication_json.headers['Authorization'] = 'Bearer ' + authState.user.auth_token;
     console.log(config_aplication_json);
 
@@ -70832,7 +70841,7 @@ var App = function App() {
       alert(response.status == 200 ? "\u010Cl\xE1nok sa \xFAspe\u0161ne vymazal" : "\u010Cl\xE1nok sa nepodarilo vymaza\u0165!");
     });
 
-    Object(_reach_router__WEBPACK_IMPORTED_MODULE_3__["navigate"])("/".concat(title_link));
+    getAllPosts();
   };
 
   var getHomePosts = function getHomePosts() {
@@ -70875,14 +70884,6 @@ var App = function App() {
     });
   };
 
-  var getNews = function getNews() {
-    fetch("/api/news").then(function (response) {
-      return response.json();
-    }).then(function (posts) {
-      setNewsPosts(posts.reverse());
-    });
-  };
-
   var closePost = function closePost() {
     setProject(null);
   };
@@ -70895,6 +70896,13 @@ var App = function App() {
     });
   };
 
+  var getAllPosts = function getAllPosts() {
+    _getData("/api/postAll", config_aplication_json).then(function (res) {
+      console.log(res);
+      setAllPosts(res.data);
+    });
+  };
+
   return react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
     className: "row col-12 | p-0 m-0"
   }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_reach_router__WEBPACK_IMPORTED_MODULE_3__["Router"], null, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_Main__WEBPACK_IMPORTED_MODULE_5__["Main"], {
@@ -70902,8 +70910,6 @@ var App = function App() {
     auth: authState,
     logout: _logoutUser,
     changeSubpage: subpageFetchData,
-    getNewsPosts: getNews,
-    newsPosts: newsPosts,
     subpages: subpages
   }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_Home__WEBPACK_IMPORTED_MODULE_4__["Home"], {
     path: "/",
@@ -70949,6 +70955,16 @@ var App = function App() {
     post: _updatePost,
     getpost: getPost,
     project: project
+  }), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_admin_AdministrationPage__WEBPACK_IMPORTED_MODULE_12__["AdministrationPage"], {
+    path: "/administration",
+    logged: authState.user,
+    changeSubpage: subpageFetchData,
+    getAllPosts: getAllPosts,
+    allPosts: allPosts,
+    hide: _deletePost,
+    clear: function clear() {
+      return setProject(null);
+    }
   }))));
 };
 
@@ -75113,6 +75129,180 @@ var Loader = function Loader() {
 
 /***/ }),
 
+/***/ "./resources/js/components/admin/AdministrationPage.js":
+/*!*************************************************************!*\
+  !*** ./resources/js/components/admin/AdministrationPage.js ***!
+  \*************************************************************/
+/*! exports provided: AdministrationPage */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "AdministrationPage", function() { return AdministrationPage; });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _reach_router__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @reach/router */ "./node_modules/@reach/router/es/index.js");
+function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _nonIterableRest(); }
+
+function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance"); }
+
+function _iterableToArrayLimit(arr, i) { var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
+
+function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
+
+
+
+var AdministrationPage = function AdministrationPage(_ref) {
+  var logged = _ref.logged,
+      changeSubpage = _ref.changeSubpage,
+      _ref$getAllPosts = _ref.getAllPosts,
+      getAllPosts = _ref$getAllPosts === void 0 ? function (f) {
+    return f;
+  } : _ref$getAllPosts,
+      allPosts = _ref.allPosts,
+      _ref$hide = _ref.hide,
+      hide = _ref$hide === void 0 ? function (f) {
+    return f;
+  } : _ref$hide,
+      clear = _ref.clear;
+
+  var _useState = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(null),
+      _useState2 = _slicedToArray(_useState, 2),
+      data = _useState2[0],
+      setData = _useState2[1];
+
+  Object(react__WEBPACK_IMPORTED_MODULE_0__["useEffect"])(function () {
+    if (allPosts === null) {
+      getAllPosts();
+    } else {
+      setData(allPosts);
+    }
+  }, [allPosts]);
+
+  var _update = function _update(id) {
+    clear();
+    Object(_reach_router__WEBPACK_IMPORTED_MODULE_1__["navigate"])("/update/".concat(id));
+  };
+
+  var _create = function _create() {
+    Object(_reach_router__WEBPACK_IMPORTED_MODULE_1__["navigate"])('/create');
+  };
+
+  var _delete = function _delete(id) {
+    hide(id);
+  };
+
+  if (logged.id !== undefined) {
+    if (data === null) {
+      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, "Loading...");
+    } else {
+      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "row"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "col-12"
+      }, "Pripravujeme"), data.filter(function (item) {
+        return item.done === 0;
+      }).map(function (_ref2) {
+        var id = _ref2.id,
+            title = _ref2.title,
+            image = _ref2.image,
+            author = _ref2.author,
+            description = _ref2.description;
+        return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+          className: 'project-outlook-frame | col-2 | mx-0 my-2 p-0 | justify-content-center'
+        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+          className: 'project-outlook | row col-xl-11 col-lg-11 col-md-11 col-12 | m-0 p-0'
+        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+          className: 'project-cover-image | col-12 | m-0 p-0 | justify-content-center'
+        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
+          src: image,
+          alt: "project-cover-image",
+          className: 'col-12 | p-0'
+        })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+          className: 'project-content | row col-12 | m-0 p-0 | justify-content-center'
+        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+          className: 'col-10 | p-0 mx-0 mt-3 mb-2'
+        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h4", {
+          className: 'title | mb-1'
+        }, id), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h4", {
+          className: 'title | mb-1'
+        }, title), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h4", {
+          className: 'mb-1'
+        }, author), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
+          className: 'description'
+        }, description.substring(0, 200), "...", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+          className: 'show-more',
+          onClick: function onClick() {
+            return _update(id);
+          }
+        }, "Edit"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+          className: 'show-more',
+          onClick: function onClick() {
+            return _delete(id);
+          }
+        }, "Delete"))))));
+      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "col-12"
+      }, "Ukoncene"), data.filter(function (item) {
+        return item.done === 1;
+      }).map(function (_ref3) {
+        var id = _ref3.id,
+            title = _ref3.title,
+            image = _ref3.image,
+            author = _ref3.author,
+            description = _ref3.description;
+        return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+          className: 'project-outlook-frame | col-2 | mx-0 my-2 p-0 | justify-content-center'
+        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+          className: 'project-outlook | row col-xl-11 col-lg-11 col-md-11 col-12 | m-0 p-0'
+        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+          className: 'project-cover-image | col-12 | m-0 p-0 | justify-content-center'
+        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
+          src: image,
+          alt: "project-cover-image",
+          className: 'col-12 | p-0'
+        })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+          className: 'project-content | row col-12 | m-0 p-0 | justify-content-center'
+        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+          className: 'col-10 | p-0 mx-0 mt-3 mb-2'
+        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h4", {
+          className: 'title | mb-1'
+        }, id), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h4", {
+          className: 'title | mb-1'
+        }, title), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h4", {
+          className: 'mb-1'
+        }, author), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
+          className: 'description'
+        }, description.substring(0, 200), "...", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+          className: 'show-more',
+          onClick: function onClick() {
+            return _update(id);
+          }
+        }, "Edit"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+          className: 'show-more',
+          onClick: function onClick() {
+            return _delete(id);
+          }
+        }, "Delete"))))));
+      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "col-12",
+        onClick: function onClick() {
+          return _create();
+        }
+      }, "Create"));
+    }
+  } else {
+    return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, "Unauthorized"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      onClick: function onClick() {
+        Object(_reach_router__WEBPACK_IMPORTED_MODULE_1__["navigate"])("/");
+        changeSubpage();
+      }
+    }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, "Go back!")));
+  }
+};
+
+/***/ }),
+
 /***/ "./resources/js/components/admin/CreatePost.js":
 /*!*****************************************************!*\
   !*** ./resources/js/components/admin/CreatePost.js ***!
@@ -75222,29 +75412,60 @@ var CreatePost = function CreatePost(_ref) {
         }));
       },
       multiple: true
-    }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+    }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, "Subpage Id"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, "Mobilita"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+      type: "radio",
       name: "subpage_id",
-      type: "number",
-      className: "col-10 offset-1",
-      value: creationData.subpage_id,
-      placeholder: "Zadajte subpage_id",
-      onChange: function onChange(e) {
+      value: "1",
+      onClick: function onClick(e) {
         setCreationData(_objectSpread({}, creationData, {
-          subpage_id: e.target.value
+          subpage_id: 1
         }));
-      },
-      required: true
-    }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+      }
+    }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, "Zivotne prostredie"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+      type: "radio",
+      name: "subpage_id",
+      value: "2",
+      onClick: function onClick(e) {
+        setCreationData(_objectSpread({}, creationData, {
+          subpage_id: 2
+        }));
+      }
+    }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, "Digitalne mesto"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+      type: "radio",
+      name: "subpage_id",
+      value: "3",
+      onClick: function onClick(e) {
+        setCreationData(_objectSpread({}, creationData, {
+          subpage_id: 3
+        }));
+      }
+    }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, "Energia"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+      type: "radio",
+      name: "subpage_id",
+      value: "4",
+      onClick: function onClick(e) {
+        setCreationData(_objectSpread({}, creationData, {
+          subpage_id: 4
+        }));
+      }
+    }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, "Stav"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, "Pripravujeme"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+      type: "radio",
       name: "done",
-      className: "col-10 offset-1",
-      value: creationData.done,
-      placeholder: "Zadajte stav",
-      onChange: function onChange(e) {
+      value: "0",
+      onClick: function onClick(e) {
         setCreationData(_objectSpread({}, creationData, {
-          done: e.target.value
+          done: 0
         }));
-      },
-      required: true
+      }
+    }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, "Ukoncene"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+      type: "radio",
+      name: "done",
+      value: "1",
+      onClick: function onClick(e) {
+        setCreationData(_objectSpread({}, creationData, {
+          done: 1
+        }));
+      }
     }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
       type: "button",
       value: "potvrdiť",
@@ -75478,28 +75699,66 @@ var UpdatePost = function UpdatePost(_ref) {
         }));
       },
       multiple: true
-    }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+    }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, "Subpage Id"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, "Mobilita"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+      type: "radio",
       name: "subpage_id",
-      className: "col-10 offset-1",
-      value: updatedData.subpage_id,
-      placeholder: "Zadajte subpageId",
-      onChange: function onChange(e) {
+      value: "1",
+      checked: updatedData.subpage_id === 1,
+      onClick: function onClick(e) {
         setUpdatedData(_objectSpread({}, updatedData, {
-          subpage_id: e.target.value
+          subpage_id: 1
         }));
-      },
-      required: true
-    }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+      }
+    }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, "Zivotne prostredie"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+      type: "radio",
+      name: "subpage_id",
+      value: "2",
+      checked: updatedData.subpage_id === 2,
+      onClick: function onClick(e) {
+        setUpdatedData(_objectSpread({}, updatedData, {
+          subpage_id: 2
+        }));
+      }
+    }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, "Digitalne mesto"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+      type: "radio",
+      name: "subpage_id",
+      value: "3",
+      checked: updatedData.subpage_id === 3,
+      onClick: function onClick(e) {
+        setUpdatedData(_objectSpread({}, updatedData, {
+          subpage_id: 3
+        }));
+      }
+    }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, "Energia"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+      type: "radio",
+      name: "subpage_id",
+      value: "4",
+      checked: updatedData.subpage_id === 4,
+      onClick: function onClick(e) {
+        setUpdatedData(_objectSpread({}, updatedData, {
+          subpage_id: 4
+        }));
+      }
+    }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, "Stav"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, "Pripravujeme"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+      type: "radio",
       name: "done",
-      className: "col-10 offset-1",
-      value: updatedData.done,
-      placeholder: "Zadajte stav",
-      onChange: function onChange(e) {
+      value: "0",
+      checked: updatedData.done === 0,
+      onClick: function onClick(e) {
         setUpdatedData(_objectSpread({}, updatedData, {
-          done: e.target.value
+          done: 0
         }));
-      },
-      required: true
+      }
+    }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, "Ukoncene"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+      type: "radio",
+      name: "done",
+      value: "1",
+      checked: updatedData.done === 1,
+      onClick: function onClick(e) {
+        setUpdatedData(_objectSpread({}, updatedData, {
+          done: 1
+        }));
+      }
     }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
       type: "button",
       value: "potvrdiť",
