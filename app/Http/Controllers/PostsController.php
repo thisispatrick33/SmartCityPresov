@@ -17,6 +17,11 @@ class PostsController extends Controller
         return $posts;
     }
 
+    public function getAll(){
+	$posts = Post::with("user")->orderBy('created_at', 'DESC')->where('subpage_id','!=', null)->where('active',true)->get();
+    	return $posts;
+    }
+
     public function add(Request $request){
         $validator = Validator::make($request->all(), [
             'title' => 'required|string',
