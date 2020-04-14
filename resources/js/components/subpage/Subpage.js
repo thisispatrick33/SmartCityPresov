@@ -10,7 +10,7 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 
 
-export const Subpage = ({id, logged, hide = f => f, data, getpost = f => f, project, author, closePost}) => {
+export const Subpage = ({id, logged, hide = f => f, data, getpost = f => f, project, closePost}) => {
     const path = window.location.pathname;
     const settings = {
         dots: false,
@@ -64,6 +64,7 @@ export const Subpage = ({id, logged, hide = f => f, data, getpost = f => f, proj
         return chunked_arr;
     };
 
+
     const getSmallerArray = (array) => {
         let size = 1;
         if(window.innerWidth >= 1200){
@@ -73,12 +74,13 @@ export const Subpage = ({id, logged, hide = f => f, data, getpost = f => f, proj
         }else if(window.innerWidth >= 768){
             size = 2;
         }
-        return array.slice(0, size);
+        return array.filter(item => item.done === 0).slice(0, size);
     };
 
     useEffect( () => {
         if(data!==null){
             setSubpage(data);
+            console.log(data);
         }
     },[data]);
 
@@ -91,7 +93,7 @@ export const Subpage = ({id, logged, hide = f => f, data, getpost = f => f, proj
     return (
         <div className={`subpage container-fluid p-0 m-0`}>
             {
-                (author !== null && project !==null) ? <Project data={project} user={author} close={close}/> : null
+                (project !==null) ? <Project data={project} close={close}/> : null
             }
             <div className={`py-4`}>
                 <svg className={`ml-5 my-3`} style={{transform: `scale(1)`}} width={`47.031`} height={`33.966`} viewBox={`0 0 47.031 33.966`}><path d={`M45.071,126.587H1.96a1.96,1.96,0,1,1,0-3.919H45.071a1.96,1.96,0,1,1,0,3.919Zm0,0`} transform={`translate(0 -107.644)`}/><path d={`M45.071,3.919H1.96A1.96,1.96,0,0,1,1.96,0H45.071a1.96,1.96,0,1,1,0,3.919Zm0,0`}/><path d={`M45.071,249.251H1.96a1.96,1.96,0,1,1,0-3.919H45.071a1.96,1.96,0,1,1,0,3.919Zm0,0`} transform={`translate(0 -215.285)`}/></svg>
@@ -162,7 +164,6 @@ export const Subpage = ({id, logged, hide = f => f, data, getpost = f => f, proj
                 <div className="col-6 col-md-8 col-lg-10 col-xl-9 row my-5">
                     {
                         getSmallerArray(subpage.posts).map((post)=>{
-
                             return(
                                 <NewsOutlook post={post} getPost={(id)=>getpost(id)}></NewsOutlook>
                             );
@@ -190,7 +191,7 @@ export const Subpage = ({id, logged, hide = f => f, data, getpost = f => f, proj
             <div className="row col-12 m-0 p-0 justify-content-center">
                 <div className="row col-md-11 col-8 m-0 p-0 justify-content-center">
                     {
-                        chunk(subpage.posts, 4).map((arr)=> {
+                        chunk(subpage.posts.filter(item => item.done === 1), 4).map((arr)=> {
                             return(
                                 <>
                                 <Slider {...settings} className="row col-md-11 col-8 m-0 p-0 justify-content-center">

@@ -8,26 +8,21 @@ import { Subpage }  from "./subpage/Subpage";
 import { Post } from "./news/Post";
 import { Login } from "./admin/Login";
 import axios from "axios";
+import {CreatePost} from "./admin/CreatePost";
+import {UpdatePost} from "./admin/UpdatePost";
 
 const App = () => {
 
-    {/*
-        Auxiliary variable for store user data
-    */}
-
     const [authState, setAuthState] = useState({isLoggedIn: false, user: {}});
-    const [post, setPost] = useState(null);
+    const [homeNewestPosts, setHomeNewestPosts] = useState(null);
     const [subpageData, setSubpageData] = useState(JSON.parse(localStorage.getItem("subpageData"))==null ? null : JSON.parse(localStorage.getItem("subpageData")).data);
     const [currentSubpage, setCurrentSubpage] = useState(null);
 
     const [project, setProject] = useState(null);
-    const [author, setAuthor] = useState(null);
 
     const [newsPosts, setNewsPosts] = useState([]);
 
     const [subpages, setSubpages] = useState(null);
-
-    const requestVersions = {"/mobilita":40, "/zivotne_prostredie":4, "/digitalne_mesto":50, "/energia":12};
 
     const [version, setVersion] = useState( JSON.parse(localStorage.getItem("subpageData"))==null ? null : JSON.parse(localStorage.getItem("subpageData")).version);
 
@@ -48,10 +43,6 @@ const App = () => {
         }
     };
 
-    {/*
-        Before start check state of user isLoggedIn
-    */}
-
    useEffect( () => {
         let state = JSON.parse(localStorage.getItem("authState"));
         if (state !== null && state.isLoggedIn && !authState.isLoggedIn) {
@@ -63,19 +54,16 @@ const App = () => {
             localStorage["subpageData"] = JSON.stringify({data:null, version:null});
         }
 
-        getPosts();
+        getHomePosts();
 
-        subpageFetchData();
+        if(window.location.pathname!=="/create" && window.location.pathname.indexOf("/update/")===-1 && window.location.pathname!=="/login"){
+            subpageFetchData();
+        }
+
 
         getSubpages();
 
     },[authState]);
-
-    {/*
-
-        User Functions
-
-    */}
 
     const _postData = async (url, data, config) => await axios.post(url, data, config);
 
@@ -127,29 +115,25 @@ const App = () => {
         config_multipart_form_data.headers['Authorization'] =  null;
     };
 
-
-    {/*
-
-        Post Functions
-
-    */}
-
-    const _createPost = ( {title, description, price, user_id, subpage_id, images } ) => {
+    const _createPost = ( creationData ) => {
+        console.log(creationData.subpageId);
         config_multipart_form_data.headers['Authorization'] =  'Bearer '+authState.user.auth_token;
         let formData = new FormData();
-        formData.append(`title`, title);
-        formData.append(`description`, description);
-        formData.append(`price`, price);
-        formData.append(`user_id`, user_id);
-        formData.append(`subpage_id`, subpage_id);
-        if(!images){
+        formData.append(`title`, creationData.title);
+        formData.append(`description`, creationData.description);
+        formData.append(`price`, creationData.price);
+        formData.append(`user_id`, 5);
+        formData.append(`author`, creationData.author);
+        formData.append(`subpage_id`, creationData.subpage_id);
+        formData.append(`done`, creationData.done);
+        if(!creationData.images){
         }
         else {
-            Array.from(images).forEach(image => formData.append(`images[]`, image));
+            Array.from(creationData.images).forEach(image => formData.append(`images[]`, image));
         }
-
         _postData(`/api/post`, formData, config_multipart_form_data)
             .then(response => {
+                console.log(response);
                 if(response.status==200){
                     alert(`Úspešne si vytvoril článok.`);
                 }
@@ -157,22 +141,26 @@ const App = () => {
                     alert(`Článok sa nepodarilo vytvoriť!`);
                 }
             })
-
     };
 
-    const _updatePost = ( {id, title, description, price, subpage_id, images, updated_images} ) => {
+    const _updatePost = ( updatedData ) => {
+        console.log(updatedData);
         config_multipart_form_data.headers['Authorization'] =  'Bearer '+authState.user.auth_token;
         const formData = new FormData();
-        formData.append(`id`, id);
-        formData.append(`title`, title);
-        formData.append(`description`, description);
-        formData.append(`price`, price);
-        formData.append(`subpage_id`, subpage_id);
-        Array.from(images).forEach(image => formData.append(`images[]`, image));
-        Array.from(updated_images).forEach(image => formData.append(`updated_images[]`, image));
+        formData.append(`id`, updatedData.id);
+        formData.append(`title`, updatedData.title);
+        formData.append(`description`, updatedData.description);
+        formData.append(`price`, updatedData.price);
+        formData.append(`subpage_id`, updatedData.subpage_id);
+        Array.from(updatedData.images).forEach(image => formData.append(`images[]`, image));
+        Array.from(updatedData.updated_images).forEach(image => formData.append(`updated_images[]`, image));
+        formData.append(`done`, updatedData.done);
+        formData.append(`user_id`, 5);
+        formData.append(`author`, updatedData.author);
 
         _postData(`/api/post/edit`, formData, config_multipart_form_data)
             .then(response => {
+                console.log(response);
                 return response;
             })
             .then(( {data} ) => {
@@ -190,43 +178,40 @@ const App = () => {
         navigate(`/${title_link}`);
     };
 
-    const getPosts = () => { _getData("/api/post", config_aplication_json).then(res => { setPost(res.data); }); };
+    const getHomePosts = () => { _getData("/api/post", config_aplication_json).then(res => { setHomeNewestPosts(res.data); }); };
 
     const subpageFetchData = () => {
-        console.log(version);
-        console.log(subpageData);
-        if (( version === null || version[window.location.pathname] === null || version[window.location.pathname] !== requestVersions[window.location.pathname]) || (subpageData === null || subpageData[window.location.pathname] === undefined || subpageData[window.location.pathname] === null)) {
-            console.log("fetching from server");
-            _getData(`api${window.location.pathname}`, config_aplication_json)
-                .then(res => {
-                    setSubpageData({...subpageData, [window.location.pathname]: res.data.subpage});
-                    setVersion({...version, [window.location.pathname]: requestVersions[window.location.pathname]});
+        _getData("api/version", config_aplication_json).then(versionResponse => {
+            console.log(versionResponse.data);
+            console.log(versionResponse.data[window.location.pathname]);
+            if (( version === null || version[window.location.pathname] === null || version[window.location.pathname] !== versionResponse.data[window.location.pathname]) || (subpageData === null || subpageData[window.location.pathname] === undefined || subpageData[window.location.pathname] === null)) {
+                console.log("fetching from server");
+                _getData(`api${window.location.pathname}`, config_aplication_json)
+                    .then(res => {
+                        setSubpageData({...subpageData, [window.location.pathname]: res.data.subpage});
+                        setVersion({...version, [window.location.pathname]: versionResponse.data[window.location.pathname]});
 
-                    console.log({...subpageData, [window.location.pathname]: res.data.subpage});
-                    localStorage[`subpageData`] = JSON.stringify({
-                        data: {...subpageData, [window.location.pathname]: res.data.subpage},
-                        version : {...version, [window.location.pathname]: requestVersions[window.location.pathname]}
+                        console.log(versionResponse.data[window.location.pathname]);
+                        localStorage[`subpageData`] = JSON.stringify({
+                            data: {...subpageData, [window.location.pathname]: res.data.subpage},
+                            version : {...version, [window.location.pathname]: versionResponse.data[window.location.pathname]}
+                        });
+                        setCurrentSubpage(res.data.subpage);
+                        console.log(window.location.pathname);
                     });
-                    setCurrentSubpage(res.data.subpage);
-                    console.log(window.location.pathname);
-                });
-        }
-        else {
-            console.log("already saved");
-            setCurrentSubpage(subpageData[window.location.pathname]);
-        }
+            }
+            else {
+                console.log("already saved");
+                setCurrentSubpage(subpageData[window.location.pathname]);
+            }
+        });
     };
 
-    const getPost = _id => {
-        fetch(`/api/post/${_id}`)
+    const getPost = id => {
+        fetch(`/api/post/${id}`)
             .then(response => response.json())
             .then(postData => {
                 setProject(postData);
-                fetch(`/api/author/${postData.user_id}`)
-                    .then(response => response.json())
-                    .then(({ data }) => {
-                        setAuthor(data);
-                    });
             });
     };
 
@@ -240,7 +225,6 @@ const App = () => {
 
     const closePost = () => {
         setProject(null);
-        setAuthor([]);
     };
 
     const getSubpages = () =>{
@@ -255,19 +239,17 @@ const App = () => {
         <div className={`row col-12 | p-0 m-0`}>
                 <Router>
                     <Main path={`/`} auth={authState} logout={_logoutUser} changeSubpage={subpageFetchData} getNewsPosts={getNews} newsPosts={newsPosts} subpages={subpages}>
-                        <Home path={`/`} getposts={post} getpost={getPost} project={project} author={author} closePost={closePost} changeSubpage={subpageFetchData}/>
-                        <Subpage path={`:id`} hide={_deletePost} logged={authState.isLoggedIn ? authState.user : false} data={currentSubpage} getpost={getPost} project={project} author={author} closePost={closePost} />
-                        <Post path={"/posts/:id"} logged={authState.user} getpost={getPost} project={project} author={author} post={_updatePost} hide={_deletePost}/>
-                        <Post path={"/post-create"} logged={authState.user} getpost={getPost} project={project} author={author} post={_createPost}/>
+                        <Home path={`/`} _homeNewestPosts={homeNewestPosts} getpost={getPost} project={project} closePost={closePost} changeSubpage={subpageFetchData}/>
+                        <Subpage path={`:id`} hide={_deletePost} logged={authState.isLoggedIn ? authState.user : false} data={currentSubpage} getpost={getPost} project={project} closePost={closePost} />
+                        <Post path={"/posts/:id"} logged={authState.user} getpost={getPost} project={project} post={_updatePost} hide={_deletePost}/>
+                        <Post path={"/post-create"} logged={authState.user} getpost={getPost} project={project} post={_createPost}/>
                         <Login path={"/login"} login={_loginUser} logout={_logoutUser}/>
+                        <CreatePost path={"/create"} logged={authState.user} changeSubpage={subpageFetchData} post={_createPost}/>
+                        <UpdatePost path={"/update/:id"} logged={authState.user} changeSubpage={subpageFetchData} post={_updatePost} getpost={getPost} project={project}/>
                     </Main>
                 </Router>
         </div>
     );
 };
-
-{/*
-    React export
-*/}
 
 ReactDOM.render(<App />, document.getElementById("root"));
