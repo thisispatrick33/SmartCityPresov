@@ -12,7 +12,7 @@ class CreateSubpagesTable extends Migration
      */
     public function up()
     {
-        Schema::create('subpages', function (Blueprint $table) {
+        Schema::create('backgrounds-old', function (Blueprint $table) {
             $table->increments('id');
             $table->string('title');
             $table->text('description');
@@ -29,6 +29,6 @@ class CreateSubpagesTable extends Migration
      */
     public function down()
     {
-        Schema::drop('subpages');
+        Schema::drop('backgrounds-old');
     }
 }

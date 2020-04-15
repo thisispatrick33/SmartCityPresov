@@ -1,11 +1,7 @@
 import React, {useEffect, useState} from "react";
 import $ from 'jquery';
 import FsLightbox from 'fslightbox-react';
-
-
-export const Project = ({data, close = f => f}) => {
-    console.log("project");
-    console.log(data);
+export const Project = ({data,user, close = f => f}) => {
     const written = new Date(data.updated_at.replace(' ', 'T'));
     const [toggler, setToggler] = useState(false);
     useEffect(() => {

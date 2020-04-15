@@ -6,16 +6,16 @@ export const HomeOutlook = ({post, getPost = f => f}) => {
             <div className={'news-outlook | row col-xl-11 col-lg-11 col-md-11 col-11 | m-0 p-0'}>
                 <div className={'news-cover-icon | row col-12 | m-0 p-0 | justify-content-center'}>
                     {
-                        post.subpage_id == 1 ? <img alt={"cover news image"} className={'col-5 | px-2 py-3'} src={`img/subpages/news/mobilita.svg`}/> : null
+                        post.subpage_id == 1 ? <img alt={"cover news image"} className={'col-5 | px-2 py-3'} src={`images/news/mobilita.svg`}/> : null
                     }
                     {
-                        post.subpage_id == 2 ? <img alt={"cover news image"} className={'col-5 | px-2 py-3'} src={`img/subpages/news/zivotne_prostredie.svg`}/> : null
+                        post.subpage_id == 2 ? <img alt={"cover news image"} className={'col-5 | px-2 py-3'} src={`images/news/zivotne_prostredie.svg`}/> : null
                     }
                     {
-                        post.subpage_id == 3 ? <img alt={"cover news image"} className={'col-5 | px-2 py-3'} src={`img/subpages/news/digitalne_mesto.svg`}/> : null
+                        post.subpage_id == 3 ? <img alt={"cover news image"} className={'col-7 | px-2 py-3'} src={`images/news/digitalne_mesto.svg`}/> : null
                     }
                     {
-                        post.subpage_id == 4 ? <img alt={"cover news image"} className={'col-5 | px-2 py-3'} src={`img/subpages/news/energia.svg`}/> : null
+                        post.subpage_id == 4 ? <img alt={"cover news image"} className={'col-6 | px-2 py-4'} src={`images/news/energia.svg`}/> : null
                     }
 
 

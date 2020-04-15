@@ -1,29 +1,25 @@
 import React, { useEffect, useState, useRef } from "react";
+import {Navigation} from "./Navigation";
+import {Footer} from "./Footer";
 
 export const Main = (props) => {
-    const [bodyMargin, setBodyMargin] = useState(0);
-    const refNavigation = useRef();
-    const refNews = useRef();
-    const [news, setNews] = useState(false);
     const [width, setWidth] = useState(window.innerWidth);
     const [pageYOffset, setPageYOffset] = useState(window.pageYOffset);
 
 
     useEffect(() => {
-        const handleResize = () => setWidth(window.innerWidth);
-        const handleScroll = () => setPageYOffset(window.pageYOffset);
+        const handleResize = () => {};
+        const handleScroll = () => {
+            if(props['*'].length > 0){
+                $('.background').css('backgroundPositionY', Number($('.background').css('backgroundPositionY').replace('%','').replace('px','')) + 1);
+            }else{
+                $('.map').css('width', Number($('.map').css('width').replace('%','').replace('px','')) + 1);
+            }
+        };
 
         window.addEventListener('resize', handleResize);
         window.addEventListener('scroll', handleScroll);
 
-
-        setTimeout(
-            function() {
-                setBodyMargin($('.navigation').height());
-            }
-                .bind(this),
-            200
-        );
 
         return () => {
             window.removeEventListener('resize', handleResize);
@@ -34,9 +30,11 @@ export const Main = (props) => {
 
     return (
         <>
+            <Navigation changeSubpage={props.changeSubpage}/>
             <div>
                 { props.children }
             </div>
+            <Footer />
         </>
 
     );
