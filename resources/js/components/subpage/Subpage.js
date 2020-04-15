@@ -118,18 +118,6 @@ export const Subpage = ({id, data, logged, project, author, hide = f => f, getpo
     }
 
 
-    const getSmallerArray = (array) => {
-        let size = 1;
-        if(window.innerWidth >= 1200){
-            size = 4;
-        }else if(window.innerWidth >= 999){
-            size = 3;
-        }else if(window.innerWidth >= 768){
-            size = 2;
-        }
-        return array.filter(item => item.done === 0).slice(0, size);
-    };
-
     useEffect(() => {
         if(data !== null){
             setSubpage(data);

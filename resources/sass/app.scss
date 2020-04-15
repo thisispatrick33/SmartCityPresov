@@ -55,69 +55,7 @@ body{
       color: $secondaryColor;
     }
   }
-  .project-details-frame{
-    position: fixed;
-    z-index: 1500;
-    width: 100vw;
-    top : 0;
-    left: 0;
-    height: 100vh;
-    overflow-y: scroll;
-    background : rgba(0,0,0,0.85);
-    .project-content{
-      border-radius: 10px;
-      background: $secondaryColor;
-      margin-bottom: 10vh;
-      .content{
-        background: white;
-        .close-button{
-          width: 30px;
-          height: 30px;
-          &:not(:hover){
-            fill : $secondaryColor;
-            transition: 0.2s;
-          }
-          &:hover{
-            fill : $primaryColor;
-            cursor: pointer;
-            transition: 0.2s;
-          }
 
-        }
-        .title{
-          span{
-            color: $primaryColor;
-          }
-        }
-        .description{
-          color: $secondaryColor;
-          font-size: 1.1em;
-        }
-        .post-data{
-          font-family: Gilroy-SemiBold, serif;
-          font-size: 1em;
-        }
-        .price{
-          span{
-            font-family: Gilroy-SemiBold;
-          }
-          font-family: Gilroy-Regular;
-        }
-      }
-      .gallery{
-        background: $secondaryColor;
-        -webkit-border-radius: 10px 0 0 10px;
-        -moz-border-radius: 10px 0 0 10px;
-        border-radius: 10px 0 0 10px;
-        .cover-image{
-          border: 4px solid $primaryColor;
-        }
-        .title{
-          color: $colorOfPage;
-        }
-      }
-    }
-  }
 
   footer{
     width: 100vw;
@@ -143,7 +81,7 @@ body{
 
 @import 'fonts';
 @import '_news';
-@import '_projects';
 @import 'home';
 @import 'subpage';
 @import '_navigation';
+@import '_projects';
