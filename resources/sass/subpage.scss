@@ -1,6 +1,47 @@
 .subpage{
+    .subpage-intro{
+        .background{
+            right: 0;
+            height : 95%;
+            z-index : -1;
+        }
+        .main-title{
+            font-size : 9.68rem;
+            color: $primaryColor;
+            font-family: SF-Bold, serif;
+            line-height: 80%;
+        }
+        .sub-title{
+            font-size : 5.43rem;
+            color: $secondaryColor;
+            font-family: SF-Bold, serif;
+        }
+        .description{
+            .title, a{
+                text-transform: uppercase;
+                letter-spacing: 2.5px;
+                font-size : 1.36rem;
+                font-family: SF-Bold, serif;
+            }
+            hr{
+                border-top: 3px solid $primaryColor;
+                fill : $primaryColor;
+            }
+            font-size : 1.2375rem;
+            color : $colorOfPage;
+            font-family: SF-Light, serif;
+        }
+    }
     height: 100%;
-
+    .subtitle-1{
+        background : $primaryColor;
+    }
+    .subtitle-2{
+        background : $secondaryColor;
+    }
+    .subtitle{
+        color: $colorOfPage;
+    }
     .partial-border{
         font-size: 1.25rem;
         &:after{
@@ -34,29 +75,77 @@
             display: none;
         }
     }
-
-
-    @media (max-width : $lg){
-        .preparing{
-            height: 110%;
-            left: 0%;
-            top: 25%;
-            z-index: -1;
-        }
-        .solved{
-            width: 95vw;
-        }
+}
+@media (max-width : $lg){
+    .main-title{
+        font-size : 7.68rem !important;
     }
-    @media (max-width : $md){
-        .solved{
-            width: 100vw;
-            height: 100%;
-            left: 0;
-            top: 0;
-            z-index: 2;
+    .sub-title{
+        font-size : 4.43rem !important;
+        margin-top : -1.5rem !important;
+    }
+    .description{
+        .title{
+            font-size : 1.16rem !important;
         }
-        .partial-border{
-            font-size: 1rem;
+        font-size : 1rem !important;
+    }
+}
+@media (max-width : $md){
+    .background{
+        height : 100% !important;
+    }
+    .subpage .solved{
+        width: 70vw;
+        left: 25%;
+    }
+    .main-title{
+        font-size : 6.68rem !important;
+    }
+    .sub-title{
+        font-size : 3.43rem !important;
+        margin-top : -1.5rem !important;
+    }
+}
+@media (max-width : $sm){
+    .main-title{
+        margin-top: 5rem;
+        font-size : 4.68rem !important;
+    }
+    .sub-title{
+        font-size : 2.73rem !important;
+        margin-top : -0.6rem !important;
+        margin-bottom: 4rem;
+    }
+    .description{
+        .title{
+            font-size : 1rem !important;
         }
+        font-size : .9rem !important;
+    }
+}
+@media (max-width : 375px){
+    .main-title{
+        margin-top: 5rem;
+        font-size : 3.68rem !important;
+    }
+    .sub-title{
+        font-size : 2.0rem !important;
+        margin-top : 0 !important;
+        margin-bottom: 4rem;
+    }
+}
+
+.arrow{
+    animation : scroll 0.5s alternate infinite;
+
+}
+
+@keyframes scroll {
+    from{
+        margin-bottom: 0;
+    }
+    to{
+        margin-bottom: 20px;
     }
 }

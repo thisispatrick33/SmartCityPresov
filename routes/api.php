@@ -16,7 +16,7 @@ use Illuminate\Http\Request;
 Route::get('/post', 'PostsController@get');
 Route::get('/news', 'MainController@news');
 Route::get('/{option}', 'MainController@subpage');
-Route::get('/', 'MainController@subpages');
+Route::get('/', 'MainController@backgrounds-old');
 Route::get('/author/{id}', 'MainController@author');
 Route::get('/post/{id}', 'MainController@post');
 

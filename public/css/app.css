@@ -10796,6 +10796,30 @@ body .project-details-frame .project-content .gallery .title {
   color: #fff;
 }
 
+body footer {
+  width: 100vw;
+  text-transform: uppercase;
+  font-size: 1em;
+}
+
+body footer a {
+  color: #D61920;
+}
+
+body footer a:hover {
+  color: #D61920;
+  transition: 1s;
+  cursor: pointer;
+}
+
+body footer p {
+  letter-spacing: 2.5px;
+}
+
+body footer p:nth-child(2) {
+  color: #D3D2D2;
+}
+
 @font-face {
   font-family: SF-Regular;
   src: url(/fonts/SF-Pro-Display-Regular.otf?5810cdf5bc7db8d0090a6c46890ee33b) format("opentype");
@@ -10924,15 +10948,11 @@ footer {
 
 @media (max-width: 992px) {
   footer {
-    font-size: 0.95rem;
+    font-size: 0.85rem;
   }
 
   footer p:first-child {
     font-size: 0.65rem;
-  }
-
-  footer p span {
-    color: #D61920;
   }
 
   .home-main-title {
@@ -10973,11 +10993,7 @@ footer {
   }
 
   footer {
-    font-size: 0.95rem;
-  }
-
-  footer p:first-child {
-    font-size: 0.8rem;
+    font-size: 0.85rem;
   }
 }
 
@@ -11104,7 +11120,7 @@ footer {
 
 .home .absolute-red {
   position: absolute;
-  background: red;
+  background: #D61920;
   height: 81vh;
   width: 20vw;
   left: 33%;
@@ -11172,8 +11188,63 @@ footer {
   }
 }
 
+.home-cards:hover {
+  cursor: pointer;
+  margin-bottom: 20px;
+}
+
 .subpage {
   height: 100%;
+}
+
+.subpage .subpage-intro .background {
+  right: 0;
+  height: 95%;
+  z-index: -1;
+}
+
+.subpage .subpage-intro .main-title {
+  font-size: 9.68rem;
+  color: #D61920;
+  font-family: SF-Bold, serif;
+  line-height: 80%;
+}
+
+.subpage .subpage-intro .sub-title {
+  font-size: 5.43rem;
+  color: #191919;
+  font-family: SF-Bold, serif;
+}
+
+.subpage .subpage-intro .description {
+  font-size: 1.2375rem;
+  color: #fff;
+  font-family: SF-Light, serif;
+}
+
+.subpage .subpage-intro .description .title,
+.subpage .subpage-intro .description a {
+  text-transform: uppercase;
+  letter-spacing: 2.5px;
+  font-size: 1.36rem;
+  font-family: SF-Bold, serif;
+}
+
+.subpage .subpage-intro .description hr {
+  border-top: 3px solid #D61920;
+  fill: #D61920;
+}
+
+.subpage .subtitle-1 {
+  background: #D61920;
+}
+
+.subpage .subtitle-2 {
+  background: #191919;
+}
+
+.subpage .subtitle {
+  color: #fff;
 }
 
 .subpage .partial-border {
@@ -11213,29 +11284,143 @@ footer {
 }
 
 @media (max-width: 992px) {
-  .subpage .preparing {
-    height: 110%;
-    left: 0%;
-    top: 25%;
-    z-index: -1;
+  .main-title {
+    font-size: 7.68rem !important;
   }
 
-  .subpage .solved {
-    width: 95vw;
+  .sub-title {
+    font-size: 4.43rem !important;
+    margin-top: -1.5rem !important;
+  }
+
+  .description {
+    font-size: 1rem !important;
+  }
+
+  .description .title {
+    font-size: 1.16rem !important;
   }
 }
 
 @media (max-width: 768px) {
-  .subpage .solved {
-    width: 100vw;
-    height: 100%;
-    left: 0;
-    top: 0;
-    z-index: 2;
+  .background {
+    height: 100% !important;
   }
 
-  .subpage .partial-border {
-    font-size: 1rem;
+  .subpage .solved {
+    width: 70vw;
+    left: 25%;
   }
+
+  .main-title {
+    font-size: 6.68rem !important;
+  }
+
+  .sub-title {
+    font-size: 3.43rem !important;
+    margin-top: -1.5rem !important;
+  }
+}
+
+@media (max-width: 576px) {
+  .main-title {
+    margin-top: 5rem;
+    font-size: 4.68rem !important;
+  }
+
+  .sub-title {
+    font-size: 2.73rem !important;
+    margin-top: -0.6rem !important;
+    margin-bottom: 4rem;
+  }
+
+  .description {
+    font-size: 0.9rem !important;
+  }
+
+  .description .title {
+    font-size: 1rem !important;
+  }
+}
+
+@media (max-width: 375px) {
+  .main-title {
+    margin-top: 5rem;
+    font-size: 3.68rem !important;
+  }
+
+  .sub-title {
+    font-size: 2rem !important;
+    margin-top: 0 !important;
+    margin-bottom: 4rem;
+  }
+}
+
+.arrow {
+  -webkit-animation: scroll 0.5s alternate infinite;
+          animation: scroll 0.5s alternate infinite;
+}
+
+@-webkit-keyframes scroll {
+  from {
+    margin-bottom: 0;
+  }
+
+  to {
+    margin-bottom: 20px;
+  }
+}
+
+@keyframes scroll {
+  from {
+    margin-bottom: 0;
+  }
+
+  to {
+    margin-bottom: 20px;
+  }
+}
+
+nav {
+  z-index: 1600;
+  width: 10vw;
+  top: 10px;
+  right: 15px;
+}
+
+nav .item {
+  border-radius: 50%;
+  border: 0 none;
+}
+
+nav .item:hover {
+  margin-right: 100px;
+  background: #D61920;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+nav .item:hover svg {
+  fill: #fff;
+}
+
+nav .item:not(:hover) {
+  background: #fff;
+  transition: 0.3s;
+}
+
+nav .item:not(:hover) svg {
+  fill: #D61920;
+}
+
+nav .item:focus {
+  outline: 0;
+}
+
+nav .line {
+  width: 8px;
+  height: 8px;
+  background: #fff;
+  border-radius: 100%;
 }
 

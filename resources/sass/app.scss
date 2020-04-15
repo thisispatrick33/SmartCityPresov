@@ -118,7 +118,27 @@ body{
       }
     }
   }
-  
+
+  footer{
+    width: 100vw;
+    text-transform: uppercase;
+    font-size: 1em;
+    a{
+      color: $primaryColor;
+      &:hover{
+        color: $primaryColor;
+        transition: 1s;
+        cursor: pointer;
+      }
+    }
+    p{
+      letter-spacing: 2.5px;
+      &:nth-child(2){
+        color: #D3D2D2;
+      }
+    }
+  }
+
 }
 
 @import 'fonts';
@@ -126,3 +146,4 @@ body{
 @import '_projects';
 @import 'home';
 @import 'subpage';
+@import '_navigation';

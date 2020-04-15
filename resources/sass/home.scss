@@ -35,7 +35,7 @@
     }
     .absolute-red{
         position: absolute;
-        background: red;
+        background: $primaryColor;
         height: 81vh;
         width: 20vw;
         left: 33%;
@@ -96,5 +96,11 @@
         .map{
             height: 100%;
         }
+    }
+}
+.home-cards{
+    &:hover{
+        cursor: pointer;
+        margin-bottom: 20px;
     }
 }

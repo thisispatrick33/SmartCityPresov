@@ -1,7 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import {NewsOutlook} from './outlook/NewsOutlook';
 import {ProjectOutlook} from './outlook/ProjectOutlook';
-import {Footer} from '../Footer';
 import { Loader } from "../Utillities";
 import { Project } from './Project';
 import $ from "jquery";
@@ -10,11 +9,14 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 
 
-export const Subpage = ({id, logged, hide = f => f, data, getpost = f => f, project, author, closePost}) => {
-    const path = window.location.pathname;
+export const Subpage = ({id, data, logged, project, author, hide = f => f, getpost = f => f, closePost}) => {
+    const descTitles = {
+        "mobilita" : '["mobilita", "pohyb", "doprava", "transport"]',
+        "zivotne_prostredie" : '["životné prostredie", "ekológia", "ovzdušie", "počasie"]',
+        "digitalne_mesto" : '["digitálne mesto", "informácie", "zastupiteľstvo", "občan"]',
+        "energia" : '["energia", "odpad", "spotreba", "ekológia"]',
+    };
     const settings = {
-        dots: false,
-        arrows : true,
         infinite: false,
         speed: 500,
         slidesToShow: 4,
@@ -24,28 +26,28 @@ export const Subpage = ({id, logged, hide = f => f, data, getpost = f => f, proj
         prevArrow: <PreviousArrow />,
         responsive: [
             {
-                breakpoint: 1200,
+                breakpoint: 1100,
                 settings: {
                     slidesToShow: 3,
                 }
             },
             {
-                breakpoint: 992,
+                breakpoint: 860,
                 settings: {
                     slidesToShow: 2,
                 }
             },
             {
-                breakpoint: 768,
+                breakpoint: 650,
                 settings: {
                     slidesToShow: 1,
                 }
             }
         ]
     };
-
+    let settings1 = {...settings, dots: true, arrows : false};
+    let settings2 = {...settings, dots: false, arrows : true};
     const [subpage, setSubpage] = useState([]);
-
     const close = () => {
         $('.project-details-frame .project-content').animate({
             marginTop: '100vh',
@@ -53,7 +55,6 @@ export const Subpage = ({id, logged, hide = f => f, data, getpost = f => f, proj
         },1000);
         $('.project-details-frame').fadeToggle("slow", closePost);
     };
-
     const chunk = (array, size) => {
         const chunked_arr = [];
         let index = 0;
@@ -63,185 +64,166 @@ export const Subpage = ({id, logged, hide = f => f, data, getpost = f => f, proj
         }
         return chunked_arr;
     };
-
-    const getSmallerArray = (array) => {
-        let size = 1;
-        if(window.innerWidth >= 1200){
-            size = 4;
-        }else if(window.innerWidth >= 999){
-            size = 3;
-        }else if(window.innerWidth >= 768){
-            size = 2;
-        }
-        return array.slice(0, size);
+    const typing = () => {
+        let TxtType = function(el, toRotate, period) {
+            this.toRotate = toRotate;
+            this.el = el;
+            this.loopNum = 0;
+            this.period = parseInt(period, 10) || 2000;
+            this.txt = '';
+            this.tick();
+            this.isDeleting = false;
+        };
+        TxtType.prototype.tick = function() {
+            let i = this.loopNum % this.toRotate.length;
+            let fullTxt = this.toRotate[i];
+            if (this.isDeleting) {
+                this.txt = fullTxt.substring(0, this.txt.length - 1);
+            } else {
+                this.txt = fullTxt.substring(0, this.txt.length + 1);
+            }
+            this.el.innerHTML = '<span class="wrap">'+this.txt+'</span>';
+            let that = this;
+            let delta = 200 - Math.random() * 100;
+            if (this.isDeleting) { delta /= 2; }
+            if (!this.isDeleting && this.txt === fullTxt) {
+                delta = this.period;
+                this.isDeleting = true;
+            } else if (this.isDeleting && this.txt === '') {
+                this.isDeleting = false;
+                this.loopNum++;
+                delta = 500;
+            }
+            setTimeout(function() {
+                that.tick();
+            }, delta);
+        };
+        window.onload = function() {
+            let elements = document.getElementsByClassName('typewrite');
+            for (let i=0; i<elements.length; i++) {
+                let toRotate = elements[i].getAttribute('data-type');
+                let period = elements[i].getAttribute('data-period');
+                if (toRotate) {
+                    new TxtType(elements[i], JSON.parse(toRotate), period);
+                }
+            }
+            let css = document.createElement("style");
+            css.type = "text/css";
+            css.innerHTML = ".typewrite > .wrap { border-right: 0.08em solid #fff}";
+            document.body.appendChild(css);
+        };
     };
 
-    useEffect( () => {
-        if(data!==null){
+    useEffect(() => {
+        if(data !== null){
             setSubpage(data);
         }
+        typing();
     },[data]);
 
-
-    if(subpage===null || subpage===undefined || !subpage.title){
+    if(subpage === null || subpage === undefined || !subpage.title){
         return <Loader/>;
     }
 
-
     return (
         <div className={`subpage container-fluid p-0 m-0`}>
-            {
-                (author !== null && project !==null) ? <Project data={project} user={author} close={close}/> : null
-            }
-            <div className={`py-4`}>
-                <svg className={`ml-5 my-3`} style={{transform: `scale(1)`}} width={`47.031`} height={`33.966`} viewBox={`0 0 47.031 33.966`}><path d={`M45.071,126.587H1.96a1.96,1.96,0,1,1,0-3.919H45.071a1.96,1.96,0,1,1,0,3.919Zm0,0`} transform={`translate(0 -107.644)`}/><path d={`M45.071,3.919H1.96A1.96,1.96,0,0,1,1.96,0H45.071a1.96,1.96,0,1,1,0,3.919Zm0,0`}/><path d={`M45.071,249.251H1.96a1.96,1.96,0,1,1,0-3.919H45.071a1.96,1.96,0,1,1,0,3.919Zm0,0`} transform={`translate(0 -215.285)`}/></svg>
-            </div>
-            <div className={`row col-12`}>
-                <div className={`offset-1 col font-bold pt-5 text-lg-left text-center`}>
-                    <h1 className="primary-color subpage-main-title text-lowercase">
-                        {subpage.title}.
-                    </h1>
-                    <h1 className="subpage-main-title">
-                        smartcity prešov.
-                    </h1>
-                </div>
-                {
-                    window.innerWidth >= 1200?
-                        <div className={`col-4`}>
-                            <img alt={"cover image"} src={`img/subpages${path}.svg`}/>
-
-                        </div>:<><div className="space"></div><div className="space"></div></>
-                }
-            </div>
-            <div className={`row col-12 mt-n4 mb-5 m-0 p-0`}>
-                <div className={`col-xl-7 col-lg-11 col-12 background-secondary py-5 position-relative`}>
-
-                        <div className={`preparing offset-md-4 col-md-8 position-absolute background-primary`}>
-                            <div className="col-12 h-70 row justify-content-end align-items-end">
-                                <div className="col-2">
-                                    <svg className="pl-3 mb-5" style={{transform: `scale(1.4)`}} xmlns="http://www.w3.org/2000/svg" width="55.795" height="27.898" viewBox="0 0 55.795 27.898">
-                                        <path id="virustotal-icon" d="M160.45,27.9,137.783,50.565V55.8l27.9-27.9L137.783,0V5.231Z" transform="translate(55.795 -137.783) rotate(90)" fill="#fff"/>
-                                    </svg>
-                                </div>
-                            </div>
-                            <div className="col-12 h-30 align-items-center d-flex text-center">
-                                <h3 className="col-12 font-bold subpage-title">
-                                    aktuálne pripravujeme.
-                                </h3>
-                            </div>
+            <div className="subpage-intro row col-12 p-0 mx-0 position-relative" style={{minHeight : $(window).height()}}>
+                <div className="col-xl-4 col-lg-4 col-md-4 col-sm-2 col-1 position-absolute background m-0 p-0" style={{backgroundImage : 'url("./././././images/backgrounds/'+subpage.title_link+'.svg")'}}/>
+                <div className="row m-0 col-xl-9 col-lg-10 col-md-12 col-12 align-items-end justify-content-end p-0">
+                    <div className="col-12 row mx-0 p-0 justify-content-center">
+                        <div className="col-11 row m-0">
+                            <h1 className={`main-title mb-0 col-auto p-0`}>{subpage.title}.</h1>
+                            <h3 className={`sub-title col-auto p-0`}>smartcity prešov.</h3>
                         </div>
-
-
-                    <div className={`justify-content-center d-flex`}>
-                        <h2 className={`partial-border d-inline font-bold`}>
-                            SMARTCITY PREŠOV OBLASŤ <span className={"text-uppercase"}>{subpage.title}</span>
-                        </h2>
                     </div>
-                    <div className={`col-12 row justify-content-center`}>
-                        <p className={`col-9 py-5 text-center h3 font-light subpage-text`}>
-                            {subpage.description}
-                        </p>
+                    <div className="col-xl-10 col-lg-10 col-md-11 col-12 row d-flex description subtitle-2 mx-0 py-5 align-items-end justify-content-center">
+                        <h5 className="col-12 text-center title">
+                            smartcity prešov oblasť <a className="typewrite" data-period="2000" data-type={descTitles[subpage.title_link]}><span className="wrap"></span></a>
+                        </h5>
+                        <div className="col-10 my-2"><div className="col-6 ml-5"><hr/></div></div>
+                        <p className={`col-xl-8 col-lg-9 col-md-9 col-sm-10 col-11 text-center`}>{subpage.description}</p>
                     </div>
-
-
+                    <div className="col-xl-2 col-lg-2 col-md-1 d-xl-flex d-lg-flex d-md-flex d-none subtitle-1 mx-0 p-0 py-5 align-items-end justify-content-center">
+                        <svg className={`arrow col-5 p-0`} fill={`#ffffff`} enableBackground="new 0 0 64 64" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg"><path d="m32 8c-1.104 0-2 .896-2 2v39.899l-14.552-15.278c-.761-.799-2.026-.832-2.828-.069-.8.762-.831 2.027-.069 2.827l16.62 17.449c.756.756 1.76 1.172 2.829 1.172 1.068 0 2.073-.416 2.862-1.207l16.586-17.414c.762-.8.73-2.065-.069-2.827-.799-.763-2.065-.731-2.827.069l-14.552 15.342v-39.963c0-1.104-.896-2-2-2z"/></svg>
+                    </div>
                 </div>
-                {
-                    window.innerWidth >= 1200?
-                        <div className="col d-flex justify-content-end align-items-end">
-                            <svg className="mr-5" style={{transform:"translateY(60%)"}} xmlns="http://www.w3.org/2000/svg" width="215" height="157" viewBox="0 0 215 157"><g transform="translate(4.5 -1815.5)"><circle cx="6" cy="6" r="6" transform="translate(210.5 1844.5) rotate(90)" fill="#191919"/><circle cx="6" cy="6" r="6" transform="translate(210.5 1815.5) rotate(90)" fill="#191919"/><circle cx="6" cy="6" r="6" transform="translate(210.5 1902.5) rotate(90)" fill="#191919"/><circle cx="6" cy="6" r="6" transform="translate(210.5 1873.5) rotate(90)" fill="#191919"/><circle cx="6" cy="6" r="6" transform="translate(210.5 1960.5) rotate(90)" fill="#191919"/><circle cx="6" cy="6" r="6" transform="translate(210.5 1931.5) rotate(90)" fill="#191919"/><circle cx="6" cy="6" r="6" transform="translate(181.5 1844.5) rotate(90)" fill="#191919"/><circle cx="6" cy="6" r="6" transform="translate(181.5 1815.5) rotate(90)" fill="#191919"/><circle cx="6" cy="6" r="6" transform="translate(181.5 1902.5) rotate(90)" fill="#191919"/><circle cx="6" cy="6" r="6" transform="translate(181.5 1873.5) rotate(90)" fill="#191919"/><circle cx="6" cy="6" r="6" transform="translate(181.5 1960.5) rotate(90)" fill="#191919"/><circle cx="6" cy="6" r="6" transform="translate(181.5 1931.5) rotate(90)" fill="#191919"/><circle cx="6" cy="6" r="6" transform="translate(152.5 1844.5) rotate(90)" fill="#191919"/><circle cx="6" cy="6" r="6" transform="translate(152.5 1815.5) rotate(90)" fill="#191919"/><circle cx="6" cy="6" r="6" transform="translate(152.5 1902.5) rotate(90)" fill="#191919"/><circle cx="6" cy="6" r="6" transform="translate(152.5 1873.5) rotate(90)" fill="#191919"/><circle cx="6" cy="6" r="6" transform="translate(152.5 1960.5) rotate(90)" fill="#191919"/><circle cx="6" cy="6" r="6" transform="translate(152.5 1931.5) rotate(90)" fill="#191919"/><circle cx="6" cy="6" r="6" transform="translate(123.5 1844.5) rotate(90)" fill="#191919"/><circle cx="6" cy="6" r="6" transform="translate(123.5 1815.5) rotate(90)" fill="#191919"/><circle cx="6" cy="6" r="6" transform="translate(123.5 1902.5) rotate(90)" fill="#191919"/><circle cx="6" cy="6" r="6" transform="translate(123.5 1873.5) rotate(90)" fill="#191919"/><circle cx="6" cy="6" r="6" transform="translate(123.5 1960.5) rotate(90)" fill="#191919"/><circle cx="6" cy="6" r="6" transform="translate(123.5 1931.5) rotate(90)" fill="#191919"/><circle cx="6" cy="6" r="6" transform="translate(94.5 1844.5) rotate(90)" fill="#191919"/><circle cx="6" cy="6" r="6" transform="translate(94.5 1815.5) rotate(90)" fill="#191919"/><circle cx="6" cy="6" r="6" transform="translate(94.5 1902.5) rotate(90)" fill="#191919"/><circle cx="6" cy="6" r="6" transform="translate(94.5 1873.5) rotate(90)" fill="#191919"/><circle cx="6" cy="6" r="6" transform="translate(94.5 1960.5) rotate(90)" fill="#191919"/><circle cx="6" cy="6" r="6" transform="translate(94.5 1931.5) rotate(90)" fill="#191919"/><circle cx="6" cy="6" r="6" transform="translate(65.5 1844.5) rotate(90)" fill="#191919"/><circle cx="6" cy="6" r="6" transform="translate(65.5 1815.5) rotate(90)" fill="#191919"/><circle cx="6" cy="6" r="6" transform="translate(65.5 1902.5) rotate(90)" fill="#191919"/><circle cx="6" cy="6" r="6" transform="translate(65.5 1873.5) rotate(90)" fill="#191919"/><circle cx="6" cy="6" r="6" transform="translate(65.5 1960.5) rotate(90)" fill="#191919"/><circle cx="6" cy="6" r="6" transform="translate(65.5 1931.5) rotate(90)" fill="#191919"/><circle cx="6" cy="6" r="6" transform="translate(36.5 1844.5) rotate(90)" fill="#191919"/><circle cx="6" cy="6" r="6" transform="translate(36.5 1815.5) rotate(90)" fill="#191919"/><circle cx="6" cy="6" r="6" transform="translate(36.5 1902.5) rotate(90)" fill="#191919"/><circle cx="6" cy="6" r="6" transform="translate(36.5 1873.5) rotate(90)" fill="#191919"/><circle cx="6" cy="6" r="6" transform="translate(36.5 1960.5) rotate(90)" fill="#191919"/><circle cx="6" cy="6" r="6" transform="translate(36.5 1931.5) rotate(90)" fill="#191919"/><circle cx="6" cy="6" r="6" transform="translate(7.5 1844.5) rotate(90)" fill="#191919"/><circle cx="6" cy="6" r="6" transform="translate(7.5 1815.5) rotate(90)" fill="#191919"/><circle cx="6" cy="6" r="6" transform="translate(7.5 1902.5) rotate(90)" fill="#191919"/><circle cx="6" cy="6" r="6" transform="translate(7.5 1873.5) rotate(90)" fill="#191919"/><circle cx="6" cy="6" r="6" transform="translate(7.5 1960.5) rotate(90)" fill="#191919"/><circle cx="6" cy="6" r="6" transform="translate(7.5 1931.5) rotate(90)" fill="#191919"/></g></svg>
-                        </div>:<></>
-                }
             </div>
-
-            <div className="space"></div>
-            <div className="space"></div>
-            <div className="row col-12 p-0 m-0 justify-content-between">
-                <div className="col-6 col-lg-2 col-md-4 align-items-center d-flex">
-                    <svg className="ml-n3 " xmlns="http://www.w3.org/2000/svg" width="215" height="157" viewBox="0 0 215 157"><g transform="translate(4.5 -1815.5)"><circle cx="6" cy="6" r="6" transform="translate(210.5 1844.5) rotate(90)" fill="#d3d2d2"/><circle cx="6" cy="6" r="6" transform="translate(210.5 1815.5) rotate(90)" fill="#d3d2d2"/><circle cx="6" cy="6" r="6" transform="translate(210.5 1902.5) rotate(90)" fill="#d3d2d2"/><circle cx="6" cy="6" r="6" transform="translate(210.5 1873.5) rotate(90)" fill="#d3d2d2"/><circle cx="6" cy="6" r="6" transform="translate(210.5 1960.5) rotate(90)" fill="#d3d2d2"/><circle cx="6" cy="6" r="6" transform="translate(210.5 1931.5) rotate(90)" fill="#d3d2d2"/><circle cx="6" cy="6" r="6" transform="translate(181.5 1844.5) rotate(90)" fill="#d3d2d2"/><circle cx="6" cy="6" r="6" transform="translate(181.5 1815.5) rotate(90)" fill="#d3d2d2"/><circle cx="6" cy="6" r="6" transform="translate(181.5 1902.5) rotate(90)" fill="#d3d2d2"/><circle cx="6" cy="6" r="6" transform="translate(181.5 1873.5) rotate(90)" fill="#d3d2d2"/><circle cx="6" cy="6" r="6" transform="translate(181.5 1960.5) rotate(90)" fill="#d3d2d2"/><circle cx="6" cy="6" r="6" transform="translate(181.5 1931.5) rotate(90)" fill="#d3d2d2"/><circle cx="6" cy="6" r="6" transform="translate(152.5 1844.5) rotate(90)" fill="#d3d2d2"/><circle cx="6" cy="6" r="6" transform="translate(152.5 1815.5) rotate(90)" fill="#d3d2d2"/><circle cx="6" cy="6" r="6" transform="translate(152.5 1902.5) rotate(90)" fill="#d3d2d2"/><circle cx="6" cy="6" r="6" transform="translate(152.5 1873.5) rotate(90)" fill="#d3d2d2"/><circle cx="6" cy="6" r="6" transform="translate(152.5 1960.5) rotate(90)" fill="#d3d2d2"/><circle cx="6" cy="6" r="6" transform="translate(152.5 1931.5) rotate(90)" fill="#d3d2d2"/><circle cx="6" cy="6" r="6" transform="translate(123.5 1844.5) rotate(90)" fill="#d3d2d2"/><circle cx="6" cy="6" r="6" transform="translate(123.5 1815.5) rotate(90)" fill="#d3d2d2"/><circle cx="6" cy="6" r="6" transform="translate(123.5 1902.5) rotate(90)" fill="#d3d2d2"/><circle cx="6" cy="6" r="6" transform="translate(123.5 1873.5) rotate(90)" fill="#d3d2d2"/><circle cx="6" cy="6" r="6" transform="translate(123.5 1960.5) rotate(90)" fill="#d3d2d2"/><circle cx="6" cy="6" r="6" transform="translate(123.5 1931.5) rotate(90)" fill="#d3d2d2"/><circle cx="6" cy="6" r="6" transform="translate(94.5 1844.5) rotate(90)" fill="#d3d2d2"/><circle cx="6" cy="6" r="6" transform="translate(94.5 1815.5) rotate(90)" fill="#d3d2d2"/><circle cx="6" cy="6" r="6" transform="translate(94.5 1902.5) rotate(90)" fill="#d3d2d2"/><circle cx="6" cy="6" r="6" transform="translate(94.5 1873.5) rotate(90)" fill="#d3d2d2"/><circle cx="6" cy="6" r="6" transform="translate(94.5 1960.5) rotate(90)" fill="#d3d2d2"/><circle cx="6" cy="6" r="6" transform="translate(94.5 1931.5) rotate(90)" fill="#d3d2d2"/><circle cx="6" cy="6" r="6" transform="translate(65.5 1844.5) rotate(90)" fill="#d3d2d2"/><circle cx="6" cy="6" r="6" transform="translate(65.5 1815.5) rotate(90)" fill="#d3d2d2"/><circle cx="6" cy="6" r="6" transform="translate(65.5 1902.5) rotate(90)" fill="#d3d2d2"/><circle cx="6" cy="6" r="6" transform="translate(65.5 1873.5) rotate(90)" fill="#d3d2d2"/><circle cx="6" cy="6" r="6" transform="translate(65.5 1960.5) rotate(90)" fill="#d3d2d2"/><circle cx="6" cy="6" r="6" transform="translate(65.5 1931.5) rotate(90)" fill="#d3d2d2"/><circle cx="6" cy="6" r="6" transform="translate(36.5 1844.5) rotate(90)" fill="#d3d2d2"/><circle cx="6" cy="6" r="6" transform="translate(36.5 1815.5) rotate(90)" fill="#d3d2d2"/><circle cx="6" cy="6" r="6" transform="translate(36.5 1902.5) rotate(90)" fill="#d3d2d2"/><circle cx="6" cy="6" r="6" transform="translate(36.5 1873.5) rotate(90)" fill="#d3d2d2"/><circle cx="6" cy="6" r="6" transform="translate(36.5 1960.5) rotate(90)" fill="#d3d2d2"/><circle cx="6" cy="6" r="6" transform="translate(36.5 1931.5) rotate(90)" fill="#d3d2d2"/><circle cx="6" cy="6" r="6" transform="translate(7.5 1844.5) rotate(90)" fill="#d3d2d2"/><circle cx="6" cy="6" r="6" transform="translate(7.5 1815.5) rotate(90)" fill="#d3d2d2"/><circle cx="6" cy="6" r="6" transform="translate(7.5 1902.5) rotate(90)" fill="#d3d2d2"/><circle cx="6" cy="6" r="6" transform="translate(7.5 1873.5) rotate(90)" fill="#d3d2d2"/><circle cx="6" cy="6" r="6" transform="translate(7.5 1960.5) rotate(90)" fill="#d3d2d2"/><circle cx="6" cy="6" r="6" transform="translate(7.5 1931.5) rotate(90)" fill="#d3d2d2"/></g></svg>
+            <div className="row col-12 p-0 mx-0 mb-xl-5 mb-lg-5 my-0 justify-content-end">
+                <div className="row m-0 col-xl-9 col-lg-10 col-md-11 col-12 align-items-start justify-content-end p-0">
+                    <div className="col-xl-7 col-lg-8 col-md-10 col-12 subtitle subtitle-1 row mx-0 p-0 py-5">
+                        <h3 className="col-12 text-center font-bold subpage-title p-0 m-0">
+                            aktuálne pripravujeme.
+                        </h3>
+                    </div>
                 </div>
-                <div className="col-6 col-md-8 col-lg-10 col-xl-9 row my-5">
-                    {
-                        getSmallerArray(subpage.posts).map((post)=>{
+                <div className="row m-0 col-xl-3 col-lg-2 d-xl-flex d-lg-flex d-none justify-content-center p-0"> <svg className={`col-10 p-0`} xmlns="http://www.w3.org/2000/svg" width="215" height="161" viewBox="0 0 215 161" fill={`white`}><circle cx="6" cy="6" r="6" transform="translate(215 149) rotate(90)"/><circle cx="6" cy="6" r="6" transform="translate(215 120) rotate(90)" /><circle cx="6" cy="6" r="6" transform="translate(186 149) rotate(90)" /><circle cx="6" cy="6" r="6" transform="translate(186 120) rotate(90)" /><circle cx="6" cy="6" r="6" transform="translate(157 149) rotate(90)" /><circle cx="6" cy="6" r="6" transform="translate(157 120) rotate(90)" /><circle cx="6" cy="6" r="6" transform="translate(128 149) rotate(90)" /><circle cx="6" cy="6" r="6" transform="translate(128 120) rotate(90)" /><circle cx="6" cy="6" r="6" transform="translate(99 149) rotate(90)" /><circle cx="6" cy="6" r="6" transform="translate(99 120) rotate(90)" /><circle cx="6" cy="6" r="6" transform="translate(70 149) rotate(90)" /><circle cx="6" cy="6" r="6" transform="translate(70 120) rotate(90)" /><circle cx="6" cy="6" r="6" transform="translate(41 149) rotate(90)" /><circle cx="6" cy="6" r="6" transform="translate(41 120) rotate(90)" /><circle cx="6" cy="6" r="6" transform="translate(12 149) rotate(90)" /><circle cx="6" cy="6" r="6" transform="translate(12 120) rotate(90)"/><circle cx="6" cy="6" r="6" transform="translate(215 89) rotate(90)" /><circle cx="6" cy="6" r="6" transform="translate(215 60) rotate(90)" /><circle cx="6" cy="6" r="6" transform="translate(186 89) rotate(90)" /><circle cx="6" cy="6" r="6" transform="translate(186 60) rotate(90)" /><circle cx="6" cy="6" r="6" transform="translate(157 89) rotate(90)" /><circle cx="6" cy="6" r="6" transform="translate(157 60) rotate(90)" /><circle cx="6" cy="6" r="6" transform="translate(128 89) rotate(90)" /><circle cx="6" cy="6" r="6" transform="translate(128 60) rotate(90)" /><circle cx="6" cy="6" r="6" transform="translate(99 89) rotate(90)" /><circle cx="6" cy="6" r="6" transform="translate(99 60) rotate(90)" /><circle cx="6" cy="6" r="6" transform="translate(70 89) rotate(90)" /><circle cx="6" cy="6" r="6" transform="translate(70 60) rotate(90)"/><circle cx="6" cy="6" r="6" transform="translate(41 89) rotate(90)" /><circle cx="6" cy="6" r="6" transform="translate(41 60) rotate(90)" /><circle cx="6" cy="6" r="6" transform="translate(12 89) rotate(90)"/><circle cx="6" cy="6" r="6" transform="translate(12 60) rotate(90)" /><circle cx="6" cy="6" r="6" transform="translate(215 29) rotate(90)" /><circle cx="6" cy="6" r="6" transform="translate(215) rotate(90)"/><circle cx="6" cy="6" r="6" transform="translate(186 29) rotate(90)" /><circle cx="6" cy="6" r="6" transform="translate(186) rotate(90)" /><circle cx="6" cy="6" r="6" transform="translate(157 29) rotate(90)" /><circle cx="6" cy="6" r="6" transform="translate(157) rotate(90)" /><circle cx="6" cy="6" r="6" transform="translate(128 29) rotate(90)" /><circle cx="6" cy="6" r="6" transform="translate(128) rotate(90)" /><circle cx="6" cy="6" r="6" transform="translate(99 29) rotate(90)" /><circle cx="6" cy="6" r="6" transform="translate(99) rotate(90)" /><circle cx="6" cy="6" r="6" transform="translate(70 29) rotate(90)" /><circle cx="6" cy="6" r="6" transform="translate(70) rotate(90)" /><circle cx="6" cy="6" r="6" transform="translate(41 29) rotate(90)" /><circle cx="6" cy="6" r="6" transform="translate(41) rotate(90)" /><circle cx="6" cy="6" r="6" transform="translate(12 29) rotate(90)" /><circle cx="6" cy="6" r="6" transform="translate(12) rotate(90)" /></svg> </div>
+            </div>
+            <div className="row col-12 p-0 m-0 justify-content-xl-between justify-content-lg-between justify-content-start mx-0">
+                <div className="col-xl-2 col-lg-2 col-md-3 col-4 align-items-center d-flex p-0">
+                    <svg className="col-12 m-0" xmlns="http://www.w3.org/2000/svg" width="215" height="157" viewBox="0 0 215 157"><g transform="translate(4.5 -1815.5)"><circle cx="6" cy="6" r="6" transform="translate(210.5 1844.5) rotate(90)" fill="#d3d2d2"/><circle cx="6" cy="6" r="6" transform="translate(210.5 1815.5) rotate(90)" fill="#d3d2d2"/><circle cx="6" cy="6" r="6" transform="translate(210.5 1902.5) rotate(90)" fill="#d3d2d2"/><circle cx="6" cy="6" r="6" transform="translate(210.5 1873.5) rotate(90)" fill="#d3d2d2"/><circle cx="6" cy="6" r="6" transform="translate(210.5 1960.5) rotate(90)" fill="#d3d2d2"/><circle cx="6" cy="6" r="6" transform="translate(210.5 1931.5) rotate(90)" fill="#d3d2d2"/><circle cx="6" cy="6" r="6" transform="translate(181.5 1844.5) rotate(90)" fill="#d3d2d2"/><circle cx="6" cy="6" r="6" transform="translate(181.5 1815.5) rotate(90)" fill="#d3d2d2"/><circle cx="6" cy="6" r="6" transform="translate(181.5 1902.5) rotate(90)" fill="#d3d2d2"/><circle cx="6" cy="6" r="6" transform="translate(181.5 1873.5) rotate(90)" fill="#d3d2d2"/><circle cx="6" cy="6" r="6" transform="translate(181.5 1960.5) rotate(90)" fill="#d3d2d2"/><circle cx="6" cy="6" r="6" transform="translate(181.5 1931.5) rotate(90)" fill="#d3d2d2"/><circle cx="6" cy="6" r="6" transform="translate(152.5 1844.5) rotate(90)" fill="#d3d2d2"/><circle cx="6" cy="6" r="6" transform="translate(152.5 1815.5) rotate(90)" fill="#d3d2d2"/><circle cx="6" cy="6" r="6" transform="translate(152.5 1902.5) rotate(90)" fill="#d3d2d2"/><circle cx="6" cy="6" r="6" transform="translate(152.5 1873.5) rotate(90)" fill="#d3d2d2"/><circle cx="6" cy="6" r="6" transform="translate(152.5 1960.5) rotate(90)" fill="#d3d2d2"/><circle cx="6" cy="6" r="6" transform="translate(152.5 1931.5) rotate(90)" fill="#d3d2d2"/><circle cx="6" cy="6" r="6" transform="translate(123.5 1844.5) rotate(90)" fill="#d3d2d2"/><circle cx="6" cy="6" r="6" transform="translate(123.5 1815.5) rotate(90)" fill="#d3d2d2"/><circle cx="6" cy="6" r="6" transform="translate(123.5 1902.5) rotate(90)" fill="#d3d2d2"/><circle cx="6" cy="6" r="6" transform="translate(123.5 1873.5) rotate(90)" fill="#d3d2d2"/><circle cx="6" cy="6" r="6" transform="translate(123.5 1960.5) rotate(90)" fill="#d3d2d2"/><circle cx="6" cy="6" r="6" transform="translate(123.5 1931.5) rotate(90)" fill="#d3d2d2"/><circle cx="6" cy="6" r="6" transform="translate(94.5 1844.5) rotate(90)" fill="#d3d2d2"/><circle cx="6" cy="6" r="6" transform="translate(94.5 1815.5) rotate(90)" fill="#d3d2d2"/><circle cx="6" cy="6" r="6" transform="translate(94.5 1902.5) rotate(90)" fill="#d3d2d2"/><circle cx="6" cy="6" r="6" transform="translate(94.5 1873.5) rotate(90)" fill="#d3d2d2"/><circle cx="6" cy="6" r="6" transform="translate(94.5 1960.5) rotate(90)" fill="#d3d2d2"/><circle cx="6" cy="6" r="6" transform="translate(94.5 1931.5) rotate(90)" fill="#d3d2d2"/><circle cx="6" cy="6" r="6" transform="translate(65.5 1844.5) rotate(90)" fill="#d3d2d2"/><circle cx="6" cy="6" r="6" transform="translate(65.5 1815.5) rotate(90)" fill="#d3d2d2"/><circle cx="6" cy="6" r="6" transform="translate(65.5 1902.5) rotate(90)" fill="#d3d2d2"/><circle cx="6" cy="6" r="6" transform="translate(65.5 1873.5) rotate(90)" fill="#d3d2d2"/><circle cx="6" cy="6" r="6" transform="translate(65.5 1960.5) rotate(90)" fill="#d3d2d2"/><circle cx="6" cy="6" r="6" transform="translate(65.5 1931.5) rotate(90)" fill="#d3d2d2"/><circle cx="6" cy="6" r="6" transform="translate(36.5 1844.5) rotate(90)" fill="#d3d2d2"/><circle cx="6" cy="6" r="6" transform="translate(36.5 1815.5) rotate(90)" fill="#d3d2d2"/><circle cx="6" cy="6" r="6" transform="translate(36.5 1902.5) rotate(90)" fill="#d3d2d2"/><circle cx="6" cy="6" r="6" transform="translate(36.5 1873.5) rotate(90)" fill="#d3d2d2"/><circle cx="6" cy="6" r="6" transform="translate(36.5 1960.5) rotate(90)" fill="#d3d2d2"/><circle cx="6" cy="6" r="6" transform="translate(36.5 1931.5) rotate(90)" fill="#d3d2d2"/><circle cx="6" cy="6" r="6" transform="translate(7.5 1844.5) rotate(90)" fill="#d3d2d2"/><circle cx="6" cy="6" r="6" transform="translate(7.5 1815.5) rotate(90)" fill="#d3d2d2"/><circle cx="6" cy="6" r="6" transform="translate(7.5 1902.5) rotate(90)" fill="#d3d2d2"/><circle cx="6" cy="6" r="6" transform="translate(7.5 1873.5) rotate(90)" fill="#d3d2d2"/><circle cx="6" cy="6" r="6" transform="translate(7.5 1960.5) rotate(90)" fill="#d3d2d2"/><circle cx="6" cy="6" r="6" transform="translate(7.5 1931.5) rotate(90)" fill="#d3d2d2"/></g></svg>
+                </div>
 
-                            return(
-                                <NewsOutlook post={post} getPost={(id)=>getpost(id)}></NewsOutlook>
-                            );
+                    {
+                        chunk(subpage.posts.slice(0, 4), 4).map(arr => {
+                            return <Slider {...settings1} className="col-xl-8 col-lg-8 col-md-8 col-7 row my-5 mx-xl-0 mx-lg-0 mr-0 ml-2 p-0 justify-content-start">
+                                {
+                                    arr.map(post => <NewsOutlook post={post} getPost={id =>getpost(id)} />)
+                                }
+                            </Slider>
                         })
                     }
-                </div>
                 {
-                        window.innerWidth >= 1200?
-                            <div className="col-1 p-0 m-0 background-secondary"></div>
-                            :<></>
+                    window.innerWidth >= 1200 ?
+                        <div className="col-1 p-0 m-0 background-secondary d-xl-flex d-lg-flex d-none"></div>
+                        :<></>
                 }
             </div>
-            <div className="space"></div>
-            <div className="row col-12 p-0 m-0 h-15rem">
-                <div className="col-md-4 col-lg-3 col-xl-2 background-primary">
-                    <div className="position-absolute background-secondary solved align-items-center d-flex text-center">
-                        <h3 className="col-12 font-bold subpage-title p-0 m-0">
+            <div className="row col-12 p-0 mx-0 h-15rem my-5">
+                <div className="col-md-4 col-lg-3 col-xl-2 background-primary m-0">
+                    <div className="position-absolute subtitle subtitle-2 solved m-0 align-items-center d-flex text-center">
+                        <h3 className="col-12 font-bold subpage-title p-3 m-0">
                             už sme zrealizovali a vyriešili.
                         </h3>
                     </div>
                 </div>
             </div>
-            <div className="space"></div>
-            <div className="space"></div>
-            <div className="row col-12 m-0 p-0 justify-content-center">
-                <div className="row col-md-11 col-8 m-0 p-0 justify-content-center">
+            <div className="row col-12 my-xl-5 my-lg-5 mb-3 mx-0 p-0 justify-content-center">
+                <div className="row col-xl-12 col-lg-12 col-md-12 col-sm-11 col-11 m-0 p-0 justify-content-center">
                     {
-                        chunk(subpage.posts, 4).map((arr)=> {
-                            return(
-                                <>
-                                <Slider {...settings} className="row col-md-11 col-8 m-0 p-0 justify-content-center">
-                                    {
-                                        arr.map((post)=>{
-                                            return(
-                                                <ProjectOutlook post={post} getPost={(id)=>getpost(id)}></ProjectOutlook>
-                                            );
-                                        })
-                                    }
-                                </Slider>
+                        chunk(subpage.posts, 4).map(arr => {
+                            return <>
+                                    <Slider {...settings2} className="row col-xl-11 col-lg-11 col-md-11 col-10 m-0 p-0 justify-content-center">
+                                        {
+                                            arr.map(post => <ProjectOutlook post={post} getPost={id => getpost(id)}/>)
+                                        }
+                                    </Slider>
                                     <div className={"col-12 text-center my-5 divider"}>
                                         <svg xmlns="http://www.w3.org/2000/svg" width="157" height="12" viewBox="0 0 157 12">
-                                        <g id="spacer" transform="translate(-563 -2718)">
-                                            <circle id="Ellipse_246" data-name="Ellipse 246" cx="6" cy="6" r="6"
-                                                    transform="translate(691 2730) rotate(180)" fill="#d3d2d2"/>
-                                            <circle id="Ellipse_247" data-name="Ellipse 247" cx="6" cy="6" r="6"
-                                                    transform="translate(720 2730) rotate(180)" fill="#d3d2d2"/>
-                                            <circle id="Ellipse_246-2" data-name="Ellipse 246" cx="6" cy="6" r="6"
-                                                    transform="translate(633 2730) rotate(180)" fill="#d3d2d2"/>
-                                            <circle id="Ellipse_247-2" data-name="Ellipse 247" cx="6" cy="6" r="6"
-                                                    transform="translate(662 2730) rotate(180)" fill="#d3d2d2"/>
-                                            <circle id="Ellipse_246-3" data-name="Ellipse 246" cx="6" cy="6" r="6"
-                                                    transform="translate(575 2730) rotate(180)" fill="#d3d2d2"/>
-                                            <circle id="Ellipse_247-3" data-name="Ellipse 247" cx="6" cy="6" r="6"
-                                                    transform="translate(604 2730) rotate(180)" fill="#d3d2d2"/>
-                                            <circle id="Ellipse_246-4" data-name="Ellipse 246" cx="6" cy="6" r="6"
-                                                    transform="translate(691 2730) rotate(180)" fill="#d3d2d2"/>
-                                            <circle id="Ellipse_247-4" data-name="Ellipse 247" cx="6" cy="6" r="6"
-                                                    transform="translate(720 2730) rotate(180)" fill="#d3d2d2"/>
-                                            <circle id="Ellipse_246-5" data-name="Ellipse 246" cx="6" cy="6" r="6"
-                                                    transform="translate(633 2730) rotate(180)" fill="#d3d2d2"/>
-                                            <circle id="Ellipse_247-5" data-name="Ellipse 247" cx="6" cy="6" r="6"
-                                                    transform="translate(662 2730) rotate(180)" fill="#d3d2d2"/>
-                                            <circle id="Ellipse_246-6" data-name="Ellipse 246" cx="6" cy="6" r="6"
-                                                    transform="translate(575 2730) rotate(180)" fill="#d3d2d2"/>
-                                            <circle id="Ellipse_247-6" data-name="Ellipse 247" cx="6" cy="6" r="6"
-                                                    transform="translate(604 2730) rotate(180)" fill="#d3d2d2"/>
-                                        </g>
-                                    </svg>
+                                            <g id="spacer" transform="translate(-563 -2718)">
+                                                <circle cx="6" cy="6" r="6" transform="translate(691 2730) rotate(180)" fill="#d3d2d2"/>
+                                                <circle cx="6" cy="6" r="6" transform="translate(720 2730) rotate(180)" fill="#d3d2d2"/>
+                                                <circle cx="6" cy="6" r="6" transform="translate(633 2730) rotate(180)" fill="#d3d2d2"/>
+                                                <circle cx="6" cy="6" r="6" transform="translate(662 2730) rotate(180)" fill="#d3d2d2"/>
+                                                <circle cx="6" cy="6" r="6" transform="translate(575 2730) rotate(180)" fill="#d3d2d2"/>
+                                                <circle cx="6" cy="6" r="6" transform="translate(604 2730) rotate(180)" fill="#d3d2d2"/>
+                                                <circle cx="6" cy="6" r="6" transform="translate(691 2730) rotate(180)" fill="#d3d2d2"/>
+                                                <circle cx="6" cy="6" r="6" transform="translate(720 2730) rotate(180)" fill="#d3d2d2"/>
+                                                <circle cx="6" cy="6" r="6" transform="translate(633 2730) rotate(180)" fill="#d3d2d2"/>
+                                                <circle cx="6" cy="6" r="6" transform="translate(662 2730) rotate(180)" fill="#d3d2d2"/>
+                                                <circle cx="6" cy="6" r="6" transform="translate(575 2730) rotate(180)" fill="#d3d2d2"/>
+                                                <circle cx="6" cy="6" r="6" transform="translate(604 2730) rotate(180)" fill="#d3d2d2"/>
+                                            </g>
+                                        </svg>
                                     </div>
                                 </>
-                            );
-
                         })
                     }
                 </div>
             </div>
-            <div className="space"></div>
-            <div className="space"></div>
-            <Footer></Footer>
+            {
+                (project !== null && author !== null) ? (
+                    <Project data={project} user={author} close={close}/>) : null
+            }
         </div>
     );
 };

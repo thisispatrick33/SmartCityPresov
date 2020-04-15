@@ -1,0 +1,36 @@
+nav{
+  z-index: 1600;
+  width: 10vw;
+  top : 10px;
+  right: 15px;
+  .item{
+    border-radius: 50%;
+    border : 0 none;
+
+    &:hover{
+      margin-right: 100px;
+      background: $primaryColor;
+      cursor: pointer;
+      svg{
+        fill : $colorOfPage;
+      }
+      transition: 0.3s;
+    }
+    &:not(:hover){
+      background: $colorOfPage;
+      svg{
+        fill : $primaryColor;
+      }
+      transition: 0.3s;
+    }
+    &:focus{
+      outline: 0;
+    }
+  }
+  .line{
+    width: 8px;
+    height: 8px;
+    background : $colorOfPage;
+    border-radius: 100%;
+  }
+}

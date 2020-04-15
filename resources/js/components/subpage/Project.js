@@ -1,7 +1,6 @@
 import React, {useEffect, useState} from "react";
 import $ from 'jquery';
 import FsLightbox from 'fslightbox-react';
-import { Loader } from "../Utillities";
 export const Project = ({data,user, close = f => f}) => {
     const written = new Date(data.updated_at.replace(' ', 'T'));
     const [toggler, setToggler] = useState(false);
