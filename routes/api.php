@@ -13,36 +13,24 @@ use Illuminate\Http\Request;
 |
 */
 /*->middleware('auth.basic')*/
+Route::get('/version', 'MainController@version');
 Route::get('/post', 'PostsController@get');
-Route::get('/news', 'MainController@news');
-Route::get('/{option}', 'MainController@subpage');
-Route::get('/', 'MainController@backgrounds-old');
-Route::get('/author/{id}', 'MainController@author');
+
+Route::get('/postAll','PostsController@getAll');
+Route::get('/', 'MainController@subpages');
 Route::get('/post/{id}', 'MainController@post');
-
-
-
-
+Route::get('/{option}', 'MainController@subpage');
 
 Route::group(['middleware' => ['jwt.auth','api-header']], function () {
-
-    // all routes to protected resources are registered here
-
     Route::put('/post/delete', 'PostsController@delete');
     Route::post('/post', 'PostsController@add');
     Route::post('/post/edit', 'PostsController@update');
 
     Route::group(['middleware' => 'admin'], function () {
-
         Route::post('auth/register', 'AuthController@register');
-
     });
 });
 
 Route::group(['middleware' => 'api-header'], function () {
-
-    // The registration and login requests doesn't come with tokens
-    // as users at that point have not been authenticated yet
-    // Therefore the jwtMiddleware will be exclusive of them
     Route::post('auth/login', 'AuthController@login');
 });

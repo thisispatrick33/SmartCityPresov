@@ -24,3 +24,12 @@ Route::get('/login', function(){
 Route::get('/posts/{id}', function(){
     return view('welcome');
 });
+Route::get('/create', function(){
+    return view('welcome');
+});
+Route::get('/update/{id}', function(){
+    return view('welcome');
+});
+Route::get('/administration', function(){
+    return view('welcome');
+});

@@ -6,7 +6,7 @@ import { Project } from './subpage/Project';
 import { navigate } from '@reach/router';
 
 
-export const Home = ({getposts, getpost = f => f, project, author, closePost, changeSubpage}) => {
+export const Home = ({_homeNewestPosts, getpost = f => f, project, author, closePost, changeSubpage}) => {
     const [post, setPost] = useState(null);
 
     const close = () => {
@@ -21,10 +21,10 @@ export const Home = ({getposts, getpost = f => f, project, author, closePost, ch
     };
 
     useEffect(() => {
-        if (getposts !== null) {
-            setPost(getposts.slice(0, 3));
+        if (_homeNewestPosts !== null) {
+            setPost(_homeNewestPosts.slice(0, 3));
         }
-    }, [getposts]);
+    }, [_homeNewestPosts]);
 
 
     if (post !== null && post !== undefined) {

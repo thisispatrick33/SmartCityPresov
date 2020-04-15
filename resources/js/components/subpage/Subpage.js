@@ -64,8 +64,9 @@ export const Subpage = ({id, data, logged, project, author, hide = f => f, getpo
         }
         return chunked_arr;
     };
+
     const typing = () => {
-        let TxtType = function(el, toRotate, period) {
+        let TxtType = function (el, toRotate, period) {
             this.toRotate = toRotate;
             this.el = el;
             this.loopNum = 0;
@@ -74,7 +75,7 @@ export const Subpage = ({id, data, logged, project, author, hide = f => f, getpo
             this.tick();
             this.isDeleting = false;
         };
-        TxtType.prototype.tick = function() {
+        TxtType.prototype.tick = function () {
             let i = this.loopNum % this.toRotate.length;
             let fullTxt = this.toRotate[i];
             if (this.isDeleting) {
@@ -82,10 +83,12 @@ export const Subpage = ({id, data, logged, project, author, hide = f => f, getpo
             } else {
                 this.txt = fullTxt.substring(0, this.txt.length + 1);
             }
-            this.el.innerHTML = '<span class="wrap">'+this.txt+'</span>';
+            this.el.innerHTML = '<span class="wrap">' + this.txt + '</span>';
             let that = this;
             let delta = 200 - Math.random() * 100;
-            if (this.isDeleting) { delta /= 2; }
+            if (this.isDeleting) {
+                delta /= 2;
+            }
             if (!this.isDeleting && this.txt === fullTxt) {
                 delta = this.period;
                 this.isDeleting = true;
@@ -94,13 +97,13 @@ export const Subpage = ({id, data, logged, project, author, hide = f => f, getpo
                 this.loopNum++;
                 delta = 500;
             }
-            setTimeout(function() {
+            setTimeout(function () {
                 that.tick();
             }, delta);
         };
-        window.onload = function() {
+        window.onload = function () {
             let elements = document.getElementsByClassName('typewrite');
-            for (let i=0; i<elements.length; i++) {
+            for (let i = 0; i < elements.length; i++) {
                 let toRotate = elements[i].getAttribute('data-type');
                 let period = elements[i].getAttribute('data-period');
                 if (toRotate) {
@@ -112,11 +115,25 @@ export const Subpage = ({id, data, logged, project, author, hide = f => f, getpo
             css.innerHTML = ".typewrite > .wrap { border-right: 0.08em solid #fff}";
             document.body.appendChild(css);
         };
+    }
+
+
+    const getSmallerArray = (array) => {
+        let size = 1;
+        if(window.innerWidth >= 1200){
+            size = 4;
+        }else if(window.innerWidth >= 999){
+            size = 3;
+        }else if(window.innerWidth >= 768){
+            size = 2;
+        }
+        return array.filter(item => item.done === 0).slice(0, size);
     };
 
     useEffect(() => {
         if(data !== null){
             setSubpage(data);
+            console.log(data);
         }
         typing();
     },[data]);
@@ -197,6 +214,7 @@ export const Subpage = ({id, data, logged, project, author, hide = f => f, getpo
                                             arr.map(post => <ProjectOutlook post={post} getPost={id => getpost(id)}/>)
                                         }
                                     </Slider>
+
                                     <div className={"col-12 text-center my-5 divider"}>
                                         <svg xmlns="http://www.w3.org/2000/svg" width="157" height="12" viewBox="0 0 157 12">
                                             <g id="spacer" transform="translate(-563 -2718)">
