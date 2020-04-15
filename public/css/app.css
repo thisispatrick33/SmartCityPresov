@@ -10724,78 +10724,6 @@ body a:hover {
   color: #191919;
 }
 
-body .project-details-frame {
-  position: fixed;
-  z-index: 1500;
-  width: 100vw;
-  top: 0;
-  left: 0;
-  height: 100vh;
-  overflow-y: scroll;
-  background: rgba(0, 0, 0, 0.85);
-}
-
-body .project-details-frame .project-content {
-  border-radius: 10px;
-  background: #191919;
-  margin-bottom: 10vh;
-}
-
-body .project-details-frame .project-content .content {
-  background: white;
-}
-
-body .project-details-frame .project-content .content .close-button {
-  width: 30px;
-  height: 30px;
-}
-
-body .project-details-frame .project-content .content .close-button:not(:hover) {
-  fill: #191919;
-  transition: 0.2s;
-}
-
-body .project-details-frame .project-content .content .close-button:hover {
-  fill: #D61920;
-  cursor: pointer;
-  transition: 0.2s;
-}
-
-body .project-details-frame .project-content .content .title span {
-  color: #D61920;
-}
-
-body .project-details-frame .project-content .content .description {
-  color: #191919;
-  font-size: 1.1em;
-}
-
-body .project-details-frame .project-content .content .post-data {
-  font-family: Gilroy-SemiBold, serif;
-  font-size: 1em;
-}
-
-body .project-details-frame .project-content .content .price {
-  font-family: Gilroy-Regular;
-}
-
-body .project-details-frame .project-content .content .price span {
-  font-family: Gilroy-SemiBold;
-}
-
-body .project-details-frame .project-content .gallery {
-  background: #191919;
-  border-radius: 10px 0 0 10px;
-}
-
-body .project-details-frame .project-content .gallery .cover-image {
-  border: 4px solid #D61920;
-}
-
-body .project-details-frame .project-content .gallery .title {
-  color: #fff;
-}
-
 body footer {
   width: 100vw;
   text-transform: uppercase;
@@ -11032,50 +10960,6 @@ footer {
 }
 
 .news-outlook-frame .news-outlook .news-content .show-more:hover {
-  cursor: pointer;
-}
-
-.project-outlook-frame .project-outlook {
-  background: #FFFFFF;
-  box-shadow: 0 3px 6px #00000029;
-  border-radius: 10px;
-}
-
-.project-outlook-frame .project-outlook:hover {
-  cursor: pointer;
-}
-
-.project-outlook-frame .project-outlook .project-cover-image {
-  border-bottom: 8px solid #191919;
-  border-radius: 10px 10px 0 0;
-}
-
-.project-outlook-frame .project-outlook .project-cover-image img {
-  border-radius: 10px 10px 0 0;
-}
-
-.project-outlook-frame .project-outlook .project-content {
-  border-radius: 0 0 10px 10px;
-  border-top: 8px solid #D61920;
-}
-
-.project-outlook-frame .project-outlook .project-content .title {
-  font-family: SF-SemiBold;
-  font-size: 1.1rem;
-  color: #191919;
-  text-transform: uppercase;
-}
-
-.project-outlook-frame .project-outlook .project-content .description {
-  font-family: SF-Regular;
-  font-size: 0.88rem;
-}
-
-.project-outlook-frame .project-outlook .project-content .description .show-more {
-  color: #D61920;
-}
-
-.project-outlook-frame .project-outlook .project-content .description .show-more:hover {
   cursor: pointer;
 }
 
@@ -11422,5 +11306,133 @@ nav .line {
   height: 8px;
   background: #fff;
   border-radius: 100%;
+}
+
+.project-outlook-frame .project-outlook {
+  background: #FFFFFF;
+  box-shadow: 0 3px 6px #00000029;
+  border-radius: 10px;
+}
+
+.project-outlook-frame .project-outlook:hover {
+  cursor: pointer;
+}
+
+.project-outlook-frame .project-outlook .project-cover-image {
+  border-bottom: 8px solid #191919;
+  border-radius: 10px 10px 0 0;
+}
+
+.project-outlook-frame .project-outlook .project-cover-image img {
+  border-radius: 10px 10px 0 0;
+}
+
+.project-outlook-frame .project-outlook .project-content {
+  border-radius: 0 0 10px 10px;
+  border-top: 8px solid #D61920;
+}
+
+.project-outlook-frame .project-outlook .project-content .title {
+  font-family: SF-SemiBold;
+  font-size: 1.1rem;
+  color: #191919;
+  text-transform: uppercase;
+}
+
+.project-outlook-frame .project-outlook .project-content .description {
+  font-family: SF-Regular;
+  font-size: 0.88rem;
+}
+
+.project-outlook-frame .project-outlook .project-content .description .show-more {
+  color: #D61920;
+}
+
+.project-outlook-frame .project-outlook .project-content .description .show-more:hover {
+  cursor: pointer;
+}
+
+.project-details-frame {
+  position: fixed;
+  z-index: 2500;
+  width: 100vw;
+  top: 0;
+  left: 0;
+  height: 100vh;
+  overflow-y: scroll;
+  background: rgba(0, 0, 0, 0.85);
+}
+
+.project-details-frame .project-content {
+  font-family: SF-SemiBold, serif;
+  border-radius: 10px;
+  background: #191919;
+  margin-bottom: 10vh;
+}
+
+.project-details-frame .project-content .content {
+  min-height: 100% !important;
+  background: white;
+  border-radius: 0 10px 10px 0;
+}
+
+.project-details-frame .project-content .content .close-button {
+  width: 30px;
+  height: 30px;
+}
+
+.project-details-frame .project-content .content .close-button:not(:hover) {
+  fill: #191919;
+  transition: 0.2s;
+}
+
+.project-details-frame .project-content .content .close-button:hover {
+  fill: #D61920;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.project-details-frame .project-content .content .title {
+  text-transform: uppercase;
+  font-family: SF-SemiBold, serif;
+}
+
+.project-details-frame .project-content .content .title span {
+  color: #D61920;
+}
+
+.project-details-frame .project-content .content .description {
+  font-family: SF-Regular, serif;
+  color: #191919;
+  font-size: 1.1em;
+}
+
+.project-details-frame .project-content .content .post-data {
+  font-family: SF-SemiBold, serif;
+  text-transform: uppercase;
+  font-size: 1em;
+}
+
+.project-details-frame .project-content .content .price {
+  font-family: SF-Regular, serif;
+}
+
+.project-details-frame .project-content .content .price span {
+  font-family: SF-SemiBold, serif;
+}
+
+.project-details-frame .project-content .gallery {
+  background: #191919;
+  border-radius: 10px 0 0 10px;
+}
+
+.project-details-frame .project-content .gallery .cover-image {
+  border: 4px solid #D61920;
+}
+
+.project-details-frame .project-content .gallery .title {
+  font-family: SF-SemiBold, serif;
+  color: #fff;
+  text-transform: uppercase;
 }
 

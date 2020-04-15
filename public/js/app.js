@@ -76124,21 +76124,25 @@ var Project = function Project(_ref) {
       marginTop: '10vh',
       easing: 'easeInOutCirc'
     }, 1000);
+    jquery__WEBPACK_IMPORTED_MODULE_1___default()('.gallery').css("maxHeight", jquery__WEBPACK_IMPORTED_MODULE_1___default()('.project-content .content').height());
   }, []);
   return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "project-details-frame row p-0 justify-content-center",
+    className: "project-details-frame row mx-0 p-0 m-0 justify-content-center",
     style: {
       display: "none"
     }
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "project-content col-xl-9 col-lg-9 col-md-10 col-sm-11 col-11 row shadow p-0 justify-content-start align-items-start",
+    className: "project-content col-xl-9 col-lg-9 col-md-10 col-sm-11 col-11 row mx-0 shadow p-0 justify-content-start align-items-start",
     style: {
       marginTop: '100vh',
       marginBottom: '10vh',
       minHeight: '80%'
     }
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "gallery col-xl-2 col-lg-2 col-12 order-xl-1 order-lg-1 order-2 row p-0 "
+    className: "gallery m-0 col-xl-2 col-lg-2 col-12 order-xl-1 order-lg-1 order-2 row mx-0 p-0 ",
+    style: {
+      overflowY: 'scroll'
+    }
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "col-12 p-0 mt-5 title"
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", {
@@ -76149,7 +76153,7 @@ var Project = function Project(_ref) {
       return image.path.substr(image.path.indexOf('img'));
     })
   })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "col-12 row p-3"
+    className: "col-12 row mx-0 p-3"
   }, data.images.map(function (_ref2) {
     var id = _ref2.id,
         title = _ref2.title,
@@ -76166,12 +76170,14 @@ var Project = function Project(_ref) {
       className: "col-12 shadow p-2"
     }));
   }))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "content shadow col-xl-10 col-lg-10 col-12 order-xl-2 order-lg-2 order-1 row justify-content-end p-0 align-items-start"
+    className: "content m-0 shadow col-xl-10 col-lg-10 col-12 order-xl-2 order-lg-2 order-1 row mx-0 justify-content-end p-0 align-items-start"
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "col-12 row p-0"
+    className: "col-12 row mx-0 p-0"
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "col-12 row mt-5 px-5 title p-0"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+    className: "col-12 row mx-0 mt-5 px-5 title p-0"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h2", {
+    className: "col-11 mb-3"
+  }, data.title), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
     onClick: function onClick() {
       return close();
     },
@@ -76186,19 +76192,15 @@ var Project = function Project(_ref) {
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("polygon", {
     points: "357 35.7 321.3 0 178.5 142.8 35.7 0 0 35.7 142.8 178.5 0 321.3 35.7 357 178.5 214.2 321.3 357 357 321.3 214.2 178.5"
   })))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "col-12 row price mt-4 py-2 px-5"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
-    className: "col-11 mb-3"
-  }, data.title)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "col-12 row description mt-4 py-2 px-5"
+    className: "col-12 row mx-0 description mt-4 py-2 px-5"
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
     className: "col-11 mb-3"
   }, data.description)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "col-12 row price mt-4 py-2 px-5"
+    className: "col-12 row mx-0 price mt-4 py-2 px-5"
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
     className: "col-11 mb-3"
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null, "Cena projektu : "), data.price, "\u20AC")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "col-11 row post-data my-4 py-2 px-5"
+    className: "col-11 row mx-0 post-data my-4 py-2 px-5"
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
     className: "col-12 mb-0 text-right"
   }, String(written.getDay()) + "/" + (written.getMonth() + 1) + "/" + written.getFullYear()), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
@@ -76397,22 +76399,6 @@ var Subpage = function Subpage(_ref) {
       css.innerHTML = ".typewrite > .wrap { border-right: 0.08em solid #fff}";
       document.body.appendChild(css);
     };
-  };
-
-  var getSmallerArray = function getSmallerArray(array) {
-    var size = 1;
-
-    if (window.innerWidth >= 1200) {
-      size = 4;
-    } else if (window.innerWidth >= 999) {
-      size = 3;
-    } else if (window.innerWidth >= 768) {
-      size = 2;
-    }
-
-    return array.filter(function (item) {
-      return item.done === 0;
-    }).slice(0, size);
   };
 
   Object(react__WEBPACK_IMPORTED_MODULE_0__["useEffect"])(function () {
