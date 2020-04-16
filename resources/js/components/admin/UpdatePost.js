@@ -41,23 +41,23 @@ export const UpdatePost = ({id, logged, changeSubpage, post = f => f, getpost = 
                 </div>
                 <input name={`images[]`} className={"col-10 offset-1"} type={`file`} onChange={e => {setUpdatedData({...updatedData,images : e.target.files})}} multiple/>
 
-                <h1>Subpage Id</h1>
-                <h1>Mobilita</h1>
+                <h1 className={"col-10 offset-1"}>Subpage Id</h1>
+                <p className={"col-3 d-inline offset-1"}>Mobilita</p>
                 <input type="radio" name="subpage_id" value="1" checked={updatedData.subpage_id === 1} onClick={e => {setUpdatedData({...updatedData,subpage_id :1})}}/>
-                <h1>Zivotne prostredie</h1>
+                <p className={"col-3 d-inline offset-1"}>Zivotne prostredie</p>
                 <input type="radio" name="subpage_id" value="2" checked={updatedData.subpage_id === 2} onClick={e => {setUpdatedData({...updatedData,subpage_id : 2})}}/>
-                <h1>Digitalne mesto</h1>
+                <p className={"col-3 d-inline offset-1"}>Digitalne mesto</p>
                 <input type="radio" name="subpage_id" value="3" checked={updatedData.subpage_id === 3} onClick={e => {setUpdatedData({...updatedData,subpage_id : 3})}}/>
-                <h1>Energia</h1>
+                <p className={"col-3 d-inline offset-1"}>Energia</p>
                 <input type="radio" name="subpage_id" value="4" checked={updatedData.subpage_id === 4} onClick={e => {setUpdatedData({...updatedData,subpage_id : 4})}}/>
 
-                <h1>Stav</h1>
-                <h1>Pripravujeme</h1>
+                <h1 className={"col-10 offset-1"}>Stav</h1>
+                <p className={"col-3 d-inline offset-1"}>Pripravujeme</p>
                 <input type="radio" name="done" value="0" checked={updatedData.done === 0} onClick={e => {setUpdatedData({...updatedData,done : 0})}}/>
-                <h1>Ukoncene</h1>
+                <p className={"col-3 d-inline offset-1"}>Ukoncene</p>
                 <input type="radio" name="done" value="1" checked={updatedData.done === 1} onClick={e => {setUpdatedData({...updatedData,done : 1})}}/>
 
-                <input type="button" value={"potvrdiť"} onClick={() => handleSubmit()}/>
+                <input type="button" className={"offset-1 d-block"} value={"potvrdiť"} onClick={() => handleSubmit()}/>
             </form>
 
         );

@@ -75363,7 +75363,11 @@ var CreatePost = function CreatePost(_ref) {
         }));
       },
       multiple: true
-    }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, "Subpage Id"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, "Mobilita"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+    }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", {
+      className: "col-10 offset-1"
+    }, "Subpage Id"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
+      className: "col-3 d-inline offset-1"
+    }, "Mobilita"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
       type: "radio",
       name: "subpage_id",
       value: "1",
@@ -75372,7 +75376,9 @@ var CreatePost = function CreatePost(_ref) {
           subpage_id: 1
         }));
       }
-    }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, "Zivotne prostredie"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+    }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
+      className: "col-3 d-inline offset-1"
+    }, "Zivotne prostredie"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
       type: "radio",
       name: "subpage_id",
       value: "2",
@@ -75381,7 +75387,9 @@ var CreatePost = function CreatePost(_ref) {
           subpage_id: 2
         }));
       }
-    }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, "Digitalne mesto"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+    }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
+      className: "col-3 d-inline offset-1"
+    }, "Digitalne mesto"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
       type: "radio",
       name: "subpage_id",
       value: "3",
@@ -75390,7 +75398,9 @@ var CreatePost = function CreatePost(_ref) {
           subpage_id: 3
         }));
       }
-    }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, "Energia"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+    }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
+      className: "col-3 d-inline offset-1"
+    }, "Energia"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
       type: "radio",
       name: "subpage_id",
       value: "4",
@@ -75399,7 +75409,11 @@ var CreatePost = function CreatePost(_ref) {
           subpage_id: 4
         }));
       }
-    }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, "Stav"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, "Pripravujeme"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+    }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", {
+      className: "col-10 offset-1"
+    }, "Stav"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
+      className: "col-3 d-inline offset-1"
+    }, "Pripravujeme"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
       type: "radio",
       name: "done",
       value: "0",
@@ -75408,7 +75422,9 @@ var CreatePost = function CreatePost(_ref) {
           done: 0
         }));
       }
-    }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, "Ukoncene"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+    }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
+      className: "col-3 d-inline offset-1"
+    }, "Ukoncene"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
       type: "radio",
       name: "done",
       value: "1",
@@ -75419,6 +75435,7 @@ var CreatePost = function CreatePost(_ref) {
       }
     }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
       type: "button",
+      className: "offset-1 d-block",
       value: "potvrdiť",
       onClick: function onClick() {
         return handleSubmit();
@@ -75650,7 +75667,11 @@ var UpdatePost = function UpdatePost(_ref) {
         }));
       },
       multiple: true
-    }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, "Subpage Id"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, "Mobilita"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+    }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", {
+      className: "col-10 offset-1"
+    }, "Subpage Id"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
+      className: "col-3 d-inline offset-1"
+    }, "Mobilita"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
       type: "radio",
       name: "subpage_id",
       value: "1",
@@ -75660,7 +75681,9 @@ var UpdatePost = function UpdatePost(_ref) {
           subpage_id: 1
         }));
       }
-    }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, "Zivotne prostredie"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+    }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
+      className: "col-3 d-inline offset-1"
+    }, "Zivotne prostredie"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
       type: "radio",
       name: "subpage_id",
       value: "2",
@@ -75670,7 +75693,9 @@ var UpdatePost = function UpdatePost(_ref) {
           subpage_id: 2
         }));
       }
-    }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, "Digitalne mesto"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+    }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
+      className: "col-3 d-inline offset-1"
+    }, "Digitalne mesto"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
       type: "radio",
       name: "subpage_id",
       value: "3",
@@ -75680,7 +75705,9 @@ var UpdatePost = function UpdatePost(_ref) {
           subpage_id: 3
         }));
       }
-    }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, "Energia"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+    }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
+      className: "col-3 d-inline offset-1"
+    }, "Energia"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
       type: "radio",
       name: "subpage_id",
       value: "4",
@@ -75690,7 +75717,11 @@ var UpdatePost = function UpdatePost(_ref) {
           subpage_id: 4
         }));
       }
-    }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, "Stav"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, "Pripravujeme"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+    }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", {
+      className: "col-10 offset-1"
+    }, "Stav"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
+      className: "col-3 d-inline offset-1"
+    }, "Pripravujeme"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
       type: "radio",
       name: "done",
       value: "0",
@@ -75700,7 +75731,9 @@ var UpdatePost = function UpdatePost(_ref) {
           done: 0
         }));
       }
-    }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, "Ukoncene"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+    }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
+      className: "col-3 d-inline offset-1"
+    }, "Ukoncene"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
       type: "radio",
       name: "done",
       value: "1",
@@ -75712,6 +75745,7 @@ var UpdatePost = function UpdatePost(_ref) {
       }
     }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
       type: "button",
+      className: "offset-1 d-block",
       value: "potvrdiť",
       onClick: function onClick() {
         return handleSubmit();
