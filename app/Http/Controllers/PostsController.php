@@ -29,7 +29,6 @@ class PostsController extends Controller
             'price' => 'required|numeric',
             'user_id' => 'required|numeric',
             'subpage_id' => 'required|numeric',
-            'images' => 'required',
             'author' => 'required|string',
             'done' => 'required|boolean',
         ]);
@@ -100,8 +99,6 @@ class PostsController extends Controller
             'description' => 'required|string',
             'price' => 'required|numeric',
             'subpage_id' => 'sometimes|numeric',
-            'images' => 'required',
-            'updated_images' => 'sometimes',
             'author' => 'required|string',
             'done' => 'required|boolean',
         ]);
