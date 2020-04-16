@@ -76439,6 +76439,7 @@ var Subpage = function Subpage(_ref) {
     }
 
     typing();
+    closePost();
   }, [data]);
 
   if (subpage === null || subpage === undefined || !subpage.title) {

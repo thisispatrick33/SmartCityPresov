@@ -124,6 +124,7 @@ export const Subpage = ({data, project, getpost = f => f, closePost}) => {
             console.log(data);
         }
         typing();
+        closePost();
     },[data]);
 
     if(subpage === null || subpage === undefined || !subpage.title){
