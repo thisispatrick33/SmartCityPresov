@@ -70770,7 +70770,6 @@ var App = function App() {
   };
 
   var _createPost = function _createPost(creationData) {
-    console.log(creationData);
     config_multipart_form_data.headers['Authorization'] = 'Bearer ' + authState.user.auth_token;
     var formData = new FormData();
     formData.append("title", creationData.title);
@@ -70922,8 +70921,6 @@ var App = function App() {
     changeSubpage: subpageFetchData
   }), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_subpage_Subpage__WEBPACK_IMPORTED_MODULE_6__["Subpage"], {
     path: ":id",
-    hide: _deletePost,
-    logged: authState.isLoggedIn ? authState.user : false,
     data: currentSubpage,
     getpost: getPost,
     project: project,
@@ -75294,20 +75291,24 @@ var CreatePost = function CreatePost(_ref) {
     description: null,
     price: null,
     author: null,
-    subpage_id: null,
-    done: null
+    subpage_id: 1,
+    done: 0
   }),
       _useState2 = _slicedToArray(_useState, 2),
       creationData = _useState2[0],
       setCreationData = _useState2[1];
 
-  var handleSubmit = function handleSubmit() {
+  var handleSubmit = function handleSubmit(e) {
+    e.preventDefault();
     post(creationData);
   };
 
   if (logged.id !== undefined) {
     return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("form", {
-      encType: "multipart/form-data"
+      encType: "multipart/form-data",
+      onSubmit: function onSubmit(e) {
+        return handleSubmit(e);
+      }
     }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
       name: "title",
       className: "col-10 offset-1",
@@ -75371,6 +75372,7 @@ var CreatePost = function CreatePost(_ref) {
       type: "radio",
       name: "subpage_id",
       value: "1",
+      checked: creationData.subpage_id === 1,
       onClick: function onClick(e) {
         setCreationData(_objectSpread({}, creationData, {
           subpage_id: 1
@@ -75382,6 +75384,7 @@ var CreatePost = function CreatePost(_ref) {
       type: "radio",
       name: "subpage_id",
       value: "2",
+      checked: creationData.subpage_id === 2,
       onClick: function onClick(e) {
         setCreationData(_objectSpread({}, creationData, {
           subpage_id: 2
@@ -75393,6 +75396,7 @@ var CreatePost = function CreatePost(_ref) {
       type: "radio",
       name: "subpage_id",
       value: "3",
+      checked: creationData.subpage_id === 3,
       onClick: function onClick(e) {
         setCreationData(_objectSpread({}, creationData, {
           subpage_id: 3
@@ -75404,6 +75408,7 @@ var CreatePost = function CreatePost(_ref) {
       type: "radio",
       name: "subpage_id",
       value: "4",
+      checked: creationData.subpage_id === 4,
       onClick: function onClick(e) {
         setCreationData(_objectSpread({}, creationData, {
           subpage_id: 4
@@ -75417,6 +75422,7 @@ var CreatePost = function CreatePost(_ref) {
       type: "radio",
       name: "done",
       value: "0",
+      checked: creationData.done === 0,
       onClick: function onClick(e) {
         setCreationData(_objectSpread({}, creationData, {
           done: 0
@@ -75428,18 +75434,16 @@ var CreatePost = function CreatePost(_ref) {
       type: "radio",
       name: "done",
       value: "1",
+      checked: creationData.done === 1,
       onClick: function onClick(e) {
         setCreationData(_objectSpread({}, creationData, {
           done: 1
         }));
       }
     }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
-      type: "button",
+      type: "submit",
       className: "offset-1 d-block",
-      value: "potvrdiť",
-      onClick: function onClick() {
-        return handleSubmit();
-      }
+      value: "potvrdiť"
     }));
   } else {
     return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, "Unauthorized"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
@@ -75576,7 +75580,8 @@ var UpdatePost = function UpdatePost(_ref) {
     }
   }, [project]);
 
-  var handleSubmit = function handleSubmit() {
+  var handleSubmit = function handleSubmit(e) {
+    e.preventDefault();
     post(_objectSpread({}, updatedData, {
       updated_images: images.map(function (_ref2) {
         var id = _ref2.id;
@@ -75593,7 +75598,10 @@ var UpdatePost = function UpdatePost(_ref) {
 
   if (logged.id !== undefined) {
     return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("form", {
-      encType: "multipart/form-data"
+      encType: "multipart/form-data",
+      onSubmit: function onSubmit(e) {
+        return handleSubmit(e);
+      }
     }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
       name: "title",
       className: "col-10 offset-1",
@@ -75744,12 +75752,9 @@ var UpdatePost = function UpdatePost(_ref) {
         }));
       }
     }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
-      type: "button",
+      type: "submit",
       className: "offset-1 d-block",
-      value: "potvrdiť",
-      onClick: function onClick() {
-        return handleSubmit();
-      }
+      value: "potvrdiť"
     }));
   } else {
     return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, "Unauthorized"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
@@ -76291,15 +76296,8 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
 
 var Subpage = function Subpage(_ref) {
-  var id = _ref.id,
-      data = _ref.data,
-      logged = _ref.logged,
+  var data = _ref.data,
       project = _ref.project,
-      author = _ref.author,
-      _ref$hide = _ref.hide,
-      hide = _ref$hide === void 0 ? function (f) {
-    return f;
-  } : _ref$hide,
       _ref$getpost = _ref.getpost,
       getpost = _ref$getpost === void 0 ? function (f) {
     return f;
@@ -77174,9 +77172,8 @@ var Subpage = function Subpage(_ref) {
       transform: "translate(604 2730) rotate(180)",
       fill: "#d3d2d2"
     })))));
-  }))), project !== null && author !== null ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Project__WEBPACK_IMPORTED_MODULE_4__["Project"], {
+  }))), project !== null ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Project__WEBPACK_IMPORTED_MODULE_4__["Project"], {
     data: project,
-    user: author,
     close: close
   }) : null);
 };

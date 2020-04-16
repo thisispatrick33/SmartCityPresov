@@ -9,7 +9,7 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 
 
-export const Subpage = ({id, data, logged, project, author, hide = f => f, getpost = f => f, closePost}) => {
+export const Subpage = ({data, project, getpost = f => f, closePost}) => {
     const descTitles = {
         "mobilita" : '["mobilita", "pohyb", "doprava", "transport"]',
         "zivotne_prostredie" : '["životné prostredie", "ekológia", "ovzdušie", "počasie"]',
@@ -115,7 +115,7 @@ export const Subpage = ({id, data, logged, project, author, hide = f => f, getpo
             css.innerHTML = ".typewrite > .wrap { border-right: 0.08em solid #fff}";
             document.body.appendChild(css);
         };
-    }
+    };
 
 
     useEffect(() => {
@@ -227,8 +227,8 @@ export const Subpage = ({id, data, logged, project, author, hide = f => f, getpo
                 </div>
             </div>
             {
-                (project !== null && author !== null) ? (
-                    <Project data={project} user={author} close={close}/>) : null
+                (project !== null) ? (
+                    <Project data={project} close={close}/>) : null
             }
         </div>
     );

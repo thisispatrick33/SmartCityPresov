@@ -119,7 +119,6 @@ const App = () => {
     };
 
     const _createPost = ( creationData ) => {
-        console.log(creationData);
         config_multipart_form_data.headers['Authorization'] =  'Bearer '+authState.user.auth_token;
         let formData = new FormData();
         formData.append(`title`, creationData.title);
@@ -251,7 +250,7 @@ const App = () => {
                 <Router>
                     <Main path={`/`} auth={authState} logout={_logoutUser} changeSubpage={subpageFetchData} subpages={subpages}>
                         <Home path={`/`} _homeNewestPosts={homeNewestPosts} getpost={getPost} project={project} closePost={closePost} changeSubpage={subpageFetchData}/>
-                        <Subpage path={`:id`} hide={_deletePost} logged={authState.isLoggedIn ? authState.user : false} data={currentSubpage} getpost={getPost} project={project} closePost={closePost} />
+                        <Subpage path={`:id`} data={currentSubpage} getpost={getPost} project={project} closePost={closePost} />
                         <Post path={"/posts/:id"} logged={authState.user} getpost={getPost} project={project} post={_updatePost} hide={_deletePost}/>
                         <Post path={"/post-create"} logged={authState.user} getpost={getPost} project={project} post={_createPost}/>
                         <Login path={"/login"} login={_loginUser} logout={_logoutUser}/>
