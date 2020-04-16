@@ -169,7 +169,7 @@ export const Subpage = ({id, data, logged, project, author, hide = f => f, getpo
                 </div>
 
                     {
-                        chunk(subpage.posts.slice(0, 4), 4).map(arr => {
+                        chunk(subpage.posts.filter(item => item.done === 0).slice(0, 4), 4).map(arr => {
                             return <Slider {...settings1} className="col-xl-8 col-lg-8 col-md-8 col-7 row my-5 mx-xl-0 mx-lg-0 mr-0 ml-2 p-0 justify-content-start">
                                 {
                                     arr.map(post => <NewsOutlook post={post} getPost={id =>getpost(id)} />)
@@ -195,7 +195,7 @@ export const Subpage = ({id, data, logged, project, author, hide = f => f, getpo
             <div className="row col-12 my-xl-5 my-lg-5 mb-3 mx-0 p-0 justify-content-center">
                 <div className="row col-xl-12 col-lg-12 col-md-12 col-sm-11 col-11 m-0 p-0 justify-content-center">
                     {
-                        chunk(subpage.posts, 4).map(arr => {
+                        chunk(subpage.posts.filter(item => item.done === 1), 4).map(arr => {
                             return <>
                                     <Slider {...settings2} className="row col-xl-11 col-lg-11 col-md-11 col-10 m-0 p-0 justify-content-center">
                                         {

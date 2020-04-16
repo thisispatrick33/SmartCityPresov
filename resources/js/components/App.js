@@ -78,7 +78,7 @@ const App = () => {
         let formData = new FormData();
         formData.append(`email`, email);
         formData.append(`password`, password);
-        _postData(`/api/auth/login/`, formData, config_aplication_json)
+        _postData(`/api/auth/login`, formData, config_aplication_json)
             .then(({data}) => {
                 if (data.success) {
                     alert(`Prihlásenie prebehlo úspešne !`);

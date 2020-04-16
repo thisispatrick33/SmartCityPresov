@@ -70729,7 +70729,7 @@ var App = function App() {
     formData.append("email", email);
     formData.append("password", password);
 
-    _postData("/api/auth/login/", formData, config_aplication_json).then(function (_ref4) {
+    _postData("/api/auth/login", formData, config_aplication_json).then(function (_ref4) {
       var data = _ref4.data;
 
       if (data.success) {
@@ -76106,7 +76106,6 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 var Project = function Project(_ref) {
   var data = _ref.data,
-      user = _ref.user,
       _ref$close = _ref.close,
       close = _ref$close === void 0 ? function (f) {
     return f;
@@ -76203,7 +76202,7 @@ var Project = function Project(_ref) {
     className: "col-11 row mx-0 post-data my-4 py-2 px-5"
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
     className: "col-12 mb-0 text-right"
-  }, String(written.getDay()) + "/" + (written.getMonth() + 1) + "/" + written.getFullYear()), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
+  }, String(written.getDate()) + "/" + (written.getMonth() + 1) + "/" + written.getFullYear()), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
     className: "col-12 mb-0 text-right"
   }, data.author))))));
 };
@@ -77019,7 +77018,9 @@ var Subpage = function Subpage(_ref) {
     r: "6",
     transform: "translate(7.5 1931.5) rotate(90)",
     fill: "#d3d2d2"
-  })))), chunk(subpage.posts.slice(0, 4), 4).map(function (arr) {
+  })))), chunk(subpage.posts.filter(function (item) {
+    return item.done === 0;
+  }).slice(0, 4), 4).map(function (arr) {
     return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_slick__WEBPACK_IMPORTED_MODULE_6___default.a, _extends({}, settings1, {
       className: "col-xl-8 col-lg-8 col-md-8 col-7 row my-5 mx-xl-0 mx-lg-0 mr-0 ml-2 p-0 justify-content-start"
     }), arr.map(function (post) {
@@ -77044,7 +77045,9 @@ var Subpage = function Subpage(_ref) {
     className: "row col-12 my-xl-5 my-lg-5 mb-3 mx-0 p-0 justify-content-center"
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "row col-xl-12 col-lg-12 col-md-12 col-sm-11 col-11 m-0 p-0 justify-content-center"
-  }, chunk(subpage.posts, 4).map(function (arr) {
+  }, chunk(subpage.posts.filter(function (item) {
+    return item.done === 1;
+  }), 4).map(function (arr) {
     return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_slick__WEBPACK_IMPORTED_MODULE_6___default.a, _extends({}, settings2, {
       className: "row col-xl-11 col-lg-11 col-md-11 col-10 m-0 p-0 justify-content-center"
     }), arr.map(function (post) {
@@ -77365,6 +77368,7 @@ var ProjectOutlook = function ProjectOutlook(_ref) {
       getPost = _ref$getPost === void 0 ? function (f) {
     return f;
   } : _ref$getPost;
+  console.log(post);
   return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: 'project-outlook-frame | row | mx-0 my-2 p-3 | justify-content-center'
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
@@ -77372,7 +77376,7 @@ var ProjectOutlook = function ProjectOutlook(_ref) {
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: 'project-cover-image | col-12 | m-0 p-0 | justify-content-center'
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
-    src: "./images/project-cover-image.jpg",
+    src: post.image.substr(post.image.indexOf('img')),
     alt: "project-cover-image",
     className: 'col-12 | p-0'
   })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
