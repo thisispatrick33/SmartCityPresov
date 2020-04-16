@@ -141,13 +141,13 @@ class PostsController extends Controller
                 foreach($request->images as $image_file){
                     $image_name = time().Str::random(5).".".$image_file->getClientOriginalExtension();
                     $image_file->move(public_path('img/'),$image_name);
-
+                    
                     $image = new Image;
                     $image->title = $image_name;
                     $image->alt = $image_file->getClientOriginalName();
                     $image->path = public_path('img/'.$image_name);
                     $image->save();
-
+                    
                     array_push($post_images_ids,$image->id);
                 }
             }
@@ -156,8 +156,13 @@ class PostsController extends Controller
                 $post->images()->detach();
                 $post->images()->attach($post_images_ids);
                 $post_cover = Post::with('images')->find($post->id);
-                $post_cover->image = $post_cover->images[0]->path;
-                if($post_cover->save()){
+                if(is_array($post_cover->images)){
+                    $post_cover->image = $post_cover->images[0]->path;
+                    if($post_cover->save()){
+                        $success = true;
+                    }
+                }
+                else{
                     $success = true;
                 }
             }
