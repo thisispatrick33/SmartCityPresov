@@ -10,7 +10,6 @@ export const UpdatePost = ({id, logged, changeSubpage, post = f => f, getpost = 
             getpost(id);
         }
         else {
-            console.log(project);
             setUpdatedData(project);
             setImages(project.images);
         }

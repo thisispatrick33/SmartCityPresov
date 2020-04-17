@@ -8,7 +8,7 @@ import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 
-export const Subpage = ({id, data, logged, project, author, hide = f => f, getpost = f => f, closePost}) => {
+export const Subpage = ({data, project, getpost = f => f, closePost}) => {
 
     const settings = {
         infinite: false,
@@ -65,8 +65,6 @@ export const Subpage = ({id, data, logged, project, author, hide = f => f, getpo
     useEffect(() => {
         if(data !== null){
             setSubpage(data);
-            typing();
-            console.log(data);
         }
         closePost();
     },[window.location.pathname, data]);
@@ -85,7 +83,7 @@ export const Subpage = ({id, data, logged, project, author, hide = f => f, getpo
                     <div className={`row col-12 | justify-content-center | mx-0 p-0`}>
                         <div className={`row col-11 | m-0`}>
                             <h1 className={`main-title | col-auto | mb-0 p-0`}>{subpage.title}.</h1>
-                            <h3 className={`sub-title | col-auto | p-0`}>smartcity prešov.</h3>
+                            <h3 className={`sub-title | col-12 | p-0`}>smartcity prešov.</h3>
                         </div>
                     </div>
                     <div className={`description subtitle-2 | row col-xl-10 col-lg-10 col-md-11 col-12 | align-items-end | justify-content-center | mx-0 py-5 | d-flex`}>

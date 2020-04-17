@@ -4,7 +4,6 @@ import { Router, navigate } from "@reach/router"
 import { Home }  from "./Home";
 import { Main } from "./Main";
 import { Subpage }  from "./subpage/Subpage";
-import { Post } from "./news/Post";
 import { Login } from "./admin/Login";
 import axios from "axios";
 import {CreatePost} from "./admin/CreatePost";
@@ -15,6 +14,7 @@ import {AdministrationPage} from "./admin/AdministrationPage";
 const App = () => {
 
     const [authState, setAuthState] = useState({isLoggedIn: false, user: {}});
+    const [currentSubpage, setCurrentSubpage] = useState(null);
 
     const [subpageData, setSubpageData] = useState(JSON.parse(localStorage.getItem("subpageData"))==null ? null : JSON.parse(localStorage.getItem("subpageData")).data);
     const [version, setVersion] = useState( JSON.parse(localStorage.getItem("subpageData"))==null ? null : JSON.parse(localStorage.getItem("subpageData")).version);
@@ -129,7 +129,6 @@ const App = () => {
         }
         _postData(`/api/post`, formData, config_multipart_form_data)
             .then(response => {
-                console.log(response);
                 if(response.status==200){
                     alert(`Úspešne si vytvoril článok.`);
                 }
@@ -159,7 +158,6 @@ const App = () => {
 
         _postData(`/api/post/edit`, formData, config_multipart_form_data)
             .then(response => {
-                console.log(response);
                 return response;
             })
             .then(( {data} ) => {
@@ -174,7 +172,6 @@ const App = () => {
 
     const _deletePost = (id) => {
         config_aplication_json.headers['Authorization'] =  'Bearer '+authState.user.auth_token;
-        console.log(config_aplication_json);
         _putData(`/api/post/delete`, {id : id}, config_aplication_json).then(response => {
                 alert(response.status==200 ? `Článok sa úspešne vymazal` : `Článok sa nepodarilo vymazať!`);
             });
@@ -195,10 +192,12 @@ const App = () => {
                             data: {...subpageData, [window.location.pathname]: res.data.subpage},
                             version : {...version, [window.location.pathname]: versionResponse.data[window.location.pathname]}
                         });
+                        setCurrentSubpage(res.data.subpage);
                     });
             }
             else {
                 console.log("already saved");
+                setCurrentSubpage(subpageData[window.location.pathname]);
             }
         });
     };
@@ -227,9 +226,7 @@ const App = () => {
                 <Router>
                     <Main path={`/`} auth={authState} logout={_logoutUser} changeSubpage={subpageFetchData}>
                         <Home path={`/`} _homeNewestPosts={homeNewestPosts} getpost={getPost} project={project} closePost={closePost} changeSubpage={subpageFetchData}/>
-                        <Subpage path={`:id`} data={subpageData[window.location.pathname]} getpost={getPost} project={project} closePost={closePost} />
-                        <Post path={"/posts/:id"} logged={authState.user} getpost={getPost} project={project} post={_updatePost} hide={_deletePost}/>
-                        <Post path={"/post-create"} logged={authState.user} getpost={getPost} project={project} post={_createPost}/>
+                        <Subpage path={`:id`} data={currentSubpage} getpost={getPost} project={project} closePost={closePost} />
                         <Login path={"/login"} login={_loginUser} logout={_logoutUser}/>
                         <CreatePost path={"/create"} logged={authState.user} changeSubpage={subpageFetchData} post={_createPost}/>
                         <UpdatePost path={"/update/:id"} logged={authState.user} changeSubpage={subpageFetchData} post={_updatePost} getpost={getPost} project={project}/>
