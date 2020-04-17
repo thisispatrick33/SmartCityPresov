@@ -96,7 +96,7 @@ body{
 /* Handle */
 ::-webkit-scrollbar-thumb {
   background: #888;
-  border-radius: 5px;
+  border-radius: 5px 0 0 5px;
 }
 
 /* Handle on hover */
@@ -105,9 +105,10 @@ body{
 
 }
 
-@import 'fonts';
+@import '_fonts';
+@import '_animations';
 @import '_news';
-@import 'home';
-@import 'subpage';
+@import '_home';
+@import '_subpage';
 @import '_navigation';
 @import '_projects';

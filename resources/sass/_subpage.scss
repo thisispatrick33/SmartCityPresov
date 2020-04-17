@@ -1,3 +1,4 @@
+
 .sub-page{
     .intro{
         .background{
@@ -8,44 +9,23 @@
         .main-title{
             font-size : 9.68rem;
             color: $primaryColor;
-            font-family: SF-Bold, serif;
             line-height: 80%;
         }
         .sub-title{
             font-size : 5.43rem;
             color: $secondaryColor;
-            font-family: SF-Bold, serif;
         }
         .description{
-            .title, a{
-                text-transform: uppercase;
+            font-size : 1.23rem;
+            color : $backgroundColor;
+            .title{
                 letter-spacing: 2.5px;
                 font-size : 1.36rem;
-                font-family: SF-Bold, serif;
             }
-            hr{
-                border-top: 3px solid $primaryColor;
-                fill : $primaryColor;
-            }
-            font-size : 1.2375rem;
-            color : $colorOfPage;
-            font-family: SF-Light, serif;
         }
     }
-
-
-
-
-
-    height: 100%;
-    .subtitle-1{
-        background : $primaryColor;
-    }
-    .subtitle-2{
-        background : $secondaryColor;
-    }
-    .subtitle{
-        color: $colorOfPage;
+    .sub-page-sub-title{
+        color: $backgroundColor;
     }
     .partial-border{
         font-size: 1.25rem;
@@ -144,14 +124,4 @@
 
 .arrow{
     animation : scroll 0.5s alternate infinite;
-
-}
-
-@keyframes scroll {
-    from{
-        margin-bottom: 0;
-    }
-    to{
-        margin-bottom: 20px;
-    }
 }

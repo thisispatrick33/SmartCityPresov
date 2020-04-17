@@ -65,7 +65,6 @@ export const Subpage = ({id, data, logged, project, author, hide = f => f, getpo
     useEffect(() => {
         if(data !== null){
             setSubpage(data);
-            console.log(data);
         }
         closePost();
     },[data]);
@@ -78,30 +77,30 @@ export const Subpage = ({id, data, logged, project, author, hide = f => f, getpo
 
     return (
         <div className={`sub-page | container-fluid | m-0 p-0`}>
-            <div className={`position-relative intro | row col-12 | mx-0 p-0`} style={{minHeight : $(window).height()}}>
+            <div className={`intro position-relative | row col-12 | mx-0 p-0`} style={{minHeight : $(window).height()}}>
                 <div className={`background position-absolute | col-xl-4 col-lg-4 col-md-4 col-sm-2 col-1 | m-0 p-0`} style={{backgroundImage : 'url("./././././images/backgrounds/'+subpage.title_link+'.svg")'}}/>
                 <div className={`row col-xl-9 col-lg-10 col-md-12 col-12 | align-items-end | justify-content-end | m-0 p-0`}>
                     <div className={`row col-12 | justify-content-center | mx-0 p-0`}>
                         <div className={`row col-11 | m-0`}>
                             <h1 className={`main-title | col-auto | mb-0 p-0`}>{subpage.title}.</h1>
-                            <h3 className={`sub-title | col-auto | p-0`}>smartcity prešov.</h3>
+                            <h3 className={`sub-title | col-12 | p-0`}>smartcity prešov.</h3>
                         </div>
                     </div>
-                    <div className={`description subtitle-2 | row col-xl-10 col-lg-10 col-md-11 col-12 | align-items-end | justify-content-center | mx-0 py-5 | d-flex`}>
-                        <h5 className={`title | col-12 | text-center`}>
+                    <div className={`description background-secondary | row col-xl-10 col-lg-10 col-md-11 col-12 | align-items-end | justify-content-center | mx-0 py-5 | d-flex`}>
+                        <h5 className={`title text-uppercase | col-12 | text-center `}>
                             smartcity prešov oblasť {subpage.title}
                         </h5>
                         <div className={`col-10 | my-2`}><div className="col-6 ml-5"><hr/></div></div>
                         <p className={`col-xl-8 col-lg-9 col-md-9 col-sm-10 col-11 | text-center`}>{subpage.description}</p>
                     </div>
-                    <div onClick={scroll} className={`subtitle-1 | col-xl-2 col-lg-2 col-md-1 | align-items-end | justify-content-center | mx-0 p-0 py-5 | d-xl-flex d-lg-flex d-md-flex d-none`}>
+                    <div onClick={scroll} className={`background-primary | col-xl-2 col-lg-2 col-md-1 | align-items-end | justify-content-center | mx-0 p-0 py-5 | d-xl-flex d-lg-flex d-md-flex d-none`}>
                         <svg className={`arrow col-5 | p-0`} fill={`#ffffff`} enableBackground="new 0 0 64 64" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg"><path d="m32 8c-1.104 0-2 .896-2 2v39.899l-14.552-15.278c-.761-.799-2.026-.832-2.828-.069-.8.762-.831 2.027-.069 2.827l16.62 17.449c.756.756 1.76 1.172 2.829 1.172 1.068 0 2.073-.416 2.862-1.207l16.586-17.414c.762-.8.73-2.065-.069-2.827-.799-.763-2.065-.731-2.827.069l-14.552 15.342v-39.963c0-1.104-.896-2-2-2z"/></svg>
                     </div>
                 </div>
             </div>
             <div className={`row col-12 | justify-content-end | mb-xl-5 mb-lg-5 mx-0 my-0 p-0`}>
                 <div className={`row col-xl-9 col-lg-10 col-md-11 col-12 | align-items-start | justify-content-end | m-0 p-0`}>
-                    <div className={`subtitle subtitle-1 | row col-xl-7 col-lg-8 col-md-10 col-12 | mx-0 p-0 py-5`}>
+                    <div className={`sub-page-sub-title background-primary | row col-xl-7 col-lg-8 col-md-10 col-12 | mx-0 p-0 py-5`}>
                         <h3 id={`here`} className={`font-bold subpage-title | col-12 | m-0 p-0 | text-center`}>
                             aktuálne pripravujeme.
                         </h3>
@@ -131,7 +130,7 @@ export const Subpage = ({id, data, logged, project, author, hide = f => f, getpo
             </div>
             <div className={`h-15rem | row col-12 | mx-0 my-5 p-0`}>
                 <div className={`col-xl-2 col-lg-3 col-md-4 | m-0 | background-primary`}>
-                    <div className={`position-absolute solved subtitle subtitle-2 | align-items-center | m-0 | d-flex | text-center`}>
+                    <div className={`position-absolute solved sub-page-sub-title background-secondary | align-items-center | m-0 | d-flex | text-center`}>
                         <h3 className={`font-bold subpage-title | col-12 | m-0 p-3`}>
                             už sme zrealizovali a vyriešili.
                         </h3>

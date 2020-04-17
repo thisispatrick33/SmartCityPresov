@@ -70517,10 +70517,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _admin_Login__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./admin/Login */ "./resources/js/components/admin/Login.js");
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_9___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_9__);
-/* harmony import */ var _NotFound__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./NotFound */ "./resources/js/components/NotFound.js");
-/* harmony import */ var _admin_CreatePost__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./admin/CreatePost */ "./resources/js/components/admin/CreatePost.js");
-/* harmony import */ var _admin_UpdatePost__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./admin/UpdatePost */ "./resources/js/components/admin/UpdatePost.js");
-/* harmony import */ var _admin_AdministrationPage__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ./admin/AdministrationPage */ "./resources/js/components/admin/AdministrationPage.js");
+/* harmony import */ var _admin_CreatePost__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./admin/CreatePost */ "./resources/js/components/admin/CreatePost.js");
+/* harmony import */ var _admin_UpdatePost__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./admin/UpdatePost */ "./resources/js/components/admin/UpdatePost.js");
+/* harmony import */ var _admin_AdministrationPage__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./admin/AdministrationPage */ "./resources/js/components/admin/AdministrationPage.js");
 
 
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; var ownKeys = Object.keys(source); if (typeof Object.getOwnPropertySymbols === 'function') { ownKeys = ownKeys.concat(Object.getOwnPropertySymbols(source).filter(function (sym) { return Object.getOwnPropertyDescriptor(source, sym).enumerable; })); } ownKeys.forEach(function (key) { _defineProperty(target, key, source[key]); }); } return target; }
@@ -70538,7 +70537,6 @@ function _nonIterableRest() { throw new TypeError("Invalid attempt to destructur
 function _iterableToArrayLimit(arr, i) { var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
 
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
-
 
 
 
@@ -70942,19 +70940,19 @@ var App = function App() {
     path: "/login",
     login: _loginUser,
     logout: _logoutUser
-  }), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_admin_CreatePost__WEBPACK_IMPORTED_MODULE_11__["CreatePost"], {
+  }), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_admin_CreatePost__WEBPACK_IMPORTED_MODULE_10__["CreatePost"], {
     path: "/create",
     logged: authState.user,
     changeSubpage: subpageFetchData,
     post: _createPost
-  }), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_admin_UpdatePost__WEBPACK_IMPORTED_MODULE_12__["UpdatePost"], {
+  }), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_admin_UpdatePost__WEBPACK_IMPORTED_MODULE_11__["UpdatePost"], {
     path: "/update/:id",
     logged: authState.user,
     changeSubpage: subpageFetchData,
     post: _updatePost,
     getpost: getPost,
     project: project
-  }), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_admin_AdministrationPage__WEBPACK_IMPORTED_MODULE_13__["AdministrationPage"], {
+  }), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_admin_AdministrationPage__WEBPACK_IMPORTED_MODULE_12__["AdministrationPage"], {
     path: "/administration",
     logged: authState.user,
     changeSubpage: subpageFetchData,
@@ -74986,27 +74984,6 @@ var Navigation = function Navigation(_ref) {
 
 /***/ }),
 
-/***/ "./resources/js/components/NotFound.js":
-/*!*********************************************!*\
-  !*** ./resources/js/components/NotFound.js ***!
-  \*********************************************/
-/*! exports provided: NotFound */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "NotFound", function() { return NotFound; });
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-
-var NotFound = function NotFound() {
-  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "subpage container-fluid p-0 m-0"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "a"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "a"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "a"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "a"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "a"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "a"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "a"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "a"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "a"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "a"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "a"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "a"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "a"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "a"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "a"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "a"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "a"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "a"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "a"));
-};
-
-/***/ }),
-
 /***/ "./resources/js/components/Utillities.js":
 /*!***********************************************!*\
   !*** ./resources/js/components/Utillities.js ***!
@@ -76338,7 +76315,6 @@ var Subpage = function Subpage(_ref) {
   Object(react__WEBPACK_IMPORTED_MODULE_0__["useEffect"])(function () {
     if (data !== null) {
       setSubpage(data);
-      console.log(data);
     }
 
     closePost();
@@ -76358,7 +76334,7 @@ var Subpage = function Subpage(_ref) {
   return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "sub-page | container-fluid | m-0 p-0"
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "position-relative intro | row col-12 | mx-0 p-0",
+    className: "intro position-relative | row col-12 | mx-0 p-0",
     style: {
       minHeight: jquery__WEBPACK_IMPORTED_MODULE_5___default()(window).height()
     }
@@ -76376,11 +76352,11 @@ var Subpage = function Subpage(_ref) {
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", {
     className: "main-title | col-auto | mb-0 p-0"
   }, subpage.title, "."), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", {
-    className: "sub-title | col-auto | p-0"
+    className: "sub-title | col-12 | p-0"
   }, "smartcity pre\u0161ov."))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "description subtitle-2 | row col-xl-10 col-lg-10 col-md-11 col-12 | align-items-end | justify-content-center | mx-0 py-5 | d-flex"
+    className: "description background-secondary | row col-xl-10 col-lg-10 col-md-11 col-12 | align-items-end | justify-content-center | mx-0 py-5 | d-flex"
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h5", {
-    className: "title | col-12 | text-center"
+    className: "title text-uppercase | col-12 | text-center "
   }, "smartcity pre\u0161ov oblas\u0165 ", subpage.title), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "col-10 | my-2"
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
@@ -76389,7 +76365,7 @@ var Subpage = function Subpage(_ref) {
     className: "col-xl-8 col-lg-9 col-md-9 col-sm-10 col-11 | text-center"
   }, subpage.description)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     onClick: scroll,
-    className: "subtitle-1 | col-xl-2 col-lg-2 col-md-1 | align-items-end | justify-content-center | mx-0 p-0 py-5 | d-xl-flex d-lg-flex d-md-flex d-none"
+    className: "background-primary | col-xl-2 col-lg-2 col-md-1 | align-items-end | justify-content-center | mx-0 p-0 py-5 | d-xl-flex d-lg-flex d-md-flex d-none"
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("svg", {
     className: "arrow col-5 | p-0",
     fill: "#ffffff",
@@ -76403,7 +76379,7 @@ var Subpage = function Subpage(_ref) {
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "row col-xl-9 col-lg-10 col-md-11 col-12 | align-items-start | justify-content-end | m-0 p-0"
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "subtitle subtitle-1 | row col-xl-7 col-lg-8 col-md-10 col-12 | mx-0 p-0 py-5"
+    className: "sub-page-sub-title background-primary | row col-xl-7 col-lg-8 col-md-10 col-12 | mx-0 p-0 py-5"
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", {
     id: "here",
     className: "font-bold subpage-title | col-12 | m-0 p-0 | text-center"
@@ -76976,7 +76952,7 @@ var Subpage = function Subpage(_ref) {
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "col-xl-2 col-lg-3 col-md-4 | m-0 | background-primary"
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "position-absolute solved subtitle subtitle-2 | align-items-center | m-0 | d-flex | text-center"
+    className: "position-absolute solved sub-page-sub-title background-secondary | align-items-center | m-0 | d-flex | text-center"
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", {
     className: "font-bold subpage-title | col-12 | m-0 p-3"
   }, "u\u017E sme zrealizovali a vyrie\u0161ili.")))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {

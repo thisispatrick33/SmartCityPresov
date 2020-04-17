@@ -6,7 +6,6 @@
     &:hover{
       cursor: pointer;
     }
-
     .project-cover-image{
       border-bottom: 8px solid $secondaryColor;
       img{
@@ -108,7 +107,7 @@
       }
       .title{
         font-family: SF-SemiBold,serif;
-        color: $colorOfPage;
+        color: $backgroundColor;
         text-transform: uppercase;
       }
     }

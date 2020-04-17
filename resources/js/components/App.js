@@ -8,7 +8,6 @@ import { Subpage }  from "./subpage/Subpage";
 import { Post } from "./news/Post";
 import { Login } from "./admin/Login";
 import axios from "axios";
-import {NotFound} from "./NotFound";
 import {CreatePost} from "./admin/CreatePost";
 import {UpdatePost} from "./admin/UpdatePost";
 import {AdministrationPage} from "./admin/AdministrationPage";
