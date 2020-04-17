@@ -1,7 +1,7 @@
 import React, {useEffect, useState } from "react";
 import { navigate } from '@reach/router';
 
-export const UpdatePost = ({id, logged, changeSubpage, post = f => f, getpost = f => f, project}) => {
+export const UpdatePost = ({id, logged, post = f => f, getpost = f => f, project}) => {
     const [updatedData, setUpdatedData] = useState({});
     const [images, setImages] = useState([]);
 
@@ -66,7 +66,7 @@ export const UpdatePost = ({id, logged, changeSubpage, post = f => f, getpost = 
         return (
             <div>
                 <h1>Unauthorized</h1>
-                <div onClick={()=>{navigate(`/`); changeSubpage()}}>
+                <div onClick={()=>navigate(`/`)}>
                     <h1>Go back!</h1>
                 </div>
             </div>

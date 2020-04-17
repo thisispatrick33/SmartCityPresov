@@ -10,12 +10,12 @@ nav{
       background: $primaryColor !important;
       cursor: pointer;
       svg{
-        fill : $colorOfPage !important;
+        fill : $backgroundColor !important;
       }
       transition: 0.3s !important;
     }
     &:not(:hover){
-      background: $colorOfPage;
+      background: $backgroundColor;
       svg{
         fill : $primaryColor;
       }
@@ -28,7 +28,7 @@ nav{
   .line{
     width: 8px;
     height: 8px;
-    background : $colorOfPage;
+    background : $backgroundColor;
     border-radius: 100%;
   }
 }

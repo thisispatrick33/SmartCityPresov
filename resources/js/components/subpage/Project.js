@@ -2,8 +2,11 @@ import React, {useEffect, useState} from "react";
 import $ from 'jquery';
 import FsLightbox from 'fslightbox-react';
 export const Project = ({data, close = f => f}) => {
+
     const written = new Date(data.updated_at.replace(' ', 'T'));
     const [toggler, setToggler] = useState(false);
+
+
     useEffect(() => {
         $('.project-details-frame').fadeIn();
         $('.project-details-frame .project-content').animate({
@@ -29,7 +32,7 @@ export const Project = ({data, close = f => f}) => {
                         />
                     </>
                     <div className={"col-12 row mx-0 p-3"}>
-                        { data.images.map(({id,title,alt,path}) => {
+                        { data.images.map(({alt,path}) => {
                             return <div onClick={ () => setToggler(!toggler) } className={"col-xl-12 col-lg-12 col-4 mb-4 p-1"}>
                                 <img src={path.substr(path.indexOf('img'))} alt={alt} className={"col-12 shadow p-2"}/>
                             </div>

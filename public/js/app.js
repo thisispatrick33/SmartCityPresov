@@ -70514,11 +70514,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _Main__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./Main */ "./resources/js/components/Main.js");
 /* harmony import */ var _subpage_Subpage__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./subpage/Subpage */ "./resources/js/components/subpage/Subpage.js");
 /* harmony import */ var _admin_Login__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./admin/Login */ "./resources/js/components/admin/Login.js");
-/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
-/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_8___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_8__);
-/* harmony import */ var _admin_CreatePost__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./admin/CreatePost */ "./resources/js/components/admin/CreatePost.js");
-/* harmony import */ var _admin_UpdatePost__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./admin/UpdatePost */ "./resources/js/components/admin/UpdatePost.js");
-/* harmony import */ var _admin_AdministrationPage__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./admin/AdministrationPage */ "./resources/js/components/admin/AdministrationPage.js");
+/* harmony import */ var _admin_CreatePost__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./admin/CreatePost */ "./resources/js/components/admin/CreatePost.js");
+/* harmony import */ var _admin_UpdatePost__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./admin/UpdatePost */ "./resources/js/components/admin/UpdatePost.js");
+/* harmony import */ var _admin_AdministrationPage__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./admin/AdministrationPage */ "./resources/js/components/admin/AdministrationPage.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_11___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_11__);
 
 
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; var ownKeys = Object.keys(source); if (typeof Object.getOwnPropertySymbols === 'function') { ownKeys = ownKeys.concat(Object.getOwnPropertySymbols(source).filter(function (sym) { return Object.getOwnPropertyDescriptor(source, sym).enumerable; })); } ownKeys.forEach(function (key) { _defineProperty(target, key, source[key]); }); } return target; }
@@ -70606,8 +70606,7 @@ var App = function App() {
     var state = JSON.parse(localStorage.getItem("authState"));
 
     if (state !== null && state.isLoggedIn && !authState.isLoggedIn) {
-      var AppState = state;
-      setAuthState(AppState);
+      setAuthState(state);
     }
 
     var controlSubpage = JSON.parse(localStorage.getItem("subpageData"));
@@ -70619,9 +70618,11 @@ var App = function App() {
       });
     }
 
-    getHomePosts();
+    _getData("/api/post", config_aplication_json).then(function (res) {
+      setHomeNewestPosts(res.data);
+    });
 
-    if (window.location.pathname !== "/administration" && window.location.pathname !== "/create" && window.location.pathname.indexOf("/update/") === -1 && window.location.pathname !== "/login") {
+    if (window.location.pathname !== "/administration" && window.location.pathname !== "/create" && window.location.pathname.indexOf("/update/") === -1 && window.location.pathname !== "/login" && window.location.pathname !== "/") {
       subpageFetchData();
     }
   }, [authState]);
@@ -70637,7 +70638,7 @@ var App = function App() {
           switch (_context.prev = _context.next) {
             case 0:
               _context.next = 2;
-              return axios__WEBPACK_IMPORTED_MODULE_8___default.a.post(url, data, config);
+              return axios__WEBPACK_IMPORTED_MODULE_11___default.a.post(url, data, config);
 
             case 2:
               return _context.abrupt("return", _context.sent);
@@ -70666,7 +70667,7 @@ var App = function App() {
           switch (_context2.prev = _context2.next) {
             case 0:
               _context2.next = 2;
-              return axios__WEBPACK_IMPORTED_MODULE_8___default.a.get(url, config);
+              return axios__WEBPACK_IMPORTED_MODULE_11___default.a.get(url, config);
 
             case 2:
               return _context2.abrupt("return", _context2.sent);
@@ -70695,7 +70696,7 @@ var App = function App() {
           switch (_context3.prev = _context3.next) {
             case 0:
               _context3.next = 2;
-              return axios__WEBPACK_IMPORTED_MODULE_8___default.a.put(url, data, config);
+              return axios__WEBPACK_IMPORTED_MODULE_11___default.a.put(url, data, config);
 
             case 2:
               return _context3.abrupt("return", _context3.sent);
@@ -70747,17 +70748,6 @@ var App = function App() {
     });
   };
 
-  var _logoutUser = function _logoutUser() {
-    var authState = {
-      isLoggedIn: false,
-      user: {}
-    };
-    localStorage["authState"] = JSON.stringify(authState);
-    setAuthState(authState);
-    config_aplication_json.headers['Authorization'] = null;
-    config_multipart_form_data.headers['Authorization'] = null;
-  };
-
   var _createPost = function _createPost(creationData) {
     config_multipart_form_data.headers['Authorization'] = 'Bearer ' + authState.user.auth_token;
     var formData = new FormData();
@@ -70776,12 +70766,7 @@ var App = function App() {
     }
 
     _postData("/api/post", formData, config_multipart_form_data).then(function (response) {
-      if (response.status == 200) {
-        alert("\xDAspe\u0161ne si vytvoril \u010Dl\xE1nok.");
-      } else {
-        alert("\u010Cl\xE1nok sa nepodarilo vytvori\u0165!");
-      }
-
+      alert(response.status == 200 ? "\xDAspe\u0161ne si vytvoril \u010Dl\xE1nok." : "\u010Cl\xE1nok sa nepodarilo vytvori\u0165!");
       setProject(null);
       getAllPosts();
       Object(_reach_router__WEBPACK_IMPORTED_MODULE_3__["navigate"])("/administration");
@@ -70829,12 +70814,6 @@ var App = function App() {
     getAllPosts();
   };
 
-  var getHomePosts = function getHomePosts() {
-    _getData("/api/post", config_aplication_json).then(function (res) {
-      setHomeNewestPosts(res.data);
-    });
-  };
-
   var subpageFetchData = function subpageFetchData() {
     _getData("api/version", config_aplication_json).then(function (versionResponse) {
       if (version === null || version[window.location.pathname] === null || version[window.location.pathname] !== versionResponse.data[window.location.pathname] || subpageData === null || subpageData[window.location.pathname] === undefined || subpageData[window.location.pathname] === null) {
@@ -70864,10 +70843,6 @@ var App = function App() {
     });
   };
 
-  var closePost = function closePost() {
-    setProject(null);
-  };
-
   var getAllPosts = function getAllPosts() {
     _getData("/api/postAll", config_aplication_json).then(function (res) {
       setAllPosts(res.data);
@@ -70878,39 +70853,38 @@ var App = function App() {
     className: "row col-12 | p-0 m-0"
   }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_reach_router__WEBPACK_IMPORTED_MODULE_3__["Router"], null, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_Main__WEBPACK_IMPORTED_MODULE_5__["Main"], {
     path: "/",
-    auth: authState,
-    logout: _logoutUser,
     changeSubpage: subpageFetchData
   }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_Home__WEBPACK_IMPORTED_MODULE_4__["Home"], {
     path: "/",
     _homeNewestPosts: homeNewestPosts,
     getpost: getPost,
     project: project,
-    closePost: closePost,
+    closePost: function closePost() {
+      return setProject(null);
+    },
     changeSubpage: subpageFetchData
   }), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_subpage_Subpage__WEBPACK_IMPORTED_MODULE_6__["Subpage"], {
     path: ":id",
     data: currentSubpage,
     getpost: getPost,
     project: project,
-    closePost: closePost
+    closePost: function closePost() {
+      return setProject(null);
+    }
   }), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_admin_Login__WEBPACK_IMPORTED_MODULE_7__["Login"], {
     path: "/login",
-    login: _loginUser,
-    logout: _logoutUser
-  }), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_admin_CreatePost__WEBPACK_IMPORTED_MODULE_9__["CreatePost"], {
+    login: _loginUser
+  }), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_admin_CreatePost__WEBPACK_IMPORTED_MODULE_8__["CreatePost"], {
     path: "/create",
     logged: authState.user,
-    changeSubpage: subpageFetchData,
     post: _createPost
-  }), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_admin_UpdatePost__WEBPACK_IMPORTED_MODULE_10__["UpdatePost"], {
+  }), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_admin_UpdatePost__WEBPACK_IMPORTED_MODULE_9__["UpdatePost"], {
     path: "/update/:id",
     logged: authState.user,
-    changeSubpage: subpageFetchData,
     post: _updatePost,
     getpost: getPost,
     project: project
-  }), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_admin_AdministrationPage__WEBPACK_IMPORTED_MODULE_11__["AdministrationPage"], {
+  }), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_admin_AdministrationPage__WEBPACK_IMPORTED_MODULE_10__["AdministrationPage"], {
     path: "/administration",
     logged: authState.user,
     changeSubpage: subpageFetchData,
@@ -74977,7 +74951,6 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 var AdministrationPage = function AdministrationPage(_ref) {
   var logged = _ref.logged,
-      changeSubpage = _ref.changeSubpage,
       _ref$getAllPosts = _ref.getAllPosts,
       getAllPosts = _ref$getAllPosts === void 0 ? function (f) {
     return f;
@@ -75002,19 +74975,6 @@ var AdministrationPage = function AdministrationPage(_ref) {
     }
   }, [allPosts]);
 
-  var _update = function _update(id) {
-    clear();
-    Object(_reach_router__WEBPACK_IMPORTED_MODULE_1__["navigate"])("/update/".concat(id));
-  };
-
-  var _create = function _create() {
-    Object(_reach_router__WEBPACK_IMPORTED_MODULE_1__["navigate"])('/create');
-  };
-
-  var _delete = function _delete(id) {
-    hide(id);
-  };
-
   if (logged.id !== undefined) {
     if (data === null) {
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, "Loading...");
@@ -75028,7 +74988,6 @@ var AdministrationPage = function AdministrationPage(_ref) {
       }).map(function (_ref2) {
         var id = _ref2.id,
             title = _ref2.title,
-            image = _ref2.image,
             author = _ref2.author,
             description = _ref2.description;
         return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
@@ -75036,12 +74995,6 @@ var AdministrationPage = function AdministrationPage(_ref) {
         }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
           className: 'project-outlook | row col-xl-11 col-lg-11 col-md-11 col-12 | m-0 p-0'
         }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-          className: 'project-cover-image | col-12 | m-0 p-0 | justify-content-center'
-        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
-          src: image,
-          alt: "project-cover-image",
-          className: 'col-12 | p-0'
-        })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
           className: 'project-content | row col-12 | m-0 p-0 | justify-content-center'
         }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
           className: 'col-10 | p-0 mx-0 mt-3 mb-2'
@@ -75056,12 +75009,13 @@ var AdministrationPage = function AdministrationPage(_ref) {
         }, description.substring(0, 200), "...", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
           className: 'show-more',
           onClick: function onClick() {
-            return _update(id);
+            clear();
+            Object(_reach_router__WEBPACK_IMPORTED_MODULE_1__["navigate"])("/update/".concat(id));
           }
         }, "Edit"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
           className: 'show-more',
           onClick: function onClick() {
-            return _delete(id);
+            return hide(id);
           }
         }, "Delete"))))));
       }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
@@ -75081,7 +75035,7 @@ var AdministrationPage = function AdministrationPage(_ref) {
         }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
           className: 'project-cover-image | col-12 | m-0 p-0 | justify-content-center'
         }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
-          src: image,
+          src: image.substr(image.indexOf('img')),
           alt: "project-cover-image",
           className: 'col-12 | p-0'
         })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
@@ -75099,26 +75053,26 @@ var AdministrationPage = function AdministrationPage(_ref) {
         }, description.substring(0, 200), "...", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
           className: 'show-more',
           onClick: function onClick() {
-            return _update(id);
+            clear();
+            Object(_reach_router__WEBPACK_IMPORTED_MODULE_1__["navigate"])("/update/".concat(id));
           }
         }, "Edit"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
           className: 'show-more',
           onClick: function onClick() {
-            return _delete(id);
+            return hide(id);
           }
         }, "Delete"))))));
       }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "col-12",
         onClick: function onClick() {
-          return _create();
+          return Object(_reach_router__WEBPACK_IMPORTED_MODULE_1__["navigate"])('/create');
         }
       }, "Create"));
     }
   } else {
     return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, "Unauthorized"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
       onClick: function onClick() {
-        Object(_reach_router__WEBPACK_IMPORTED_MODULE_1__["navigate"])("/");
-        changeSubpage();
+        return Object(_reach_router__WEBPACK_IMPORTED_MODULE_1__["navigate"])("/");
       }
     }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, "Go back!")));
   }
@@ -75155,7 +75109,6 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 var CreatePost = function CreatePost(_ref) {
   var logged = _ref.logged,
-      changeSubpage = _ref.changeSubpage,
       _ref$post = _ref.post,
       post = _ref$post === void 0 ? function (f) {
     return f;
@@ -75323,8 +75276,7 @@ var CreatePost = function CreatePost(_ref) {
   } else {
     return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, "Unauthorized"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
       onClick: function onClick() {
-        Object(_reach_router__WEBPACK_IMPORTED_MODULE_1__["navigate"])("/");
-        changeSubpage();
+        return Object(_reach_router__WEBPACK_IMPORTED_MODULE_1__["navigate"])("/");
       }
     }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, "Go back!")));
   }
@@ -75424,7 +75376,6 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 var UpdatePost = function UpdatePost(_ref) {
   var id = _ref.id,
       logged = _ref.logged,
-      changeSubpage = _ref.changeSubpage,
       _ref$post = _ref.post,
       post = _ref$post === void 0 ? function (f) {
     return f;
@@ -75633,8 +75584,7 @@ var UpdatePost = function UpdatePost(_ref) {
   } else {
     return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, "Unauthorized"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
       onClick: function onClick() {
-        Object(_reach_router__WEBPACK_IMPORTED_MODULE_1__["navigate"])("/");
-        changeSubpage();
+        return Object(_reach_router__WEBPACK_IMPORTED_MODULE_1__["navigate"])("/");
       }
     }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, "Go back!")));
   }
@@ -75719,9 +75669,7 @@ var Project = function Project(_ref) {
   })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "col-12 row mx-0 p-3"
   }, data.images.map(function (_ref2) {
-    var id = _ref2.id,
-        title = _ref2.title,
-        alt = _ref2.alt,
+    var alt = _ref2.alt,
         path = _ref2.path;
     return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
       onClick: function onClick() {
@@ -75912,7 +75860,7 @@ var Subpage = function Subpage(_ref) {
   return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "sub-page | container-fluid | m-0 p-0"
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "position-relative intro | row col-12 | mx-0 p-0",
+    className: "intro position-relative | row col-12 | mx-0 p-0",
     style: {
       minHeight: jquery__WEBPACK_IMPORTED_MODULE_5___default()(window).height()
     }
@@ -75932,9 +75880,9 @@ var Subpage = function Subpage(_ref) {
   }, subpage.title, "."), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", {
     className: "sub-title | col-12 | p-0"
   }, "smartcity pre\u0161ov."))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "description subtitle-2 | row col-xl-10 col-lg-10 col-md-11 col-12 | align-items-end | justify-content-center | mx-0 py-5 | d-flex"
+    className: "description background-secondary | row col-xl-10 col-lg-10 col-md-11 col-12 | align-items-end | justify-content-center | mx-0 py-5 | d-flex"
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h5", {
-    className: "title | col-12 | text-center"
+    className: "title text-uppercase | col-12 | text-center "
   }, "smartcity pre\u0161ov oblas\u0165 ", subpage.title), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "col-10 | my-2"
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
@@ -75943,7 +75891,7 @@ var Subpage = function Subpage(_ref) {
     className: "col-xl-8 col-lg-9 col-md-9 col-sm-10 col-11 | text-center"
   }, subpage.description)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     onClick: scroll,
-    className: "subtitle-1 | col-xl-2 col-lg-2 col-md-1 | align-items-end | justify-content-center | mx-0 p-0 py-5 | d-xl-flex d-lg-flex d-md-flex d-none"
+    className: "background-primary | col-xl-2 col-lg-2 col-md-1 | align-items-end | justify-content-center | mx-0 p-0 py-5 | d-xl-flex d-lg-flex d-md-flex d-none"
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("svg", {
     className: "arrow col-5 | p-0",
     fill: "#ffffff",
@@ -75957,7 +75905,7 @@ var Subpage = function Subpage(_ref) {
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "row col-xl-9 col-lg-10 col-md-11 col-12 | align-items-start | justify-content-end | m-0 p-0"
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "subtitle subtitle-1 | row col-xl-7 col-lg-8 col-md-10 col-12 | mx-0 p-0 py-5"
+    className: "sub-page-sub-title background-primary | row col-xl-7 col-lg-8 col-md-10 col-12 | mx-0 p-0 py-5"
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", {
     id: "here",
     className: "font-bold subpage-title | col-12 | m-0 p-0 | text-center"
@@ -76530,7 +76478,7 @@ var Subpage = function Subpage(_ref) {
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "col-xl-2 col-lg-3 col-md-4 | m-0 | background-primary"
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "position-absolute solved subtitle subtitle-2 | align-items-center | m-0 | d-flex | text-center"
+    className: "position-absolute solved sub-page-sub-title background-secondary | align-items-center | m-0 | d-flex | text-center"
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", {
     className: "font-bold subpage-title | col-12 | m-0 p-3"
   }, "u\u017E sme zrealizovali a vyrie\u0161ili.")))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
