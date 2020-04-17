@@ -70517,10 +70517,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _admin_Login__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./admin/Login */ "./resources/js/components/admin/Login.js");
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_9___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_9__);
-/* harmony import */ var _NotFound__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./NotFound */ "./resources/js/components/NotFound.js");
-/* harmony import */ var _admin_CreatePost__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./admin/CreatePost */ "./resources/js/components/admin/CreatePost.js");
-/* harmony import */ var _admin_UpdatePost__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./admin/UpdatePost */ "./resources/js/components/admin/UpdatePost.js");
-/* harmony import */ var _admin_AdministrationPage__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ./admin/AdministrationPage */ "./resources/js/components/admin/AdministrationPage.js");
+/* harmony import */ var _admin_CreatePost__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./admin/CreatePost */ "./resources/js/components/admin/CreatePost.js");
+/* harmony import */ var _admin_UpdatePost__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./admin/UpdatePost */ "./resources/js/components/admin/UpdatePost.js");
+/* harmony import */ var _admin_AdministrationPage__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./admin/AdministrationPage */ "./resources/js/components/admin/AdministrationPage.js");
 
 
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; var ownKeys = Object.keys(source); if (typeof Object.getOwnPropertySymbols === 'function') { ownKeys = ownKeys.concat(Object.getOwnPropertySymbols(source).filter(function (sym) { return Object.getOwnPropertyDescriptor(source, sym).enumerable; })); } ownKeys.forEach(function (key) { _defineProperty(target, key, source[key]); }); } return target; }
@@ -70552,7 +70551,6 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 
 
-
 var App = function App() {
   var _useState = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])({
     isLoggedIn: false,
@@ -70562,40 +70560,30 @@ var App = function App() {
       authState = _useState2[0],
       setAuthState = _useState2[1];
 
-  var _useState3 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(null),
+  var _useState3 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(JSON.parse(localStorage.getItem("subpageData")) == null ? null : JSON.parse(localStorage.getItem("subpageData")).data),
       _useState4 = _slicedToArray(_useState3, 2),
-      subpages = _useState4[0],
-      setSubpages = _useState4[1];
+      subpageData = _useState4[0],
+      setSubpageData = _useState4[1];
 
-  var _useState5 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(JSON.parse(localStorage.getItem("subpageData")) == null ? null : JSON.parse(localStorage.getItem("subpageData")).data),
+  var _useState5 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(JSON.parse(localStorage.getItem("subpageData")) == null ? null : JSON.parse(localStorage.getItem("subpageData")).version),
       _useState6 = _slicedToArray(_useState5, 2),
-      subpageData = _useState6[0],
-      setSubpageData = _useState6[1];
+      version = _useState6[0],
+      setVersion = _useState6[1];
 
   var _useState7 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(null),
       _useState8 = _slicedToArray(_useState7, 2),
-      currentSubpage = _useState8[0],
-      setCurrentSubpage = _useState8[1];
+      homeNewestPosts = _useState8[0],
+      setHomeNewestPosts = _useState8[1];
 
   var _useState9 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(null),
       _useState10 = _slicedToArray(_useState9, 2),
-      homeNewestPosts = _useState10[0],
-      setHomeNewestPosts = _useState10[1];
+      project = _useState10[0],
+      setProject = _useState10[1];
 
   var _useState11 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(null),
       _useState12 = _slicedToArray(_useState11, 2),
-      project = _useState12[0],
-      setProject = _useState12[1];
-
-  var _useState13 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(JSON.parse(localStorage.getItem("subpageData")) == null ? null : JSON.parse(localStorage.getItem("subpageData")).version),
-      _useState14 = _slicedToArray(_useState13, 2),
-      version = _useState14[0],
-      setVersion = _useState14[1];
-
-  var _useState15 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(null),
-      _useState16 = _slicedToArray(_useState15, 2),
-      allPosts = _useState16[0],
-      setAllPosts = _useState16[1];
+      allPosts = _useState12[0],
+      setAllPosts = _useState12[1];
 
   var config_aplication_json = {
     headers: {
@@ -70633,8 +70621,6 @@ var App = function App() {
     if (window.location.pathname !== "/administration" && window.location.pathname !== "/create" && window.location.pathname.indexOf("/update/") === -1 && window.location.pathname !== "/login") {
       subpageFetchData();
     }
-
-    getSubpages();
   }, [authState]);
 
   var _postData =
@@ -70802,7 +70788,6 @@ var App = function App() {
   };
 
   var _updatePost = function _updatePost(updatedData) {
-    console.log(updatedData);
     config_multipart_form_data.headers['Authorization'] = 'Bearer ' + authState.user.auth_token;
     var formData = new FormData();
     formData.append("id", updatedData.id);
@@ -70853,26 +70838,19 @@ var App = function App() {
 
   var subpageFetchData = function subpageFetchData() {
     _getData("api/version", config_aplication_json).then(function (versionResponse) {
-      console.log(versionResponse.data);
-      console.log(versionResponse.data[window.location.pathname]);
-
       if (version === null || version[window.location.pathname] === null || version[window.location.pathname] !== versionResponse.data[window.location.pathname] || subpageData === null || subpageData[window.location.pathname] === undefined || subpageData[window.location.pathname] === null) {
         console.log("fetching from server");
 
         _getData("api".concat(window.location.pathname), config_aplication_json).then(function (res) {
           setSubpageData(_objectSpread({}, subpageData, _defineProperty({}, window.location.pathname, res.data.subpage)));
           setVersion(_objectSpread({}, version, _defineProperty({}, window.location.pathname, versionResponse.data[window.location.pathname])));
-          console.log(versionResponse.data[window.location.pathname]);
           localStorage["subpageData"] = JSON.stringify({
             data: _objectSpread({}, subpageData, _defineProperty({}, window.location.pathname, res.data.subpage)),
             version: _objectSpread({}, version, _defineProperty({}, window.location.pathname, versionResponse.data[window.location.pathname]))
           });
-          setCurrentSubpage(res.data.subpage);
-          console.log(window.location.pathname);
         });
       } else {
         console.log("already saved");
-        setCurrentSubpage(subpageData[window.location.pathname]);
       }
     });
   };
@@ -70889,17 +70867,8 @@ var App = function App() {
     setProject(null);
   };
 
-  var getSubpages = function getSubpages() {
-    fetch("/api/").then(function (response) {
-      return response.json();
-    }).then(function (subpages) {
-      setSubpages(subpages);
-    });
-  };
-
   var getAllPosts = function getAllPosts() {
     _getData("/api/postAll", config_aplication_json).then(function (res) {
-      console.log(res);
       setAllPosts(res.data);
     });
   };
@@ -70910,8 +70879,7 @@ var App = function App() {
     path: "/",
     auth: authState,
     logout: _logoutUser,
-    changeSubpage: subpageFetchData,
-    subpages: subpages
+    changeSubpage: subpageFetchData
   }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_Home__WEBPACK_IMPORTED_MODULE_4__["Home"], {
     path: "/",
     _homeNewestPosts: homeNewestPosts,
@@ -70921,7 +70889,7 @@ var App = function App() {
     changeSubpage: subpageFetchData
   }), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_subpage_Subpage__WEBPACK_IMPORTED_MODULE_6__["Subpage"], {
     path: ":id",
-    data: currentSubpage,
+    data: subpageData[window.location.pathname],
     getpost: getPost,
     project: project,
     closePost: closePost
@@ -70942,19 +70910,19 @@ var App = function App() {
     path: "/login",
     login: _loginUser,
     logout: _logoutUser
-  }), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_admin_CreatePost__WEBPACK_IMPORTED_MODULE_11__["CreatePost"], {
+  }), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_admin_CreatePost__WEBPACK_IMPORTED_MODULE_10__["CreatePost"], {
     path: "/create",
     logged: authState.user,
     changeSubpage: subpageFetchData,
     post: _createPost
-  }), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_admin_UpdatePost__WEBPACK_IMPORTED_MODULE_12__["UpdatePost"], {
+  }), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_admin_UpdatePost__WEBPACK_IMPORTED_MODULE_11__["UpdatePost"], {
     path: "/update/:id",
     logged: authState.user,
     changeSubpage: subpageFetchData,
     post: _updatePost,
     getpost: getPost,
     project: project
-  }), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_admin_AdministrationPage__WEBPACK_IMPORTED_MODULE_13__["AdministrationPage"], {
+  }), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_admin_AdministrationPage__WEBPACK_IMPORTED_MODULE_12__["AdministrationPage"], {
     path: "/administration",
     logged: authState.user,
     changeSubpage: subpageFetchData,
@@ -71012,10 +70980,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _subpage_outlook_HomeOutlook__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./subpage/outlook/HomeOutlook */ "./resources/js/components/subpage/outlook/HomeOutlook.js");
-/* harmony import */ var _Footer__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./Footer */ "./resources/js/components/Footer.js");
-/* harmony import */ var _Utillities__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./Utillities */ "./resources/js/components/Utillities.js");
-/* harmony import */ var _subpage_Project__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./subpage/Project */ "./resources/js/components/subpage/Project.js");
-/* harmony import */ var _reach_router__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @reach/router */ "./node_modules/@reach/router/es/index.js");
+/* harmony import */ var _Utillities__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./Utillities */ "./resources/js/components/Utillities.js");
+/* harmony import */ var _subpage_Project__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./subpage/Project */ "./resources/js/components/subpage/Project.js");
+/* harmony import */ var _reach_router__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @reach/router */ "./node_modules/@reach/router/es/index.js");
 function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _nonIterableRest(); }
 
 function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance"); }
@@ -71023,7 +70990,6 @@ function _nonIterableRest() { throw new TypeError("Invalid attempt to destructur
 function _iterableToArrayLimit(arr, i) { var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
 
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
-
 
 
 
@@ -71063,7 +71029,7 @@ var Home = function Home(_ref) {
   if (post !== null && post !== undefined) {
     return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
       className: "home container-fluid p-0 m-0"
-    }, project !== null && author !== null ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_subpage_Project__WEBPACK_IMPORTED_MODULE_4__["Project"], {
+    }, project !== null && author !== null ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_subpage_Project__WEBPACK_IMPORTED_MODULE_3__["Project"], {
       data: project,
       user: author,
       close: close
@@ -73645,7 +73611,7 @@ var Home = function Home(_ref) {
     }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
       className: " col-4 background-white rounded-lg text-center mr-3 my-4 py-3 text-uppercase font-semibold home-cards align-items-center",
       onClick: function onClick() {
-        Object(_reach_router__WEBPACK_IMPORTED_MODULE_5__["navigate"])("/mobilita");
+        Object(_reach_router__WEBPACK_IMPORTED_MODULE_4__["navigate"])("/mobilita");
         changeSubpage();
       }
     }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
@@ -73659,7 +73625,7 @@ var Home = function Home(_ref) {
     }, "mobilita"))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
       className: " col-4 background-white rounded-lg text-center ml-3 my-4 py-3 text-uppercase font-semibold home-cards ",
       onClick: function onClick() {
-        Object(_reach_router__WEBPACK_IMPORTED_MODULE_5__["navigate"])("/zivotne_prostredie");
+        Object(_reach_router__WEBPACK_IMPORTED_MODULE_4__["navigate"])("/zivotne_prostredie");
         changeSubpage();
       }
     }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
@@ -74093,7 +74059,7 @@ var Home = function Home(_ref) {
     }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
       className: "col-4 background-white rounded-lg text-center mr-3 my-4 py-3 text-uppercase font-semibold home-cards align-items-center",
       onClick: function onClick() {
-        Object(_reach_router__WEBPACK_IMPORTED_MODULE_5__["navigate"])("/digitalne_mesto");
+        Object(_reach_router__WEBPACK_IMPORTED_MODULE_4__["navigate"])("/digitalne_mesto");
         changeSubpage();
       }
     }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
@@ -74107,7 +74073,7 @@ var Home = function Home(_ref) {
     }, "DIGIT\xC1LNE MESTO"))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
       className: "col-4 background-white rounded-lg text-center ml-3 my-4 py-3 text-uppercase font-semibold home-cards align-items-center",
       onClick: function onClick() {
-        Object(_reach_router__WEBPACK_IMPORTED_MODULE_5__["navigate"])("/energia");
+        Object(_reach_router__WEBPACK_IMPORTED_MODULE_4__["navigate"])("/energia");
         changeSubpage();
       }
     }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
@@ -74744,7 +74710,7 @@ var Home = function Home(_ref) {
     }))))) : react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null))))));
   }
 
-  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Utillities__WEBPACK_IMPORTED_MODULE_3__["Loader"], null);
+  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Utillities__WEBPACK_IMPORTED_MODULE_2__["Loader"], null);
 };
 
 /***/ }),
@@ -74981,81 +74947,19 @@ var Navigation = function Navigation(_ref) {
 
 /***/ }),
 
-/***/ "./resources/js/components/NotFound.js":
-/*!*********************************************!*\
-  !*** ./resources/js/components/NotFound.js ***!
-  \*********************************************/
-/*! exports provided: NotFound */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "NotFound", function() { return NotFound; });
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-
-var NotFound = function NotFound() {
-  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "subpage container-fluid p-0 m-0"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "a"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "a"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "a"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "a"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "a"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "a"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "a"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "a"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "a"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "a"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "a"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "a"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "a"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "a"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "a"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "a"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "a"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "a"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "a"));
-};
-
-/***/ }),
-
 /***/ "./resources/js/components/Utillities.js":
 /*!***********************************************!*\
   !*** ./resources/js/components/Utillities.js ***!
   \***********************************************/
-/*! exports provided: NonLogged, Logged, Loader */
+/*! exports provided: Loader */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "NonLogged", function() { return NonLogged; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "Logged", function() { return Logged; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "Loader", function() { return Loader; });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 
-var NonLogged = function NonLogged() {
-  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
-    className: "reverse | col-xl-12 col-lg-12 | text-center | px-3 py-2",
-    href: "https://www.presov.sk",
-    target: "blank"
-  }, "Pre\u0161ov.sk");
-};
-var Logged = function Logged(_ref) {
-  var user = _ref.user,
-      _ref$logout = _ref.logout,
-      logout = _ref$logout === void 0 ? function (f) {
-    return f;
-  } : _ref$logout;
-  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "logged | row col-12 | justify-content-center | d-flex | my-2 px-0"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "body | row col-auto | justify-content-center | align-items-center | py-3 px-0"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "col-3 | justify-content-center | d-flex | pr-2 pl-0"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("svg", {
-    className: "col-xl-8 col-lg-8 col-md-9 col-10 | p-0",
-    enableBackground: "new 0 0 60 60",
-    version: "1.1",
-    viewBox: "0 0 60 60",
-    space: "preserve",
-    xmlns: "http://www.w3.org/2000/svg"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("path", {
-    d: "M39,22c0-4.963-4.038-9-9-9s-9,4.037-9,9c0,2.814,1.306,5.438,3.523,7.138L21.848,48h16.304l-2.675-18.862   C37.694,27.438,39,24.814,39,22z M35.848,46H24.152l2.526-17.81l-0.528-0.349C24.177,26.54,23,24.356,23,22c0-3.859,3.14-7,7-7   s7,3.141,7,7c0,2.356-1.177,4.54-3.149,5.842l-0.528,0.349L35.848,46z"
-  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("path", {
-    d: "M30,0C13.458,0,0,13.458,0,30s13.458,30,30,30s30-13.458,30-30S46.542,0,30,0z M30,58C14.561,58,2,45.439,2,30   S14.561,2,30,2s28,12.561,28,28S45.439,58,30,58z"
-  }))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "col-auto | p-0"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h4", {
-    className: "col-12 | text-center | p-0 m-0"
-  }, " ", "".concat(user.name.split(" ")[0].charAt(0), ".").concat(user.name.split(" ")[1]), " "), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
-    className: "logout-button | col-12 | p-0 m-0 | text-center",
-    onClick: logout
-  }, "odhl\xE1si\u0165 sa"))));
-};
 var Loader = function Loader() {
   return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "loader d-flex justify-content-center align-items-center"
@@ -76435,12 +76339,12 @@ var Subpage = function Subpage(_ref) {
   Object(react__WEBPACK_IMPORTED_MODULE_0__["useEffect"])(function () {
     if (data !== null) {
       setSubpage(data);
+      typing();
       console.log(data);
     }
 
-    typing();
     closePost();
-  }, [data]);
+  }, [window.location.pathname, data]);
 
   if (subpage === null || subpage === undefined || !subpage.title) {
     return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Utillities__WEBPACK_IMPORTED_MODULE_3__["Loader"], null);
@@ -77400,7 +77304,6 @@ var ProjectOutlook = function ProjectOutlook(_ref) {
       getPost = _ref$getPost === void 0 ? function (f) {
     return f;
   } : _ref$getPost;
-  console.log(post);
   return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: 'project-outlook-frame | row | mx-0 my-2 p-3 | justify-content-center'
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {

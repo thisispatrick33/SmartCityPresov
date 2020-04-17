@@ -121,11 +121,11 @@ export const Subpage = ({data, project, getpost = f => f, closePost}) => {
     useEffect(() => {
         if(data !== null){
             setSubpage(data);
+            typing();
             console.log(data);
         }
-        typing();
         closePost();
-    },[data]);
+    },[window.location.pathname, data]);
 
     if(subpage === null || subpage === undefined || !subpage.title){
         return <Loader/>;
