@@ -71034,7 +71034,7 @@ var Home = function Home(_ref) {
       user: author,
       close: close
     }) : null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-      className: "screen mb-md-5 mt-5"
+      className: "screen mb-md-5 mt-5 d-flex align-items-center"
     }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
       className: "row m-0 p-0"
     }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
@@ -71050,7 +71050,7 @@ var Home = function Home(_ref) {
     }, "pre\u0161ov.")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
       className: "col-xl-6 col-8  m-0 p-0  row justify-content-center map-box mt-md-n5 my-5 ml-xl-5 mx-auto"
     }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-      className: "col-lg-10 mt-md-n5"
+      className: "map-frame col-lg-10 mt-md-n5"
     }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("svg", {
       className: "map",
       xmlns: "http://www.w3.org/2000/svg",
@@ -73580,19 +73580,22 @@ var Home = function Home(_ref) {
       fill: "#d3d2d2"
     })))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
       className: "col-9 row align-items-start justify-content-around justify-content-md-between"
-    }, post.slice(0, 2).map(function (data) {
-      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_subpage_outlook_HomeOutlook__WEBPACK_IMPORTED_MODULE_1__["HomeOutlook"], {
-        post: data,
-        getPost: function getPost(id) {
-          return getpost(id);
-        }
-      });
-    }), window.innerWidth >= 992 ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_subpage_outlook_HomeOutlook__WEBPACK_IMPORTED_MODULE_1__["HomeOutlook"], {
+    }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_subpage_outlook_HomeOutlook__WEBPACK_IMPORTED_MODULE_1__["HomeOutlook"], {
+      post: post[0],
+      getPost: function getPost(id) {
+        return getpost(id);
+      }
+    }), window.innerWidth >= 570 ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_subpage_outlook_HomeOutlook__WEBPACK_IMPORTED_MODULE_1__["HomeOutlook"], {
+      post: post[1],
+      getPost: function getPost(id) {
+        return getpost(id);
+      }
+    }) : "", window.innerWidth >= 992 ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_subpage_outlook_HomeOutlook__WEBPACK_IMPORTED_MODULE_1__["HomeOutlook"], {
       post: post[2],
       getPost: function getPost(id) {
         return getpost(id);
       }
-    }) : react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null))))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    }) : "")))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
       className: "my-md-5 pt-md-5"
     }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
       className: "row mt-md-4"
@@ -74756,9 +74759,9 @@ var Main = function Main(props) {
 
     var handleScroll = function handleScroll() {
       if (props['*'].length > 0) {
-        $('.background').css('backgroundPositionY', Number($('.background').css('backgroundPositionY').replace('%', '').replace('px', '')) + 1);
+        $('.background').css('backgroundPositionY', Number($('.background').css('backgroundPositionY').replace('%', '').replace('px', '')) + 3);
       } else {
-        $('.map').css('width', Number($('.map').css('width').replace('%', '').replace('px', '')) + 1);
+        Number($('.map-frame').css('width').replace('px', '') * 1.2 > Number($('.map').css('width').replace('px', '')) ? $('.map').css('width', Number($('.map').css('width').replace('%', '').replace('px', '')) + 1) : "");
       }
     };
 
@@ -74770,6 +74773,7 @@ var Main = function Main(props) {
     };
   }, [pageYOffset]);
   return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Navigation__WEBPACK_IMPORTED_MODULE_1__["Navigation"], {
+    subpageId: props['*'],
     changeSubpage: props.changeSubpage
   }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, props.children), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Footer__WEBPACK_IMPORTED_MODULE_2__["Footer"], null));
 };
@@ -74795,7 +74799,8 @@ __webpack_require__.r(__webpack_exports__);
 
 
 var Navigation = function Navigation(_ref) {
-  var changeSubpage = _ref.changeSubpage;
+  var subpageId = _ref.subpageId,
+      changeSubpage = _ref.changeSubpage;
   return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("nav", {
     className: "row col-xl-1 col-lg-1 col-md-2 col-sm-2 col-3 justify-content-center align-items-center position-fixed"
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
@@ -74803,7 +74808,7 @@ var Navigation = function Navigation(_ref) {
       Object(_reach_router__WEBPACK_IMPORTED_MODULE_1__["navigate"])("/mobilita");
       changeSubpage();
     },
-    className: "col-12 row my-2 mx-0 item justify-content-center align-items-center p-0 shadow",
+    className: "".concat(subpageId == 'mobilita' ? "on" : "", " col-12 row my-2 mx-0 item justify-content-center align-items-center p-0 shadow"),
     style: {
       height: jquery__WEBPACK_IMPORTED_MODULE_2___default()('.item').width()
     }
@@ -74838,7 +74843,7 @@ var Navigation = function Navigation(_ref) {
       Object(_reach_router__WEBPACK_IMPORTED_MODULE_1__["navigate"])("/zivotne_prostredie");
       changeSubpage();
     },
-    className: "col-12 row my-2 mx-0 item justify-content-center align-items-center p-0 shadow",
+    className: "".concat(subpageId == 'zivotne_prostredie' ? "on" : "", " col-12 row my-2 mx-0 item justify-content-center align-items-center p-0 shadow"),
     style: {
       height: jquery__WEBPACK_IMPORTED_MODULE_2___default()('.item').width()
     }
@@ -74859,7 +74864,7 @@ var Navigation = function Navigation(_ref) {
       Object(_reach_router__WEBPACK_IMPORTED_MODULE_1__["navigate"])("/digitalne_mesto");
       changeSubpage();
     },
-    className: "col-12 row my-2 mx-0 item justify-content-center align-items-center p-0 shadow",
+    className: "".concat(subpageId == 'digitalne_mesto' ? "on" : "", " col-12 row my-2 mx-0 item justify-content-center align-items-center p-0 shadow"),
     style: {
       height: jquery__WEBPACK_IMPORTED_MODULE_2___default()('.item').width()
     }
@@ -74924,7 +74929,7 @@ var Navigation = function Navigation(_ref) {
       Object(_reach_router__WEBPACK_IMPORTED_MODULE_1__["navigate"])("/energia");
       changeSubpage();
     },
-    className: "col-12 row my-2 mx-0 item justify-content-center align-items-center p-0 shadow",
+    className: "".concat(subpageId == 'energia' ? "on" : "", " col-12 row my-2 mx-0 item justify-content-center align-items-center p-0 shadow"),
     style: {
       height: jquery__WEBPACK_IMPORTED_MODULE_2___default()('.item').width()
     }
@@ -76116,14 +76121,14 @@ var Project = function Project(_ref) {
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "col-12 row mx-0 p-0"
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "col-12 row mx-0 mt-5 px-5 title p-0"
+    className: "col-12 row mx-0 mt-5 px-5 title p-0 justify-content-xl-start justify-content-lg-start justify-content-md-start justify-content-end"
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h2", {
-    className: "col-11 mb-3"
+    className: "col-xl-11 col-lg-11 col-md-11 col-12 order-xl-1 order-lg-1 order-md-1 order-2 mb-3"
   }, data.title), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
     onClick: function onClick() {
       return close();
     },
-    className: "col-1 p-0"
+    className: "col-1 order-xl-2 order-lg-2 order-md-2 order-1 p-0"
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("svg", {
     className: "col-12 p-0 close-button",
     enableBackground: "new 0 0 357 357",
@@ -76200,19 +76205,20 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
 
 var Subpage = function Subpage(_ref) {
-  var data = _ref.data,
+  var id = _ref.id,
+      data = _ref.data,
+      logged = _ref.logged,
       project = _ref.project,
+      author = _ref.author,
+      _ref$hide = _ref.hide,
+      hide = _ref$hide === void 0 ? function (f) {
+    return f;
+  } : _ref$hide,
       _ref$getpost = _ref.getpost,
       getpost = _ref$getpost === void 0 ? function (f) {
     return f;
   } : _ref$getpost,
       closePost = _ref.closePost;
-  var descTitles = {
-    "mobilita": '["mobilita", "pohyb", "doprava", "transport"]',
-    "zivotne_prostredie": '["životné prostredie", "ekológia", "ovzdušie", "počasie"]',
-    "digitalne_mesto": '["digitálne mesto", "informácie", "zastupiteľstvo", "občan"]',
-    "energia": '["energia", "odpad", "spotreba", "ekológia"]'
-  };
   var settings = {
     infinite: false,
     speed: 500,
@@ -76274,68 +76280,6 @@ var Subpage = function Subpage(_ref) {
     return chunked_arr;
   };
 
-  var typing = function typing() {
-    var TxtType = function TxtType(el, toRotate, period) {
-      this.toRotate = toRotate;
-      this.el = el;
-      this.loopNum = 0;
-      this.period = parseInt(period, 10) || 2000;
-      this.txt = '';
-      this.tick();
-      this.isDeleting = false;
-    };
-
-    TxtType.prototype.tick = function () {
-      var i = this.loopNum % this.toRotate.length;
-      var fullTxt = this.toRotate[i];
-
-      if (this.isDeleting) {
-        this.txt = fullTxt.substring(0, this.txt.length - 1);
-      } else {
-        this.txt = fullTxt.substring(0, this.txt.length + 1);
-      }
-
-      this.el.innerHTML = '<span class="wrap">' + this.txt + '</span>';
-      var that = this;
-      var delta = 200 - Math.random() * 100;
-
-      if (this.isDeleting) {
-        delta /= 2;
-      }
-
-      if (!this.isDeleting && this.txt === fullTxt) {
-        delta = this.period;
-        this.isDeleting = true;
-      } else if (this.isDeleting && this.txt === '') {
-        this.isDeleting = false;
-        this.loopNum++;
-        delta = 500;
-      }
-
-      setTimeout(function () {
-        that.tick();
-      }, delta);
-    };
-
-    window.onload = function () {
-      var elements = document.getElementsByClassName('typewrite');
-
-      for (var i = 0; i < elements.length; i++) {
-        var toRotate = elements[i].getAttribute('data-type');
-        var period = elements[i].getAttribute('data-period');
-
-        if (toRotate) {
-          new TxtType(elements[i], JSON.parse(toRotate), period);
-        }
-      }
-
-      var css = document.createElement("style");
-      css.type = "text/css";
-      css.innerHTML = ".typewrite > .wrap { border-right: 0.08em solid #fff}";
-      document.body.appendChild(css);
-    };
-  };
-
   Object(react__WEBPACK_IMPORTED_MODULE_0__["useEffect"])(function () {
     if (data !== null) {
       setSubpage(data);
@@ -76346,52 +76290,54 @@ var Subpage = function Subpage(_ref) {
     closePost();
   }, [window.location.pathname, data]);
 
+  var scroll = function scroll() {
+    return jquery__WEBPACK_IMPORTED_MODULE_5___default()('html, body').animate({
+      scrollTop: jquery__WEBPACK_IMPORTED_MODULE_5___default()("#here").offset().top,
+      easing: 'easeInOutCirc'
+    }, 1500);
+  };
+
   if (subpage === null || subpage === undefined || !subpage.title) {
     return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Utillities__WEBPACK_IMPORTED_MODULE_3__["Loader"], null);
   }
 
   return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "subpage container-fluid p-0 m-0"
+    className: "sub-page | container-fluid | m-0 p-0"
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "subpage-intro row col-12 p-0 mx-0 position-relative",
+    className: "position-relative intro | row col-12 | mx-0 p-0",
     style: {
       minHeight: jquery__WEBPACK_IMPORTED_MODULE_5___default()(window).height()
     }
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "col-xl-4 col-lg-4 col-md-4 col-sm-2 col-1 position-absolute background m-0 p-0",
+    className: "background position-absolute | col-xl-4 col-lg-4 col-md-4 col-sm-2 col-1 | m-0 p-0",
     style: {
       backgroundImage: 'url("./././././images/backgrounds/' + subpage.title_link + '.svg")'
     }
   }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "row m-0 col-xl-9 col-lg-10 col-md-12 col-12 align-items-end justify-content-end p-0"
+    className: "row col-xl-9 col-lg-10 col-md-12 col-12 | align-items-end | justify-content-end | m-0 p-0"
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "col-12 row mx-0 p-0 justify-content-center"
+    className: "row col-12 | justify-content-center | mx-0 p-0"
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "col-11 row m-0"
+    className: "row col-11 | m-0"
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", {
-    className: "main-title mb-0 col-auto p-0"
+    className: "main-title | col-auto | mb-0 p-0"
   }, subpage.title, "."), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", {
-    className: "sub-title col-auto p-0"
+    className: "sub-title | col-auto | p-0"
   }, "smartcity pre\u0161ov."))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "col-xl-10 col-lg-10 col-md-11 col-12 row d-flex description subtitle-2 mx-0 py-5 align-items-end justify-content-center"
+    className: "description subtitle-2 | row col-xl-10 col-lg-10 col-md-11 col-12 | align-items-end | justify-content-center | mx-0 py-5 | d-flex"
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h5", {
-    className: "col-12 text-center title"
-  }, "smartcity pre\u0161ov oblas\u0165 ", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
-    className: "typewrite",
-    "data-period": "2000",
-    "data-type": descTitles[subpage.title_link]
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
-    className: "wrap"
-  }))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "col-10 my-2"
+    className: "title | col-12 | text-center"
+  }, "smartcity pre\u0161ov oblas\u0165 ", subpage.title), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "col-10 | my-2"
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "col-6 ml-5"
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("hr", null))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
-    className: "col-xl-8 col-lg-9 col-md-9 col-sm-10 col-11 text-center"
+    className: "col-xl-8 col-lg-9 col-md-9 col-sm-10 col-11 | text-center"
   }, subpage.description)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "col-xl-2 col-lg-2 col-md-1 d-xl-flex d-lg-flex d-md-flex d-none subtitle-1 mx-0 p-0 py-5 align-items-end justify-content-center"
+    onClick: scroll,
+    className: "subtitle-1 | col-xl-2 col-lg-2 col-md-1 | align-items-end | justify-content-center | mx-0 p-0 py-5 | d-xl-flex d-lg-flex d-md-flex d-none"
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("svg", {
-    className: "arrow col-5 p-0",
+    className: "arrow col-5 | p-0",
     fill: "#ffffff",
     enableBackground: "new 0 0 64 64",
     viewBox: "0 0 64 64",
@@ -76399,17 +76345,18 @@ var Subpage = function Subpage(_ref) {
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("path", {
     d: "m32 8c-1.104 0-2 .896-2 2v39.899l-14.552-15.278c-.761-.799-2.026-.832-2.828-.069-.8.762-.831 2.027-.069 2.827l16.62 17.449c.756.756 1.76 1.172 2.829 1.172 1.068 0 2.073-.416 2.862-1.207l16.586-17.414c.762-.8.73-2.065-.069-2.827-.799-.763-2.065-.731-2.827.069l-14.552 15.342v-39.963c0-1.104-.896-2-2-2z"
   }))))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "row col-12 p-0 mx-0 mb-xl-5 mb-lg-5 my-0 justify-content-end"
+    className: "row col-12 | justify-content-end | mb-xl-5 mb-lg-5 mx-0 my-0 p-0"
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "row m-0 col-xl-9 col-lg-10 col-md-11 col-12 align-items-start justify-content-end p-0"
+    className: "row col-xl-9 col-lg-10 col-md-11 col-12 | align-items-start | justify-content-end | m-0 p-0"
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "col-xl-7 col-lg-8 col-md-10 col-12 subtitle subtitle-1 row mx-0 p-0 py-5"
+    className: "subtitle subtitle-1 | row col-xl-7 col-lg-8 col-md-10 col-12 | mx-0 p-0 py-5"
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", {
-    className: "col-12 text-center font-bold subpage-title p-0 m-0"
+    id: "here",
+    className: "font-bold subpage-title | col-12 | m-0 p-0 | text-center"
   }, "aktu\xE1lne pripravujeme."))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "row m-0 col-xl-3 col-lg-2 d-xl-flex d-lg-flex d-none justify-content-center p-0"
   }, " ", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("svg", {
-    className: "col-10 p-0",
+    className: "col-10 | p-0",
     xmlns: "http://www.w3.org/2000/svg",
     width: "215",
     height: "161",
@@ -76656,11 +76603,11 @@ var Subpage = function Subpage(_ref) {
     r: "6",
     transform: "translate(12) rotate(90)"
   })), " ")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "row col-12 p-0 m-0 justify-content-xl-between justify-content-lg-between justify-content-start mx-0"
+    className: "row col-12 | justify-content-xl-between justify-content-lg-between justify-content-start | mx-0 m-0 p-0"
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "col-xl-2 col-lg-2 col-md-3 col-4 align-items-center d-flex p-0"
+    className: "col-xl-2 col-lg-2 col-md-3 col-4 | align-items-center | p-0 | d-flex"
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("svg", {
-    className: "col-12 m-0",
+    className: "col-12 | m-0",
     xmlns: "http://www.w3.org/2000/svg",
     width: "215",
     height: "157",
@@ -76959,7 +76906,7 @@ var Subpage = function Subpage(_ref) {
     return item.done === 0;
   }).slice(0, 4), 4).map(function (arr) {
     return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_slick__WEBPACK_IMPORTED_MODULE_6___default.a, _extends({}, settings1, {
-      className: "col-xl-8 col-lg-8 col-md-8 col-7 row my-5 mx-xl-0 mx-lg-0 mr-0 ml-2 p-0 justify-content-start"
+      className: "row col-xl-8 col-lg-8 col-md-8 col-7 | justify-content-start | mx-xl-0 mx-lg-0 mr-0 my-5 ml-2 p-0"
     }), arr.map(function (post) {
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_outlook_NewsOutlook__WEBPACK_IMPORTED_MODULE_1__["NewsOutlook"], {
         post: post,
@@ -76969,24 +76916,24 @@ var Subpage = function Subpage(_ref) {
       });
     }));
   }), window.innerWidth >= 1200 ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "col-1 p-0 m-0 background-secondary d-xl-flex d-lg-flex d-none"
+    className: "col-1 | m-0 p-0 | d-xl-flex d-lg-flex d-none background-secondary"
   }) : react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "row col-12 p-0 mx-0 h-15rem my-5"
+    className: "h-15rem | row col-12 | mx-0 my-5 p-0"
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "col-md-4 col-lg-3 col-xl-2 background-primary m-0"
+    className: "col-xl-2 col-lg-3 col-md-4 | m-0 | background-primary"
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "position-absolute subtitle subtitle-2 solved m-0 align-items-center d-flex text-center"
+    className: "position-absolute solved subtitle subtitle-2 | align-items-center | m-0 | d-flex | text-center"
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", {
-    className: "col-12 font-bold subpage-title p-3 m-0"
+    className: "font-bold subpage-title | col-12 | m-0 p-3"
   }, "u\u017E sme zrealizovali a vyrie\u0161ili.")))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "row col-12 my-xl-5 my-lg-5 mb-3 mx-0 p-0 justify-content-center"
+    className: "row col-12 | justify-content-center | my-xl-5 my-lg-5 mx-0 mb-3 p-0"
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "row col-xl-12 col-lg-12 col-md-12 col-sm-11 col-11 m-0 p-0 justify-content-center"
+    className: "row col-xl-12 col-lg-12 col-md-12 col-sm-11 col-11 | justify-content-center | m-0 p-0"
   }, chunk(subpage.posts.filter(function (item) {
     return item.done === 1;
   }), 4).map(function (arr) {
     return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_slick__WEBPACK_IMPORTED_MODULE_6___default.a, _extends({}, settings2, {
-      className: "row col-xl-11 col-lg-11 col-md-11 col-10 m-0 p-0 justify-content-center"
+      className: "row col-xl-11 col-lg-11 col-md-11 col-10 | justify-content-center | m-0 p-0"
     }), arr.map(function (post) {
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_outlook_ProjectOutlook__WEBPACK_IMPORTED_MODULE_2__["ProjectOutlook"], {
         post: post,
@@ -76995,7 +76942,7 @@ var Subpage = function Subpage(_ref) {
         }
       });
     })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-      className: "col-12 text-center my-5 divider"
+      className: "divider | col-12 | my-5 | text-center"
     }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("svg", {
       xmlns: "http://www.w3.org/2000/svg",
       width: "157",
@@ -77195,7 +77142,7 @@ var HomeOutlook = function HomeOutlook(_ref) {
     return f;
   } : _ref$getPost;
   return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: 'news-outlook-frame | row col-lg-4 col-6 | mx-0 my-2 p-0 | justify-content-center'
+    className: 'news-outlook-frame | row col-lg-4 col-sm-5 col-8 | mx-0 my-2 p-0 | justify-content-center'
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: 'news-outlook | row col-xl-11 col-lg-11 col-md-11 col-11 | m-0 p-0'
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
@@ -77350,8 +77297,8 @@ var ProjectOutlook = function ProjectOutlook(_ref) {
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! C:\Users\Mamuss\PhpstormProjects\SmartCityPresov\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! C:\Users\Mamuss\PhpstormProjects\SmartCityPresov\resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! /Users/patrik/Projects/Webs/SmartCityPresov/resources/js/app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! /Users/patrik/Projects/Webs/SmartCityPresov/resources/sass/app.scss */"./resources/sass/app.scss");
 
 
 /***/ })

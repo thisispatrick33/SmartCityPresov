@@ -39,9 +39,9 @@ export const Project = ({data, close = f => f}) => {
                 </div>
                 <div className="content m-0 shadow col-xl-10 col-lg-10 col-12 order-xl-2 order-lg-2 order-1 row mx-0 justify-content-end p-0 align-items-start">
                     <div className="col-12 row mx-0 p-0">
-                        <div className="col-12 row mx-0 mt-5 px-5 title p-0">
-                            <h2 className={"col-11 mb-3"}>{data.title}</h2>
-                            <span onClick={() => close()} className={"col-1 p-0"}>
+                        <div className="col-12 row mx-0 mt-5 px-5 title p-0 justify-content-xl-start justify-content-lg-start justify-content-md-start justify-content-end">
+                            <h2 className={"col-xl-11 col-lg-11 col-md-11 col-12 order-xl-1 order-lg-1 order-md-1 order-2 mb-3"}>{data.title}</h2>
+                            <span onClick={() => close()} className={"col-1 order-xl-2 order-lg-2 order-md-2 order-1 p-0"}>
                                 <svg className={"col-12 p-0 close-button"} enableBackground="new 0 0 357 357" version="1.1" viewBox="0 0 357 357" space="preserve" xmlns="http://www.w3.org/2000/svg">
                                         <polygon points="357 35.7 321.3 0 178.5 142.8 35.7 0 0 35.7 142.8 178.5 0 321.3 35.7 357 178.5 214.2 321.3 357 357 321.3 214.2 178.5"/>
                                 </svg>
