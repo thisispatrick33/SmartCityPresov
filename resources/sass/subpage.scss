@@ -1,8 +1,9 @@
-.subpage{
-    .subpage-intro{
+.sub-page{
+
+    .sub-page-intro{
         .background{
             right: 0;
-            height : 95%;
+            height : 100%;
             z-index : -1;
         }
         .main-title{
@@ -32,6 +33,11 @@
             font-family: SF-Light, serif;
         }
     }
+
+
+
+
+
     height: 100%;
     .subtitle-1{
         background : $primaryColor;
@@ -100,6 +106,7 @@
         left: 25%;
     }
     .main-title{
+        line-height: 130% !important;
         font-size : 6.68rem !important;
     }
     .sub-title{

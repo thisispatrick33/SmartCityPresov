@@ -6,15 +6,13 @@ nav{
   .item{
     border-radius: 50%;
     border : 0 none;
-
-    &:hover{
-      margin-right: 100px;
-      background: $primaryColor;
+    &.on, &:hover{
+      background: $primaryColor !important;
       cursor: pointer;
       svg{
-        fill : $colorOfPage;
+        fill : $colorOfPage !important;
       }
-      transition: 0.3s;
+      transition: 0.3s !important;
     }
     &:not(:hover){
       background: $colorOfPage;

@@ -10,12 +10,6 @@ import "slick-carousel/slick/slick-theme.css";
 
 
 export const Subpage = ({id, data, logged, project, author, hide = f => f, getpost = f => f, closePost}) => {
-    const descTitles = {
-        "mobilita" : '["mobilita", "pohyb", "doprava", "transport"]',
-        "zivotne_prostredie" : '["životné prostredie", "ekológia", "ovzdušie", "počasie"]',
-        "digitalne_mesto" : '["digitálne mesto", "informácie", "zastupiteľstvo", "občan"]',
-        "energia" : '["energia", "odpad", "spotreba", "ekológia"]',
-    };
     const settings = {
         infinite: false,
         speed: 500,
@@ -48,6 +42,8 @@ export const Subpage = ({id, data, logged, project, author, hide = f => f, getpo
     let settings1 = {...settings, dots: true, arrows : false};
     let settings2 = {...settings, dots: false, arrows : true};
     const [subpage, setSubpage] = useState([]);
+
+
     const close = () => {
         $('.project-details-frame .project-content').animate({
             marginTop: '100vh',
@@ -65,74 +61,20 @@ export const Subpage = ({id, data, logged, project, author, hide = f => f, getpo
         return chunked_arr;
     };
 
-    const typing = () => {
-        let TxtType = function (el, toRotate, period) {
-            this.toRotate = toRotate;
-            this.el = el;
-            this.loopNum = 0;
-            this.period = parseInt(period, 10) || 2000;
-            this.txt = '';
-            this.tick();
-            this.isDeleting = false;
-        };
-        TxtType.prototype.tick = function () {
-            let i = this.loopNum % this.toRotate.length;
-            let fullTxt = this.toRotate[i];
-            if (this.isDeleting) {
-                this.txt = fullTxt.substring(0, this.txt.length - 1);
-            } else {
-                this.txt = fullTxt.substring(0, this.txt.length + 1);
-            }
-            this.el.innerHTML = '<span class="wrap">' + this.txt + '</span>';
-            let that = this;
-            let delta = 200 - Math.random() * 100;
-            if (this.isDeleting) {
-                delta /= 2;
-            }
-            if (!this.isDeleting && this.txt === fullTxt) {
-                delta = this.period;
-                this.isDeleting = true;
-            } else if (this.isDeleting && this.txt === '') {
-                this.isDeleting = false;
-                this.loopNum++;
-                delta = 500;
-            }
-            setTimeout(function () {
-                that.tick();
-            }, delta);
-        };
-        window.onload = function () {
-            let elements = document.getElementsByClassName('typewrite');
-            for (let i = 0; i < elements.length; i++) {
-                let toRotate = elements[i].getAttribute('data-type');
-                let period = elements[i].getAttribute('data-period');
-                if (toRotate) {
-                    new TxtType(elements[i], JSON.parse(toRotate), period);
-                }
-            }
-            let css = document.createElement("style");
-            css.type = "text/css";
-            css.innerHTML = ".typewrite > .wrap { border-right: 0.08em solid #fff}";
-            document.body.appendChild(css);
-        };
-    }
-
 
     useEffect(() => {
-        if(data !== null){
-            setSubpage(data);
-            console.log(data);
-        }
-        typing();
+        if (data !== null) setSubpage(data);
     },[data]);
+
+    const scroll = () => $('html, body').animate({scrollTop: $("#here").offset().top}, 1500);
 
     if(subpage === null || subpage === undefined || !subpage.title){
         return <Loader/>;
     }
 
     return (
-        <div className={`subpage container-fluid p-0 m-0`}>
-            <div className="subpage-intro row col-12 p-0 mx-0 position-relative" style={{minHeight : $(window).height()}}>
+        <div className={`sub-page container-fluid p-0 m-0`}>
+            <div className="sub-page-intro row col-12 p-0 mx-0 position-relative" style={{minHeight : $(window).height()}}>
                 <div className="col-xl-4 col-lg-4 col-md-4 col-sm-2 col-1 position-absolute background m-0 p-0" style={{backgroundImage : 'url("./././././images/backgrounds/'+subpage.title_link+'.svg")'}}/>
                 <div className="row m-0 col-xl-9 col-lg-10 col-md-12 col-12 align-items-end justify-content-end p-0">
                     <div className="col-12 row mx-0 p-0 justify-content-center">
@@ -143,12 +85,12 @@ export const Subpage = ({id, data, logged, project, author, hide = f => f, getpo
                     </div>
                     <div className="col-xl-10 col-lg-10 col-md-11 col-12 row d-flex description subtitle-2 mx-0 py-5 align-items-end justify-content-center">
                         <h5 className="col-12 text-center title">
-                            smartcity prešov oblasť <a className="typewrite" data-period="2000" data-type={descTitles[subpage.title_link]}><span className="wrap"></span></a>
+                            smartcity prešov oblasť {subpage.title}
                         </h5>
                         <div className="col-10 my-2"><div className="col-6 ml-5"><hr/></div></div>
                         <p className={`col-xl-8 col-lg-9 col-md-9 col-sm-10 col-11 text-center`}>{subpage.description}</p>
                     </div>
-                    <div className="col-xl-2 col-lg-2 col-md-1 d-xl-flex d-lg-flex d-md-flex d-none subtitle-1 mx-0 p-0 py-5 align-items-end justify-content-center">
+                    <div onClick={scroll} className="col-xl-2 col-lg-2 col-md-1 d-xl-flex d-lg-flex d-md-flex d-none subtitle-1 mx-0 p-0 py-5 align-items-end justify-content-center">
                         <svg className={`arrow col-5 p-0`} fill={`#ffffff`} enableBackground="new 0 0 64 64" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg"><path d="m32 8c-1.104 0-2 .896-2 2v39.899l-14.552-15.278c-.761-.799-2.026-.832-2.828-.069-.8.762-.831 2.027-.069 2.827l16.62 17.449c.756.756 1.76 1.172 2.829 1.172 1.068 0 2.073-.416 2.862-1.207l16.586-17.414c.762-.8.73-2.065-.069-2.827-.799-.763-2.065-.731-2.827.069l-14.552 15.342v-39.963c0-1.104-.896-2-2-2z"/></svg>
                     </div>
                 </div>
@@ -156,7 +98,7 @@ export const Subpage = ({id, data, logged, project, author, hide = f => f, getpo
             <div className="row col-12 p-0 mx-0 mb-xl-5 mb-lg-5 my-0 justify-content-end">
                 <div className="row m-0 col-xl-9 col-lg-10 col-md-11 col-12 align-items-start justify-content-end p-0">
                     <div className="col-xl-7 col-lg-8 col-md-10 col-12 subtitle subtitle-1 row mx-0 p-0 py-5">
-                        <h3 className="col-12 text-center font-bold subpage-title p-0 m-0">
+                        <h3 id={`here`} className="col-12 text-center font-bold subpage-title p-0 m-0">
                             aktuálne pripravujeme.
                         </h3>
                     </div>

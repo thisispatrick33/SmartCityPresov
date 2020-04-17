@@ -11,12 +11,11 @@ export const Main = (props) => {
         const handleResize = () => {};
         const handleScroll = () => {
             if(props['*'].length > 0){
-                $('.background').css('backgroundPositionY', Number($('.background').css('backgroundPositionY').replace('%','').replace('px','')) + 1);
+                $('.background').css('backgroundPositionY', Number($('.background').css('backgroundPositionY').replace('%','').replace('px','')) + 3);
             }else{
-                $('.map').css('width', Number($('.map').css('width').replace('%','').replace('px','')) + 1);
+                Number($('.map-frame').css('width').replace('px','') * 1.2 >  Number($('.map').css('width').replace('px','')) ? $('.map').css('width', Number($('.map').css('width').replace('%','').replace('px','')) + 1) : ``);
             }
         };
-
         window.addEventListener('resize', handleResize);
         window.addEventListener('scroll', handleScroll);
 
@@ -30,7 +29,7 @@ export const Main = (props) => {
 
     return (
         <>
-            <Navigation changeSubpage={props.changeSubpage}/>
+            <Navigation subpageId={props['*']} changeSubpage={props.changeSubpage}/>
             <div>
                 { props.children }
             </div>
