@@ -16,7 +16,8 @@ export const UpdatePost = ({id, logged, changeSubpage, post = f => f, getpost = 
         }
     }, [project]);
 
-    const handleSubmit = () =>{
+    const handleSubmit = (e) =>{
+        e.preventDefault();
         post({...updatedData, updated_images: images.map(({id}) => id)});
     };
 
@@ -24,7 +25,7 @@ export const UpdatePost = ({id, logged, changeSubpage, post = f => f, getpost = 
 
     if(logged.id!==undefined){
         return (
-            <form encType="multipart/form-data">
+            <form encType="multipart/form-data" onSubmit={(e) => handleSubmit(e)}>
                 <input name={`title`} className={"col-10 offset-1"} value={updatedData.title} placeholder={`Zadajte názov`} onChange={e => {setUpdatedData({...updatedData,title : e.target.value})}} required={true}/>
                 <textarea name={`description`} className={"col-10 offset-1"} placeholder={`Zadajte text článku`} value={updatedData.description} onChange={e => {setUpdatedData({...updatedData,description : e.target.value})}} required={true}/>
                 <input name={`price`} className={"col-10 offset-1"} value={updatedData.price} placeholder={`Zadajte cenu projektu`} type={`number`} onChange={e => {setUpdatedData({...updatedData,price : e.target.value})}} required={true}/>
@@ -57,7 +58,7 @@ export const UpdatePost = ({id, logged, changeSubpage, post = f => f, getpost = 
                 <p className={"col-3 d-inline offset-1"}>Ukoncene</p>
                 <input type="radio" name="done" value="1" checked={updatedData.done === 1} onClick={e => {setUpdatedData({...updatedData,done : 1})}}/>
 
-                <input type="button" className={"offset-1 d-block"} value={"potvrdiť"} onClick={() => handleSubmit()}/>
+                <input type="submit" className={"offset-1 d-block"} value={"potvrdiť"} />
             </form>
 
         );

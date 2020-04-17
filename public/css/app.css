@@ -11110,40 +11110,40 @@ footer {
   height: 100%;
 }
 
-.sub-page .sub-page-intro .background {
-  right: 0;
+.sub-page .intro .background {
   height: 100%;
+  right: 0;
   z-index: -1;
 }
 
-.sub-page .sub-page-intro .main-title {
+.sub-page .intro .main-title {
   font-size: 9.68rem;
   color: #D61920;
   font-family: SF-Bold, serif;
   line-height: 80%;
 }
 
-.sub-page .sub-page-intro .sub-title {
+.sub-page .intro .sub-title {
   font-size: 5.43rem;
   color: #191919;
   font-family: SF-Bold, serif;
 }
 
-.sub-page .sub-page-intro .description {
+.sub-page .intro .description {
   font-size: 1.2375rem;
   color: #fff;
   font-family: SF-Light, serif;
 }
 
-.sub-page .sub-page-intro .description .title,
-.sub-page .sub-page-intro .description a {
+.sub-page .intro .description .title,
+.sub-page .intro .description a {
   text-transform: uppercase;
   letter-spacing: 2.5px;
   font-size: 1.36rem;
   font-family: SF-Bold, serif;
 }
 
-.sub-page .sub-page-intro .description hr {
+.sub-page .intro .description hr {
   border-top: 3px solid #D61920;
   fill: #D61920;
 }

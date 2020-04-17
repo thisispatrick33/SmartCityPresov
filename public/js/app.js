@@ -70770,7 +70770,6 @@ var App = function App() {
   };
 
   var _createPost = function _createPost(creationData) {
-    console.log(creationData);
     config_multipart_form_data.headers['Authorization'] = 'Bearer ' + authState.user.auth_token;
     var formData = new FormData();
     formData.append("title", creationData.title);
@@ -70922,8 +70921,6 @@ var App = function App() {
     changeSubpage: subpageFetchData
   }), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_subpage_Subpage__WEBPACK_IMPORTED_MODULE_6__["Subpage"], {
     path: ":id",
-    hide: _deletePost,
-    logged: authState.isLoggedIn ? authState.user : false,
     data: currentSubpage,
     getpost: getPost,
     project: project,
@@ -75258,20 +75255,24 @@ var CreatePost = function CreatePost(_ref) {
     description: null,
     price: null,
     author: null,
-    subpage_id: null,
-    done: null
+    subpage_id: 1,
+    done: 0
   }),
       _useState2 = _slicedToArray(_useState, 2),
       creationData = _useState2[0],
       setCreationData = _useState2[1];
 
-  var handleSubmit = function handleSubmit() {
+  var handleSubmit = function handleSubmit(e) {
+    e.preventDefault();
     post(creationData);
   };
 
   if (logged.id !== undefined) {
     return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("form", {
-      encType: "multipart/form-data"
+      encType: "multipart/form-data",
+      onSubmit: function onSubmit(e) {
+        return handleSubmit(e);
+      }
     }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
       name: "title",
       className: "col-10 offset-1",
@@ -75335,6 +75336,7 @@ var CreatePost = function CreatePost(_ref) {
       type: "radio",
       name: "subpage_id",
       value: "1",
+      checked: creationData.subpage_id === 1,
       onClick: function onClick(e) {
         setCreationData(_objectSpread({}, creationData, {
           subpage_id: 1
@@ -75346,6 +75348,7 @@ var CreatePost = function CreatePost(_ref) {
       type: "radio",
       name: "subpage_id",
       value: "2",
+      checked: creationData.subpage_id === 2,
       onClick: function onClick(e) {
         setCreationData(_objectSpread({}, creationData, {
           subpage_id: 2
@@ -75357,6 +75360,7 @@ var CreatePost = function CreatePost(_ref) {
       type: "radio",
       name: "subpage_id",
       value: "3",
+      checked: creationData.subpage_id === 3,
       onClick: function onClick(e) {
         setCreationData(_objectSpread({}, creationData, {
           subpage_id: 3
@@ -75368,6 +75372,7 @@ var CreatePost = function CreatePost(_ref) {
       type: "radio",
       name: "subpage_id",
       value: "4",
+      checked: creationData.subpage_id === 4,
       onClick: function onClick(e) {
         setCreationData(_objectSpread({}, creationData, {
           subpage_id: 4
@@ -75381,6 +75386,7 @@ var CreatePost = function CreatePost(_ref) {
       type: "radio",
       name: "done",
       value: "0",
+      checked: creationData.done === 0,
       onClick: function onClick(e) {
         setCreationData(_objectSpread({}, creationData, {
           done: 0
@@ -75392,18 +75398,16 @@ var CreatePost = function CreatePost(_ref) {
       type: "radio",
       name: "done",
       value: "1",
+      checked: creationData.done === 1,
       onClick: function onClick(e) {
         setCreationData(_objectSpread({}, creationData, {
           done: 1
         }));
       }
     }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
-      type: "button",
+      type: "submit",
       className: "offset-1 d-block",
-      value: "potvrdiť",
-      onClick: function onClick() {
-        return handleSubmit();
-      }
+      value: "potvrdiť"
     }));
   } else {
     return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, "Unauthorized"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
@@ -75540,7 +75544,8 @@ var UpdatePost = function UpdatePost(_ref) {
     }
   }, [project]);
 
-  var handleSubmit = function handleSubmit() {
+  var handleSubmit = function handleSubmit(e) {
+    e.preventDefault();
     post(_objectSpread({}, updatedData, {
       updated_images: images.map(function (_ref2) {
         var id = _ref2.id;
@@ -75557,7 +75562,10 @@ var UpdatePost = function UpdatePost(_ref) {
 
   if (logged.id !== undefined) {
     return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("form", {
-      encType: "multipart/form-data"
+      encType: "multipart/form-data",
+      onSubmit: function onSubmit(e) {
+        return handleSubmit(e);
+      }
     }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
       name: "title",
       className: "col-10 offset-1",
@@ -75708,12 +75716,9 @@ var UpdatePost = function UpdatePost(_ref) {
         }));
       }
     }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
-      type: "button",
+      type: "submit",
       className: "offset-1 d-block",
-      value: "potvrdiť",
-      onClick: function onClick() {
-        return handleSubmit();
-      }
+      value: "potvrdiť"
     }));
   } else {
     return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, "Unauthorized"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
@@ -76331,12 +76336,18 @@ var Subpage = function Subpage(_ref) {
   };
 
   Object(react__WEBPACK_IMPORTED_MODULE_0__["useEffect"])(function () {
-    if (data !== null) setSubpage(data);
+    if (data !== null) {
+      setSubpage(data);
+      console.log(data);
+    }
+
+    closePost();
   }, [data]);
 
   var scroll = function scroll() {
     return jquery__WEBPACK_IMPORTED_MODULE_5___default()('html, body').animate({
-      scrollTop: jquery__WEBPACK_IMPORTED_MODULE_5___default()("#here").offset().top
+      scrollTop: jquery__WEBPACK_IMPORTED_MODULE_5___default()("#here").offset().top,
+      easing: 'easeInOutCirc'
     }, 1500);
   };
 
@@ -76345,42 +76356,42 @@ var Subpage = function Subpage(_ref) {
   }
 
   return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "sub-page container-fluid p-0 m-0"
+    className: "sub-page | container-fluid | m-0 p-0"
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "sub-page-intro row col-12 p-0 mx-0 position-relative",
+    className: "position-relative intro | row col-12 | mx-0 p-0",
     style: {
       minHeight: jquery__WEBPACK_IMPORTED_MODULE_5___default()(window).height()
     }
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "col-xl-4 col-lg-4 col-md-4 col-sm-2 col-1 position-absolute background m-0 p-0",
+    className: "background position-absolute | col-xl-4 col-lg-4 col-md-4 col-sm-2 col-1 | m-0 p-0",
     style: {
       backgroundImage: 'url("./././././images/backgrounds/' + subpage.title_link + '.svg")'
     }
   }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "row m-0 col-xl-9 col-lg-10 col-md-12 col-12 align-items-end justify-content-end p-0"
+    className: "row col-xl-9 col-lg-10 col-md-12 col-12 | align-items-end | justify-content-end | m-0 p-0"
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "col-12 row mx-0 p-0 justify-content-center"
+    className: "row col-12 | justify-content-center | mx-0 p-0"
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "col-11 row m-0"
+    className: "row col-11 | m-0"
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", {
-    className: "main-title mb-0 col-auto p-0"
+    className: "main-title | col-auto | mb-0 p-0"
   }, subpage.title, "."), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", {
-    className: "sub-title col-auto p-0"
+    className: "sub-title | col-auto | p-0"
   }, "smartcity pre\u0161ov."))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "col-xl-10 col-lg-10 col-md-11 col-12 row d-flex description subtitle-2 mx-0 py-5 align-items-end justify-content-center"
+    className: "description subtitle-2 | row col-xl-10 col-lg-10 col-md-11 col-12 | align-items-end | justify-content-center | mx-0 py-5 | d-flex"
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h5", {
-    className: "col-12 text-center title"
+    className: "title | col-12 | text-center"
   }, "smartcity pre\u0161ov oblas\u0165 ", subpage.title), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "col-10 my-2"
+    className: "col-10 | my-2"
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "col-6 ml-5"
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("hr", null))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
-    className: "col-xl-8 col-lg-9 col-md-9 col-sm-10 col-11 text-center"
+    className: "col-xl-8 col-lg-9 col-md-9 col-sm-10 col-11 | text-center"
   }, subpage.description)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     onClick: scroll,
-    className: "col-xl-2 col-lg-2 col-md-1 d-xl-flex d-lg-flex d-md-flex d-none subtitle-1 mx-0 p-0 py-5 align-items-end justify-content-center"
+    className: "subtitle-1 | col-xl-2 col-lg-2 col-md-1 | align-items-end | justify-content-center | mx-0 p-0 py-5 | d-xl-flex d-lg-flex d-md-flex d-none"
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("svg", {
-    className: "arrow col-5 p-0",
+    className: "arrow col-5 | p-0",
     fill: "#ffffff",
     enableBackground: "new 0 0 64 64",
     viewBox: "0 0 64 64",
@@ -76388,18 +76399,18 @@ var Subpage = function Subpage(_ref) {
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("path", {
     d: "m32 8c-1.104 0-2 .896-2 2v39.899l-14.552-15.278c-.761-.799-2.026-.832-2.828-.069-.8.762-.831 2.027-.069 2.827l16.62 17.449c.756.756 1.76 1.172 2.829 1.172 1.068 0 2.073-.416 2.862-1.207l16.586-17.414c.762-.8.73-2.065-.069-2.827-.799-.763-2.065-.731-2.827.069l-14.552 15.342v-39.963c0-1.104-.896-2-2-2z"
   }))))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "row col-12 p-0 mx-0 mb-xl-5 mb-lg-5 my-0 justify-content-end"
+    className: "row col-12 | justify-content-end | mb-xl-5 mb-lg-5 mx-0 my-0 p-0"
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "row m-0 col-xl-9 col-lg-10 col-md-11 col-12 align-items-start justify-content-end p-0"
+    className: "row col-xl-9 col-lg-10 col-md-11 col-12 | align-items-start | justify-content-end | m-0 p-0"
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "col-xl-7 col-lg-8 col-md-10 col-12 subtitle subtitle-1 row mx-0 p-0 py-5"
+    className: "subtitle subtitle-1 | row col-xl-7 col-lg-8 col-md-10 col-12 | mx-0 p-0 py-5"
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", {
     id: "here",
-    className: "col-12 text-center font-bold subpage-title p-0 m-0"
+    className: "font-bold subpage-title | col-12 | m-0 p-0 | text-center"
   }, "aktu\xE1lne pripravujeme."))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "row m-0 col-xl-3 col-lg-2 d-xl-flex d-lg-flex d-none justify-content-center p-0"
   }, " ", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("svg", {
-    className: "col-10 p-0",
+    className: "col-10 | p-0",
     xmlns: "http://www.w3.org/2000/svg",
     width: "215",
     height: "161",
@@ -76646,11 +76657,11 @@ var Subpage = function Subpage(_ref) {
     r: "6",
     transform: "translate(12) rotate(90)"
   })), " ")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "row col-12 p-0 m-0 justify-content-xl-between justify-content-lg-between justify-content-start mx-0"
+    className: "row col-12 | justify-content-xl-between justify-content-lg-between justify-content-start | mx-0 m-0 p-0"
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "col-xl-2 col-lg-2 col-md-3 col-4 align-items-center d-flex p-0"
+    className: "col-xl-2 col-lg-2 col-md-3 col-4 | align-items-center | p-0 | d-flex"
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("svg", {
-    className: "col-12 m-0",
+    className: "col-12 | m-0",
     xmlns: "http://www.w3.org/2000/svg",
     width: "215",
     height: "157",
@@ -76949,7 +76960,7 @@ var Subpage = function Subpage(_ref) {
     return item.done === 0;
   }).slice(0, 4), 4).map(function (arr) {
     return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_slick__WEBPACK_IMPORTED_MODULE_6___default.a, _extends({}, settings1, {
-      className: "col-xl-8 col-lg-8 col-md-8 col-7 row my-5 mx-xl-0 mx-lg-0 mr-0 ml-2 p-0 justify-content-start"
+      className: "row col-xl-8 col-lg-8 col-md-8 col-7 | justify-content-start | mx-xl-0 mx-lg-0 mr-0 my-5 ml-2 p-0"
     }), arr.map(function (post) {
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_outlook_NewsOutlook__WEBPACK_IMPORTED_MODULE_1__["NewsOutlook"], {
         post: post,
@@ -76959,24 +76970,24 @@ var Subpage = function Subpage(_ref) {
       });
     }));
   }), window.innerWidth >= 1200 ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "col-1 p-0 m-0 background-secondary d-xl-flex d-lg-flex d-none"
+    className: "col-1 | m-0 p-0 | d-xl-flex d-lg-flex d-none background-secondary"
   }) : react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "row col-12 p-0 mx-0 h-15rem my-5"
+    className: "h-15rem | row col-12 | mx-0 my-5 p-0"
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "col-md-4 col-lg-3 col-xl-2 background-primary m-0"
+    className: "col-xl-2 col-lg-3 col-md-4 | m-0 | background-primary"
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "position-absolute subtitle subtitle-2 solved m-0 align-items-center d-flex text-center"
+    className: "position-absolute solved subtitle subtitle-2 | align-items-center | m-0 | d-flex | text-center"
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", {
-    className: "col-12 font-bold subpage-title p-3 m-0"
+    className: "font-bold subpage-title | col-12 | m-0 p-3"
   }, "u\u017E sme zrealizovali a vyrie\u0161ili.")))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "row col-12 my-xl-5 my-lg-5 mb-3 mx-0 p-0 justify-content-center"
+    className: "row col-12 | justify-content-center | my-xl-5 my-lg-5 mx-0 mb-3 p-0"
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "row col-xl-12 col-lg-12 col-md-12 col-sm-11 col-11 m-0 p-0 justify-content-center"
+    className: "row col-xl-12 col-lg-12 col-md-12 col-sm-11 col-11 | justify-content-center | m-0 p-0"
   }, chunk(subpage.posts.filter(function (item) {
     return item.done === 1;
   }), 4).map(function (arr) {
     return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_slick__WEBPACK_IMPORTED_MODULE_6___default.a, _extends({}, settings2, {
-      className: "row col-xl-11 col-lg-11 col-md-11 col-10 m-0 p-0 justify-content-center"
+      className: "row col-xl-11 col-lg-11 col-md-11 col-10 | justify-content-center | m-0 p-0"
     }), arr.map(function (post) {
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_outlook_ProjectOutlook__WEBPACK_IMPORTED_MODULE_2__["ProjectOutlook"], {
         post: post,
@@ -76985,7 +76996,7 @@ var Subpage = function Subpage(_ref) {
         }
       });
     })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-      className: "col-12 text-center my-5 divider"
+      className: "divider | col-12 | my-5 | text-center"
     }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("svg", {
       xmlns: "http://www.w3.org/2000/svg",
       width: "157",
@@ -77067,9 +77078,8 @@ var Subpage = function Subpage(_ref) {
       transform: "translate(604 2730) rotate(180)",
       fill: "#d3d2d2"
     })))));
-  }))), project !== null && author !== null ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Project__WEBPACK_IMPORTED_MODULE_4__["Project"], {
+  }))), project !== null ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Project__WEBPACK_IMPORTED_MODULE_4__["Project"], {
     data: project,
-    user: author,
     close: close
   }) : null);
 };
