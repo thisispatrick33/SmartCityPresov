@@ -105,5 +105,11 @@
     }
 }
 @media (max-width: $sm){
-
+    .spec{
+        font-size: 1.5rem !important;
+    }
+    .desc{
+        font-size : .9rem !important;
+    }
 }
+

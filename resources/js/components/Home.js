@@ -34,13 +34,13 @@ export const Home = ({_homeNewestPosts, getpost = f => f, project, author, close
                     (project !== null && author !== null) ? (
                         <Project data={project} user={author} close={close}/>) : null
                 }
-                <div className="screen mb-md-5 mt-5 d-flex align-items-center">
+                <div className="screen mb-md-5 mt-5 d-flex align-items-xl-start align-items-lg-start align-items-center">
                     <div className="row m-0 p-0">
                         <div className='col-xl-1'></div>
                         <div className="col-xl row m-0 p-0 pt-xl-4">
-                            <div className="col-xl-5 offset-xl-0 offset-2 col-10  mt-md-1 mb-3 py-md-5 py-3 font-bold px-2 mx-xl-0">
-                                <h1 className="silver-color home-main-title">smartcity.</h1>
-                                <h1 className="primary-color home-main-title">prešov.</h1>
+                            <div className="col-xl-5 offset-xl-0 offset-1 col-10  mt-md-1 mb-3 py-md-5 py-3 font-bold px-2 mx-xl-0">
+                                <h1 className="silver-color home-main-title text-xl-left text-lg-left text-md-left text-center">smartcity.</h1>
+                                <h1 className="primary-color home-main-title text-xl-left text-lg-left text-md-left text-center">prešov.</h1>
                             </div>
                             <div className="col-xl-6 col-8  m-0 p-0  row justify-content-center map-box mt-md-n5 my-5 ml-xl-5 mx-auto">
                                 <div className="map-frame col-lg-10 mt-md-n5">
@@ -48,25 +48,10 @@ export const Home = ({_homeNewestPosts, getpost = f => f, project, author, close
                                 </div>
                             </div>
                             <div className="col-xl-5">
-                                <p className=" col-xl-12 col-10 offset-xl-0 offset-2 home-main-text p-0 pr-5">
-                                    Aj toto sú mnohé z aktuálných problémov, pre ktoré mesto Prešov pripravuje smart
-                                    riešenia.
-                                    <a className="d-block" href="">Klikni a zisti viac informácií.</a>
+                                <p className=" col-xl-12 col-10 offset-xl-0 offset-2 home-main-text p-0 pr-5 font-regular text-xl-left text-lg-left text-md-left text-center">
+                                    Práve na tomto webe môžete nájsť množstvo problémov, ktoré mesto rieši práve pomocou technológií a práve tým vytvára Smartcity Prešov
                                 </p>
                             </div>
-
-                            {
-                                window.innerWidth <= 1200 ?
-                                    <div className="col-12 d-flex justify-content-center my-5">
-                                        <svg style={{transform: "scale(1)"}} xmlns="http://www.w3.org/2000/svg"
-                                             width="55.795" height="27.898" viewBox="0 0 55.795 27.898">
-                                            <path className="a"
-                                                  d="M160.45,27.9,137.783,50.565V55.8l27.9-27.9L137.783,0V5.231Z"
-                                                  transform="translate(55.795 -137.783) rotate(90)"/>
-                                        </svg>
-                                    </div>
-                                    : <></>
-                            }
                         </div>
                     </div>
                 </div>
@@ -76,7 +61,7 @@ export const Home = ({_homeNewestPosts, getpost = f => f, project, author, close
                             <h2 className="d-inline rotate partial-border font-bold m-0">SMARTCITY PREŠOV</h2>
                         </div>
                         <div className="col-xl-5 col-lg-6 col-md-8 col-10 mx-0 row align-items-center text-center px-md-4 home-text">
-                            <p className="col-12 p-0 m-0">
+                            <p className="col-12 p-0 m-0 desc">
                                     Smart city je koncept, ktorý využíva digitálne, informačné a komunikačné technológie pre
                                     zvýšenie kvality života v mestách. Zameriava sa na efektívne využívanie súčasných a
                                     hľadanie nových zdrojov, znižovanie spotreby energií, elimináciu záťaží na životné prostredie,
@@ -93,9 +78,9 @@ export const Home = ({_homeNewestPosts, getpost = f => f, project, author, close
                         }
                     </div>
                     <div className="half-screen row">
-                        <div className="col-xl-7 row pr-md-4">
-                            <div className="col-12 align-items-center justify-content-end mb-3 mt-5 pt-4">
-                                <h2 className="text-md-right  text-center pr-3 font-bold home-preparing">momentálne
+                        <div className="col-xl-7 row pr-md-4 pr-0 mx-0">
+                            <div className="col-12 align-items-center justify-content-end mb-3 mt-5 pt-4 px-0">
+                                <h2 className="text-md-right spec text-center pr-xl-3 pr-lg-3 pr-md-3 pr-0 font-bold home-preparing">momentálne
                                     pripravujeme.</h2>
                             </div>
                             <div className="col-3 pt-5 d-flex">
@@ -229,7 +214,7 @@ export const Home = ({_homeNewestPosts, getpost = f => f, project, author, close
                                         >
                                             <div className='col-12 row align-items-center h-100 m-0 p-0 justify-content-center'>
                                                 <img alt={"cover news image"} className={'col-xl-8 col-lg-8 col-md-7 col-sm-6 col-8 | p-3'} src={`images/news/mobilita.svg`}/>
-                                                <p className="col-12 p-0 m-0">mobilita</p>
+                                                <p className="col-12 p-0 m-0 font-semibold">mobilita</p>
                                             </div>
                                         </div>
                                         <div
@@ -238,7 +223,7 @@ export const Home = ({_homeNewestPosts, getpost = f => f, project, author, close
                                         >
                                             <div className='col-12 row align-items-center justify-content-center h-100 m-0 p-0'>
                                                 <img alt={"cover news image"} className={'col-xl-9 col-lg-9 col-md-8 col-sm-7 col-9 | p-3'} src={`images/news/zivotne_prostredie.svg`}/>
-                                                <p className="col-12 p-0 m-0">životné prostredie</p>
+                                                <p className="col-12 p-0 m-0 font-semibold">životné prostredie</p>
                                             </div>
                                         </div>
                                         </div>
@@ -478,7 +463,7 @@ export const Home = ({_homeNewestPosts, getpost = f => f, project, author, close
                                                 onClick={()=>{navigate(`/digitalne_mesto`); changeSubpage()}}>
                                                 <div className='col-12 row align-items-center h-100 m-0 p-0 justify-content-center'>
                                                         <img alt={"cover news image"} className={'col-xl-9 col-lg-9 col-md-8 col-sm-7 col-9 | p-3'} src={`images/news/digitalne_mesto.svg`}/>
-                                                        <p className="col-12 p-0 m-0">DIGITÁLNE MESTO</p>
+                                                        <p className="col-12 p-0 m-0 font-semibold">DIGITÁLNE MESTO</p>
                                                 </div>
                                         </div>
                                         <div
@@ -486,7 +471,7 @@ export const Home = ({_homeNewestPosts, getpost = f => f, project, author, close
                                                 onClick={()=>{navigate(`/energia`); changeSubpage()}}>
                                                 <div className='col-12 row align-items-center justify-content-center h-100 m-0 p-0'>
                                                     <img alt={"cover news image"} className={'col-xl-9 col-lg-9 col-md-8 col-sm-7 col-9 | p-3'} src={`images/news/energia.svg`}/>
-                                                    <p className="col-12 p-0 m-0">energia</p>
+                                                    <p className="col-12 p-0 m-0 font-semibold">energia</p>
                                                 </div>
                                         </div>
                                         </div>

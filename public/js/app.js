@@ -70996,7 +70996,7 @@ var Home = function Home(_ref) {
       user: author,
       close: close
     }) : null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-      className: "screen mb-md-5 mt-5 d-flex align-items-center"
+      className: "screen mb-md-5 mt-5 d-flex align-items-xl-start align-items-lg-start align-items-center"
     }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
       className: "row m-0 p-0"
     }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
@@ -71004,11 +71004,11 @@ var Home = function Home(_ref) {
     }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
       className: "col-xl row m-0 p-0 pt-xl-4"
     }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-      className: "col-xl-5 offset-xl-0 offset-2 col-10  mt-md-1 mb-3 py-md-5 py-3 font-bold px-2 mx-xl-0"
+      className: "col-xl-5 offset-xl-0 offset-1 col-10  mt-md-1 mb-3 py-md-5 py-3 font-bold px-2 mx-xl-0"
     }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", {
-      className: "silver-color home-main-title"
+      className: "silver-color home-main-title text-xl-left text-lg-left text-md-left text-center"
     }, "smartcity."), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", {
-      className: "primary-color home-main-title"
+      className: "primary-color home-main-title text-xl-left text-lg-left text-md-left text-center"
     }, "pre\u0161ov.")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
       className: "col-xl-6 col-8  m-0 p-0  row justify-content-center map-box mt-md-n5 my-5 ml-xl-5 mx-auto"
     }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
@@ -73196,25 +73196,8 @@ var Home = function Home(_ref) {
     }))))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
       className: "col-xl-5"
     }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
-      className: " col-xl-12 col-10 offset-xl-0 offset-2 home-main-text p-0 pr-5"
-    }, "Aj toto s\xFA mnoh\xE9 z aktu\xE1ln\xFDch probl\xE9mov, pre ktor\xE9 mesto Pre\u0161ov pripravuje smart rie\u0161enia.", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
-      className: "d-block",
-      href: ""
-    }, "Klikni a zisti viac inform\xE1ci\xED."))), window.innerWidth <= 1200 ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-      className: "col-12 d-flex justify-content-center my-5"
-    }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("svg", {
-      style: {
-        transform: "scale(1)"
-      },
-      xmlns: "http://www.w3.org/2000/svg",
-      width: "55.795",
-      height: "27.898",
-      viewBox: "0 0 55.795 27.898"
-    }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("path", {
-      className: "a",
-      d: "M160.45,27.9,137.783,50.565V55.8l27.9-27.9L137.783,0V5.231Z",
-      transform: "translate(55.795 -137.783) rotate(90)"
-    }))) : react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null)))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      className: " col-xl-12 col-10 offset-xl-0 offset-2 home-main-text p-0 pr-5 font-regular text-xl-left text-lg-left text-md-left text-center"
+    }, "Pr\xE1ve na tomto webe m\xF4\u017Eete n\xE1js\u0165 mno\u017Estvo probl\xE9mov, ktor\xE9 mesto rie\u0161i pr\xE1ve pomocou technol\xF3gi\xED a pr\xE1ve t\xFDm vytv\xE1ra Smartcity Pre\u0161ov"))))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
       className: "screen row p-0 m-0 pb-5"
     }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
       className: "background-secondary m-0 p-0 col-12 row py-5 justify-content-lg-start justify-content-center"
@@ -73225,7 +73208,7 @@ var Home = function Home(_ref) {
     }, "SMARTCITY PRE\u0160OV")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
       className: "col-xl-5 col-lg-6 col-md-8 col-10 mx-0 row align-items-center text-center px-md-4 home-text"
     }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
-      className: "col-12 p-0 m-0"
+      className: "col-12 p-0 m-0 desc"
     }, "Smart city je koncept, ktor\xFD vyu\u017E\xEDva digit\xE1lne, informa\u010Dn\xE9 a komunika\u010Dn\xE9 technol\xF3gie pre zv\xFD\u0161enie kvality \u017Eivota v mest\xE1ch. Zameriava sa na efekt\xEDvne vyu\u017E\xEDvanie s\xFA\u010Dasn\xFDch a h\u013Eadanie nov\xFDch zdrojov, zni\u017Eovanie spotreby energi\xED, elimin\xE1ciu z\xE1\u0165a\u017E\xED na \u017Eivotn\xE9 prostredie, optimaliz\xE1ciu dopravy a zdie\u013Eanie d\xE1t pre verejn\xE9 \xFA\u010Dely.")), window.innerWidth >= 1200 ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
       className: "col position-relative d-none d-xl-block"
     }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
@@ -73237,11 +73220,11 @@ var Home = function Home(_ref) {
     })) : react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
       className: "half-screen row"
     }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-      className: "col-xl-7 row pr-md-4"
+      className: "col-xl-7 row pr-md-4 pr-0 mx-0"
     }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-      className: "col-12 align-items-center justify-content-end mb-3 mt-5 pt-4"
+      className: "col-12 align-items-center justify-content-end mb-3 mt-5 pt-4 px-0"
     }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h2", {
-      className: "text-md-right  text-center pr-3 font-bold home-preparing"
+      className: "text-md-right spec text-center pr-xl-3 pr-lg-3 pr-md-3 pr-0 font-bold home-preparing"
     }, "moment\xE1lne pripravujeme.")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
       className: "col-3 pt-5 d-flex"
     }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("svg", {
@@ -73586,7 +73569,7 @@ var Home = function Home(_ref) {
       className: 'col-xl-8 col-lg-8 col-md-7 col-sm-6 col-8 | p-3',
       src: "images/news/mobilita.svg"
     }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
-      className: "col-12 p-0 m-0"
+      className: "col-12 p-0 m-0 font-semibold"
     }, "mobilita"))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
       className: " col-4 background-white rounded-lg text-center ml-3 my-4 py-3 text-uppercase font-semibold home-cards ",
       onClick: function onClick() {
@@ -73600,7 +73583,7 @@ var Home = function Home(_ref) {
       className: 'col-xl-9 col-lg-9 col-md-8 col-sm-7 col-9 | p-3',
       src: "images/news/zivotne_prostredie.svg"
     }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
-      className: "col-12 p-0 m-0"
+      className: "col-12 p-0 m-0 font-semibold"
     }, "\u017Eivotn\xE9 prostredie")))), window.innerWidth >= 768 ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
       className: "row d-none d-lg-flex"
     }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
@@ -74034,7 +74017,7 @@ var Home = function Home(_ref) {
       className: 'col-xl-9 col-lg-9 col-md-8 col-sm-7 col-9 | p-3',
       src: "images/news/digitalne_mesto.svg"
     }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
-      className: "col-12 p-0 m-0"
+      className: "col-12 p-0 m-0 font-semibold"
     }, "DIGIT\xC1LNE MESTO"))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
       className: "col-4 background-white rounded-lg text-center ml-3 my-4 py-3 text-uppercase font-semibold home-cards align-items-center",
       onClick: function onClick() {
@@ -74048,7 +74031,7 @@ var Home = function Home(_ref) {
       className: 'col-xl-9 col-lg-9 col-md-8 col-sm-7 col-9 | p-3',
       src: "images/news/energia.svg"
     }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
-      className: "col-12 p-0 m-0"
+      className: "col-12 p-0 m-0 font-semibold"
     }, "energia")))))))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
       className: "row my-md-5 py-md-5 pl-1"
     }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
@@ -76693,7 +76676,7 @@ var HomeOutlook = function HomeOutlook(_ref) {
     return f;
   } : _ref$getPost;
   return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: 'news-outlook-frame | row col-lg-4 col-sm-5 col-8 | mx-0 my-2 p-0 | justify-content-center'
+    className: 'news-outlook-frame | row col-lg-4 col-sm-5 col-10 | mx-0 my-2 p-0 | justify-content-center'
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: 'news-outlook | row col-xl-11 col-lg-11 col-md-11 col-11 | m-0 p-0'
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
@@ -76848,8 +76831,8 @@ var ProjectOutlook = function ProjectOutlook(_ref) {
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! C:\Users\Mamuss\PhpstormProjects\SmartCityPresov\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! C:\Users\Mamuss\PhpstormProjects\SmartCityPresov\resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! /Users/patrik/Projects/Webs/SmartCityPresov/resources/js/app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! /Users/patrik/Projects/Webs/SmartCityPresov/resources/sass/app.scss */"./resources/sass/app.scss");
 
 
 /***/ })

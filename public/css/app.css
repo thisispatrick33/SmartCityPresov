@@ -10799,194 +10799,6 @@ body footer p:nth-child(2) {
   background: #555;
 }
 
-@font-face {
-  font-family: SF-Regular;
-  src: url(/fonts/SF-Pro-Display-Regular.otf?5810cdf5bc7db8d0090a6c46890ee33b) format("opentype");
-}
-
-@font-face {
-  font-family: SF-Light;
-  src: url(/fonts/SF-Pro-Display-Light.otf?d8b752092257e647bf056db64783a1b7) format("opentype");
-}
-
-@font-face {
-  font-family: SF-Bold;
-  src: url(/fonts/SF-Pro-Display-Bold.otf?01a151b865c124f88ef147e5592bae76) format("opentype");
-}
-
-@font-face {
-  font-family: SF-Semibold;
-  src: url(/fonts/SF-Pro-Display-Semibold.otf?e570ec818d03840bfd5072c83deb1b21) format("opentype");
-}
-
-.font-regular {
-  font-family: SF-Regular;
-}
-
-.font-light {
-  font-family: SF-Light;
-}
-
-.font-bold {
-  font-family: SF-Bold;
-}
-
-.font-semibold {
-  font-family: SF-Semibold;
-}
-
-.home-main-title {
-  font-size: 10rem;
-  line-height: 8.6rem;
-}
-
-.home-main-text {
-  font-size: 1.6rem;
-  line-height: 1.8rem;
-  letter-spacing: 1.2px;
-}
-
-.home-text {
-  font-size: 1.25rem;
-  line-height: 1.3em;
-  letter-spacing: 0px;
-}
-
-.home-title {
-  font-size: 1.85rem;
-}
-
-.home-preparing {
-  font-synthesis: 1.85rem;
-}
-
-.home-cards {
-  font-size: 1.3rem;
-  line-height: 1.2em;
-}
-
-.subpage-main-title:first-child {
-  font-size: 7.75rem;
-}
-
-.subpage-main-title:last-child {
-  font-size: 4.35rem;
-}
-
-.subpage-text {
-  font-size: 1.15rem;
-}
-
-.subpage-title {
-  font-size: 2.3rem;
-}
-
-footer {
-  font-size: 1.25rem;
-}
-
-@media (max-width: 1400px) {
-  .home-main-title {
-    font-size: 9rem;
-    line-height: 7.6rem;
-  }
-
-  .home-main-text {
-    font-size: 1.4rem;
-    line-height: 1.6rem;
-  }
-}
-
-@media (max-width: 1330px) {
-  .home-title {
-    font-size: 1.65rem;
-  }
-}
-
-@media (max-width: 1220px) {
-  .home-cards {
-    font-size: 1.2rem;
-    line-height: 1.1em;
-  }
-
-  .home-title {
-    font-size: 1.55rem;
-  }
-}
-
-@media (max-width: 1120px) {
-  .home-cards {
-    font-size: 1.1rem;
-    line-height: 1em;
-  }
-
-  .home-title {
-    font-size: 1.35rem;
-  }
-}
-
-@media (max-width: 992px) {
-  footer {
-    font-size: 0.85rem;
-  }
-
-  footer p:first-child {
-    font-size: 0.65rem;
-  }
-
-  .home-main-title {
-    font-size: 8rem;
-    line-height: 6.6rem;
-  }
-
-  .home-main-text {
-    font-size: 1.3rem;
-    line-height: 1.5rem;
-  }
-}
-
-@media (max-width: 768px) {
-  .home-main-title {
-    font-size: 6rem;
-    line-height: 5.2rem;
-  }
-
-  .home-main-text {
-    font-size: 1.3rem;
-  }
-
-  .home-preparing {
-    font-size: 2rem;
-  }
-
-  .subpage-main-title:first-child {
-    font-size: 5.25rem;
-  }
-
-  .subpage-main-title:last-child {
-    font-size: 2.5rem;
-  }
-
-  .subpage-title {
-    font-size: 1.95rem;
-  }
-
-  footer {
-    font-size: 0.85rem;
-  }
-}
-
-@media (max-width: 576px) {
-  .home-main-title {
-    font-size: 4rem;
-    line-height: 3.2rem;
-  }
-
-  .home-main-text {
-    font-size: 1.1rem;
-  }
-}
-
 @-webkit-keyframes scroll {
   from {
     margin-bottom: 0;
@@ -11146,6 +10958,16 @@ footer {
 .home-cards:hover {
   cursor: pointer;
   margin-bottom: 20px;
+}
+
+@media (max-width: 576px) {
+  .spec {
+    font-size: 1.5rem !important;
+  }
+
+  .desc {
+    font-size: 0.9rem !important;
+  }
 }
 
 .sub-page .intro hr {
@@ -11493,6 +11315,194 @@ nav .line {
 
   .project-details-frame .project-content .content .title {
     font-size: 1.4rem !important;
+  }
+}
+
+@font-face {
+  font-family: SF-Regular;
+  src: url(/fonts/SF-Pro-Display-Regular.otf?5810cdf5bc7db8d0090a6c46890ee33b) format("opentype");
+}
+
+@font-face {
+  font-family: SF-Light;
+  src: url(/fonts/SF-Pro-Display-Light.otf?d8b752092257e647bf056db64783a1b7) format("opentype");
+}
+
+@font-face {
+  font-family: SF-Bold;
+  src: url(/fonts/SF-Pro-Display-Bold.otf?01a151b865c124f88ef147e5592bae76) format("opentype");
+}
+
+@font-face {
+  font-family: SF-Semibold;
+  src: url(/fonts/SF-Pro-Display-Semibold.otf?e570ec818d03840bfd5072c83deb1b21) format("opentype");
+}
+
+.font-regular {
+  font-family: SF-Regular;
+}
+
+.font-light {
+  font-family: SF-Light;
+}
+
+.font-bold {
+  font-family: SF-Bold;
+}
+
+.font-semibold {
+  font-family: SF-Semibold;
+}
+
+.home-main-title {
+  font-size: 10rem;
+  line-height: 8.6rem;
+}
+
+.home-main-text {
+  font-size: 1.6rem;
+  line-height: 1.8rem;
+  letter-spacing: 1.2px;
+}
+
+.home-text {
+  font-size: 1.25rem;
+  line-height: 1.3em;
+  letter-spacing: 0px;
+}
+
+.home-title {
+  font-size: 1.85rem;
+}
+
+.home-preparing {
+  font-synthesis: 1.85rem;
+}
+
+.home-cards {
+  font-size: 1.3rem;
+  line-height: 1.2em;
+}
+
+.subpage-main-title:first-child {
+  font-size: 7.75rem;
+}
+
+.subpage-main-title:last-child {
+  font-size: 4.35rem;
+}
+
+.subpage-text {
+  font-size: 1.15rem;
+}
+
+.subpage-title {
+  font-size: 2.3rem;
+}
+
+footer {
+  font-size: 1.25rem;
+}
+
+@media (max-width: 1400px) {
+  .home-main-title {
+    font-size: 9rem;
+    line-height: 7.6rem;
+  }
+
+  .home-main-text {
+    font-size: 1.4rem;
+    line-height: 1.6rem;
+  }
+}
+
+@media (max-width: 1330px) {
+  .home-title {
+    font-size: 1.65rem;
+  }
+}
+
+@media (max-width: 1220px) {
+  .home-cards {
+    font-size: 1.2rem;
+    line-height: 1.1em;
+  }
+
+  .home-title {
+    font-size: 1.55rem;
+  }
+}
+
+@media (max-width: 1120px) {
+  .home-cards {
+    font-size: 1.1rem;
+    line-height: 1em;
+  }
+
+  .home-title {
+    font-size: 1.35rem;
+  }
+}
+
+@media (max-width: 992px) {
+  footer {
+    font-size: 0.85rem;
+  }
+
+  footer p:first-child {
+    font-size: 0.65rem;
+  }
+
+  .home-main-title {
+    font-size: 8rem;
+    line-height: 6.6rem;
+  }
+
+  .home-main-text {
+    font-size: 1.3rem;
+    line-height: 1.5rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .home-main-title {
+    font-size: 6rem;
+    line-height: 5.2rem;
+  }
+
+  .home-main-text {
+    font-size: 1.3rem;
+  }
+
+  .home-preparing {
+    font-size: 2rem;
+  }
+
+  .subpage-main-title:first-child {
+    font-size: 5.25rem;
+  }
+
+  .subpage-main-title:last-child {
+    font-size: 2.5rem;
+  }
+
+  .subpage-title {
+    font-size: 1.95rem;
+  }
+
+  footer {
+    font-size: 0.85rem;
+  }
+}
+
+@media (max-width: 576px) {
+  .home-main-title {
+    font-size: 4rem;
+    line-height: 3.2rem;
+  }
+
+  .home-main-text {
+    font-size: 1.1rem;
   }
 }
 

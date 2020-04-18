@@ -2,7 +2,7 @@ import React from "react";
 
 export const HomeOutlook = ({post, getPost = f => f}) => {
 
-    return <div className={'news-outlook-frame | row col-lg-4 col-sm-5 col-8 | mx-0 my-2 p-0 | justify-content-center'}>
+    return <div className={'news-outlook-frame | row col-lg-4 col-sm-5 col-10 | mx-0 my-2 p-0 | justify-content-center'}>
             <div className={'news-outlook | row col-xl-11 col-lg-11 col-md-11 col-11 | m-0 p-0'}>
                 <div className={'news-cover-icon | row col-12 | m-0 p-0 | justify-content-center'}>
                     {
