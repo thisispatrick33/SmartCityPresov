@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import {HomeOutlook} from './subpage/outlook/HomeOutlook';
-import {Footer} from "./Footer";
 import { Loader } from "./Utillities";
 import { Project } from './subpage/Project';
 import { navigate } from '@reach/router';

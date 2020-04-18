@@ -1,7 +1,7 @@
 import React, {useState } from "react";
 import { navigate } from '@reach/router';
 
-export const CreatePost = ({logged, changeSubpage, post = f => f}) => {
+export const CreatePost = ({logged, post = f => f}) => {
     const [creationData, setCreationData] = useState({title: null, description: null, price: null, author: null, subpage_id: 1, done: 0});
 
     const handleSubmit = (e) =>{
@@ -41,7 +41,7 @@ export const CreatePost = ({logged, changeSubpage, post = f => f}) => {
         return (
             <div>
                 <h1>Unauthorized</h1>
-                <div onClick={()=>{navigate(`/`); changeSubpage()}}>
+                <div onClick={()=> navigate(`/`)}>
                     <h1>Go back!</h1>
                 </div>
             </div>

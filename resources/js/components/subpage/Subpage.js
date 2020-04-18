@@ -8,7 +8,7 @@ import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 
-export const Subpage = ({id, data, logged, project, author, hide = f => f, getpost = f => f, closePost}) => {
+export const Subpage = ({data, project, getpost = f => f, closePost}) => {
 
     const settings = {
         infinite: false,
@@ -41,6 +41,7 @@ export const Subpage = ({id, data, logged, project, author, hide = f => f, getpo
     };
     let settings1 = {...settings, dots: true, arrows : false};
     let settings2 = {...settings, dots: false, arrows : true};
+
     const [subpage, setSubpage] = useState([]);
 
 
@@ -51,6 +52,8 @@ export const Subpage = ({id, data, logged, project, author, hide = f => f, getpo
         },1000);
         $('.project-details-frame').fadeToggle("slow", closePost);
     };
+
+
     const chunk = (array, size) => {
         const chunked_arr = [];
         let index = 0;
@@ -67,7 +70,7 @@ export const Subpage = ({id, data, logged, project, author, hide = f => f, getpo
             setSubpage(data);
         }
         closePost();
-    },[data]);
+    },[window.location.pathname, data]);
 
     const scroll = () => $('html, body').animate({scrollTop: $("#here").offset().top, easing: 'easeInOutCirc'} , 1500);
 
