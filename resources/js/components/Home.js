@@ -186,12 +186,14 @@ export const Home = ({_homeNewestPosts, getpost = f => f, project, author, close
                                 </svg>
                             </div>
                             <div className="col-9 row align-items-start justify-content-around justify-content-md-between">
-                                <HomeOutlook post={post[0]} getPost={(id) => getpost(id)}></HomeOutlook>
                                 {
-                                    window.innerWidth >= 570 ? <HomeOutlook post={post[1]} getPost={(id) => getpost(id)}></HomeOutlook> : ``
+                                    post[0] != null ? <HomeOutlook post={post[0]} getPost={(id) => getpost(id)}></HomeOutlook> : ``
                                 }
                                 {
-                                    window.innerWidth >= 992 ? <HomeOutlook post={post[2]} getPost={(id) => getpost(id)}></HomeOutlook> : ``
+                                    window.innerWidth >= 570 ? post[1] != null ? <HomeOutlook post={post[1]} getPost={(id) => getpost(id)}></HomeOutlook> : `` : ``
+                                }
+                                {
+                                    window.innerWidth >= 992 ? post[2] != null ? <HomeOutlook post={post[2]} getPost={(id) => getpost(id)}></HomeOutlook> : `` : ``
                                 }
 
                             </div>

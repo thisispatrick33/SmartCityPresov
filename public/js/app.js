@@ -73525,22 +73525,22 @@ var Home = function Home(_ref) {
       fill: "#d3d2d2"
     })))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
       className: "col-9 row align-items-start justify-content-around justify-content-md-between"
-    }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_subpage_outlook_HomeOutlook__WEBPACK_IMPORTED_MODULE_1__["HomeOutlook"], {
+    }, post[0] != null ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_subpage_outlook_HomeOutlook__WEBPACK_IMPORTED_MODULE_1__["HomeOutlook"], {
       post: post[0],
       getPost: function getPost(id) {
         return getpost(id);
       }
-    }), window.innerWidth >= 570 ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_subpage_outlook_HomeOutlook__WEBPACK_IMPORTED_MODULE_1__["HomeOutlook"], {
+    }) : "", window.innerWidth >= 570 ? post[1] != null ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_subpage_outlook_HomeOutlook__WEBPACK_IMPORTED_MODULE_1__["HomeOutlook"], {
       post: post[1],
       getPost: function getPost(id) {
         return getpost(id);
       }
-    }) : "", window.innerWidth >= 992 ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_subpage_outlook_HomeOutlook__WEBPACK_IMPORTED_MODULE_1__["HomeOutlook"], {
+    }) : "" : "", window.innerWidth >= 992 ? post[2] != null ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_subpage_outlook_HomeOutlook__WEBPACK_IMPORTED_MODULE_1__["HomeOutlook"], {
       post: post[2],
       getPost: function getPost(id) {
         return getpost(id);
       }
-    }) : "")))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    }) : "" : "")))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
       className: "my-md-5 pt-md-5"
     }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
       className: "row mt-md-4"
@@ -76831,8 +76831,8 @@ var ProjectOutlook = function ProjectOutlook(_ref) {
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! /Users/patrik/Projects/Webs/SmartCityPresov/resources/js/app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! /Users/patrik/Projects/Webs/SmartCityPresov/resources/sass/app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! C:\Users\Mamuss\PhpstormProjects\SmartCityPresov\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! C:\Users\Mamuss\PhpstormProjects\SmartCityPresov\resources\sass\app.scss */"./resources/sass/app.scss");
 
 
 /***/ })
