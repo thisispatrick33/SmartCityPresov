@@ -14,11 +14,6 @@ p {
   text-transform: uppercase;
 }
 
-hr {
-  border-top: 3px solid #D61920;
-  fill: #D61920;
-}
-
 .background-primary {
   background: #D61920;
 }
@@ -11153,6 +11148,11 @@ footer {
   margin-bottom: 20px;
 }
 
+.sub-page .intro hr {
+  border-top: 3px solid #D61920;
+  fill: #D61920;
+}
+
 .sub-page .intro .background {
   height: 100%;
   right: 0;
@@ -11399,6 +11399,8 @@ nav .line {
 }
 
 .project-details-frame .project-content {
+  margin-top: 10vh;
+  min-height: 80%;
   font-family: SF-SemiBold, serif;
   border-radius: 10px;
   background: #191919;
@@ -11472,8 +11474,25 @@ nav .line {
 }
 
 @media (max-width: 576px) {
-  .project-content .title {
-    font-size: 1rem !important;
+  .project-details-frame .project-content {
+    margin-top: 0;
+    min-height: 100%;
+    border-radius: 10px;
+  }
+
+  .project-details-frame .project-content .content {
+    min-height: auto !important;
+    border-radius: 10px;
+  }
+
+  .project-details-frame .project-content .content .close-button {
+    width: 24px;
+    height: 24px;
+    margin-bottom: 5vh !important;
+  }
+
+  .project-details-frame .project-content .content .title {
+    font-size: 1.4rem !important;
   }
 }
 

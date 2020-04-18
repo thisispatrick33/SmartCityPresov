@@ -1,6 +1,10 @@
 
 .sub-page{
     .intro{
+        hr{
+            border-top: 3px solid $primaryColor;
+            fill : $primaryColor;
+        }
         .background{
             height : 100%;
             right: 0;

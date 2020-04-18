@@ -74764,31 +74764,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _Navigation__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Navigation */ "./resources/js/components/Navigation.js");
 /* harmony import */ var _Footer__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./Footer */ "./resources/js/components/Footer.js");
-function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _nonIterableRest(); }
-
-function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance"); }
-
-function _iterableToArrayLimit(arr, i) { var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
-
-function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
-
 
 
 
 var Main = function Main(props) {
-  var _useState = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(window.innerWidth),
-      _useState2 = _slicedToArray(_useState, 2),
-      width = _useState2[0],
-      setWidth = _useState2[1];
-
-  var _useState3 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(window.pageYOffset),
-      _useState4 = _slicedToArray(_useState3, 2),
-      pageYOffset = _useState4[0],
-      setPageYOffset = _useState4[1];
-
   Object(react__WEBPACK_IMPORTED_MODULE_0__["useEffect"])(function () {
-    var handleResize = function handleResize() {};
-
     var handleScroll = function handleScroll() {
       if (props['*'].length > 0) {
         $('.background').css('backgroundPositionY', Number($('.background').css('backgroundPositionY').replace('%', '').replace('px', '')) + 3);
@@ -74797,13 +74777,11 @@ var Main = function Main(props) {
       }
     };
 
-    window.addEventListener('resize', handleResize);
     window.addEventListener('scroll', handleScroll);
     return function () {
-      window.removeEventListener('resize', handleResize);
       window.removeEventListener('scroll', handleScroll);
     };
-  }, [pageYOffset]);
+  }, []);
   return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Navigation__WEBPACK_IMPORTED_MODULE_1__["Navigation"], {
     subpageId: props['*'],
     changeSubpage: props.changeSubpage
@@ -76111,12 +76089,7 @@ var Project = function Project(_ref) {
       display: "none"
     }
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "project-content col-xl-9 col-lg-9 col-md-10 col-sm-11 col-11 row mx-0 shadow p-0 justify-content-start align-items-start",
-    style: {
-      marginTop: '100vh',
-      marginBottom: '10vh',
-      minHeight: '80%'
-    }
+    className: "project-content col-xl-9 col-lg-9 col-md-10 col-12 row mx-0 shadow p-0 justify-content-start align-items-start"
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "gallery m-0 col-xl-2 col-lg-2 col-12 order-xl-1 order-lg-1 order-2 row mx-0 p-0 ",
     style: {
@@ -76155,7 +76128,7 @@ var Project = function Project(_ref) {
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "col-12 row mx-0 mt-5 px-5 title p-0 justify-content-xl-start justify-content-lg-start justify-content-md-start justify-content-end"
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h2", {
-    className: "col-xl-11 col-lg-11 col-md-11 col-12 order-xl-1 order-lg-1 order-md-1 order-2 mb-3"
+    className: "title p-xl-2 p-lg-2 p-md-2 px-0 col-xl-11 col-lg-11 col-md-11 col-12 order-xl-1 order-lg-1 order-md-1 order-2 mb-3"
   }, data.title), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
     onClick: function onClick() {
       return close();
@@ -76171,7 +76144,7 @@ var Project = function Project(_ref) {
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("polygon", {
     points: "357 35.7 321.3 0 178.5 142.8 35.7 0 0 35.7 142.8 178.5 0 321.3 35.7 357 178.5 214.2 321.3 357 357 321.3 214.2 178.5"
   })))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "col-12 row mx-0 description mt-4 py-2 px-5"
+    className: "col-12 row mx-0 description mt-4 py-2 px-xl-5 px-lg-5 px-md-5 px-4"
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
     className: "col-11 mb-3"
   }, data.description)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
