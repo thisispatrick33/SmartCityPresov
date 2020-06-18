@@ -172,7 +172,6 @@ const App = () => {
     const subpageFetchData = () => {
         _getData("api/version", config_aplication_json).then(versionResponse => {
             if (( version === null || version[window.location.pathname] === null || version[window.location.pathname] !== versionResponse.data[window.location.pathname]) || (subpageData === null || subpageData[window.location.pathname] === undefined || subpageData[window.location.pathname] === null)) {
-                console.log("fetching from server");
                 _getData(`api${window.location.pathname}`, config_aplication_json)
                     .then(res => {
                         setSubpageData({...subpageData, [window.location.pathname]: res.data.subpage});
@@ -185,7 +184,6 @@ const App = () => {
                     });
             }
             else {
-                console.log("already saved");
                 setCurrentSubpage(subpageData[window.location.pathname]);
             }
         });

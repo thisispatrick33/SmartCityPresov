@@ -10799,6 +10799,24 @@ body footer p:nth-child(2) {
   background: #555;
 }
 
+form input,
+form textarea {
+  resize: none;
+  border: 0;
+  border-bottom: 1px solid silver;
+}
+
+form input:focus,
+form textarea:focus {
+  outline: 0;
+  border-color: #D61920;
+}
+
+.submit-sl {
+  background-color: #D61920;
+  color: #fff;
+}
+
 @-webkit-keyframes scroll {
   from {
     margin-bottom: 0;

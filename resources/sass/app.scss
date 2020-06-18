@@ -105,6 +105,22 @@ body{
 
 }
 
+form{
+  input,textarea{
+    resize: none;
+    border: 0;
+    border-bottom : 1px solid silver;
+    &:focus{
+      outline : 0;
+      border-color : $primaryColor;
+    }
+  }
+}
+.submit-sl{
+  background-color: $primaryColor;
+  color : $white;
+}
+
 @import '_animations';
 @import '_news';
 @import '_home';

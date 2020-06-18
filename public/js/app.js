@@ -70817,8 +70817,6 @@ var App = function App() {
   var subpageFetchData = function subpageFetchData() {
     _getData("api/version", config_aplication_json).then(function (versionResponse) {
       if (version === null || version[window.location.pathname] === null || version[window.location.pathname] !== versionResponse.data[window.location.pathname] || subpageData === null || subpageData[window.location.pathname] === undefined || subpageData[window.location.pathname] === null) {
-        console.log("fetching from server");
-
         _getData("api".concat(window.location.pathname), config_aplication_json).then(function (res) {
           setSubpageData(_objectSpread({}, subpageData, _defineProperty({}, window.location.pathname, res.data.subpage)));
           setVersion(_objectSpread({}, version, _defineProperty({}, window.location.pathname, versionResponse.data[window.location.pathname])));
@@ -70829,7 +70827,6 @@ var App = function App() {
           setCurrentSubpage(res.data.subpage);
         });
       } else {
-        console.log("already saved");
         setCurrentSubpage(subpageData[window.location.pathname]);
       }
     });
@@ -74963,56 +74960,88 @@ var AdministrationPage = function AdministrationPage(_ref) {
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, "Loading...");
     } else {
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "row"
+        className: "row col-12 mx-0"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "col-12"
-      }, "Pripravujeme"), data.filter(function (item) {
+        className: "col-12 mb-4 d-flex row"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
+        onClick: function onClick() {
+          Object(_reach_router__WEBPACK_IMPORTED_MODULE_1__["navigate"])("/create");
+          changeSubpage();
+        },
+        className: "offset-1 submit-sl col-auto mt-4 py-2 px-4 rounded"
+      }, "Vytvori\u0165 \u010Dl\xE1nok")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "col-12 align-items-center mb-3 mt-5 pt-4 px-0"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "row col-xl-9 col-lg-10 col-md-11 col-12 | align-items-start | justify-content-end | m-0 my-4 p-0"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "sub-page-sub-title background-primary | row col-xl-7 col-lg-8 col-md-10 col-12 | mx-0 p-0 py-5"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", {
+        id: "here",
+        className: "font-bold subpage-title | col-12 | m-0 p-0 | text-center"
+      }, "aktu\xE1lne pripravujeme.")))), data.filter(function (item) {
         return item.done === 0;
       }).map(function (_ref2) {
         var id = _ref2.id,
             title = _ref2.title,
             author = _ref2.author,
-            description = _ref2.description;
+            description = _ref2.description,
+            subpage_id = _ref2.subpage_id;
         return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-          className: 'project-outlook-frame | col-2 | mx-0 my-2 p-0 | justify-content-center'
+          className: 'project-outlook-frame | col-xl-3 col-lg-3 col-md-6 col-12 | mx-0 my-2 p-0 | justify-content-center rounded'
         }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-          className: 'project-outlook | row col-xl-11 col-lg-11 col-md-11 col-12 | m-0 p-0'
+          className: 'project-outlook | row col-xl-11 col-lg-11 col-md-11 col-12 | m-0 p-0 rounded'
         }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-          className: 'project-content | row col-12 | m-0 p-0 | justify-content-center'
+          className: 'project-content | row col-12 | m-0 p-0 | justify-content-center rounded'
         }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-          className: 'col-10 | p-0 mx-0 mt-3 mb-2'
-        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h4", {
+          className: 'col-10 | p-0 mx-0 mt-3 mb-2 rounded'
+        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
+          className: 'my-2'
+        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+          className: 'show-more'
+        }, "ID \u010Dl\xE1nku : "), " ", id), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
+          className: 'my-2'
+        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+          className: 'show-more'
+        }, "Oblas\u0165 : "), " ", subpage_id == 4 && 'energia', " ", subpage_id == 1 && 'mobilita', " ", subpage_id == 2 && 'živ. prostredie', " ", subpage_id == 3 && 'dig. mesto'), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h4", {
           className: 'title | mb-1'
-        }, id), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h4", {
-          className: 'title | mb-1'
-        }, title), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h4", {
-          className: 'mb-1'
-        }, author), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
+        }, title.substring(0, 40), "..."), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
           className: 'description'
-        }, description.substring(0, 200), "...", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+        }, description.substring(0, 120), "...", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
+          className: 'my-2'
+        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+          className: 'show-more'
+        }, "Autor : "), " ", author), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
           className: 'show-more',
           onClick: function onClick() {
             clear();
             Object(_reach_router__WEBPACK_IMPORTED_MODULE_1__["navigate"])("/update/".concat(id));
           }
         }, "Edit"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
-          className: 'show-more',
+          className: 'show-more ml-3',
           onClick: function onClick() {
             return hide(id);
           }
         }, "Delete"))))));
       }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "col-12"
-      }, "Ukoncene"), data.filter(function (item) {
+        className: "col-12 align-items-center mb-3 mt-5 pt-4 px-0"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "row col-xl-9 col-lg-10 col-md-11 col-12 | align-items-start | justify-content-end | m-0 my-4 p-0"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "sub-page-sub-title background-secondary | row col-xl-7 col-lg-8 col-md-10 col-12 | mx-0 p-0 py-5"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", {
+        id: "here",
+        className: "font-bold subpage-title | col-12 | m-0 p-0 | text-center"
+      }, "u\u017E sme zrealizovali a vyrie\u0161ili.")))), data.filter(function (item) {
         return item.done === 1;
       }).map(function (_ref3) {
         var id = _ref3.id,
             title = _ref3.title,
             image = _ref3.image,
             author = _ref3.author,
-            description = _ref3.description;
+            description = _ref3.description,
+            subpage_id = _ref3.subpage_id;
         return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-          className: 'project-outlook-frame | col-2 | mx-0 my-2 p-0 | justify-content-center'
+          className: 'project-outlook-frame | col-xl-3 col-lg-3 col-md-6 col-12 | mx-0 my-2 p-0 | justify-content-center'
         }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
           className: 'project-outlook | row col-xl-11 col-lg-11 col-md-11 col-12 | m-0 p-0'
         }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
@@ -75025,32 +75054,35 @@ var AdministrationPage = function AdministrationPage(_ref) {
           className: 'project-content | row col-12 | m-0 p-0 | justify-content-center'
         }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
           className: 'col-10 | p-0 mx-0 mt-3 mb-2'
-        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h4", {
+        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
+          className: 'my-2'
+        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+          className: 'show-more'
+        }, "ID \u010Dl\xE1nku : "), " ", id), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
+          className: 'my-2'
+        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+          className: 'show-more'
+        }, "Oblas\u0165 : "), " ", subpage_id == 4 && 'energia', " ", subpage_id == 1 && 'mobilita', " ", subpage_id == 2 && 'živ. prostredie', " ", subpage_id == 3 && 'dig. mesto'), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h4", {
           className: 'title | mb-1'
-        }, id), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h4", {
-          className: 'title | mb-1'
-        }, title), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h4", {
-          className: 'mb-1'
-        }, author), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
+        }, title), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
           className: 'description'
-        }, description.substring(0, 200), "...", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+        }, description.substring(0, 120), "...", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
+          className: 'my-2'
+        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+          className: 'show-more'
+        }, "Autor : "), " ", author), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
           className: 'show-more',
           onClick: function onClick() {
             clear();
             Object(_reach_router__WEBPACK_IMPORTED_MODULE_1__["navigate"])("/update/".concat(id));
           }
         }, "Edit"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
-          className: 'show-more',
+          className: 'show-more ml-3',
           onClick: function onClick() {
             return hide(id);
           }
         }, "Delete"))))));
-      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "col-12",
-        onClick: function onClick() {
-          return Object(_reach_router__WEBPACK_IMPORTED_MODULE_1__["navigate"])('/create');
-        }
-      }, "Create"));
+      }));
     }
   } else {
     return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, "Unauthorized"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
@@ -75119,10 +75151,23 @@ var CreatePost = function CreatePost(_ref) {
       encType: "multipart/form-data",
       onSubmit: function onSubmit(e) {
         return handleSubmit(e);
+      },
+      style: {
+        minHeight: '95vh'
       }
-    }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+    }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      className: "col-12 mb-4 d-flex row"
+    }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
+      onClick: function onClick() {
+        Object(_reach_router__WEBPACK_IMPORTED_MODULE_1__["navigate"])("/administration");
+        changeSubpage();
+      },
+      className: "offset-1 submit-sl col-auto mt-4 py-2 px-4 rounded"
+    }, "Sp\xE4\u0165 do administr\xE1cie")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", {
+      className: "text-center col-12"
+    }, "Moment\xE1lne vytv\xE1rate nov\xFD \u010Dl\xE1nok"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
       name: "title",
-      className: "col-10 offset-1",
+      className: "col-10 offset-1 my-4",
       value: creationData.title,
       placeholder: "Zadajte n\xE1zov",
       onChange: function onChange(e) {
@@ -75132,8 +75177,9 @@ var CreatePost = function CreatePost(_ref) {
       },
       required: true
     }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("textarea", {
+      rows: "10",
       name: "description",
-      className: "col-10 offset-1",
+      className: "col-10 offset-1 my-4",
       placeholder: "Zadajte text \u010Dl\xE1nku",
       value: creationData.description,
       onChange: function onChange(e) {
@@ -75144,7 +75190,7 @@ var CreatePost = function CreatePost(_ref) {
       required: true
     }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
       name: "price",
-      className: "col-10 offset-1",
+      className: "col-10 offset-1 my-4",
       value: creationData.price,
       placeholder: "Zadajte cenu projektu",
       type: "number",
@@ -75156,7 +75202,7 @@ var CreatePost = function CreatePost(_ref) {
       required: true
     }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
       name: "author",
-      className: "col-10 offset-1",
+      className: "col-10 offset-1 my-4",
       value: creationData.author,
       placeholder: "Zadajte meno autora",
       onChange: function onChange(e) {
@@ -75167,7 +75213,7 @@ var CreatePost = function CreatePost(_ref) {
       required: true
     }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
       name: "images[]",
-      className: "col-10 offset-1",
+      className: "col-10 offset-1 my-4 p-2",
       type: "file",
       onChange: function onChange(e) {
         setCreationData(_objectSpread({}, creationData, {
@@ -75175,9 +75221,9 @@ var CreatePost = function CreatePost(_ref) {
         }));
       },
       multiple: true
-    }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", {
-      className: "col-10 offset-1"
-    }, "Subpage Id"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
+    }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", {
+      className: "col-10 offset-1 mt-4"
+    }, "Vyberte oblas\u0165"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
       className: "col-3 d-inline offset-1"
     }, "Mobilita"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
       type: "radio",
@@ -75191,7 +75237,7 @@ var CreatePost = function CreatePost(_ref) {
       }
     }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
       className: "col-3 d-inline offset-1"
-    }, "Zivotne prostredie"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+    }, "\u017Divotn\xE9 prostredie"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
       type: "radio",
       name: "subpage_id",
       value: "2",
@@ -75203,7 +75249,7 @@ var CreatePost = function CreatePost(_ref) {
       }
     }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
       className: "col-3 d-inline offset-1"
-    }, "Digitalne mesto"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+    }, "Digit\xE1lne mesto"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
       type: "radio",
       name: "subpage_id",
       value: "3",
@@ -75225,9 +75271,9 @@ var CreatePost = function CreatePost(_ref) {
           subpage_id: 4
         }));
       }
-    }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", {
-      className: "col-10 offset-1"
-    }, "Stav"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
+    }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", {
+      className: "col-10 offset-1 mt-4"
+    }, "Vyberte stav projektu"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
       className: "col-3 d-inline offset-1"
     }, "Pripravujeme"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
       type: "radio",
@@ -75241,7 +75287,7 @@ var CreatePost = function CreatePost(_ref) {
       }
     }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
       className: "col-3 d-inline offset-1"
-    }, "Ukoncene"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+    }, "Ukon\u010Den\xE9"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
       type: "radio",
       name: "done",
       value: "1",
@@ -75251,11 +75297,13 @@ var CreatePost = function CreatePost(_ref) {
           done: 1
         }));
       }
-    }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+    }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      className: "col-12 my-4 justify-content-center d-flex row"
+    }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
       type: "submit",
-      className: "offset-1 d-block",
-      value: "potvrdiť"
-    }));
+      className: "offset-1 submit-sl col-auto mt-4 py-2 px-4 rounded",
+      value: "Vytvoriť článok"
+    })));
   } else {
     return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, "Unauthorized"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
       onClick: function onClick() {
@@ -75294,13 +75342,19 @@ var Login = function Login(_ref) {
   };
 
   return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "col-12 row shadow login-frame p-5 my-5"
+    className: "col-12 row login-frame p-5 my-5 justify-content-center align-items-start",
+    style: {
+      minHeight: '82vh'
+    }
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("form", {
+    className: "row col-10 justify-content-center",
     id: "login-form",
     action: "",
     onSubmit: handleSubmit,
     method: "post"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", null, "Login Form"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", {
+    className: "col-12 px-0 text-center"
+  }, "Login Form"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
     ref: function ref(input) {
       return _email = input;
     },
@@ -75308,8 +75362,8 @@ var Login = function Login(_ref) {
     id: "email-input",
     name: "email",
     type: "text",
-    className: "center-block",
-    placeholder: "email"
+    className: "center-block p-3 col-8",
+    placeholder: "Zadajte email"
   }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
     ref: function ref(input) {
       return _password = input;
@@ -75318,13 +75372,13 @@ var Login = function Login(_ref) {
     id: "password-input",
     name: "password",
     type: "password",
-    className: "center-block",
-    placeholder: "password"
+    className: "center-block p-3 col-8 mt-3",
+    placeholder: "Zadajte heslo"
   }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
     type: "submit",
-    className: "landing-page-btn center-block text-center",
+    className: "landing-page-btn border-0 rounded mt-4 col-5 py-2 submit-sl center-block text-center",
     id: "email-login-btn"
-  }, "Login")));
+  }, "Prihl\xE1si\u0165 sa")));
 };
 
 /***/ }),
@@ -75406,13 +75460,27 @@ var UpdatePost = function UpdatePost(_ref) {
 
   if (logged.id !== undefined) {
     return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("form", {
+      className: 'mt-5 row mx-0',
       encType: "multipart/form-data",
       onSubmit: function onSubmit(e) {
         return handleSubmit(e);
+      },
+      style: {
+        minHeight: '95vh'
       }
-    }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+    }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      className: "col-12 mb-4 d-flex row"
+    }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
+      onClick: function onClick() {
+        Object(_reach_router__WEBPACK_IMPORTED_MODULE_1__["navigate"])("/administration");
+        changeSubpage();
+      },
+      className: "offset-1 submit-sl col-auto mt-4 py-2 px-4 rounded"
+    }, "Sp\xE4\u0165 do administr\xE1cie")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", {
+      className: "text-center col-12"
+    }, "Moment\xE1lne upravujete \u010Dl\xE1nok ", id), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
       name: "title",
-      className: "col-10 offset-1",
+      className: "col-10 offset-1 my-4",
       value: updatedData.title,
       placeholder: "Zadajte n\xE1zov",
       onChange: function onChange(e) {
@@ -75422,8 +75490,9 @@ var UpdatePost = function UpdatePost(_ref) {
       },
       required: true
     }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("textarea", {
+      rows: "10",
       name: "description",
-      className: "col-10 offset-1",
+      className: "col-10 my-4 offset-1",
       placeholder: "Zadajte text \u010Dl\xE1nku",
       value: updatedData.description,
       onChange: function onChange(e) {
@@ -75434,7 +75503,7 @@ var UpdatePost = function UpdatePost(_ref) {
       required: true
     }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
       name: "price",
-      className: "col-10 offset-1",
+      className: "col-10 offset-1 my-4",
       value: updatedData.price,
       placeholder: "Zadajte cenu projektu",
       type: "number",
@@ -75446,7 +75515,7 @@ var UpdatePost = function UpdatePost(_ref) {
       required: true
     }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
       name: "author",
-      className: "col-10 offset-1",
+      className: "col-10 offset-1 my-4",
       value: updatedData.author,
       placeholder: "Zadajte meno autora",
       onChange: function onChange(e) {
@@ -75456,7 +75525,7 @@ var UpdatePost = function UpdatePost(_ref) {
       },
       required: true
     }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-      className: "col-10 offset-1"
+      className: "col-10 offset-1 my-4"
     }, images.map(function (_ref3) {
       var path = _ref3.path,
           id = _ref3.id;
@@ -75475,17 +75544,18 @@ var UpdatePost = function UpdatePost(_ref) {
       }));
     })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
       name: "images[]",
-      className: "col-10 offset-1",
+      className: "col-10 offset-1 p-2",
       type: "file",
       onChange: function onChange(e) {
         setUpdatedData(_objectSpread({}, updatedData, {
           images: e.target.files
         }));
       },
-      multiple: true
-    }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", {
-      className: "col-10 offset-1"
-    }, "Subpage Id"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
+      multiple: true,
+      placeholder: "Vyberte fotografie"
+    }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", {
+      className: "col-10 offset-1 mt-4"
+    }, "Vyberte oblas\u0165"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
       className: "col-3 d-inline offset-1"
     }, "Mobilita"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
       type: "radio",
@@ -75499,7 +75569,7 @@ var UpdatePost = function UpdatePost(_ref) {
       }
     }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
       className: "col-3 d-inline offset-1"
-    }, "Zivotne prostredie"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+    }, "\u017Divotn\xE9 prostredie"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
       type: "radio",
       name: "subpage_id",
       value: "2",
@@ -75511,7 +75581,7 @@ var UpdatePost = function UpdatePost(_ref) {
       }
     }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
       className: "col-3 d-inline offset-1"
-    }, "Digitalne mesto"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+    }, "Digit\xE1lne mesto"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
       type: "radio",
       name: "subpage_id",
       value: "3",
@@ -75533,9 +75603,9 @@ var UpdatePost = function UpdatePost(_ref) {
           subpage_id: 4
         }));
       }
-    }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", {
-      className: "col-10 offset-1"
-    }, "Stav"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
+    }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", {
+      className: "col-10 offset-1 mt-4"
+    }, "Vyberte stav projektu"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
       className: "col-3 d-inline offset-1"
     }, "Pripravujeme"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
       type: "radio",
@@ -75549,7 +75619,7 @@ var UpdatePost = function UpdatePost(_ref) {
       }
     }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
       className: "col-3 d-inline offset-1"
-    }, "Ukoncene"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+    }, "Ukon\u010Den\xE9"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
       type: "radio",
       name: "done",
       value: "1",
@@ -75559,11 +75629,13 @@ var UpdatePost = function UpdatePost(_ref) {
           done: 1
         }));
       }
-    }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+    }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      className: "col-12 my-4 justify-content-center d-flex row"
+    }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
       type: "submit",
-      className: "offset-1 d-block",
-      value: "potvrdiť"
-    }));
+      className: "offset-1 submit-sl col-4 mt-4 py-2 px-4 rounded",
+      value: "Upraviť zmeny"
+    })));
   } else {
     return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, "Unauthorized"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
       onClick: function onClick() {
@@ -76831,8 +76903,8 @@ var ProjectOutlook = function ProjectOutlook(_ref) {
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! C:\Users\Mamuss\PhpstormProjects\SmartCityPresov\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! C:\Users\Mamuss\PhpstormProjects\SmartCityPresov\resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! D:\PROGRAMMING\web\SmartCityPresov\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! D:\PROGRAMMING\web\SmartCityPresov\resources\sass\app.scss */"./resources/sass/app.scss");
 
 
 /***/ })
