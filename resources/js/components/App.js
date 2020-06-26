@@ -28,6 +28,8 @@ const App = () => {
 
     const [allPosts, setAllPosts] = useState(null);
 
+    const [showSearchBar, setShowSearchBar] = useState(false);
+
 
     const config_aplication_json = {
         headers : {
@@ -169,22 +171,31 @@ const App = () => {
         getAllPosts();
     };
 
-    const subpageFetchData = () => {
+    const subpageFetchData = (value = window.location.pathname, control = true) => {
+        console.log(value);
         _getData("api/version", config_aplication_json).then(versionResponse => {
-            if (( version === null || version[window.location.pathname] === null || version[window.location.pathname] !== versionResponse.data[window.location.pathname]) || (subpageData === null || subpageData[window.location.pathname] === undefined || subpageData[window.location.pathname] === null)) {
-                _getData(`api${window.location.pathname}`, config_aplication_json)
+            if (( version === null || version[value] === null || version[value] !== versionResponse.data[value]) || (subpageData === null || subpageData[value] === undefined || subpageData[value] === null)) {
+                console.log("fetching data");
+                _getData(`api${value}`, config_aplication_json)
                     .then(res => {
-                        setSubpageData({...subpageData, [window.location.pathname]: res.data.subpage});
-                        setVersion({...version, [window.location.pathname]: versionResponse.data[window.location.pathname]});
+                        setSubpageData({...subpageData, [value]: res.data.subpage});
+                        setVersion({...version, [value]: versionResponse.data[value]});
                         localStorage[`subpageData`] = JSON.stringify({
-                            data: {...subpageData, [window.location.pathname]: res.data.subpage},
-                            version : {...version, [window.location.pathname]: versionResponse.data[window.location.pathname]}
+                            data: {...subpageData, [value]: res.data.subpage},
+                            version : {...version, [value]: versionResponse.data[value]}
                         });
-                        setCurrentSubpage(res.data.subpage);
+                        if(control){
+                            setCurrentSubpage(res.data.subpage);
+                            console.log("set subpage");
+                        }
                     });
             }
             else {
-                setCurrentSubpage(subpageData[window.location.pathname]);
+                console.log("already saved");
+                if(control){
+                    setCurrentSubpage(subpageData[value]);
+                    console.log("set subpage");
+                }
             }
         });
     };
@@ -207,13 +218,13 @@ const App = () => {
     return (
         <div className={`row col-12 | p-0 m-0`}>
                 <Router>
-                    <Main path={`/`} changeSubpage={subpageFetchData}>
-                        <Home path={`/`} _homeNewestPosts={homeNewestPosts} getpost={getPost} project={project} closePost={()=>setProject(null)} changeSubpage={subpageFetchData}/>
-                        <Subpage path={`:id`} data={currentSubpage} getpost={getPost} project={project} closePost={()=>setProject(null)} />
+                    <Main path={`/`} changeSubpage={() => subpageFetchData()} setShowSearchBar={value => setShowSearchBar(value)}>
+                        <Home path={`/`} _homeNewestPosts={homeNewestPosts} getpost={getPost} project={project} closePost={()=>setProject(null)} changeSubpage={() => subpageFetchData()}/>
+                        <Subpage path={`:id`} data={currentSubpage} getpost={getPost} project={project} closePost={()=>setProject(null)} showSearchBar={showSearchBar} closeSearchBar={() => setShowSearchBar(false)} searchFetchData={value => subpageFetchData(value)} allSubpageData={subpageData}/>
                         <Login path={"/login"} login={_loginUser}/>
                         <CreatePost path={"/create"} logged={authState.user} post={_createPost}/>
                         <UpdatePost path={"/update/:id"} logged={authState.user} post={_updatePost} getpost={getPost} project={project}/>
-                        <AdministrationPage path={"/administration"} logged={authState.user} changeSubpage={subpageFetchData} getAllPosts={getAllPosts} allPosts={allPosts} hide={_deletePost} clear={()=>setProject(null)}/>
+                        <AdministrationPage path={"/administration"} logged={authState.user} changeSubpage={() => subpageFetchData()} getAllPosts={getAllPosts} allPosts={allPosts} hide={_deletePost} clear={()=>setProject(null)}/>
                     </Main>
                 </Router>
         </div>

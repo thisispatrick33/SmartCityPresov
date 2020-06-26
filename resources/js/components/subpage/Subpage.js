@@ -3,12 +3,13 @@ import {NewsOutlook} from './outlook/NewsOutlook';
 import {ProjectOutlook} from './outlook/ProjectOutlook';
 import { Loader } from "../Utillities";
 import { Project } from './Project';
+import { Search } from './Search';
 import $ from "jquery";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 
-export const Subpage = ({data, project, getpost = f => f, closePost}) => {
+export const Subpage = ({data, project, getpost = f => f, closePost, showSearchBar, closeSearchBar, searchFetchData = f => f, allSubpageData}) => {
 
     const settings = {
         infinite: false,
@@ -177,6 +178,9 @@ export const Subpage = ({data, project, getpost = f => f, closePost}) => {
             {
                 (project !== null) ? (
                     <Project data={project} close={close}/>) : null
+            }
+            {
+                showSearchBar && <Search close={() => closeSearchBar()} searchFetchData={value => searchFetchData(value)} allSubpageData={allSubpageData} getPost={id => getpost(id)}/>
             }
         </div>
     );

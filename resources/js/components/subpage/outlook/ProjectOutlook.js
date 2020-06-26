@@ -1,7 +1,7 @@
 import React from "react";
 
 export const ProjectOutlook = ({post, getPost = f => f}) => {
-    return <div className={'project-outlook-frame | row | mx-0 my-2 p-3 | justify-content-center'}>
+    return (<div className={'project-outlook-frame | row | mx-0 my-2 p-3 | justify-content-center'}>
         <div className={'project-outlook | row col-xl-11 col-lg-11 col-md-11 col-12 | m-0 p-0'}>
             <div className={'project-cover-image | col-12 | m-0 p-0 | justify-content-center'}>
                 <img src={post.image.substr(post.image.indexOf('img'))} alt="project-cover-image" className={'col-12 | p-0'}/>
@@ -17,6 +17,6 @@ export const ProjectOutlook = ({post, getPost = f => f}) => {
                 </div>
             </div>
         </div>
-    </div>;
+    </div>);
 };
 
