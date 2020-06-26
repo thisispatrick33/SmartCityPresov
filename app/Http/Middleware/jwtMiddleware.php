@@ -3,8 +3,6 @@
 namespace App\Http\Middleware;
 
 use Closure;
-use JWTAuth;
-use Exception;
 
 class jwtMiddleware
 {
@@ -17,21 +15,22 @@ class jwtMiddleware
      */
     public function handle($request, Closure $next)
     {
-        try {
-            $user = JWTAuth::toUser($request->input('token'));
-            return $user;
-        } catch (Exception $e) {
-            if ($e instanceof \Tymon\JWTAuth\Exceptions\TokenInvalidException){
-                return $next($request);
-                return response()->json(['error'=>'Token is Invalid']);
-            }else if ($e instanceof \Tymon\JWTAuth\Exceptions\TokenExpiredException){
-                return $next($request);
-                return response()->json(['error'=>'Token is Expired']);
-            }else{
-                return $next($request);
-                return response()->json(['error'=>'Something is wrong']);
+        $response;
+        if($request->hasHeader("Authorization")){
+            $token = explode(" ",$request->header("Authorization"))[1];
+            if($user = \App\User::select('id')->where("auth_token",$token)->first()){
+                $request->merge([
+                    'auth_user' => $user->id
+                ]);
+                $response = $next($request);
+            }
+            else{
+                $response = response('Unauthorized.', 401);
             }
         }
-        return $next($request);
+        else{   
+            $response = response('Unauthorized.', 401);
+        }
+        return $response;
     }
 }
