@@ -176,11 +176,10 @@ export const Subpage = ({data, project, getpost = f => f, closePost, showSearchB
                 </div>
             </div>
             {
-                (project !== null) ? (
-                    <Project data={project} close={close}/>) : null
+                (project !== null) ? (<Project data={project} close={close}/>) : null
             }
             {
-                showSearchBar && <Search close={() => closeSearchBar()} searchFetchData={value => searchFetchData(value)} allSubpageData={allSubpageData} getPost={id => getpost(id)}/>
+                showSearchBar && <Search close={() => closeSearchBar()} searchFetchData={() => searchFetchData()} allSubpageData={allSubpageData} getPost={id => getpost(id)}/>
             }
         </div>
     );
