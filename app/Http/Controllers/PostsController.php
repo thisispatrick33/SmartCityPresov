@@ -13,12 +13,17 @@ use App\Image;
 class PostsController extends Controller
 {
     public function get(){
-        $posts = Post::with("user")->orderBy('created_at', 'DESC')->where('subpage_id','!=', null)->where('active',true)->get()->take(3);
+        $posts = Post::with("user")->orderBy('updated_at', 'DESC')->where('subpage_id','!=', null)->where('active',true)->get()->take(3);
         return $posts;
     }
 
+    public function getAllWhereActive(){
+	    $posts = Post::with("user")->orderBy('updated_at', 'DESC')->where('subpage_id','!=', null)->where('active',true)->get();
+    	return $posts;
+    }
+
     public function getAll(){
-	    $posts = Post::with("user")->orderBy('created_at', 'DESC')->where('subpage_id','!=', null)->where('active',true)->get();
+	    $posts = Post::with("user")->orderBy('updated_at', 'DESC')->where('subpage_id','!=', null)->get();
     	return $posts;
     }
 
@@ -179,20 +184,19 @@ class PostsController extends Controller
         }
     }
 
-    public function delete(Request $request){
+    public function show(Request $request){
         $validator = Validator::make($request->all(), [
             'id' => 'required|exists:posts,id',
+            'show' => 'required|boolean',
         ]);
-
         if ($validator->fails()) {
             return $validator->messages()->all();
         };
-        if($post = Post::find($request->id)){
-            $post->active = false;
-            $post->save();
+        $post = Post::find($request->id);
+        $post->active = $request->show;
+        if($post->save()){
             DB::table('subpages')->where('id',$post->subpage_id)->increment('version');
             return 200;
         }
-        return 400;
     }
 }

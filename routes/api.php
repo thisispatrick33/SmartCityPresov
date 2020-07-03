@@ -17,12 +17,13 @@ Route::get('/version', 'MainController@version');
 Route::get('/post', 'PostsController@get');
 
 Route::get('/postAll','PostsController@getAll');
+Route::get('/postAllActive','PostsController@getAllWhereActive');
 Route::get('/', 'MainController@subpages');
 Route::get('/post/{id}', 'MainController@post');
 Route::get('/{option}', 'MainController@subpage');
 
-Route::group(['middleware' => ['jwt.auth','api-header']], function () {
-    Route::put('/post/delete', 'PostsController@delete');
+Route::group(['middleware' => ['jwt-auth','api-header']], function () {
+    Route::put('/post/show', 'PostsController@show');
     Route::post('/post', 'PostsController@add');
     Route::post('/post/edit', 'PostsController@update');
 

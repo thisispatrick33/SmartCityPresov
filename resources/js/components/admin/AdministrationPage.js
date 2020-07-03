@@ -1,8 +1,9 @@
 import React, {useEffect, useState } from "react";
 import { navigate } from '@reach/router';
 
-export const AdministrationPage = ({logged, getAllPosts = f => f, allPosts, hide = f => f, clear}) => {
+export const AdministrationPage = ({logged, getAllPosts = f => f, allPosts, show = f => f, clear}) => {
     const [data, setData] = useState(null);
+    const [filterPosts, setFilterPosts] = useState(0);
 
     useEffect(() => {
         if(allPosts===null){
@@ -23,11 +24,28 @@ export const AdministrationPage = ({logged, getAllPosts = f => f, allPosts, hide
             )
         }
         else {
+            console.log(data);
             return (
                 <div className={"row col-12 mx-0"}>
                      <div className='col-12 mb-4 d-flex row'>
                         <p onClick={()=>{navigate(`/create`); changeSubpage()}} className={"offset-1 submit-sl col-auto mt-4 py-2 px-4 rounded"} >Vytvoriť článok</p>
+                     </div>
+                    <div className='col-12 mb-4 d-flex row'>
+                        <p onClick={()=>setFilterPosts(0)} className={"offset-1 submit-sl col-auto mt-4 py-2 px-4 rounded"}>Všetky</p>
                     </div>
+                    <div className='col-12 mb-4 d-flex row'>
+                        <p onClick={()=>setFilterPosts(1)} className={"offset-1 submit-sl col-auto mt-4 py-2 px-4 rounded"}>Mobilita</p>
+                    </div>
+                    <div className='col-12 mb-4 d-flex row'>
+                        <p onClick={()=>setFilterPosts(2)} className={"offset-1 submit-sl col-auto mt-4 py-2 px-4 rounded"}>Životné prostredie</p>
+                    </div>
+                    <div className='col-12 mb-4 d-flex row'>
+                        <p onClick={()=>setFilterPosts(3)} className={"offset-1 submit-sl col-auto mt-4 py-2 px-4 rounded"}>Digitálne mesto</p>
+                    </div>
+                    <div className='col-12 mb-4 d-flex row'>
+                        <p onClick={()=>setFilterPosts(4)} className={"offset-1 submit-sl col-auto mt-4 py-2 px-4 rounded"}>Energia</p>
+                    </div>
+
                     <div className="col-12 align-items-center mb-3 mt-5 pt-4 px-0">
                         <div className={`row col-xl-9 col-lg-10 col-md-11 col-12 | align-items-start | justify-content-end | m-0 my-4 p-0`}>
                             <div className={`sub-page-sub-title background-primary | row col-xl-7 col-lg-8 col-md-10 col-12 | mx-0 p-0 py-5`}>
@@ -37,7 +55,7 @@ export const AdministrationPage = ({logged, getAllPosts = f => f, allPosts, hide
                             </div>
                         </div>
                     </div>
-                    {data.filter(item => item.done === 0).map(({id, title, author, description, subpage_id})=>{
+                    {data.filter(item => item.done === 0).filter(item => (item.subpage_id === filterPosts || filterPosts === 0)).map(({id, title, author, description, subpage_id, active})=>{
                         return(
                             <div className={'project-outlook-frame | col-xl-3 col-lg-3 col-md-6 col-12 | mx-0 my-2 p-0 | justify-content-center rounded'}>
                                 <div className={'project-outlook | row col-xl-11 col-lg-11 col-md-11 col-12 | m-0 p-0 rounded'}>
@@ -52,7 +70,7 @@ export const AdministrationPage = ({logged, getAllPosts = f => f, allPosts, hide
                                                 <p className={'my-2'}><span className={'show-more'}>Autor : </span> {author}</p>
                                                 <br />
                                                 <span className={'show-more'} onClick={() => {clear();navigate(`/update/${id}`);}}>Edit</span>
-                                                <span className={'show-more ml-3'} onClick={() => hide(id)}>Delete</span>
+                                                <span className={'show-more ml-3'} onClick={() => show(id, active == 1 ? 0 : 1)}>{active == 1 ? "Skryť" : "Zobraziť"}</span>
                                             </p>
                                         </div>
                                     </div>
@@ -69,7 +87,7 @@ export const AdministrationPage = ({logged, getAllPosts = f => f, allPosts, hide
                             </div>
                         </div>
                     </div>
-                    {data.filter(item => item.done === 1).map(({id, title, image, author, description,subpage_id})=>{
+                    {data.filter(item => item.done === 1).filter(item => (item.subpage_id === filterPosts || filterPosts === 0)).map(({id, title, image, author, description,subpage_id, active})=>{
                         return(
                             <div className={'project-outlook-frame | col-xl-3 col-lg-3 col-md-6 col-12 | mx-0 my-2 p-0 | justify-content-center'}>
                                 <div className={'project-outlook | row col-xl-11 col-lg-11 col-md-11 col-12 | m-0 p-0'}>
@@ -87,7 +105,7 @@ export const AdministrationPage = ({logged, getAllPosts = f => f, allPosts, hide
                                                 <p className={'my-2'}><span className={'show-more'}>Autor : </span> {author}</p>
                                                 <br />
                                                 <span className={'show-more'} onClick={() => {clear();navigate(`/update/${id}`);}}>Edit</span>
-                                                <span className={'show-more ml-3'} onClick={() => hide(id)}>Delete</span>
+                                                <span className={'show-more ml-3'} onClick={() => show(id, active == 1 ? 0 : 1)}>{active == 1 ? "Skryť" : "Zobraziť"}</span>
                                             </p>
                                         </div>
                                     </div>

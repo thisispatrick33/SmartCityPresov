@@ -3,9 +3,10 @@ import {HomeOutlook} from './subpage/outlook/HomeOutlook';
 import { Loader } from "./Utillities";
 import { Project } from './subpage/Project';
 import { navigate } from '@reach/router';
+import {Search} from "./subpage/Search";
 
 
-export const Home = ({_homeNewestPosts, getpost = f => f, project, author, closePost, changeSubpage}) => {
+export const Home = ({_homeNewestPosts, getpost = f => f, project, author, closePost, changeSubpage, showSearchBar, closeSearchBar, searchFetchData = f => f, allSubpageData}) => {
     const [post, setPost] = useState(null);
 
     const close = () => {
@@ -822,7 +823,9 @@ export const Home = ({_homeNewestPosts, getpost = f => f, project, author, close
                         </div>
                     </div>
                 </div>
-
+                {
+                    showSearchBar && <Search close={() => closeSearchBar()} searchFetchData={() => searchFetchData()} allSubpageData={allSubpageData} getPost={id => getpost(id)}/>
+                }
             </div>
         );
     }
