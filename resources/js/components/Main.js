@@ -22,7 +22,7 @@ export const Main = (props) => {
 
     return (
         <>
-            <Navigation subpageId={props['*']} changeSubpage={props.changeSubpage}/>
+            <Navigation subpageId={props['*']} changeSubpage={props.changeSubpage} setShowSearchBar={value => props.setShowSearchBar(value)}/>
             <div>
                 { props.children }
             </div>
