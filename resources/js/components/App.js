@@ -163,10 +163,10 @@ const App = () => {
     };
 
 
-    const _deletePost = (id) => {
+    const _showPost = (id, show) => {
         config_aplication_json.headers['Authorization'] =  'Bearer '+authState.user.auth_token;
-        _putData(`/api/post/delete`, {id : id}, config_aplication_json).then(response => {
-                alert(response.status==200 ? `Článok sa úspešne vymazal` : `Článok sa nepodarilo vymazať!`);
+        _putData(`/api/post/show`, {id : id, show : show}, config_aplication_json).then(response => {
+                alert(response.status==200 ? `Článok sa úspešne aktualizoval` : `Článok sa nepodarilo aktualizovať!`);
             });
         getAllPosts();
     };
@@ -264,7 +264,7 @@ const App = () => {
                         <Login path={"/login"} login={_loginUser}/>
                         <CreatePost path={"/create"} logged={authState.user} post={_createPost}/>
                         <UpdatePost path={"/update/:id"} logged={authState.user} post={_updatePost} getpost={getPost} project={project}/>
-                        <AdministrationPage path={"/administration"} logged={authState.user} changeSubpage={() => subpageFetchData()} getAllPosts={getAllPosts} allPosts={allPosts} hide={_deletePost} clear={()=>setProject(null)}/>
+                        <AdministrationPage path={"/administration"} logged={authState.user} changeSubpage={() => subpageFetchData()} getAllPosts={getAllPosts} allPosts={allPosts} show={(id, show) => _showPost(id, show)} clear={()=>setProject(null)}/>
                     </Main>
                 </Router>
         </div>
