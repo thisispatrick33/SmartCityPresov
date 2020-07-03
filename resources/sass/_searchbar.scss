@@ -1,0 +1,36 @@
+.searchbar-frame{
+    background-color: rgba($color: $backgroundColor, $alpha: 0.97);
+    width: 100vw;
+    overflow-y: scroll !important;
+    z-index : 2000;
+    left : 0;
+    top : 0;
+    height: 100vh;
+    overflow-y: scroll;
+    input{
+        border-radius : 50px;
+        &:focus{
+            outline: 0;
+        }
+    }
+}
+::-webkit-scrollbar {
+    width: 10px;
+  }
+  
+  /* Track */
+  ::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  
+  /* Handle */
+  ::-webkit-scrollbar-thumb {
+    background: #888;
+    border-radius: 5px 0 0 5px;
+  }
+  
+  /* Handle on hover */
+  ::-webkit-scrollbar-thumb:hover {
+    background: #555;
+  
+  }
