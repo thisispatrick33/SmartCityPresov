@@ -5,6 +5,17 @@
     border-radius: 10px;
     &:hover{
       cursor: pointer;
+      transform: scale(1.05);
+      transition: .5s;
+    }
+    &:not(:hover){
+        transform: scale(1);
+        transition: .5s;
+    }
+    &:focus{
+        background: darken($white, 10%);
+        transform: scale(.95);
+        transition: .5s;
     }
     .project-cover-image{
       border-bottom: 8px solid $secondaryColor;

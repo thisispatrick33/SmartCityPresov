@@ -1,0 +1,57 @@
+.administration-bar{
+    bottom : 0;
+    left: 0;
+    z-index : 1000;
+    .switch{
+        button{
+            border : 0;
+            background : white;
+            border-radius: 25px;
+            &:hover{
+                background : $primaryColor;
+                color: $white;
+                transition: .25s;
+            }
+            &:not(:hover){
+                background : $white;
+                color: $secondaryColor;
+                transition: .25s;
+            }
+            &:focus{
+                outline : 0;
+                transition: .25s;
+                background : darken($primaryColor, 7%);
+                transform: scale(.95);
+            }
+            &.on{
+                background: $primaryColor;
+                color : $white;
+                transform: scale(1);
+            }
+        }
+    }
+}
+.tag{
+    border-radius: 25px;
+    font-size: .95em;
+}
+.create-button{
+    border-radius: 5px;
+    background : $primaryColor;
+    color: $white;
+    transform: scale(1);
+    &:focus{
+        outline : 0;
+        transition: .25s;
+        background : darken($primaryColor, 7%);
+        transform: scale(.95);
+    }
+}
+
+.edit-button{
+    font-size: .9em;
+}
+
+.headline{
+    border-bottom: 1.5px dashed $secondaryColor;
+}

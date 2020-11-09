@@ -6,7 +6,7 @@ export const Login = ({login = f => f}) => {
         login(_email.value, _password.value);
     };
     return (
-        <div className={"col-12 row login-frame p-5 my-5 justify-content-center align-items-start"} style={{minHeight : '82vh'}}>
+        <div className={"col-12 row login-frame p-5 my-5 justify-content-center align-items-start"} style={{minHeight : '90vh'}}>
             <form className="row col-10 justify-content-center" id="login-form" action="" onSubmit={handleSubmit} method="post">
                 <h3 className='col-12 px-0 text-center'>Login Form</h3>
                 <input

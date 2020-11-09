@@ -70588,6 +70588,11 @@ var App = function App() {
       allPosts = _useState14[0],
       setAllPosts = _useState14[1];
 
+  var _useState15 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(false),
+      _useState16 = _slicedToArray(_useState15, 2),
+      showSearchBar = _useState16[0],
+      _setShowSearchBar = _useState16[1];
+
   var config_aplication_json = {
     headers: {
       'Accept': 'application/json',
@@ -70802,32 +70807,41 @@ var App = function App() {
     });
   };
 
-  var _deletePost = function _deletePost(id) {
+  var _showPost = function _showPost(id, show) {
     config_aplication_json.headers['Authorization'] = 'Bearer ' + authState.user.auth_token;
 
-    _putData("/api/post/delete", {
-      id: id
+    _putData("/api/post/show", {
+      id: id,
+      show: show
     }, config_aplication_json).then(function (response) {
-      alert(response.status == 200 ? "\u010Cl\xE1nok sa \xFAspe\u0161ne vymazal" : "\u010Cl\xE1nok sa nepodarilo vymaza\u0165!");
+      alert(response.status == 200 ? "\u010Cl\xE1nok sa \xFAspe\u0161ne aktualizoval" : "\u010Cl\xE1nok sa nepodarilo aktualizova\u0165!");
     });
 
     getAllPosts();
   };
 
   var subpageFetchData = function subpageFetchData() {
+    var value = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : window.location.pathname;
+    var control = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : true;
+
     _getData("api/version", config_aplication_json).then(function (versionResponse) {
-      if (version === null || version[window.location.pathname] === null || version[window.location.pathname] !== versionResponse.data[window.location.pathname] || subpageData === null || subpageData[window.location.pathname] === undefined || subpageData[window.location.pathname] === null) {
-        _getData("api".concat(window.location.pathname), config_aplication_json).then(function (res) {
-          setSubpageData(_objectSpread({}, subpageData, _defineProperty({}, window.location.pathname, res.data.subpage)));
-          setVersion(_objectSpread({}, version, _defineProperty({}, window.location.pathname, versionResponse.data[window.location.pathname])));
+      if (version === null || version[value] === null || version[value] !== versionResponse.data[value] || subpageData === null || subpageData[value] === undefined || subpageData[value] === null) {
+        _getData("api".concat(value), config_aplication_json).then(function (res) {
+          setSubpageData(_objectSpread({}, subpageData, _defineProperty({}, value, res.data.subpage)));
+          setVersion(_objectSpread({}, version, _defineProperty({}, value, versionResponse.data[value])));
           localStorage["subpageData"] = JSON.stringify({
-            data: _objectSpread({}, subpageData, _defineProperty({}, window.location.pathname, res.data.subpage)),
-            version: _objectSpread({}, version, _defineProperty({}, window.location.pathname, versionResponse.data[window.location.pathname]))
+            data: _objectSpread({}, subpageData, _defineProperty({}, value, res.data.subpage)),
+            version: _objectSpread({}, version, _defineProperty({}, value, versionResponse.data[value]))
           });
-          setCurrentSubpage(res.data.subpage);
+
+          if (control) {
+            setCurrentSubpage(res.data.subpage);
+          }
         });
       } else {
-        setCurrentSubpage(subpageData[window.location.pathname]);
+        if (control) {
+          setCurrentSubpage(subpageData[value]);
+        }
       }
     });
   };
@@ -70846,11 +70860,61 @@ var App = function App() {
     });
   };
 
+  var getPostsSearch = function getPostsSearch() {
+    _getData("api/version", config_aplication_json).then(function (versionResponse) {
+      _getData("api/mobilita", config_aplication_json).then(function (res) {
+        return {
+          "/mobilita": res.data.subpage
+        };
+      }).then(function (data) {
+        _getData("api/zivotne_prostredie", config_aplication_json).then(function (res) {
+          return _objectSpread({}, data, {
+            "/zivotne_prostredie": res.data.subpage
+          });
+        }).then(function (data) {
+          _getData("api/digitalne_mesto", config_aplication_json).then(function (res) {
+            return _objectSpread({}, data, {
+              "/digitalne_mesto": res.data.subpage
+            });
+          }).then(function (data) {
+            _getData("api/energia", config_aplication_json).then(function (res) {
+              return _objectSpread({}, data, {
+                "/energia": res.data.subpage
+              });
+            }).then(function (data) {
+              setSubpageData(data);
+              setVersion(_objectSpread({}, version, {
+                "/mobilita": versionResponse.data["/mobilita"],
+                "/zivotne_prostredie": versionResponse.data["/zivotne_prostredie"],
+                "/digitalne_mesto": versionResponse.data["/digitalne_mesto"],
+                "/energia": versionResponse.data["/energia"]
+              }));
+              localStorage["subpageData"] = JSON.stringify({
+                data: data,
+                version: _objectSpread({}, version, {
+                  "/mobilita": versionResponse.data["/mobilita"],
+                  "/zivotne_prostredie": versionResponse.data["/zivotne_prostredie"],
+                  "/digitalne_mesto": versionResponse.data["/digitalne_mesto"],
+                  "/energia": versionResponse.data["/energia"]
+                })
+              });
+            });
+          });
+        });
+      });
+    });
+  };
+
   return react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
     className: "row col-12 | p-0 m-0"
   }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_reach_router__WEBPACK_IMPORTED_MODULE_3__["Router"], null, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_Main__WEBPACK_IMPORTED_MODULE_5__["Main"], {
     path: "/",
-    changeSubpage: subpageFetchData
+    changeSubpage: function changeSubpage() {
+      return subpageFetchData();
+    },
+    setShowSearchBar: function setShowSearchBar(value) {
+      return _setShowSearchBar(value);
+    }
   }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_Home__WEBPACK_IMPORTED_MODULE_4__["Home"], {
     path: "/",
     _homeNewestPosts: homeNewestPosts,
@@ -70859,7 +70923,19 @@ var App = function App() {
     closePost: function closePost() {
       return setProject(null);
     },
-    changeSubpage: subpageFetchData
+    changeSubpage: function changeSubpage() {
+      return subpageFetchData();
+    },
+    showSearchBar: showSearchBar,
+    closeSearchBar: function closeSearchBar() {
+      $('body,html').css('overflowY', 'scroll');
+
+      _setShowSearchBar(false);
+    },
+    searchFetchData: function searchFetchData() {
+      return getPostsSearch();
+    },
+    allSubpageData: subpageData
   }), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_subpage_Subpage__WEBPACK_IMPORTED_MODULE_6__["Subpage"], {
     path: ":id",
     data: currentSubpage,
@@ -70867,7 +70943,17 @@ var App = function App() {
     project: project,
     closePost: function closePost() {
       return setProject(null);
-    }
+    },
+    showSearchBar: showSearchBar,
+    closeSearchBar: function closeSearchBar() {
+      $('body,html').css('overflowY', 'scroll');
+
+      _setShowSearchBar(false);
+    },
+    searchFetchData: function searchFetchData() {
+      return getPostsSearch();
+    },
+    allSubpageData: subpageData
   }), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_admin_Login__WEBPACK_IMPORTED_MODULE_7__["Login"], {
     path: "/login",
     login: _loginUser
@@ -70884,10 +70970,14 @@ var App = function App() {
   }), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_admin_AdministrationPage__WEBPACK_IMPORTED_MODULE_10__["AdministrationPage"], {
     path: "/administration",
     logged: authState.user,
-    changeSubpage: subpageFetchData,
+    changeSubpage: function changeSubpage() {
+      return subpageFetchData();
+    },
     getAllPosts: getAllPosts,
     allPosts: allPosts,
-    hide: _deletePost,
+    show: function show(id, _show) {
+      return _showPost(id, _show);
+    },
     clear: function clear() {
       return setProject(null);
     }
@@ -70942,6 +71032,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _Utillities__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./Utillities */ "./resources/js/components/Utillities.js");
 /* harmony import */ var _subpage_Project__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./subpage/Project */ "./resources/js/components/subpage/Project.js");
 /* harmony import */ var _reach_router__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @reach/router */ "./node_modules/@reach/router/es/index.js");
+/* harmony import */ var _subpage_Search__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./subpage/Search */ "./resources/js/components/subpage/Search.js");
 function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _nonIterableRest(); }
 
 function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance"); }
@@ -70949,6 +71040,7 @@ function _nonIterableRest() { throw new TypeError("Invalid attempt to destructur
 function _iterableToArrayLimit(arr, i) { var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
 
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
+
 
 
 
@@ -70964,7 +71056,14 @@ var Home = function Home(_ref) {
       project = _ref.project,
       author = _ref.author,
       closePost = _ref.closePost,
-      changeSubpage = _ref.changeSubpage;
+      changeSubpage = _ref.changeSubpage,
+      showSearchBar = _ref.showSearchBar,
+      closeSearchBar = _ref.closeSearchBar,
+      _ref$searchFetchData = _ref.searchFetchData,
+      _searchFetchData = _ref$searchFetchData === void 0 ? function (f) {
+    return f;
+  } : _ref$searchFetchData,
+      allSubpageData = _ref.allSubpageData;
 
   var _useState = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(null),
       _useState2 = _slicedToArray(_useState, 2),
@@ -70993,7 +71092,7 @@ var Home = function Home(_ref) {
       user: author,
       close: close
     }) : null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-      className: "screen mb-md-5 mt-5 d-flex align-items-xl-start align-items-lg-start align-items-center"
+      className: "screen mb-md-5 mt-5 d-flex align-items-center"
     }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
       className: "row m-0 p-0"
     }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
@@ -74652,7 +74751,18 @@ var Home = function Home(_ref) {
       r: "6",
       transform: "translate(1585.5 3252.5) rotate(90)",
       fill: "#d3d2d2"
-    }))))) : react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null))))));
+    }))))) : react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null))))), showSearchBar && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_subpage_Search__WEBPACK_IMPORTED_MODULE_5__["Search"], {
+      close: function close() {
+        return closeSearchBar();
+      },
+      searchFetchData: function searchFetchData() {
+        return _searchFetchData();
+      },
+      allSubpageData: allSubpageData,
+      getPost: function getPost(id) {
+        return getpost(id);
+      }
+    }));
   }
 
   return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Utillities__WEBPACK_IMPORTED_MODULE_2__["Loader"], null);
@@ -74694,7 +74804,10 @@ var Main = function Main(props) {
   }, []);
   return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Navigation__WEBPACK_IMPORTED_MODULE_1__["Navigation"], {
     subpageId: props['*'],
-    changeSubpage: props.changeSubpage
+    changeSubpage: props.changeSubpage,
+    setShowSearchBar: function setShowSearchBar(value) {
+      return props.setShowSearchBar(value);
+    }
   }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, props.children), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Footer__WEBPACK_IMPORTED_MODULE_2__["Footer"], null));
 };
 
@@ -74720,9 +74833,13 @@ __webpack_require__.r(__webpack_exports__);
 
 var Navigation = function Navigation(_ref) {
   var subpageId = _ref.subpageId,
-      changeSubpage = _ref.changeSubpage;
+      changeSubpage = _ref.changeSubpage,
+      _ref$setShowSearchBar = _ref.setShowSearchBar,
+      setShowSearchBar = _ref$setShowSearchBar === void 0 ? function (f) {
+    return f;
+  } : _ref$setShowSearchBar;
   return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("nav", {
-    className: "row col-xl-1 col-lg-1 col-md-2 col-sm-2 col-3 justify-content-center align-items-center position-fixed"
+    className: "row col-xl-1 col-lg-1 col-md-2 col-sm-2 col-3 justify-content-end position-fixed"
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
     onClick: function onClick() {
       Object(_reach_router__WEBPACK_IMPORTED_MODULE_1__["navigate"])("/mobilita");
@@ -74867,7 +74984,33 @@ var Navigation = function Navigation(_ref) {
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("path", {
     d: "M155.265,238.977c0-.034,0-.068-.005-.1a1.867,1.867,0,0,0-.031-.2.026.026,0,0,0,0,0l-3.48-16.53,0-.018-3.48-16.529,0-.018-3.483-16.546a1.954,1.954,0,0,0-1.912-1.551H59.261a1.954,1.954,0,0,0-1.912,1.551l-3.482,16.544,0,.021-3.48,16.53,0,.014L46.9,238.666a1.99,1.99,0,0,0-.033.213c0,.017,0,.034,0,.05,0,.046-.007.093-.007.14v7.839a1.954,1.954,0,0,0,1.954,1.954H95.19V259.84H80.162a1.954,1.954,0,0,0-1.954,1.954v5.885H59.261a1.954,1.954,0,0,0,0,3.908h83.6a1.954,1.954,0,0,0,0-3.908H123.919v-5.885a1.954,1.954,0,0,0-1.954-1.954H106.937V248.862h46.379a1.954,1.954,0,0,0,1.954-1.954v-7.8s0-.006,0-.009v-.025C155.27,239.039,155.267,239.008,155.265,238.977Zm-4.357-1.861H120.3l-.887-12.639h28.831Zm-6.144-29.185,2.661,12.639H119.142l-.887-12.639Zm-3.483-16.547,2.661,12.639H117.98l-.887-12.639Zm-52.329,0h24.225l.887,12.639h-26ZM87.79,207.931h26.547l.887,12.639H86.9Zm-1.161,16.547H115.5l.887,12.638H85.742ZM60.846,191.384H85.033l-.887,12.639H58.185Zm-3.483,16.547H83.872l-.887,12.639H54.7Zm62.648,55.818v3.93H82.116v-3.93h37.895ZM99.1,259.841V248.863h3.931v10.978Zm5.907-14.886H50.765v-3.93h9.309a1.954,1.954,0,1,0,0-3.908H51.219l2.661-12.639H82.711l-.887,12.638h-13.3a1.954,1.954,0,0,0,0,3.908h82.837v3.93H105.005Z",
     transform: "translate(-46.857 -187.476)"
-  }))))))));
+  }))))))), window.location.pathname != "/administration" && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+    onClick: function onClick() {
+      return setShowSearchBar(true);
+    },
+    className: "col-8 row mt-3 mx-0 search-item item justify-content-center align-items-center p-0 shadow",
+    style: {
+      height: jquery__WEBPACK_IMPORTED_MODULE_2___default()('.search-item').width()
+    }
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
+    className: "col-5 p-0 justify-content-center align-items-center row m-0"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("svg", {
+    xmlns: "http://www.w3.org/2000/svg",
+    className: "col-12 p-0",
+    viewBox: "0 0 68.508 68.494"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("g", {
+    transform: "translate(0 0)"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("path", {
+    d: "M7.72,7.747A26.224,26.224,0,0,1,45.758,43.832l2,2a4.143,4.143,0,0,1,5.86,0h0L67.294,59.508a4.143,4.143,0,0,1,0,5.86h0l-1.953,1.953a4.143,4.143,0,0,1-5.859,0L45.809,53.648a4.143,4.143,0,0,1,0-5.86h0l-2-2A26.224,26.224,0,0,1,7.72,7.747ZM47.761,51.694,61.434,65.367a1.381,1.381,0,0,0,1.953,0l1.953-1.954a1.381,1.381,0,0,0,0-1.952L51.666,47.788a1.413,1.413,0,0,0-1.953,0l-1.953,1.954A1.381,1.381,0,0,0,47.761,51.694ZM9.672,42.905a23.479,23.479,0,1,0,0-33.205A23.479,23.479,0,0,0,9.672,42.905Z",
+    transform: "translate(0 -0.041)"
+  })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("g", {
+    transform: "translate(5.567 11.612)"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("g", {
+    transform: "translate(0)"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("path", {
+    d: "M324.226,67.3h0l1.953,1.953a17.977,17.977,0,0,0,0,25.392L324.226,96.6A20.738,20.738,0,0,1,324.226,67.3Z",
+    transform: "translate(-318.167 -67.303)"
+  })))))));
 };
 
 /***/ }),
@@ -74936,16 +75079,21 @@ var AdministrationPage = function AdministrationPage(_ref) {
     return f;
   } : _ref$getAllPosts,
       allPosts = _ref.allPosts,
-      _ref$hide = _ref.hide,
-      hide = _ref$hide === void 0 ? function (f) {
+      _ref$show = _ref.show,
+      show = _ref$show === void 0 ? function (f) {
     return f;
-  } : _ref$hide,
+  } : _ref$show,
       clear = _ref.clear;
 
   var _useState = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(null),
       _useState2 = _slicedToArray(_useState, 2),
       data = _useState2[0],
       setData = _useState2[1];
+
+  var _useState3 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(0),
+      _useState4 = _slicedToArray(_useState3, 2),
+      filterPosts = _useState4[0],
+      setFilterPosts = _useState4[1];
 
   Object(react__WEBPACK_IMPORTED_MODULE_0__["useEffect"])(function () {
     if (allPosts === null) {
@@ -74960,32 +75108,90 @@ var AdministrationPage = function AdministrationPage(_ref) {
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, "Loading...");
     } else {
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "row col-12 mx-0"
+        className: "row col-12 justify-content-around mx-0 position-relative px-0"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "col-12 mb-4 d-flex row"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
+        className: "col-12 row mx-0 px-0 administration-bar position-fixed background-secondary"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "col-2 row mx-0 align-items-center"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "col-auto px-2 row mx-0"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
         onClick: function onClick() {
-          Object(_reach_router__WEBPACK_IMPORTED_MODULE_1__["navigate"])("/create");
-          changeSubpage();
+          return Object(_reach_router__WEBPACK_IMPORTED_MODULE_1__["navigate"])("/create");
         },
-        className: "offset-1 submit-sl col-auto mt-4 py-2 px-4 rounded"
-      }, "Vytvori\u0165 \u010Dl\xE1nok")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "col-12 align-items-center mb-3 mt-5 pt-4 px-0"
+        className: "create-button border-0 col-12 px-0 row mx-0 align-items-center shadow-sm"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
+        className: 'mb-0 px-4 py-2 font-semibold color-white'
+      }, "+ Vytvori\u0165 \u010Dl\xE1nok")))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "col-10 row mx-0 my-2 justify-content-end switch"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "row col-xl-9 col-lg-10 col-md-11 col-12 | align-items-start | justify-content-end | m-0 my-4 p-0"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "sub-page-sub-title background-primary | row col-xl-7 col-lg-8 col-md-10 col-12 | mx-0 p-0 py-5"
+        className: "col-auto px-2 row mx-0"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
+        className: 'mb-0 px-4 py-2 color-secondary font-semibold'
+      }, "Zobrazenie pr\xEDspevkov :")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "col-auto px-2 row mx-0"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+        onClick: function onClick() {
+          return setFilterPosts(0);
+        },
+        className: "".concat(filterPosts == 0 && 'on', " col-auto row mx-0 align-items-center shadow-sm")
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
+        className: 'mb-0 px-4 py-2 font-semibold'
+      }, "V\u0161etky"))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "col-auto px-2 row mx-0"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+        onClick: function onClick() {
+          return setFilterPosts(1);
+        },
+        className: "".concat(filterPosts == 1 && 'on', " col-auto row mx-0 align-items-center shadow-sm")
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
+        className: 'mb-0 px-4 py-2 font-semibold'
+      }, "Mobilita"))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "col-auto px-2 row mx-0"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+        onClick: function onClick() {
+          return setFilterPosts(2);
+        },
+        className: "".concat(filterPosts == 2 && 'on', " col-auto row mx-0 align-items-center shadow-sm")
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
+        className: 'mb-0 px-4 py-2 font-semibold'
+      }, "\u017Divotn\xE9 prostredie"))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "col-auto px-2 row mx-0"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+        onClick: function onClick() {
+          return setFilterPosts(3);
+        },
+        className: "".concat(filterPosts == 3 && 'on', " col-auto row mx-0 align-items-center shadow-sm")
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
+        className: 'mb-0 px-4 py-2 font-semibold'
+      }, "Digit\xE1lne mesto"))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "col-auto px-2 row mx-0"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+        onClick: function onClick() {
+          return setFilterPosts(4);
+        },
+        className: "".concat(filterPosts == 4 && 'on', " col-auto row mx-0 align-items-center shadow-sm")
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
+        className: 'mb-0 px-4 py-2 font-semibold'
+      }, "Energia"))))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "col-12 align-items-center mb-3 background-primary py-5"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", {
-        id: "here",
-        className: "font-bold subpage-title | col-12 | m-0 p-0 | text-center"
-      }, "aktu\xE1lne pripravujeme.")))), data.filter(function (item) {
+        className: "font-bold subpage-title | col-12 | m-0 p-0 | text-center py-5"
+      }, "aktu\xE1lne pripravujeme.")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "col-12 row mx-0 justify-content-center"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "col-11 row mx-0 my-3"
+      }, data.filter(function (item) {
         return item.done === 0;
+      }).filter(function (item) {
+        return item.subpage_id === filterPosts || filterPosts === 0;
       }).map(function (_ref2) {
         var id = _ref2.id,
             title = _ref2.title,
             author = _ref2.author,
             description = _ref2.description,
-            subpage_id = _ref2.subpage_id;
+            subpage_id = _ref2.subpage_id,
+            active = _ref2.active;
         return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
           className: 'project-outlook-frame | col-xl-3 col-lg-3 col-md-6 col-12 | mx-0 my-2 p-0 | justify-content-center rounded'
         }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
@@ -74993,53 +75199,73 @@ var AdministrationPage = function AdministrationPage(_ref) {
         }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
           className: 'project-content | row col-12 | m-0 p-0 | justify-content-center rounded'
         }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-          className: 'col-10 | p-0 mx-0 mt-3 mb-2 rounded'
+          className: "col-12 px-0 row mx-0 headline justify-content-center"
+        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+          className: "col-10 row mx-0 my-2 justify-content-between"
+        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+          className: "col-auto px-0"
         }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
-          className: 'my-2'
-        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
-          className: 'show-more'
-        }, "ID \u010Dl\xE1nku : "), " ", id), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
-          className: 'my-2'
-        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
-          className: 'show-more'
-        }, "Oblas\u0165 : "), " ", subpage_id == 4 && 'energia', " ", subpage_id == 1 && 'mobilita', " ", subpage_id == 2 && 'živ. prostredie', " ", subpage_id == 3 && 'dig. mesto'), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h4", {
+          className: 'mb-0 px-4 py-2 font-semibold color-primary'
+        }, subpage_id == 1 && 'Mobilita', subpage_id == 2 && 'Životné prostredie', subpage_id == 3 && 'Digitálne mesto', subpage_id == 4 && 'Energia')), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+          className: "background-secondary tag col-auto px-0"
+        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
+          className: 'mb-0 px-4 py-2 font-semibold'
+        }, id)))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+          className: 'project-content | row col-12 | m-0 p-0 | justify-content-center border-0'
+        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+          className: 'col-12 | p-0 mx-0'
+        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+          className: "col-12 my-3 mx-0"
+        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h4", {
           className: 'title | mb-1'
-        }, title.substring(0, 40), "..."), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
+        }, title), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
           className: 'description'
-        }, description.substring(0, 120), "...", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
-          className: 'my-2'
-        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+        }, description.substring(0, 120), "...", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
+          className: 'mt-2'
+        }, " ", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
           className: 'show-more'
-        }, "Autor : "), " ", author), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
-          className: 'show-more',
+        }, "Autor : "), " ", author))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+          className: "col-12 px-0 py-3 row mx-0 align-items-center background-secondary rounded justify-content-center"
+        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+          className: "col-10 row mx-0 justify-content-between align-items-center"
+        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+          className: "col-auto row mx-0 px-0"
+        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
           onClick: function onClick() {
             clear();
             Object(_reach_router__WEBPACK_IMPORTED_MODULE_1__["navigate"])("/update/".concat(id));
-          }
-        }, "Edit"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
-          className: 'show-more ml-3',
+          },
+          className: "create-button edit-button border-0 col-12 px-3 py-2 row mx-0 align-items-center shadow-sm"
+        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
+          className: 'mb-0 font-semibold color-white'
+        }, "Upravit \u010Dl\xE1nok"))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+          className: "col-auto row mx-0 edit-button",
           onClick: function onClick() {
-            return hide(id);
+            return show(id, active == 1 ? 0 : 1);
           }
-        }, "Delete"))))));
-      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "col-12 align-items-center mb-3 mt-5 pt-4 px-0"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "row col-xl-9 col-lg-10 col-md-11 col-12 | align-items-start | justify-content-end | m-0 my-4 p-0"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "sub-page-sub-title background-secondary | row col-xl-7 col-lg-8 col-md-10 col-12 | mx-0 p-0 py-5"
+        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
+          className: 'mb-0 font-regular color-primary'
+        }, active == 1 ? "Skryť" : "Zobraziť"))))))));
+      }))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "col-12 align-items-center mb-3 background-secondary py-5"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", {
-        id: "here",
-        className: "font-bold subpage-title | col-12 | m-0 p-0 | text-center"
-      }, "u\u017E sme zrealizovali a vyrie\u0161ili.")))), data.filter(function (item) {
+        className: "font-bold subpage-title | col-12 | m-0 p-0 | text-center py-5"
+      }, "u\u017E sme zrealizovali a vyrie\u0161ili.")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "col-12 row mx-0 justify-content-center"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "col-11 row mx-0 my-3"
+      }, data.filter(function (item) {
         return item.done === 1;
+      }).filter(function (item) {
+        return item.subpage_id === filterPosts || filterPosts === 0;
       }).map(function (_ref3) {
         var id = _ref3.id,
             title = _ref3.title,
             image = _ref3.image,
             author = _ref3.author,
             description = _ref3.description,
-            subpage_id = _ref3.subpage_id;
+            subpage_id = _ref3.subpage_id,
+            active = _ref3.active;
         return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
           className: 'project-outlook-frame | col-xl-3 col-lg-3 col-md-6 col-12 | mx-0 my-2 p-0 | justify-content-center'
         }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
@@ -75051,38 +75277,54 @@ var AdministrationPage = function AdministrationPage(_ref) {
           alt: "project-cover-image",
           className: 'col-12 | p-0'
         })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-          className: 'project-content | row col-12 | m-0 p-0 | justify-content-center'
+          className: "col-12 px-0 row mx-0 headline justify-content-center"
         }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-          className: 'col-10 | p-0 mx-0 mt-3 mb-2'
+          className: "col-10 row mx-0 my-2 justify-content-between"
+        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+          className: "background-primary tag col-auto px-0"
         }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
-          className: 'my-2'
-        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
-          className: 'show-more'
-        }, "ID \u010Dl\xE1nku : "), " ", id), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
-          className: 'my-2'
-        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
-          className: 'show-more'
-        }, "Oblas\u0165 : "), " ", subpage_id == 4 && 'energia', " ", subpage_id == 1 && 'mobilita', " ", subpage_id == 2 && 'živ. prostredie', " ", subpage_id == 3 && 'dig. mesto'), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h4", {
+          className: 'mb-0 px-4 py-2 font-semibold'
+        }, subpage_id == 1 && 'Mobilita', subpage_id == 2 && 'Životné prostredie', subpage_id == 3 && 'Digitálne mesto', subpage_id == 4 && 'Energia')), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+          className: "background-secondary tag col-auto px-0"
+        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
+          className: 'mb-0 px-4 py-2 font-semibold'
+        }, id)))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+          className: 'project-content | row col-12 | m-0 p-0 | justify-content-center border-0'
+        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+          className: 'col-12 | p-0 mx-0'
+        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+          className: "col-12 my-3 mx-0"
+        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h4", {
           className: 'title | mb-1'
         }, title), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
           className: 'description'
-        }, description.substring(0, 120), "...", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
-          className: 'my-2'
+        }, description.substring(0, 120), "...", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
+          className: 'mt-2'
         }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
           className: 'show-more'
-        }, "Autor : "), " ", author), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
-          className: 'show-more',
+        }, "Autor : "), " ", author))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+          className: "col-12 px-0 py-3 row mx-0 align-items-center background-secondary rounded justify-content-center"
+        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+          className: "col-10 row mx-0 justify-content-between align-items-center"
+        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+          className: "col-auto row mx-0 px-0"
+        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
           onClick: function onClick() {
             clear();
             Object(_reach_router__WEBPACK_IMPORTED_MODULE_1__["navigate"])("/update/".concat(id));
-          }
-        }, "Edit"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
-          className: 'show-more ml-3',
+          },
+          className: "create-button edit-button border-0 col-12 px-3 py-2 row mx-0 align-items-center shadow-sm"
+        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
+          className: 'mb-0 font-semibold color-white'
+        }, "Upravit \u010Dl\xE1nok"))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+          className: "col-auto row mx-0 edit-button",
           onClick: function onClick() {
-            return hide(id);
+            return show(id, active == 1 ? 0 : 1);
           }
-        }, "Delete"))))));
-      }));
+        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
+          className: 'mb-0 font-regular color-primary'
+        }, active == 1 ? "Skryť" : "Zobraziť")))))));
+      }))));
     }
   } else {
     return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, "Unauthorized"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
@@ -75200,7 +75442,7 @@ var CreatePost = function CreatePost(_ref) {
         }));
       },
       required: true
-    }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+    }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "Ak zad\xE1te hodnotu 0, suma sa nezobraz\xED."), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
       name: "author",
       className: "col-10 offset-1 my-4",
       value: creationData.author,
@@ -75344,7 +75586,7 @@ var Login = function Login(_ref) {
   return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "col-12 row login-frame p-5 my-5 justify-content-center align-items-start",
     style: {
-      minHeight: '82vh'
+      minHeight: '90vh'
     }
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("form", {
     className: "row col-10 justify-content-center",
@@ -75513,7 +75755,9 @@ var UpdatePost = function UpdatePost(_ref) {
         }));
       },
       required: true
-    }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+    }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
+      className: "col-10 offset-1 mb-4"
+    }, "Ak zad\xE1te hodnotu 0, suma sa nezobraz\xED."), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
       name: "author",
       className: "col-10 offset-1 my-4",
       value: updatedData.author,
@@ -75722,6 +75966,7 @@ var Project = function Project(_ref) {
     var alt = _ref2.alt,
         path = _ref2.path;
     return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      key: path,
       onClick: function onClick() {
         return setToggler(!toggler);
       },
@@ -75757,7 +76002,7 @@ var Project = function Project(_ref) {
     className: "col-12 row mx-0 description mt-4 py-2 px-xl-5 px-lg-5 px-md-5 px-4"
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
     className: "col-11 mb-3"
-  }, data.description)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+  }, data.description)), data.price != 0 && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "col-12 row mx-0 price mt-4 py-2 px-5"
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
     className: "col-11 mb-3"
@@ -75768,6 +76013,213 @@ var Project = function Project(_ref) {
   }, String(written.getDate()) + "/" + (written.getMonth() + 1) + "/" + written.getFullYear()), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
     className: "col-12 mb-0 text-right"
   }, data.author))))));
+};
+
+/***/ }),
+
+/***/ "./resources/js/components/subpage/Search.js":
+/*!***************************************************!*\
+  !*** ./resources/js/components/subpage/Search.js ***!
+  \***************************************************/
+/*! exports provided: Search */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "Search", function() { return Search; });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! jquery */ "./node_modules/jquery/dist/jquery.js");
+/* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(jquery__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _outlook_ProjectOutlook__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./outlook/ProjectOutlook */ "./resources/js/components/subpage/outlook/ProjectOutlook.js");
+/* harmony import */ var _outlook_NewsOutlook__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./outlook/NewsOutlook */ "./resources/js/components/subpage/outlook/NewsOutlook.js");
+/* harmony import */ var _Utillities__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../Utillities */ "./resources/js/components/Utillities.js");
+function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _nonIterableRest(); }
+
+function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance"); }
+
+function _iterableToArrayLimit(arr, i) { var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
+
+function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
+
+
+
+
+
+
+var Search = function Search(_ref) {
+  var _ref$close = _ref.close,
+      close = _ref$close === void 0 ? function (f) {
+    return f;
+  } : _ref$close,
+      _ref$searchFetchData = _ref.searchFetchData,
+      searchFetchData = _ref$searchFetchData === void 0 ? function (f) {
+    return f;
+  } : _ref$searchFetchData,
+      allSubpageData = _ref.allSubpageData,
+      _ref$getPost = _ref.getPost,
+      _getPost = _ref$getPost === void 0 ? function (f) {
+    return f;
+  } : _ref$getPost;
+
+  var _useState = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(""),
+      _useState2 = _slicedToArray(_useState, 2),
+      searchInput = _useState2[0],
+      setSearchInput = _useState2[1];
+
+  var _useState3 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(true),
+      _useState4 = _slicedToArray(_useState3, 2),
+      firstTime = _useState4[0],
+      setFirstTime = _useState4[1];
+
+  Object(react__WEBPACK_IMPORTED_MODULE_0__["useEffect"])(function () {
+    jquery__WEBPACK_IMPORTED_MODULE_1___default()('.searchbar-frame').fadeIn();
+    jquery__WEBPACK_IMPORTED_MODULE_1___default()('body,html').css('overflowY', 'hidden');
+
+    if (firstTime) {
+      searchFetchData();
+      setFirstTime(false);
+    }
+  }, []);
+
+  if (allSubpageData == null || allSubpageData["/mobilita"] == undefined || allSubpageData["/zivotne_prostredie"] == undefined || allSubpageData["/digitalne_mesto"] == undefined || allSubpageData["/energia"] == undefined) {
+    searchFetchData();
+    return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Utillities__WEBPACK_IMPORTED_MODULE_4__["Loader"], null);
+  } else {
+    return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      className: "searchbar-frame row mx-0 p-0 m-0 justify-content-center align-items-start position-fixed"
+    }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      className: "col-xl-10 col-lg-12 row mx-0 justify-content-around align-items-center"
+    }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+      onChange: function onChange(e) {
+        return setSearchInput(e.target.value);
+      },
+      className: 'col-xl-8 py-3 px-4 mt-4 shadow-sm border-0 background-white',
+      placeholder: 'Zadajte vyhľadávaný výraz'
+    }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      onClick: close,
+      className: "col-auto order-xl-2 order-lg-2 order-md-2 order-1 p-0"
+    }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("svg", {
+      className: "col-12 p-0 close-button",
+      width: 24,
+      height: 24,
+      enableBackground: "new 0 0 357 357",
+      version: "1.1",
+      viewBox: "0 0 357 357",
+      space: "preserve",
+      xmlns: "http://www.w3.org/2000/svg"
+    }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("polygon", {
+      points: "357 35.7 321.3 0 178.5 142.8 35.7 0 0 35.7 142.8 178.5 0 321.3 35.7 357 178.5 214.2 321.3 357 357 321.3 214.2 178.5"
+    })))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      className: "row col-xl-10 col-lg-11 col-md-11 col-10 | my-4 p-0"
+    }, allSubpageData["/mobilita"].posts.filter(function (_ref2) {
+      var done = _ref2.done;
+      return done == 0;
+    }).map(function (current) {
+      return (current.title.toUpperCase().includes(searchInput.toUpperCase()) || current.description.toUpperCase().includes(searchInput.toUpperCase())) && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        key: current.id,
+        className: "col-3 mx-0 row"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_outlook_NewsOutlook__WEBPACK_IMPORTED_MODULE_3__["NewsOutlook"], {
+        post: current,
+        getPost: function getPost(id) {
+          return _getPost(id);
+        }
+      }));
+    }), allSubpageData["/zivotne_prostredie"].posts.filter(function (_ref3) {
+      var done = _ref3.done;
+      return done == 0;
+    }).map(function (current) {
+      return (current.title.toUpperCase().includes(searchInput.toUpperCase()) || current.description.toUpperCase().includes(searchInput.toUpperCase())) && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        key: current.id,
+        className: "col-3 mx-0 row"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_outlook_NewsOutlook__WEBPACK_IMPORTED_MODULE_3__["NewsOutlook"], {
+        post: current,
+        getPost: function getPost(id) {
+          return _getPost(id);
+        }
+      }));
+    }), allSubpageData["/digitalne_mesto"].posts.filter(function (_ref4) {
+      var done = _ref4.done;
+      return done == 0;
+    }).map(function (current) {
+      return (current.title.toUpperCase().includes(searchInput.toUpperCase()) || current.description.toUpperCase().includes(searchInput.toUpperCase())) && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        key: current.id,
+        className: "col-3 mx-0 row"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_outlook_NewsOutlook__WEBPACK_IMPORTED_MODULE_3__["NewsOutlook"], {
+        post: current,
+        getPost: function getPost(id) {
+          return _getPost(id);
+        }
+      }));
+    }), allSubpageData["/energia"].posts.filter(function (_ref5) {
+      var done = _ref5.done;
+      return done == 0;
+    }).map(function (current) {
+      return (current.title.toUpperCase().includes(searchInput.toUpperCase()) || current.description.toUpperCase().includes(searchInput.toUpperCase())) && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        key: current.id,
+        className: "col-3 mx-0 row"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_outlook_NewsOutlook__WEBPACK_IMPORTED_MODULE_3__["NewsOutlook"], {
+        post: current,
+        getPost: function getPost(id) {
+          return _getPost(id);
+        }
+      }));
+    })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      className: "row col-xl-10 col-lg-11 col-md-11 col-10 | my-4 p-0"
+    }, allSubpageData["/mobilita"].posts.filter(function (_ref6) {
+      var done = _ref6.done;
+      return done == 1;
+    }).map(function (current) {
+      return (current.title.toUpperCase().includes(searchInput.toUpperCase()) || current.description.toUpperCase().includes(searchInput.toUpperCase())) && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        key: current.id,
+        className: "col-3 mx-0 row"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_outlook_ProjectOutlook__WEBPACK_IMPORTED_MODULE_2__["ProjectOutlook"], {
+        post: current,
+        getPost: function getPost(id) {
+          return _getPost(id);
+        }
+      }));
+    }), allSubpageData["/zivotne_prostredie"].posts.filter(function (_ref7) {
+      var done = _ref7.done;
+      return done == 1;
+    }).map(function (current) {
+      return (current.title.toUpperCase().includes(searchInput.toUpperCase()) || current.description.toUpperCase().includes(searchInput.toUpperCase())) && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        key: current.id,
+        className: "col-3 mx-0 row"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_outlook_ProjectOutlook__WEBPACK_IMPORTED_MODULE_2__["ProjectOutlook"], {
+        post: current,
+        getPost: function getPost(id) {
+          return _getPost(id);
+        }
+      }));
+    }), allSubpageData["/digitalne_mesto"].posts.filter(function (_ref8) {
+      var done = _ref8.done;
+      return done == 1;
+    }).map(function (current) {
+      return (current.title.toUpperCase().includes(searchInput.toUpperCase()) || current.description.toUpperCase().includes(searchInput.toUpperCase())) && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        key: current.id,
+        className: "col-3 mx-0 row"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_outlook_ProjectOutlook__WEBPACK_IMPORTED_MODULE_2__["ProjectOutlook"], {
+        post: current,
+        getPost: function getPost(id) {
+          return _getPost(id);
+        }
+      }));
+    }), allSubpageData["/energia"].posts.filter(function (_ref9) {
+      var done = _ref9.done;
+      return done == 1;
+    }).map(function (current) {
+      return (current.title.toUpperCase().includes(searchInput.toUpperCase()) || current.description.toUpperCase().includes(searchInput.toUpperCase())) && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        key: current.id,
+        className: "col-3 mx-0 row"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_outlook_ProjectOutlook__WEBPACK_IMPORTED_MODULE_2__["ProjectOutlook"], {
+        post: current,
+        getPost: function getPost(id) {
+          return _getPost(id);
+        }
+      }));
+    })));
+  }
 };
 
 /***/ }),
@@ -75788,14 +76240,15 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _outlook_ProjectOutlook__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./outlook/ProjectOutlook */ "./resources/js/components/subpage/outlook/ProjectOutlook.js");
 /* harmony import */ var _Utillities__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../Utillities */ "./resources/js/components/Utillities.js");
 /* harmony import */ var _Project__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./Project */ "./resources/js/components/subpage/Project.js");
-/* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! jquery */ "./node_modules/jquery/dist/jquery.js");
-/* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(jquery__WEBPACK_IMPORTED_MODULE_5__);
-/* harmony import */ var react_slick__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! react-slick */ "./node_modules/react-slick/lib/index.js");
-/* harmony import */ var react_slick__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(react_slick__WEBPACK_IMPORTED_MODULE_6__);
-/* harmony import */ var slick_carousel_slick_slick_css__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! slick-carousel/slick/slick.css */ "./node_modules/slick-carousel/slick/slick.css");
-/* harmony import */ var slick_carousel_slick_slick_css__WEBPACK_IMPORTED_MODULE_7___default = /*#__PURE__*/__webpack_require__.n(slick_carousel_slick_slick_css__WEBPACK_IMPORTED_MODULE_7__);
-/* harmony import */ var slick_carousel_slick_slick_theme_css__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! slick-carousel/slick/slick-theme.css */ "./node_modules/slick-carousel/slick/slick-theme.css");
-/* harmony import */ var slick_carousel_slick_slick_theme_css__WEBPACK_IMPORTED_MODULE_8___default = /*#__PURE__*/__webpack_require__.n(slick_carousel_slick_slick_theme_css__WEBPACK_IMPORTED_MODULE_8__);
+/* harmony import */ var _Search__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./Search */ "./resources/js/components/subpage/Search.js");
+/* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! jquery */ "./node_modules/jquery/dist/jquery.js");
+/* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(jquery__WEBPACK_IMPORTED_MODULE_6__);
+/* harmony import */ var react_slick__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! react-slick */ "./node_modules/react-slick/lib/index.js");
+/* harmony import */ var react_slick__WEBPACK_IMPORTED_MODULE_7___default = /*#__PURE__*/__webpack_require__.n(react_slick__WEBPACK_IMPORTED_MODULE_7__);
+/* harmony import */ var slick_carousel_slick_slick_css__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! slick-carousel/slick/slick.css */ "./node_modules/slick-carousel/slick/slick.css");
+/* harmony import */ var slick_carousel_slick_slick_css__WEBPACK_IMPORTED_MODULE_8___default = /*#__PURE__*/__webpack_require__.n(slick_carousel_slick_slick_css__WEBPACK_IMPORTED_MODULE_8__);
+/* harmony import */ var slick_carousel_slick_slick_theme_css__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! slick-carousel/slick/slick-theme.css */ "./node_modules/slick-carousel/slick/slick-theme.css");
+/* harmony import */ var slick_carousel_slick_slick_theme_css__WEBPACK_IMPORTED_MODULE_9___default = /*#__PURE__*/__webpack_require__.n(slick_carousel_slick_slick_theme_css__WEBPACK_IMPORTED_MODULE_9__);
 function _extends() { _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends.apply(this, arguments); }
 
 function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _nonIterableRest(); }
@@ -75819,6 +76272,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
 
 
+
 var Subpage = function Subpage(_ref) {
   var data = _ref.data,
       project = _ref.project,
@@ -75826,7 +76280,15 @@ var Subpage = function Subpage(_ref) {
       getpost = _ref$getpost === void 0 ? function (f) {
     return f;
   } : _ref$getpost,
-      closePost = _ref.closePost;
+      closePost = _ref.closePost,
+      showSearchBar = _ref.showSearchBar,
+      closeSearchBar = _ref.closeSearchBar,
+      _ref$searchFetchData = _ref.searchFetchData,
+      _searchFetchData = _ref$searchFetchData === void 0 ? function (f) {
+    return f;
+  } : _ref$searchFetchData,
+      allSubpageData = _ref.allSubpageData;
+
   var settings = {
     infinite: false,
     speed: 500,
@@ -75869,11 +76331,11 @@ var Subpage = function Subpage(_ref) {
       setSubpage = _useState2[1];
 
   var close = function close() {
-    jquery__WEBPACK_IMPORTED_MODULE_5___default()('.project-details-frame .project-content').animate({
+    jquery__WEBPACK_IMPORTED_MODULE_6___default()('.project-details-frame .project-content').animate({
       marginTop: '100vh',
       easing: 'easeInOutCirc'
     }, 1000);
-    jquery__WEBPACK_IMPORTED_MODULE_5___default()('.project-details-frame').fadeToggle("slow", closePost);
+    jquery__WEBPACK_IMPORTED_MODULE_6___default()('.project-details-frame').fadeToggle("slow", closePost);
   };
 
   var chunk = function chunk(array, size) {
@@ -75897,8 +76359,8 @@ var Subpage = function Subpage(_ref) {
   }, [window.location.pathname, data]);
 
   var scroll = function scroll() {
-    return jquery__WEBPACK_IMPORTED_MODULE_5___default()('html, body').animate({
-      scrollTop: jquery__WEBPACK_IMPORTED_MODULE_5___default()("#here").offset().top,
+    return jquery__WEBPACK_IMPORTED_MODULE_6___default()('html, body').animate({
+      scrollTop: jquery__WEBPACK_IMPORTED_MODULE_6___default()("#here").offset().top,
       easing: 'easeInOutCirc'
     }, 1500);
   };
@@ -75912,7 +76374,7 @@ var Subpage = function Subpage(_ref) {
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "intro position-relative | row col-12 | mx-0 p-0",
     style: {
-      minHeight: jquery__WEBPACK_IMPORTED_MODULE_5___default()(window).height()
+      minHeight: jquery__WEBPACK_IMPORTED_MODULE_6___default()(window).height()
     }
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "background position-absolute | col-xl-4 col-lg-4 col-md-4 col-sm-2 col-1 | m-0 p-0",
@@ -76510,11 +76972,13 @@ var Subpage = function Subpage(_ref) {
     fill: "#d3d2d2"
   })))), chunk(subpage.posts.filter(function (item) {
     return item.done === 0;
-  }).slice(0, 4), 4).map(function (arr) {
-    return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_slick__WEBPACK_IMPORTED_MODULE_6___default.a, _extends({}, settings1, {
+  }).slice(0, 4), 4).map(function (arr, index) {
+    return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_slick__WEBPACK_IMPORTED_MODULE_7___default.a, _extends({}, settings1, {
+      key: index.toString(),
       className: "row col-xl-8 col-lg-8 col-md-8 col-7 | justify-content-start | mx-xl-0 mx-lg-0 mr-0 my-5 ml-2 p-0"
     }), arr.map(function (post) {
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_outlook_NewsOutlook__WEBPACK_IMPORTED_MODULE_1__["NewsOutlook"], {
+        key: post.id,
         post: post,
         getPost: function getPost(id) {
           return getpost(id);
@@ -76537,11 +77001,13 @@ var Subpage = function Subpage(_ref) {
     className: "row col-xl-12 col-lg-12 col-md-12 col-sm-11 col-11 | justify-content-center | m-0 p-0"
   }, chunk(subpage.posts.filter(function (item) {
     return item.done === 1;
-  }), 4).map(function (arr) {
-    return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_slick__WEBPACK_IMPORTED_MODULE_6___default.a, _extends({}, settings2, {
+  }), 4).map(function (arr, index) {
+    return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_slick__WEBPACK_IMPORTED_MODULE_7___default.a, _extends({}, settings2, {
+      key: index.toString(),
       className: "row col-xl-11 col-lg-11 col-md-11 col-10 | justify-content-center | m-0 p-0"
     }), arr.map(function (post) {
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_outlook_ProjectOutlook__WEBPACK_IMPORTED_MODULE_2__["ProjectOutlook"], {
+        key: post.id,
         post: post,
         getPost: function getPost(id) {
           return getpost(id);
@@ -76630,10 +77096,21 @@ var Subpage = function Subpage(_ref) {
       transform: "translate(604 2730) rotate(180)",
       fill: "#d3d2d2"
     })))));
-  }))), project !== null ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Project__WEBPACK_IMPORTED_MODULE_4__["Project"], {
+  }))), project !== null && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Project__WEBPACK_IMPORTED_MODULE_4__["Project"], {
     data: project,
     close: close
-  }) : null);
+  }), showSearchBar && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Search__WEBPACK_IMPORTED_MODULE_5__["Search"], {
+    close: function close() {
+      return closeSearchBar();
+    },
+    searchFetchData: function searchFetchData() {
+      return _searchFetchData();
+    },
+    allSubpageData: allSubpageData,
+    getPost: function getPost(id) {
+      return getpost(id);
+    }
+  }));
 };
 
 var NextArrow = function NextArrow(props) {
@@ -76858,7 +77335,8 @@ var ProjectOutlook = function ProjectOutlook(_ref) {
     return f;
   } : _ref$getPost;
   return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: 'project-outlook-frame | row | mx-0 my-2 p-3 | justify-content-center'
+    role: "button",
+    className: 'project-outlook-frame col-12 | row | mx-0 my-2 p-3 | justify-content-center'
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: 'project-outlook | row col-xl-11 col-lg-11 col-md-11 col-12 | m-0 p-0'
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
@@ -76903,8 +77381,8 @@ var ProjectOutlook = function ProjectOutlook(_ref) {
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! D:\PROGRAMMING\web\SmartCityPresov\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! D:\PROGRAMMING\web\SmartCityPresov\resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! /Users/patrik/Projects/Webs/SmartCityPresov/resources/js/app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! /Users/patrik/Projects/Webs/SmartCityPresov/resources/sass/app.scss */"./resources/sass/app.scss");
 
 
 /***/ })

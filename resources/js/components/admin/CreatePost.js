@@ -16,10 +16,11 @@ export const CreatePost = ({logged, post = f => f}) => {
                     <p onClick={()=>{navigate(`/administration`); changeSubpage()}} className={"offset-1 submit-sl col-auto mt-4 py-2 px-4 rounded"} >Späť do administrácie</p>
                 </div>
                 <h1 className='text-center col-12'>Momentálne vytvárate nový článok</h1>
-                
+
                 <input name={`title`} className={"col-10 offset-1 my-4"} value={creationData.title} placeholder={`Zadajte názov`} onChange={e => {setCreationData({...creationData,title : e.target.value})}} required={true}/>
                 <textarea rows='10' name={`description`} className={"col-10 offset-1 my-4"} placeholder={`Zadajte text článku`} value={creationData.description} onChange={e => {setCreationData({...creationData,description : e.target.value})}} required={true}/>
                 <input name={`price`} className={"col-10 offset-1 my-4"} value={creationData.price} placeholder={`Zadajte cenu projektu`} type={`number`} onChange={e => {setCreationData({...creationData,price : e.target.value})}} required={true}/>
+                <p>Ak zadáte hodnotu 0, suma sa nezobrazí.</p>
                 <input name={"author"} className={"col-10 offset-1 my-4"} value={creationData.author} placeholder={`Zadajte meno autora`} onChange={e => {setCreationData({...creationData,author : e.target.value})}} required={true}/>
                 <input name={`images[]`} className={"col-10 offset-1 my-4 p-2"} type={`file`} onChange={e => {setCreationData({...creationData,images : e.target.files})}} multiple/>
                 <h3 className={"col-10 offset-1 mt-4"}>Vyberte oblasť</h3>

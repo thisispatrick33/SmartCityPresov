@@ -19,7 +19,11 @@ p {
 }
 
 .background-secondary {
-  background: #191919;
+  background: #121212;
+}
+
+.color-primary {
+  color: #D61920 !important;
 }
 
 /*!
@@ -10686,7 +10690,7 @@ a.text-dark:focus {
 
 body {
   font-family: SF-Regular;
-  color: #191919;
+  color: #121212;
   background: #fff;
   overflow-x: hidden;
 }
@@ -10704,7 +10708,7 @@ body .white-color {
 }
 
 body .background-secondary {
-  background: #191919;
+  background: #121212;
   color: #fff;
 }
 
@@ -10738,12 +10742,12 @@ body div[role=group] {
 
 body a {
   text-decoration: none;
-  color: #191919;
+  color: #121212;
 }
 
 body a:hover {
   text-decoration: none;
-  color: #191919;
+  color: #121212;
 }
 
 body footer {
@@ -10850,7 +10854,7 @@ form textarea:focus {
 .news-outlook-frame .news-outlook .news-content {
   font-family: SF-Regular;
   font-size: 0.842rem;
-  background: #191919;
+  background: #121212;
   border-radius: 0 0 5px 5px;
   color: #fff;
   border-top: 14px solid #D61920;
@@ -11007,7 +11011,7 @@ form textarea:focus {
 
 .sub-page .intro .sub-title {
   font-size: 5.43rem;
-  color: #191919;
+  color: #121212;
 }
 
 .sub-page .intro .description {
@@ -11146,36 +11150,6 @@ nav {
   right: 15px;
 }
 
-nav .item {
-  border-radius: 50%;
-  border: 0 none;
-}
-
-nav .item.on,
-nav .item:hover {
-  background: #D61920 !important;
-  cursor: pointer;
-  transition: 0.3s !important;
-}
-
-nav .item.on svg,
-nav .item:hover svg {
-  fill: #fff !important;
-}
-
-nav .item:not(:hover) {
-  background: #fff;
-  transition: 0.3s;
-}
-
-nav .item:not(:hover) svg {
-  fill: #D61920;
-}
-
-nav .item:focus {
-  outline: 0;
-}
-
 nav .line {
   width: 8px;
   height: 8px;
@@ -11191,10 +11165,26 @@ nav .line {
 
 .project-outlook-frame .project-outlook:hover {
   cursor: pointer;
+  -webkit-transform: scale(1.05);
+          transform: scale(1.05);
+  transition: 0.5s;
+}
+
+.project-outlook-frame .project-outlook:not(:hover) {
+  -webkit-transform: scale(1);
+          transform: scale(1);
+  transition: 0.5s;
+}
+
+.project-outlook-frame .project-outlook:focus {
+  background: #e6e6e6;
+  -webkit-transform: scale(0.95);
+          transform: scale(0.95);
+  transition: 0.5s;
 }
 
 .project-outlook-frame .project-outlook .project-cover-image {
-  border-bottom: 8px solid #191919;
+  border-bottom: 8px solid #121212;
   border-radius: 10px 10px 0 0;
 }
 
@@ -11210,7 +11200,7 @@ nav .line {
 .project-outlook-frame .project-outlook .project-content .title {
   font-family: SF-SemiBold;
   font-size: 1.1rem;
-  color: #191919;
+  color: #121212;
   text-transform: uppercase;
 }
 
@@ -11243,7 +11233,7 @@ nav .line {
   min-height: 80%;
   font-family: SF-SemiBold, serif;
   border-radius: 10px;
-  background: #191919;
+  background: #121212;
   margin-bottom: 10vh;
 }
 
@@ -11259,7 +11249,7 @@ nav .line {
 }
 
 .project-details-frame .project-content .content .close-button:not(:hover) {
-  fill: #191919;
+  fill: #121212;
   transition: 0.2s;
 }
 
@@ -11280,7 +11270,7 @@ nav .line {
 
 .project-details-frame .project-content .content .description {
   font-family: SF-Regular, serif;
-  color: #191919;
+  color: #121212;
   font-size: 1.1em;
 }
 
@@ -11299,7 +11289,7 @@ nav .line {
 }
 
 .project-details-frame .project-content .gallery {
-  background: #191919;
+  background: #121212;
   border-radius: 10px 0 0 10px;
 }
 
@@ -11522,5 +11512,150 @@ footer {
   .home-main-text {
     font-size: 1.1rem;
   }
+}
+
+.searchbar-frame {
+  background-color: rgba(255, 255, 255, 0.97);
+  width: 100vw;
+  overflow-y: scroll !important;
+  z-index: 2000;
+  left: 0;
+  top: 0;
+  height: 100vh;
+  overflow-y: scroll;
+}
+
+.searchbar-frame input {
+  border-radius: 50px;
+}
+
+.searchbar-frame input:focus {
+  outline: 0;
+}
+
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+/* Track */
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+/* Handle */
+
+::-webkit-scrollbar-thumb {
+  background: #888;
+  border-radius: 5px 0 0 5px;
+}
+
+/* Handle on hover */
+
+::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
+
+.administration-bar {
+  bottom: 0;
+  left: 0;
+  z-index: 1000;
+}
+
+.administration-bar .switch button {
+  border: 0;
+  background: white;
+  border-radius: 25px;
+}
+
+.administration-bar .switch button:hover {
+  background: #D61920;
+  color: #fff;
+  transition: 0.25s;
+}
+
+.administration-bar .switch button:not(:hover) {
+  background: #fff;
+  color: #121212;
+  transition: 0.25s;
+}
+
+.administration-bar .switch button:focus {
+  outline: 0;
+  transition: 0.25s;
+  background: #b6151b;
+  -webkit-transform: scale(0.95);
+          transform: scale(0.95);
+}
+
+.administration-bar .switch button.on {
+  background: #D61920;
+  color: #fff;
+  -webkit-transform: scale(1);
+          transform: scale(1);
+}
+
+.tag {
+  border-radius: 25px;
+  font-size: 0.95em;
+}
+
+.create-button {
+  border-radius: 5px;
+  background: #D61920;
+  color: #fff;
+  -webkit-transform: scale(1);
+          transform: scale(1);
+}
+
+.create-button:focus {
+  outline: 0;
+  transition: 0.25s;
+  background: #b6151b;
+  -webkit-transform: scale(0.95);
+          transform: scale(0.95);
+}
+
+.edit-button {
+  font-size: 0.9em;
+}
+
+.headline {
+  border-bottom: 1.5px dashed #121212;
+}
+
+nav .item {
+  border-radius: 50%;
+  border: 0 none;
+  z-index: 5000;
+}
+
+nav .item.on,
+nav .item:hover {
+  background: #D61920 !important;
+  -webkit-transform: scale(1);
+          transform: scale(1);
+  transition: 0.3s !important;
+}
+
+nav .item.on svg,
+nav .item:hover svg {
+  fill: #fff !important;
+}
+
+nav .item:not(:hover) {
+  background: #fff;
+  transition: 0.3s;
+}
+
+nav .item:not(:hover) svg {
+  fill: #D61920;
+}
+
+nav .item:focus {
+  outline: 0;
+  background: #b6151b;
+  -webkit-transform: scale(0.95);
+          transform: scale(0.95);
 }
 

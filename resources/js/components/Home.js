@@ -35,7 +35,7 @@ export const Home = ({_homeNewestPosts, getpost = f => f, project, author, close
                     (project !== null && author !== null) ? (
                         <Project data={project} user={author} close={close}/>) : null
                 }
-                <div className="screen mb-md-5 mt-5 d-flex align-items-xl-start align-items-lg-start align-items-center">
+                <div className="screen mb-md-5 mt-5 d-flex align-items-center">
                     <div className="row m-0 p-0">
                         <div className='col-xl-1'></div>
                         <div className="col-xl row m-0 p-0 pt-xl-4">

@@ -33,7 +33,7 @@ export const Project = ({data, close = f => f}) => {
                     </>
                     <div className={"col-12 row mx-0 p-3"}>
                         { data.images.map(({alt,path}) => {
-                            return <div onClick={ () => setToggler(!toggler) } className={"col-xl-12 col-lg-12 col-4 mb-4 p-1"}>
+                            return <div key={path} onClick={ () => setToggler(!toggler) } className={"col-xl-12 col-lg-12 col-4 mb-4 p-1"}>
                                 <img src={path.substr(path.indexOf('img'))} alt={alt} className={"col-12 shadow p-2"}/>
                             </div>
                           })
@@ -53,9 +53,12 @@ export const Project = ({data, close = f => f}) => {
                         <div className="col-12 row mx-0 description mt-4 py-2 px-xl-5 px-lg-5 px-md-5 px-4">
                             <p className={"col-11 mb-3"}>{data.description}</p>
                         </div>
-                        <div className="col-12 row mx-0 price mt-4 py-2 px-5">
-                            <p className={"col-11 mb-3"}><span>Cena projektu : </span>{data.price}€</p>
-                        </div>
+                        {
+                            data.price != 0 &&
+                            <div className="col-12 row mx-0 price mt-4 py-2 px-5">
+                                <p className={"col-11 mb-3"}><span>Cena projektu : </span>{data.price}€</p>
+                            </div>
+                        }
                         <div className="col-11 row mx-0 post-data my-4 py-2 px-5">
                             <p className={"col-12 mb-0 text-right"}>{ String(written.getDate()) + `/` + (written.getMonth()+1) + `/` + written.getFullYear() }</p>
                             <p className={"col-12 mb-0 text-right"}>{data.author}</p>

@@ -3,7 +3,7 @@
 
 $backgroundColor: #fff;
 $primaryColor : #D61920;
-$secondaryColor : #191919;
+$secondaryColor : #121212;
 $silver : #D3D2D2;
 
 //Grid sizes
@@ -32,4 +32,7 @@ p{
 }
 .background-secondary{
   background : $secondaryColor;
+}
+.color-primary{
+    color : $primaryColor !important;
 }

@@ -14,7 +14,7 @@ class AddColumnsToSubpagesTable extends Migration
     public function up()
     {
         Schema::table('subpages', function (Blueprint $table) {
-            $table->integer('version')->default(0);
+            $table->integer('version')->nullable()->default(0);
         });
     }
 

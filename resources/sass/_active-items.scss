@@ -1,0 +1,27 @@
+nav{
+    .item{
+      border-radius: 50%;
+      border : 0 none;
+      z-index: 5000;
+      &.on, &:hover{
+        background: $primaryColor !important;
+        transform: scale(1);
+        svg{
+          fill : $backgroundColor !important;
+        }
+        transition: 0.3s !important;
+      }
+      &:not(:hover){
+        background: $backgroundColor;
+        svg{
+          fill : $primaryColor;
+        }
+        transition: 0.3s;
+      }
+      &:focus{
+        outline: 0;
+        background : darken($primaryColor, 7%);
+        transform: scale(.95);
+      }
+    }
+  }

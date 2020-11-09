@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from 'react';
-import {NewsOutlook} from './outlook/NewsOutlook';
-import {ProjectOutlook} from './outlook/ProjectOutlook';
+import { NewsOutlook } from './outlook/NewsOutlook';
+import { ProjectOutlook } from './outlook/ProjectOutlook';
 import { Loader } from "../Utillities";
 import { Project } from './Project';
 import { Search } from './Search';
@@ -118,10 +118,10 @@ export const Subpage = ({data, project, getpost = f => f, closePost, showSearchB
                 </div>
 
                 {
-                    chunk(subpage.posts.filter(item => item.done === 0).slice(0, 4), 4).map(arr => {
-                        return <Slider {...settings1} className={`row col-xl-8 col-lg-8 col-md-8 col-7 | justify-content-start | mx-xl-0 mx-lg-0 mr-0 my-5 ml-2 p-0`}>
+                    chunk(subpage.posts.filter(item => item.done === 0).slice(0, 4), 4).map((arr, index) => {
+                        return <Slider {...settings1} key={index.toString()} className={`row col-xl-8 col-lg-8 col-md-8 col-7 | justify-content-start | mx-xl-0 mx-lg-0 mr-0 my-5 ml-2 p-0`}>
                             {
-                                arr.map(post => <NewsOutlook post={post} getPost={id =>getpost(id)} />)
+                                arr.map(post => <NewsOutlook key={post.id} post={post} getPost={id =>getpost(id)} />)
                             }
                         </Slider>
                     })
@@ -144,11 +144,11 @@ export const Subpage = ({data, project, getpost = f => f, closePost, showSearchB
             <div className={`row col-12 | justify-content-center | my-xl-5 my-lg-5 mx-0 mb-3 p-0`}>
                 <div className={`row col-xl-12 col-lg-12 col-md-12 col-sm-11 col-11 | justify-content-center | m-0 p-0`}>
                     {
-                        chunk(subpage.posts.filter(item => item.done === 1), 4).map(arr => {
+                        chunk(subpage.posts.filter(item => item.done === 1), 4).map((arr, index) => {
                             return <>
-                                <Slider {...settings2} className={`row col-xl-11 col-lg-11 col-md-11 col-10 | justify-content-center | m-0 p-0`}>
+                                <Slider {...settings2} key={index.toString()} className={`row col-xl-11 col-lg-11 col-md-11 col-10 | justify-content-center | m-0 p-0`}>
                                     {
-                                        arr.map(post => <ProjectOutlook post={post} getPost={id => getpost(id)}/>)
+                                        arr.map(post => <ProjectOutlook key={post.id} post={post} getPost={id => getpost(id)}/>)
                                     }
                                 </Slider>
 
@@ -176,7 +176,7 @@ export const Subpage = ({data, project, getpost = f => f, closePost, showSearchB
                 </div>
             </div>
             {
-                (project !== null) ? (<Project data={project} close={close}/>) : null
+                project !== null && <Project data={project} close={close}/>
             }
             {
                 showSearchBar && <Search close={() => closeSearchBar()} searchFetchData={() => searchFetchData()} allSubpageData={allSubpageData} getPost={id => getpost(id)}/>

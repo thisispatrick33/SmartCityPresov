@@ -24,95 +24,170 @@ export const AdministrationPage = ({logged, getAllPosts = f => f, allPosts, show
             )
         }
         else {
-            console.log(data);
             return (
-                <div className={"row col-12 mx-0"}>
-                     <div className='col-12 mb-4 d-flex row'>
-                        <p onClick={()=>{navigate(`/create`); changeSubpage()}} className={"offset-1 submit-sl col-auto mt-4 py-2 px-4 rounded"} >Vytvoriť článok</p>
-                     </div>
-                    <div className='col-12 mb-4 d-flex row'>
-                        <p onClick={()=>setFilterPosts(0)} className={"offset-1 submit-sl col-auto mt-4 py-2 px-4 rounded"}>Všetky</p>
+                <div className={"row col-12 justify-content-around mx-0 position-relative px-0"}>
+                    <div className="col-12 row mx-0 px-0 administration-bar position-fixed background-secondary">
+                        <div className="col-2 row mx-0 align-items-center">
+                            <div className="col-auto px-2 row mx-0">
+                                <button onClick={()=>navigate(`/create`)} className={`create-button border-0 col-12 px-0 row mx-0 align-items-center shadow-sm`}>
+                                    <p className={'mb-0 px-4 py-2 font-semibold color-white'}>+ Vytvoriť článok</p>
+                                </button>
+                            </div>
+                        </div>
+                        <div className="col-10 row mx-0 my-2 justify-content-end switch">
+                            <div className="col-auto px-2 row mx-0">
+                                <p className={'mb-0 px-4 py-2 color-secondary font-semibold'}>Zobrazenie príspevkov :</p>
+                            </div>
+                            <div className="col-auto px-2 row mx-0">
+                                <button onClick={()=>setFilterPosts(0)} className={`${filterPosts == 0 && 'on'} col-auto row mx-0 align-items-center shadow-sm`}>
+                                    <p className={'mb-0 px-4 py-2 font-semibold'}>Všetky</p>
+                                </button>
+                            </div>
+                            <div className="col-auto px-2 row mx-0">
+                                <button onClick={()=>setFilterPosts(1)} className={`${filterPosts == 1 && 'on'} col-auto row mx-0 align-items-center shadow-sm`}>
+                                    <p className={'mb-0 px-4 py-2 font-semibold'}>Mobilita</p>
+                                </button>
+                            </div>
+                            <div className="col-auto px-2 row mx-0">
+                                <button onClick={()=>setFilterPosts(2)} className={`${filterPosts == 2 && 'on'} col-auto row mx-0 align-items-center shadow-sm`}>
+                                    <p className={'mb-0 px-4 py-2 font-semibold'}>Životné prostredie</p>
+                                </button>
+                            </div>
+                            <div className="col-auto px-2 row mx-0">
+                                <button onClick={()=>setFilterPosts(3)} className={`${filterPosts == 3 && 'on'} col-auto row mx-0 align-items-center shadow-sm`}>
+                                    <p className={'mb-0 px-4 py-2 font-semibold'}>Digitálne mesto</p>
+                                </button>
+                            </div>
+                            <div className="col-auto px-2 row mx-0">
+                                <button onClick={()=>setFilterPosts(4)} className={`${filterPosts == 4 && 'on'} col-auto row mx-0 align-items-center shadow-sm`}>
+                                    <p className={'mb-0 px-4 py-2 font-semibold'}>Energia</p>
+                                </button>
+                            </div>
+                        </div>
                     </div>
-                    <div className='col-12 mb-4 d-flex row'>
-                        <p onClick={()=>setFilterPosts(1)} className={"offset-1 submit-sl col-auto mt-4 py-2 px-4 rounded"}>Mobilita</p>
+                    <div className="col-12 align-items-center mb-3 background-primary py-5">
+                        <h3 className={`font-bold subpage-title | col-12 | m-0 p-0 | text-center py-5`}>
+                            aktuálne pripravujeme.
+                        </h3>
                     </div>
-                    <div className='col-12 mb-4 d-flex row'>
-                        <p onClick={()=>setFilterPosts(2)} className={"offset-1 submit-sl col-auto mt-4 py-2 px-4 rounded"}>Životné prostredie</p>
-                    </div>
-                    <div className='col-12 mb-4 d-flex row'>
-                        <p onClick={()=>setFilterPosts(3)} className={"offset-1 submit-sl col-auto mt-4 py-2 px-4 rounded"}>Digitálne mesto</p>
-                    </div>
-                    <div className='col-12 mb-4 d-flex row'>
-                        <p onClick={()=>setFilterPosts(4)} className={"offset-1 submit-sl col-auto mt-4 py-2 px-4 rounded"}>Energia</p>
-                    </div>
+                    <div className="col-12 row mx-0 justify-content-center">
+                        <div className="col-11 row mx-0 my-3">
+                            {data.filter(item => item.done === 0).filter(item => (item.subpage_id === filterPosts || filterPosts === 0)).map(({id, title, author, description, subpage_id, active})=>{
+                            return(
+                                <div className={'project-outlook-frame | col-xl-3 col-lg-3 col-md-6 col-12 | mx-0 my-2 p-0 | justify-content-center rounded'}>
+                                    <div className={'project-outlook | row col-xl-11 col-lg-11 col-md-11 col-12 | m-0 p-0 rounded'}>
+                                        <div className={'project-content | row col-12 | m-0 p-0 | justify-content-center rounded'}>
+                                        <div className="col-12 px-0 row mx-0 headline justify-content-center">
+                                            <div className="col-10 row mx-0 my-2 justify-content-between">
+                                                <div className="col-auto px-0">
+                                                    <p className={'mb-0 px-4 py-2 font-semibold color-primary'}>
+                                                        {subpage_id == 1 && 'Mobilita'}
+                                                        {subpage_id == 2 && 'Životné prostredie'}
+                                                        {subpage_id == 3 && 'Digitálne mesto'}
+                                                        {subpage_id == 4 && 'Energia'}
+                                                    </p>
+                                                </div>
+                                                <div className="background-secondary tag col-auto px-0">
+                                                    <p className={'mb-0 px-4 py-2 font-semibold'}>
+                                                        {id}
+                                                    </p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                            <div className={'project-content | row col-12 | m-0 p-0 | justify-content-center border-0'}>
+                                                <div className={'col-12 | p-0 mx-0'}>
+                                                    <div className="col-12 my-3 mx-0">
+                                                        <h4 className={'title | mb-1'}>{title}</h4>
+                                                        <p className={'description'}>
+                                                            {description.substring(0, 120)}...
+                                                            <br/>
+                                                        </p>
+                                                        <p className={'mt-2'}> <span className={'show-more'}>Autor : </span> {author}</p>
+                                                    </div>
+                                                </div>
 
-                    <div className="col-12 align-items-center mb-3 mt-5 pt-4 px-0">
-                        <div className={`row col-xl-9 col-lg-10 col-md-11 col-12 | align-items-start | justify-content-end | m-0 my-4 p-0`}>
-                            <div className={`sub-page-sub-title background-primary | row col-xl-7 col-lg-8 col-md-10 col-12 | mx-0 p-0 py-5`}>
-                                <h3 id={`here`} className={`font-bold subpage-title | col-12 | m-0 p-0 | text-center`}>
-                                    aktuálne pripravujeme.
-                                </h3>
-                            </div>
-                        </div>
-                    </div>
-                    {data.filter(item => item.done === 0).filter(item => (item.subpage_id === filterPosts || filterPosts === 0)).map(({id, title, author, description, subpage_id, active})=>{
-                        return(
-                            <div className={'project-outlook-frame | col-xl-3 col-lg-3 col-md-6 col-12 | mx-0 my-2 p-0 | justify-content-center rounded'}>
-                                <div className={'project-outlook | row col-xl-11 col-lg-11 col-md-11 col-12 | m-0 p-0 rounded'}>
-                                    <div className={'project-content | row col-12 | m-0 p-0 | justify-content-center rounded'}>
-                                        <div className={'col-10 | p-0 mx-0 mt-3 mb-2 rounded'}>
-                                        <p className={'my-2'}><span className={'show-more'}>ID článku : </span> {id}</p>
-                                        <p className={'my-2'}><span className={'show-more'}>Oblasť : </span> {subpage_id == 4 && 'energia'} {subpage_id == 1 && 'mobilita'} {subpage_id == 2 && 'živ. prostredie'} {subpage_id == 3 && 'dig. mesto'}</p>
-                                            <h4 className={'title | mb-1'}>{title.substring(0, 40)}...</h4>
-                                            <p className={'description'}>
-                                                {description.substring(0, 120)}...
-                                                <br/>
-                                                <p className={'my-2'}><span className={'show-more'}>Autor : </span> {author}</p>
-                                                <br />
-                                                <span className={'show-more'} onClick={() => {clear();navigate(`/update/${id}`);}}>Edit</span>
-                                                <span className={'show-more ml-3'} onClick={() => show(id, active == 1 ? 0 : 1)}>{active == 1 ? "Skryť" : "Zobraziť"}</span>
-                                            </p>
+
+                                                <div className="col-12 px-0 py-3 row mx-0 align-items-center background-secondary rounded justify-content-center">
+                                                    <div className="col-10 row mx-0 justify-content-between align-items-center">
+                                                        <div className="col-auto row mx-0 px-0">
+                                                            <button onClick={() => {clear();navigate(`/update/${id}`);}} className={`create-button edit-button border-0 col-12 px-3 py-2 row mx-0 align-items-center shadow-sm`}>
+                                                                <p className={'mb-0 font-semibold color-white'}>Upravit článok</p>
+                                                            </button>
+                                                        </div>
+                                                        <div className="col-auto row mx-0 edit-button" onClick={() => show(id, active == 1 ? 0 : 1)}>
+                                                            <p className={'mb-0 font-regular color-primary'}>{active == 1 ? "Skryť" : "Zobraziť"}</p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
-                        )
-                    })}
-                    <div className="col-12 align-items-center mb-3 mt-5 pt-4 px-0">
-                        <div className={`row col-xl-9 col-lg-10 col-md-11 col-12 | align-items-start | justify-content-end | m-0 my-4 p-0`}>
-                            <div className={`sub-page-sub-title background-secondary | row col-xl-7 col-lg-8 col-md-10 col-12 | mx-0 p-0 py-5`}>
-                                <h3 id={`here`} className={`font-bold subpage-title | col-12 | m-0 p-0 | text-center`}>
-                                    už sme zrealizovali a vyriešili.
-                                </h3>
-                            </div>
+                            )
+                        })}
                         </div>
                     </div>
-                    {data.filter(item => item.done === 1).filter(item => (item.subpage_id === filterPosts || filterPosts === 0)).map(({id, title, image, author, description,subpage_id, active})=>{
-                        return(
-                            <div className={'project-outlook-frame | col-xl-3 col-lg-3 col-md-6 col-12 | mx-0 my-2 p-0 | justify-content-center'}>
-                                <div className={'project-outlook | row col-xl-11 col-lg-11 col-md-11 col-12 | m-0 p-0'}>
-                                    <div className={'project-cover-image | col-12 | m-0 p-0 | justify-content-center'}>
-                                        <img src={image.substr(image.indexOf('img'))} alt="project-cover-image" className={'col-12 | p-0'}/>
-                                    </div>
-                                    <div className={'project-content | row col-12 | m-0 p-0 | justify-content-center'}>
-                                        <div className={'col-10 | p-0 mx-0 mt-3 mb-2'}>
-                                        <p className={'my-2'}><span className={'show-more'}>ID článku : </span> {id}</p>
-                                        <p className={'my-2'}><span className={'show-more'}>Oblasť : </span> {subpage_id == 4 && 'energia'} {subpage_id == 1 && 'mobilita'} {subpage_id == 2 && 'živ. prostredie'} {subpage_id == 3 && 'dig. mesto'}</p>
-                                            <h4 className={'title | mb-1'}>{title}</h4>
-                                            <p className={'description'}>
-                                                {description.substring(0, 120)}...
-                                                <br/>
-                                                <p className={'my-2'}><span className={'show-more'}>Autor : </span> {author}</p>
-                                                <br />
-                                                <span className={'show-more'} onClick={() => {clear();navigate(`/update/${id}`);}}>Edit</span>
-                                                <span className={'show-more ml-3'} onClick={() => show(id, active == 1 ? 0 : 1)}>{active == 1 ? "Skryť" : "Zobraziť"}</span>
-                                            </p>
+                    <div className="col-12 align-items-center mb-3 background-secondary py-5">
+                        <h3 className={`font-bold subpage-title | col-12 | m-0 p-0 | text-center py-5`}>
+                            už sme zrealizovali a vyriešili.
+                        </h3>
+                    </div>
+                    <div className="col-12 row mx-0 justify-content-center">
+                        <div className="col-11 row mx-0 my-3">
+                            {data.filter(item => item.done === 1).filter(item => (item.subpage_id === filterPosts || filterPosts === 0)).map(({id, title, image, author, description,subpage_id, active})=>{
+                                return(
+                                    <div className={'project-outlook-frame | col-xl-3 col-lg-3 col-md-6 col-12 | mx-0 my-2 p-0 | justify-content-center'}>
+                                        <div className={'project-outlook | row col-xl-11 col-lg-11 col-md-11 col-12 | m-0 p-0'}>
+                                            <div className={'project-cover-image | col-12 | m-0 p-0 | justify-content-center'}>
+                                                <img src={image.substr(image.indexOf('img'))} alt="project-cover-image" className={'col-12 | p-0'}/>
+                                            </div>
+                                            <div className="col-12 px-0 row mx-0 headline justify-content-center">
+                                                <div className="col-10 row mx-0 my-2 justify-content-between">
+                                                    <div className="background-primary tag col-auto px-0">
+                                                        <p className={'mb-0 px-4 py-2 font-semibold'}>
+                                                            {subpage_id == 1 && 'Mobilita'}
+                                                            {subpage_id == 2 && 'Životné prostredie'}
+                                                            {subpage_id == 3 && 'Digitálne mesto'}
+                                                            {subpage_id == 4 && 'Energia'}
+                                                        </p>
+                                                    </div>
+                                                    <div className="background-secondary tag col-auto px-0">
+                                                        <p className={'mb-0 px-4 py-2 font-semibold'}>
+                                                            {id}
+                                                        </p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div className={'project-content | row col-12 | m-0 p-0 | justify-content-center border-0'}>
+                                                <div className={'col-12 | p-0 mx-0'}>
+                                                    <div className="col-12 my-3 mx-0">
+                                                        <h4 className={'title | mb-1'}>{title}</h4>
+                                                        <p className={'description'}>
+                                                            {description.substring(0, 120)}...
+                                                            <br/>
+                                                        </p>
+                                                        <p className={'mt-2'}><span className={'show-more'}>Autor : </span> {author}</p>
+                                                    </div>
+                                                </div>
+                                                <div className="col-12 px-0 py-3 row mx-0 align-items-center background-secondary rounded justify-content-center">
+                                                    <div className="col-10 row mx-0 justify-content-between align-items-center">
+                                                        <div className="col-auto row mx-0 px-0">
+                                                            <button onClick={() => {clear();navigate(`/update/${id}`);}} className={`create-button edit-button border-0 col-12 px-3 py-2 row mx-0 align-items-center shadow-sm`}>
+                                                                <p className={'mb-0 font-semibold color-white'}>Upravit článok</p>
+                                                            </button>
+                                                        </div>
+                                                        <div className="col-auto row mx-0 edit-button" onClick={() => show(id, active == 1 ? 0 : 1)}>
+                                                            <p className={'mb-0 font-regular color-primary'}>{active == 1 ? "Skryť" : "Zobraziť"}</p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
-                            </div>
-                        )
-                    })}
+                                )
+                            })}
+                        </div>
+                    </div>
                 </div>
             );
         }
