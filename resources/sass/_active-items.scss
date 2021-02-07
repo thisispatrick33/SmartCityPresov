@@ -25,3 +25,16 @@ nav{
       }
     }
   }
+
+  .text-link{
+    &:link, &:visited, &:not(:hover){
+        transition: .25;
+        color: $primaryColor !important;
+        text-decoration: none;
+    }
+    &:hover{
+        transition: .25;
+        text-decoration: underline;
+    }
+
+}

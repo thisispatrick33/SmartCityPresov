@@ -11659,3 +11659,16 @@ nav .item:focus {
           transform: scale(0.95);
 }
 
+.text-link:link,
+.text-link:visited,
+.text-link:not(:hover) {
+  transition: 0.25;
+  color: #D61920 !important;
+  text-decoration: none;
+}
+
+.text-link:hover {
+  transition: 0.25;
+  text-decoration: underline;
+}
+

@@ -75924,6 +75924,15 @@ var Project = function Project(_ref) {
       close = _ref$close === void 0 ? function (f) {
     return f;
   } : _ref$close;
+
+  function urlify(text) {
+    var urlRegex = /(https?:\/\/[^\s]+)/g;
+    return text.replace(urlRegex, function (url) {
+      return '<a href="' + url + '" class="text-link">' + url + '</a>';
+    }); // or alternatively
+    // return text.replace(urlRegex, '<a href="$1">$1</a>')
+  }
+
   var written = new Date(data.updated_at.replace(' ', 'T'));
 
   var _useState = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(false),
@@ -76000,9 +76009,14 @@ var Project = function Project(_ref) {
     points: "357 35.7 321.3 0 178.5 142.8 35.7 0 0 35.7 142.8 178.5 0 321.3 35.7 357 178.5 214.2 321.3 357 357 321.3 214.2 178.5"
   })))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "col-12 row mx-0 description mt-4 py-2 px-xl-5 px-lg-5 px-md-5 px-4"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
-    className: "col-11 mb-3"
-  }, data.description)), data.price != 0 && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+  }, data.description.split('\n').map(function (text) {
+    return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
+      className: "col-11 mb-3",
+      dangerouslySetInnerHTML: {
+        __html: urlify(text)
+      }
+    });
+  })), data.price != 0 && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "col-12 row mx-0 price mt-4 py-2 px-5"
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
     className: "col-11 mb-3"
@@ -77224,37 +77238,25 @@ var HomeOutlook = function HomeOutlook(_ref) {
       getPost = _ref$getPost === void 0 ? function (f) {
     return f;
   } : _ref$getPost;
-  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+  return console.log(post), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: 'news-outlook-frame | row col-lg-4 col-sm-5 col-10 | mx-0 my-2 p-0 | justify-content-center'
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: 'news-outlook | row col-xl-11 col-lg-11 col-md-11 col-11 | m-0 p-0'
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: 'news-cover-icon | row col-12 | m-0 p-0 | justify-content-center'
-  }, post.subpage_id == 1 ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
-    alt: "cover news image",
-    className: 'col-5 | px-2 py-3',
-    src: "images/news/mobilita.svg"
-  }) : null, post.subpage_id == 2 ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
-    alt: "cover news image",
-    className: 'col-5 | px-2 py-3',
-    src: "images/news/zivotne_prostredie.svg"
-  }) : null, post.subpage_id == 3 ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
-    alt: "cover news image",
-    className: 'col-7 | px-2 py-3',
-    src: "images/news/digitalne_mesto.svg"
-  }) : null, post.subpage_id == 4 ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
-    alt: "cover news image",
-    className: 'col-6 | px-2 py-4',
-    src: "images/news/energia.svg"
-  }) : null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: 'news-content | row col-12 | m-0 p-0 | justify-content-center'
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
-    className: 'col-12 | px-4 py-3 m-0'
-  }, post.description.substring(0, 70), "...", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
-    className: 'show-more',
+    className: 'project-cover-image | col-12 | m-0 p-0 | justify-content-center'
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
+    src: post.image.substr(post.image.indexOf('img')),
+    alt: "project-cover-image",
+    className: 'col-12 | p-0'
+  })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: 'news-content | row col-12 | m-0 p-0 | justify-content-center',
     onClick: function onClick() {
       return getPost(post.id);
     }
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
+    className: 'col-12 | px-4 py-3 m-0'
+  }, post.title.substring(0, 70), "...", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+    className: 'show-more'
   }, "Zisti viac kliknut\xEDm")))));
 };
 
@@ -77284,28 +77286,19 @@ var NewsOutlook = function NewsOutlook(_ref) {
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: 'news-outlook | row col-xl-11 col-lg-11 col-md-11 col-12 | mx-0 p-0'
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: 'news-cover-icon | row col-12 | m-0 p-0 | justify-content-center'
-  }, post.subpage_id == 1 ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
-    alt: "cover news image",
-    className: 'col-5 | px-2 py-3',
-    src: "images/news/mobilita.svg"
-  }) : null, post.subpage_id == 2 ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
-    alt: "cover news image",
-    className: 'col-5 | px-2 py-3',
-    src: "images/news/zivotne_prostredie.svg"
-  }) : null, post.subpage_id == 3 ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
-    alt: "cover news image",
-    className: 'col-6 | px-2 py-4',
-    src: "images/news/digitalne_mesto.svg"
-  }) : null, post.subpage_id == 4 ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
-    alt: "cover news image",
-    className: 'col-6 | px-2 py-4',
-    src: "images/news/energia.svg"
-  }) : null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: 'project-cover-image | col-12 | m-0 p-0 | justify-content-center'
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
+    src: post.image.substr(post.image.indexOf('img')),
+    alt: "project-cover-image",
+    className: 'col-12 | p-0'
+  })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    onClick: function onClick() {
+      return getPost(post.id);
+    },
     className: 'news-content | row col-12 | m-0 p-0 | justify-content-center'
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
     className: 'col-12 | px-xl-4 px-lg-4 px-md-4 px-3 py-3 m-0'
-  }, post.description.substring(0, 100), "...", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+  }, post.title.substring(0, 100), "...", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
     className: 'show-more',
     onClick: function onClick() {
       return getPost(post.id);
@@ -77336,7 +77329,10 @@ var ProjectOutlook = function ProjectOutlook(_ref) {
   } : _ref$getPost;
   return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     role: "button",
-    className: 'project-outlook-frame col-12 | row | mx-0 my-2 p-3 | justify-content-center'
+    className: 'project-outlook-frame col-12 | row | mx-0 my-2 p-3 | justify-content-center',
+    onClick: function onClick() {
+      return getPost(post.id);
+    }
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: 'project-outlook | row col-xl-11 col-lg-11 col-md-11 col-12 | m-0 p-0'
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
@@ -77354,10 +77350,7 @@ var ProjectOutlook = function ProjectOutlook(_ref) {
   }, post.title.substring(0, 20), "..."), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
     className: 'description'
   }, post.description.substring(0, 100), "...", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
-    className: 'show-more',
-    onClick: function onClick() {
-      return getPost(post.id);
-    }
+    className: 'show-more'
   }, "Zisti viac kliknut\xEDm"))))));
 };
 
@@ -77381,8 +77374,8 @@ var ProjectOutlook = function ProjectOutlook(_ref) {
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! /Users/patrik/Projects/Webs/SmartCityPresov/resources/js/app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! /Users/patrik/Projects/Webs/SmartCityPresov/resources/sass/app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! /Users/patrik/Projects/smartcity/resources/js/app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! /Users/patrik/Projects/smartcity/resources/sass/app.scss */"./resources/sass/app.scss");
 
 
 /***/ })

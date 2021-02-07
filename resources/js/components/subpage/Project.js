@@ -1,8 +1,17 @@
 import React, {useEffect, useState} from "react";
 import $ from 'jquery';
 import FsLightbox from 'fslightbox-react';
-export const Project = ({data, close = f => f}) => {
 
+
+export const Project = ({data, close = f => f}) => {
+    function urlify(text) {
+        var urlRegex = /(https?:\/\/[^\s]+)/g;
+        return text.replace(urlRegex, function(url) {
+          return '<a href="' + url + '" class="text-link">' + url + '</a>';
+        })
+        // or alternatively
+        // return text.replace(urlRegex, '<a href="$1">$1</a>')
+      }
     const written = new Date(data.updated_at.replace(' ', 'T'));
     const [toggler, setToggler] = useState(false);
 
@@ -14,6 +23,7 @@ export const Project = ({data, close = f => f}) => {
             easing: 'easeInOutCirc'
         },1000);
         $('.gallery').css("maxHeight",$('.project-content .content').height());
+
     }, []);
 
     return (
@@ -51,7 +61,10 @@ export const Project = ({data, close = f => f}) => {
                             </span>
                         </div>
                         <div className="col-12 row mx-0 description mt-4 py-2 px-xl-5 px-lg-5 px-md-5 px-4">
-                            <p className={"col-11 mb-3"}>{data.description}</p>
+                            {
+                                data.description.split('\n').map(text => <p className={"col-11 mb-3"} dangerouslySetInnerHTML={{__html: urlify(text)}}/>)
+                            }
+
                         </div>
                         {
                             data.price != 0 &&
