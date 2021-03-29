@@ -73,7 +73,7 @@ export const Project = ({data, close = f => f}) => {
                             </div>
                         }
                         <div className="col-11 row mx-0 post-data my-4 py-2 px-5">
-                            <p className={"col-12 mb-0 text-right"}>{ String(written.getDate()) + `/` + (written.getMonth()+1) + `/` + written.getFullYear() }</p>
+                            {/**<p className={"col-12 mb-0 text-right"}>{ String(written.getDate()) + `/` + (written.getMonth()+1) + `/` + written.getFullYear() }</p> **/}
                             <p className={"col-12 mb-0 text-right"}>{data.author}</p>
                         </div>
                     </div>
